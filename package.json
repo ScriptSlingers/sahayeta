@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "lint-staged": "^14.0.1",
     "next": "latest",
+    "prism": "^4.1.2",
     "react": "latest",
     "react-dom": "latest",
     "yarn": "^1.22.19"
