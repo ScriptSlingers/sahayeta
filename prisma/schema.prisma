@@ -1,11 +1,63 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+model Users {
+  id            Bytes    @id @default(auto()) @map("_id") @db.ObjectId
+  username      String
+  email         String
+  password      String
+  first_name    String
+  last_name     String
+  address       String
+  phone_num     Int
+  user_role     String
+  role_id       Int
+  profile_image String
+  dob           DateTime
+  create_at     DateTime
+  update_at     DateTime
+}
+
+model Campaigns {
+  campaignId     Bytes    @id @default(auto()) @map("_id") @db.ObjectId
+  org_id         Int
+  title          String
+  description    String
+  goal_amount    Int
+  current_amount Int
+  start_date     DateTime
+  end_date       DateTime
+}
+
+model Organizations {
+  org_id      Bytes  @id @default(auto()) @map("_id") @db.ObjectId
+  org_name    String
+  description String
+}
+
+model Donations {
+  donation_id   Bytes    @id @default(auto()) @map("_id") @db.ObjectId
+  user_id       Int
+  campaign_id   Int
+  amount        Int
+  donation_date DateTime
+}
+
+model PaymentMethod {
+  method_id   Bytes  @id @default(auto()) @map("_id") @db.ObjectId
+  method_name String
+}
+
+model Payment {
+  payment_id      Bytes    @id @default(auto()) @map("_id") @db.ObjectId
+  user_id         Int
+  payment_type    String
+  card_number     Int
+  expiration_date DateTime
 }
