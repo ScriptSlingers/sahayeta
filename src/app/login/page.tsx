@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function page() {
-  return <div>loginpage</div>;
+  return <div className="h-5">loginpage</div>;
 }
