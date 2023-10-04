@@ -8,14 +8,20 @@ generator client {
 }
 
 model Users {
-  id         Bytes    @id @default(auto()) @map("_id") @db.ObjectId
-  username   String
-  email      String
-  password   String
-  first_name String
-  last_name  String
-  create_at  DateTime
-  update_at  DateTime
+  id            Bytes    @id @default(auto()) @map("_id") @db.ObjectId
+  username      String
+  email         String
+  password      String
+  first_name    String
+  last_name     String
+  address       String
+  phone_num     Int
+  user_role     String
+  role_id       Int
+  profile_image String
+  dob           DateTime
+  create_at     DateTime
+  update_at     DateTime
 }
 
 model Campaigns {
