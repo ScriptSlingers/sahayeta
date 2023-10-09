@@ -1,10 +1,13 @@
 import React from 'react';
 
-function AppHeader() {
+export default function AppHeader() {
   return (
     <div className="w-full text-gray-700 bg-white border-t border-gray-100 shadow-sm body-font">
       <div className="container flex flex-col items-start justify-between p-6 mx-auto md:flex-row">
-        <a className="flex items-center uppercase mb-4 font-medium text-gray-900 title-font md:mb-0">
+        <a
+          className="flex items-center uppercase mb-4 font-medium text-gray-900 title-font md:mb-0"
+          href="/"
+        >
           Sahayata
         </a>
         <nav className="flex flex-wrap items-center justify-center pl-6 ml-6 text-base border-l border-gray-200 md:mr-auto">
@@ -19,7 +22,7 @@ function AppHeader() {
           </a>
         </nav>
         <div className="items-center h-full">
-          <a href="#_" className="mr-5 font-medium hover:text-gray-900">
+          <a href="/login" className="mr-5 font-medium hover:text-gray-900">
             Login
           </a>
           <a
@@ -33,5 +36,3 @@ function AppHeader() {
     </div>
   );
 }
-
-export default AppHeader;
