@@ -1,30 +1,62 @@
 import Image from 'next/image';
-export default function page() {
+import React from 'react';
+export default function Page() {
   return (
-  <div className='container min-h-screen min-w-full bg-indigo-100 px-20 py-8 relative'>
-        <nav className="flex items-center">
-          <ul className='flex-1 text-center'>
-            <li className='list-none inline-block px-5'><a href="#" className='no-underline px-2 font-semibold'>Home</a></li>
-            <li className='list-none inline-block px-5'><a href="#"  className='no-underline px-2 font-semibold'>Contact</a></li>
-            <li className='list-none inline-block px-5'><a href="#"  className='no-underline px-2 font-semibold'>About</a></li>
-            <li className='list-none inline-block px-5'><a href="#"  className='no-underline px-2 font-semibold'>Donations</a></li>
-          </ul>
-        </nav>
-    {/* <div className='flex-col-gap-12'> */}
-      
-      <div className='text-black mt-24 '>
-        <h1 className='text-6xl font-bold leading-normal'>Donation can <br />change the world</h1>
-        <p className='text-2xl font-semibold leading-normal text-purple-500'>Donation is a way of love</p><br />
-        <p className='text-1xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit dolore minima,<br /> molestias laborum veniam odio voluptates atque consectetur fugiat perferendis.</p>
-        <div className='mt-6'>
-          <a href="#" className='text-white bg-purple-600 rounded-3xl py-3 px-8 font-medium inline-block mr-4 hover:bg-transparent
-           hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent'>Donate now</a>
+    <>
+      <div className="w-full flex flex-col md:flex-row justify-center items-center bg-indigo-100 text-black gap-6">
+        <div className="w-full md:w-2/5 flex flex-col p-4 md:p-10 gap-4 md:gap-6">
+          <div className="text-3xl md:text-5xl font-serif font-extralight">
+            Donation can change the world
+          </div>
+          <p className="text-xl md:text-2xl font-semibold text-purple-500">
+            Donation is a way of love
+          </p>
+          <p className="text-base md:text-lg">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <div className="flex">
+            <a
+              href="#"
+              className="items-center text-white bg-purple-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
+            >
+              Donate now
+            </a>
+          </div>
+        </div>
+        <div className="w-full md:w-1/2">
+          <div className="relative">
+            <Image
+              src="/assets/img/herosection.png"
+              objectPosition="center"
+              alt="Hero Section"
+              width={500}
+              height={300}
+              className=""
+              quality={100}
+            />
+          </div>
         </div>
       </div>
-      <div>
-       <img src="/assets/img/r.png" className='w-full xl:w-1/2 xl:absolute bottom-40 right-8 bg-cover' />
+      <div className="flex flex-col md:flex-row gap-10 justify-center items-center p-3 md:p-5 bg-white-100">
+        <div>Meta</div>
+        <div>Khalti</div>
+        <div>E-sewa</div>
+        <div>Ime Pay</div>
       </div>
-      <div className=''></div>
-  </div> 
-  
+      <div className="flex bg-indigo-100 h-screen ">
+        <div className="flex items-center md:text-xl md:w-2/5 flex-col md:p-10 md:gap-14">
+        </div>
+        <div className='e-card flex h-64 w-64 bg-black'>
+          <div className='e-card-header'>
+            <div className='e-card-header-caption'>Our Services
+              <div className='e-card-header-title'>
+                image
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
+}
