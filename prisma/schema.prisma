@@ -1,11 +1,105 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+model User {
+  id             String     @id @default(cuid()) @map("_id")
+  username       String
+  email          String
+  emailVerifiied Boolean
+  isVerifiied    Boolean
+  password       String
+  firstName      String
+  lastName       String
+  address        String
+  phoneNum       String?
+  bio            String?
+  profileImage   String?
+  dob            DateTime?
+  ctzImg         String
+  balance        Float?
+  orgName        String?
+  assignedOn     DateTime?
+  postedOn       DateTime?
+  createdAt      DateTime?
+  updatedAt      DateTime?
+  role           Roles      @default(donor)
+  Campaign       Campaign[]
+  Payment        Payment[]
+}
+
+model Campaign {
+  campaignId      String         @id @default(cuid()) @map("_id")
+  title           String
+  isVerified      Boolean
+  description     String
+  goalAmount      Int
+  currentAmount   Int?
+  collectedAmount Int?
+  startDate       DateTime?
+  endDate         DateTime?
+  createdById     String
+  createdBy       User           @relation(fields: [createdById], references: [id])
+  categoryId      String
+  category        Category       @relation(fields: [categoryId], references: [id])
+  status          CampaignStatus @default(pendingApproval)
+  paymentId       String?
+  payment         Payment?       @relation(fields: [paymentId], references: [paymentId])
+}
+
+model PaymentMethod {
+  methodId    String    @id @default(cuid()) @map("_id")
+  methodName  String
+  displayName String
+  Payment     Payment[]
+}
+
+model Payment {
+  paymentId       String        @id @default(cuid()) @map("_id")
+  paymentDate     DateTime
+  paymentType     String
+  expirationDate  DateTime
+  paymentById     String
+  paymentBy       User          @relation(fields: [paymentById], references: [id])
+  paymentMethodId String
+  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [methodId])
+  Campaign        Campaign[]
+}
+
+model Category {
+  id          String     @id @default(cuid()) @map("_id")
+  name        String
+  displayName String
+  description String
+  Campaign    Campaign[]
+}
+
+enum PaymentStatus {
+  pending
+  approved
+  clearing
+  rejected
+  cancelled
+  completed
+}
+
+enum CampaignStatus {
+  approved
+  pendingApproval
+  rejected
+  completed
+  cancelled
+  inProgress
+}
+
+enum Roles {
+  donor
+  charity
+  fundraiser
+  admin
 }
