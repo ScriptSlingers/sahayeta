@@ -1,38 +1,79 @@
-import React from 'react';
-
+'use client'
+import {
+  NotificationIcon,
+  ProfileIcon,
+  QuestionIcon,
+  SearchIcon
+} from '@sahayeta/icons'
+import { Hamburger } from '@sahayeta/icons/Hamburger'
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useState } from 'react'
 export default function AppHeader() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [openMenuList, setOpenMenuList] = useState<number[]>([])
   return (
-    <div className="w-full text-gray-700 bg-white border-t border-gray-100 shadow-sm body-font">
-      <div className="container flex flex-col items-start justify-between p-6 mx-auto md:flex-row">
-        <a
-          className="flex items-center uppercase mb-4 font-medium text-gray-900 title-font md:mb-0"
-          href="/"
-        >
-          Sahayata
-        </a>
-        <nav className="flex flex-wrap items-center justify-center pl-6 ml-6 text-base border-l border-gray-200 md:mr-auto">
-          <a href="#_" className="mr-5 font-medium hover:text-gray-900">
-            Home
-          </a>
-          <a href="#_" className="mr-5 font-medium hover:text-gray-900">
-            About
-          </a>
-          <a href="#_" className="font-medium hover:text-gray-900">
-            Contact
-          </a>
-        </nav>
-        <div className="items-center h-full">
-          <a href="/login" className="mr-5 font-medium hover:text-gray-900">
-            Login
-          </a>
-          <a
-            href="#_"
-            className="px-4 py-2 text-xs font-bold text-white uppercase transition-all duration-150 bg-teal-500 rounded shadow outline-none active:bg-teal-600 hover:shadow-md focus:outline-none ease"
+    <>
+      {/* first section */}
+      <div className="flex w-full h-16">
+        <div className="flex gap-5 p-6">
+          <div
+            className="flex h-full justify-center"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            Sign Up
-          </a>
+            <Hamburger />
+          </div>
+          <div className="flex items-center">
+            <div className="relative h-16 w-24 items-center">
+              <Link href="/">
+                <Image
+                  src="/assets/img/logo.png"
+                  alt="logo"
+                  fill
+                  className="object-contain"
+                />
+              </Link>
+            </div>
+          </div>
+          <div className="border-r border-slate-700"></div>
+        </div>
+        {/* second section */}
+        <div className="hidden md:flex gap-6 items-center p-6 text-base font-medium">
+          <Link href="/">
+            {' '}
+            <div>link1</div>{' '}
+          </Link>
+          <Link href="/">
+            {' '}
+            <div>link2</div>{' '}
+          </Link>
+          <div>submenu</div>
+        </div>
+        {/* last section */}
+        <div className="flex items-center p-6 gap-6 ml-auto">
+          <div className="w-6 h-6">
+            <Link href="#">
+              <SearchIcon />
+            </Link>
+          </div>
+          <div className="w-6 h-6">
+            <Link href="#">
+              <NotificationIcon />
+            </Link>
+          </div>
+          <div className="w-6 h-6">
+            <Link href="#">
+              <QuestionIcon />
+            </Link>
+          </div>
+
+          <div className="w-6 h-6">
+            <Link href="#">
+              <ProfileIcon />
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    </>
+  )
 }

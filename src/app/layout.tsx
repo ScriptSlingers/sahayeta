@@ -1,17 +1,17 @@
-import AppHeader from '@sahayeta/components/AppHeader';
-import './globals.css';
-import type { Metadata } from 'next';
-import Footer from '@sahayeta/components/Footer';
+import AppHeader from '@sahayeta/components/AppHeader'
+import './globals.css'
+import type { Metadata } from 'next'
+import { Footer } from '@sahayeta/components'
 
 export const metadata: Metadata = {
   title: 'SAHAYATA',
   description: 'Web based Dontation App'
-};
+}
 
 export default function RootLayout({
   children
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
@@ -21,5 +21,5 @@ export default function RootLayout({
         <Footer />
       </body>
     </html>
-  );
+  )
 }

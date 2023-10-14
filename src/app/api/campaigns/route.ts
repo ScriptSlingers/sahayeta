@@ -1,5 +1,5 @@
-import { prisma } from '@sahayeta/app/lib/prismadb';
-import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@sahayeta/app/lib/prismadb'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
   const Campaigns = await prisma.campaign.findMany({
@@ -14,15 +14,12 @@ export async function GET(request: NextRequest) {
       collectedAmount: true,
       startDate: true,
       endDate: true,
-      createdById: true,
       createdBy: true,
-      categoryId: true,
       category: true,
       status: true,
-      paymentId: true,
       payment: true
     }
-  });
+  })
 
-  return NextResponse.json({ Campaigns });
+  return NextResponse.json({ Campaigns })
 }

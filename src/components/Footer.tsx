@@ -1,89 +1,125 @@
-import Image from 'next/image';
-import Link from 'next/link';
+'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Typography } from './Typography'
+import { ScrollToTopButton } from './ScrollToTop'
+import {
+  CallIcon,
+  EnvelopeIcon,
+  FacebookIcon,
+  InstagramIcon
+} from '@sahayeta/icons'
 
-export default function Footer() {
+export const Footer = () => {
   return (
-    <footer className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-        <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-          <Link href="/">
-            <Image
-              src="/assets/img/logo.png"
-              alt="Hero Section"
-              width={150}
-              height={50}
-              className="object-cover"
-              quality={100}
-            />
-          </Link>
-          <p className="mt-2 text-sm text-gray-500">
-            Air plant banjo lyft occupy retro adaptogen indego
-          </p>
-        </div>
-        <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"></h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Home</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Deals</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Blog</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800"></a>
-              </li>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3"></h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">WishList</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Cart</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Loggin</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Contact</a>
-              </li>
-            </nav>
+    <>
+      <div className="flex flex-col overflow-hidden">
+        <div className="flex w-full justify-center bg-accent">
+          <div className="flex flex-col">
+            <div className="min-h-96 container grid grid-cols-1 items-center gap-x-9 gap-y-12 py-14 lg:grid-cols-4">
+              <div className="flex h-full flex-col items-center justify-center gap-4 border-r-1 lg:items-start lg:border-black">
+                <Link
+                  className="group flex items-center gap-3"
+                  href="#"
+                  target="_blank"
+                >
+                  <div className="flex h-6 w-6 text-secondary">
+                    <InstagramIcon />
+                  </div>
+                  <Typography className="group-hover:text-secondary">
+                    /Captura
+                  </Typography>
+                </Link>
+                <Link
+                  className="group flex items-center gap-3"
+                  href="#"
+                  target="_blank"
+                >
+                  <div className="flex h-6 w-6 text-secondary">
+                    <FacebookIcon />
+                  </div>
+                  <Typography className="group-hover:text-secondary">
+                    /Captura
+                  </Typography>
+                </Link>
+              </div>
+              <div className="flex flex-col items-center gap-6 lg:col-span-2">
+                <div className="relative flex h-14 w-32 lg:h-20 lg:w-44 ">
+                  <Link href="/">
+                    <Image
+                      src="/assets/img/thankyou.png"
+                      alt="logo"
+                      fill
+                      className="object-contain"
+                    />
+                  </Link>
+                </div>
+                <Typography className="max-w-lg" align="center">
+                  We would like to give you a unique photography experience and
+                  capture your special moments.
+                </Typography>
+                <div className="ld:text-body grid grid-cols-3 gap-x-10 gap-y-2 text-center text-body-sm uppercase text-gray-600 lg:grid-cols-6">
+                  <Link href="/" className="hover:text-secondary">
+                    Home
+                  </Link>
+                  <Link href="/about" className="hover:text-secondary">
+                    About
+                  </Link>
+                  <Link href="/blogs" className="hover:text-secondary">
+                    Blog
+                  </Link>
+                  <Link href="/portfolio" className="hover:text-secondary">
+                    Portfolio
+                  </Link>
+                  <Link href="/our-team" className="hover:text-secondary">
+                    Our Team
+                  </Link>
+                  <Link href="/contact" className="hover:text-secondary">
+                    Contact
+                  </Link>
+                </div>
+              </div>
+
+              <div className="flex h-full flex-col items-center justify-center gap-4 border-l-1 lg:items-end lg:border-black">
+                <Link
+                  className="group flex items-center gap-3"
+                  href="tel:#"
+                  target="_blank"
+                >
+                  <div className="flex h-6 w-6 text-secondary">
+                    <CallIcon />
+                  </div>
+                  <Typography className="group-hover:text-secondary">
+                    /(123) 456 - 7890
+                  </Typography>
+                </Link>
+                <Link
+                  className="group flex items-center gap-3"
+                  href="mailto:#"
+                  target="_blank"
+                >
+                  <div className="flex h-6 w-6 text-secondary">
+                    <EnvelopeIcon />
+                  </div>
+                  <Typography className="group-hover:text-secondary">
+                    /contact@captura.com
+                  </Typography>
+                </Link>
+              </div>
+            </div>
+
+            <div className="flex w-full justify-center border-t-1 border-black py-10 text-center">
+              <Typography>
+                © Copyright Captura | Developed by
+                <Link href="#" target="_blank" className="hover:text-secondary">
+                  Captura
+                </Link>
+              </Typography>
+            </div>
           </div>
         </div>
       </div>
-      <div className="bg-gray-100">
-        <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-          <p className="text-black text-sm text-center sm:text-left">
-            {' '}
-            © SAHAYATA
-            <a href="#" className="text-black ml-1" target="_blank">
-              Terms Privacy Notice Legal
-            </a>
-          </p>
-          <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-            <a className="text-gray-500"></a>
-            <a className="ml-3 text-gray-500"></a>
-            <a className="ml-3 text-gray-500"></a>
-            <a className="ml-3 text-gray-500"></a>
-          </span>
-        </div>
-      </div>
-    </footer>
-  );
+      <ScrollToTopButton />
+    </>
+  )
 }
-
-const FooterCard = ({ icon, url }: { icon: JSX.Element; url: string }) => {
-  return (
-    <Link href={url}>
-      <div className=" text-white hover:-translate-y-1 duration-300 hover:scale-110 flex cursor-pointer">
-        <div className="w-10 h-9 p-2 items-center justify-center"> {icon}</div>
-      </div>
-    </Link>
-  );
-};
