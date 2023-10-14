@@ -1,5 +1,5 @@
-import { prisma } from '@sahayeta/app/lib/prismadb';
-import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@sahayeta/app/lib/prismadb'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
   const users = await prisma.user.findMany({
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       email: true,
       password: false
     }
-  });
+  })
 
-  return NextResponse.json({ users });
+  return NextResponse.json({ users })
 }

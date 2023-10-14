@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Donation from '../../../public/login.png';
-import { FcGoogle } from 'react-icons/fc';
+import Image from 'next/image'
+import Donation from '../../../public/login.png'
+import { FcGoogle } from 'react-icons/fc'
 
 export default function Login() {
   return (
@@ -65,5 +65,5 @@ export default function Login() {
         </section>
       </div>
     </div>
-  );
+  )
 }
