@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 export default function page() {
   return (
     <div className="container min-h-screen min-w-full bg-indigo-100 px-20 py-8 relative">
@@ -38,10 +36,9 @@ export default function page() {
         </div>
       </div>
       <div>
-        <Image
+        <img
           src="/assets/img/r.png"
           className="w-full xl:w-1/2 xl:absolute bottom-40 right-8 bg-cover"
-          alt="test"
         />
       </div>
       <div className=""></div>

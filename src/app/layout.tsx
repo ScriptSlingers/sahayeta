@@ -2,6 +2,7 @@ import AppHeader from '@sahayeta/components/AppHeader'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Footer } from '@sahayeta/components'
+import { Providers } from '@sahayeta/components/provider'
 
 export const metadata: Metadata = {
   title: 'SAHAYATA',
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppHeader />
-        {children}
-        <Footer />
+        <Providers>
+          <AppHeader />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   )

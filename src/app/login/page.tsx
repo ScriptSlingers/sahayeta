@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Donation from '../../../public/login.png'
 import { FcGoogle } from 'react-icons/fc'
+import { signIn } from 'next-auth/react'
 
 export default function Login() {
   return (
@@ -48,7 +49,7 @@ export default function Login() {
             <button className="w-full bg-blue-600 text-white p-2 rounded-lg mb-6 hover:bg-blue-400 ">
               Login
             </button>
-            <button className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black">
+            <button className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black" onClick={() => signIn("google")}>
               <FcGoogle className="w-6 g-6 inline mr-2" />
               Sign in with Google
             </button>
