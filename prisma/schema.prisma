@@ -9,10 +9,10 @@ generator client {
 
 model Account {
   id                String  @id @default(cuid()) @map("_id")
-  userId            String
+  userId            String  @map("user_id")
   type              String
   provider          String
-  providerAccountId String
+  providerAccountId String  @map("provider_account_id")
   refresh_token     String?
   access_token      String?
   expires_at        Int?
@@ -20,45 +20,59 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {
   id           String   @id @default(cuid()) @map("_id")
-  sessionToken String   @unique
-  userId       String
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model User {
-  id             String     @id @default(cuid()) @map("_id")
-  username       String
-  email          String
-  emailVerifiied Boolean
-  isVerifiied    Boolean
-  password       String
-  firstName      String
-  lastName       String
-  address        String
-  phoneNum       String?
-  bio            String?
-  profileImage   String?
-  dob            DateTime?
-  ctzImg         String?
-  balance        Float?
-  orgName        String?
-  assignedOn     DateTime?
-  postedOn       DateTime?
-  createdAt      DateTime?
-  updatedAt      DateTime?
-  role           Roles      @default(donor)
-  Campaign       Campaign[]
-  Payment        Payment[]
-  Account        Account[]
-  Session        Session[]
+  id            String     @id @default(cuid()) @map("_id")
+  username      String
+  email         String
+  emailVerified DateTime?  @map("email_verified")
+  password      String?
+  name          String?
+  address       String?
+  phoneNum      String?
+  bio           String?
+  profileImage  String?
+  dob           DateTime?
+  ctzImg        String?
+  balance       Float?
+  orgName       String?
+  assignedOn    DateTime?
+  postedOn      DateTime?
+  createdAt     DateTime?
+  updatedAt     DateTime?
+  role          Roles      @default(donor)
+  campaign      Campaign[]
+  payment       Payment[]
+  accounts      Account[]
+  sessions      Session[]
+
+  @@unique([email, username, id])
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String   @id @default(cuid()) @map("_id")
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verificationtokens")
 }
 
 model Campaign {
@@ -78,13 +92,17 @@ model Campaign {
   status          CampaignStatus @default(pendingApproval)
   paymentId       String?
   payment         Payment?       @relation(fields: [paymentId], references: [paymentId])
+
+  @@map("campaign")
 }
 
 model PaymentMethod {
   methodId    String    @id @default(cuid()) @map("_id")
   methodName  String
   displayName String
-  Payment     Payment[]
+  payment     Payment[]
+
+  @@map("paymentMethod")
 }
 
 model Payment {
@@ -96,7 +114,9 @@ model Payment {
   paymentBy       User          @relation(fields: [paymentById], references: [id])
   paymentMethodId String
   paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [methodId])
-  Campaign        Campaign[]
+  campaign        Campaign[]
+
+  @@map("payment")
 }
 
 model Category {
@@ -104,7 +124,9 @@ model Category {
   name        String
   displayName String
   description String
-  Campaign    Campaign[]
+  campaign    Campaign[]
+
+  @@map("category")
 }
 
 enum PaymentStatus {
@@ -114,6 +136,8 @@ enum PaymentStatus {
   rejected
   cancelled
   completed
+
+  @@map("paymentStatus")
 }
 
 enum CampaignStatus {
@@ -123,6 +147,8 @@ enum CampaignStatus {
   completed
   cancelled
   inProgress
+
+  @@map("campaignStatus")
 }
 
 enum Roles {
@@ -130,4 +156,6 @@ enum Roles {
   charity
   fundraiser
   admin
+
+  @@map("roles")
 }

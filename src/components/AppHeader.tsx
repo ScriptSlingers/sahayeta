@@ -8,8 +8,9 @@ import {
 import { Hamburger } from '@sahayeta/icons/Hamburger'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
-export default function AppHeader() {
+import { useState } from 'react'
+
+export const AppHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openMenuList, setOpenMenuList] = useState<number[]>([])
   return (
