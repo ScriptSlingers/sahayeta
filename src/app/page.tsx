@@ -1,18 +1,8 @@
-import Image from 'next/image'
+'use client'
 
 export default function page() {
   return (
     <div className="container min-h-screen min-w-full bg-indigo-100 px-20 py-8 relative">
-      {/* <nav className="flex items-center">
-          <ul className='flex-1 text-center'>
-            <li className='list-none inline-block px-5'><a href="#" className='no-underline px-2 font-semibold'>Home</a></li>
-            <li className='list-none inline-block px-5'><a href="#"  className='no-underline px-2 font-semibold'>Contact</a></li>
-            <li className='list-none inline-block px-5'><a href="#"  className='no-underline px-2 font-semibold'>About</a></li>
-            <li className='list-none inline-block px-5'><a href="#"  className='no-underline px-2 font-semibold'>Donations</a></li>
-          </ul>
-        </nav> */}
-      {/* <div className='flex-col-gap-12'> */}
-
       <div className="text-black mt-24 ">
         <h1 className="text-6xl font-bold leading-normal">
           Donation can <br />
@@ -38,10 +28,9 @@ export default function page() {
         </div>
       </div>
       <div>
-        <Image
+        <img
           src="/assets/img/r.png"
           className="w-full xl:w-1/2 xl:absolute bottom-40 right-8 bg-cover"
-          alt="test"
         />
       </div>
       <div className=""></div>

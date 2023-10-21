@@ -1,7 +1,6 @@
-import AppHeader from '@sahayeta/components/AppHeader'
-import './globals.css'
+import { AppHeader, AuthProvider, Footer } from '@sahayeta/components'
 import type { Metadata } from 'next'
-import { Footer } from '@sahayeta/components'
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'SAHAYATA',
@@ -16,9 +15,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppHeader />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <AppHeader />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )
