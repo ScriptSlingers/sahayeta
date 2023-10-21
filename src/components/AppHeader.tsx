@@ -19,7 +19,7 @@ export const AppHeader = () => {
   return (
     <>
       <div className="flex w-full h-16 justify-between container">
-        <div className='flex'>
+        <div className="flex">
           <div className="flex gap-5 p-6">
             <div
               className="flex h-full justify-center"
@@ -69,28 +69,36 @@ export const AppHeader = () => {
           </div>
           {/* {JSON.stringify(session)} */}
           {session.data ? (
-            <div className='flex gap-3'>
-              <div className='relative rounded-full overflow-hidden'>
+            <div className="flex gap-3">
+              <div className="relative rounded-full overflow-hidden">
                 <Image
-                  src={session?.data?.user?.image || ""}
-                  alt={session?.data?.user?.name || ""}
+                  src={session?.data?.user?.image || ''}
+                  alt={session?.data?.user?.name || ''}
                   height={40}
-                  width={50} />
+                  width={50}
+                />
               </div>
-              <button className=' bg-purple-500 text-white hover:bg-purple-700 p-3 rounded font-bold ' onClick={() => signOut()}>Signout</button>
+              <button
+                className=" bg-purple-500 text-white hover:bg-purple-700 p-3 rounded font-bold "
+                onClick={() => signOut()}
+              >
+                Signout
+              </button>
             </div>
           ) : (
             <div className="w-6 h-6">
               <button>
-                <Link href="/login" className=' bg-purple-500 text-white hover:bg-purple-700 p-3 rounded font-bold '>
+                <Link
+                  href="/login"
+                  className=" bg-purple-500 text-white hover:bg-purple-700 p-3 rounded font-bold "
+                >
                   Login
                 </Link>
-
               </button>
             </div>
           )}
         </div>
-      </div >
+      </div>
     </>
   )
 }

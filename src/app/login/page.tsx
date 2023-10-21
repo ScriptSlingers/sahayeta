@@ -7,15 +7,14 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
 export default function Login() {
-  const session = useSession();
-  const router = useRouter();
+  const session = useSession()
+  const router = useRouter()
 
   useEffect(() => {
     if (session.data) {
-      router.replace("/");
+      router.replace('/')
     }
-  }, [session, router]);
-
+  }, [session, router])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f9f4f1] ">
@@ -62,8 +61,12 @@ export default function Login() {
             <button className="w-full bg-blue-600 text-white p-2 rounded-lg mb-6 hover:bg-blue-400 ">
               Login
             </button>
-            <button className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black"
-              onClick={() => signIn("google", { callbackUrl: "https://localhost:3000/" })}>
+            <button
+              className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black"
+              onClick={() =>
+                signIn('google', { callbackUrl: 'https://localhost:3000/' })
+              }
+            >
               <FcGoogle className="w-6 g-6 inline mr-2" />
               Sign in with Google
             </button>
