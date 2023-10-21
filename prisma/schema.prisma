@@ -54,7 +54,7 @@ model User {
   orgName       String?
   assignedOn    DateTime?
   postedOn      DateTime?
-  createdAt     DateTime?
+  createdAt     DateTime?  @default(now()) @map("created_at")
   updatedAt     DateTime?
   role          Roles      @default(donor)
   campaign      Campaign[]

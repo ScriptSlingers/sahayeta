@@ -3,10 +3,19 @@ import Image from 'next/image'
 import Donation from '../../../public/login.png'
 import { FcGoogle } from 'react-icons/fc'
 import { signIn, useSession } from 'next-auth/react'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Login() {
   const session = useSession();
-  console.log("SESSION", session);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.data) {
+      router.replace("/");
+    }
+  }, [session, router]);
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f9f4f1] ">
@@ -54,7 +63,7 @@ export default function Login() {
               Login
             </button>
             <button className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black"
-              onClick={() => signIn("google", { callbackUrl: "https://localhost:3000/test" })}>
+              onClick={() => signIn("google", { callbackUrl: "https://localhost:3000/" })}>
               <FcGoogle className="w-6 g-6 inline mr-2" />
               Sign in with Google
             </button>

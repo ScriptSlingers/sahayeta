@@ -1,12 +1,8 @@
 'use client'
-import { useSession } from "next-auth/react";
 
 export default function page() {
-  const session = useSession();
-
   return (
     <div className="container min-h-screen min-w-full bg-indigo-100 px-20 py-8 relative">
-      {JSON.stringify(session)}
       <div className="text-black mt-24 ">
         <h1 className="text-6xl font-bold leading-normal">
           Donation can <br />
