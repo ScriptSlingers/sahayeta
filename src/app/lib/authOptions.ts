@@ -25,6 +25,11 @@ export const authOptions: NextAuthOptions = {
       session.user.id = token.id
       return session
     },
+
+    /* TO DOs
+    1. Add user.id in the session return
+    */
+
     async signIn(user: any) {
       try {
         const existingUser = await prisma.user.findFirst({

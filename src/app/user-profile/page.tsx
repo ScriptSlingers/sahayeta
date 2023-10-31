@@ -1,14 +1,16 @@
 'use client'
 
 import { useSession } from 'next-auth/react';
-import React from 'react'
+import React, { useState } from 'react'
 
 const UserProfile = () => {
     const session = useSession();
 
+
     if (!session.data) {
         return <div>Loading...</div>;
     }
+
 
     return (
         <>
@@ -22,7 +24,12 @@ const UserProfile = () => {
                         <h1>Welcome, {session?.data?.user?.name}</h1>
                         <p>Email: {session?.data?.user?.email}</p>
                         <img src={session?.data?.user?.image || ""} alt={session?.data?.user?.name || ""} />
-                        <p>Bio: {session?.data?.user?.bio}</p>
+                        {/* <p>Bio: {session?.data?.user?.bio}</p>
+                        <p>Phone Number: {session?.data?.user?.phoneNum}</p>
+                        <p>Address: {session?.data?.user?.address}</p>
+                        <p>Role: {session?.data?.user?.role}</p>
+                        <p>Donate Amount:{session?.data?.user?.amount}</p> */}
+
 
 
                     </div>
