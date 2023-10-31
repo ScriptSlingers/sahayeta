@@ -25,7 +25,7 @@ export async function GET() {
         campaign: true
       }
     })
-    return NextResponse.json({ session })
+    return NextResponse.json(user)
   } else {
     return NextResponse.json({ message: 'Unauthorized access' })
   }
