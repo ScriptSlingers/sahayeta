@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import React from 'react';
 import FrontCard from '@sahayeta/components/FrontCard';
+import Image from 'next/image';
+import Link from 'next/link';
 export default function Page() {
   return (
     <>
@@ -17,12 +17,12 @@ export default function Page() {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <div className="flex">
-            <a
+            <Link
               href="#"
               className="items-center text-white bg-purple-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
             >
               Donate now
-            </a>
+            </Link>
           </div>
         </div>
         <div className="w-full md:w-1/2">

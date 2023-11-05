@@ -18,11 +18,15 @@ export default function FrontCard() {
                         </Link>
                     </div>
                     <div className='text-xl font-semibold'>Lorem ipsum dolor sit amet</div>
-                    <div className="text-gray-500 flex justify-center align-middle ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
-                    <div className='flex justify-between font-medium'> <div className="">NRP 50,000 Raised</div>
-                        <div className="">NRP 50 Donations</div></div>
+                    <div className="text-gray-500 flex justify-center align-middle ">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+                    </div>
+                    <div className='flex justify-between font-medium'>
+                        <div className="">NRP 50,000 Raised</div>
+                        <p className="">NRP 50 Donations</p>
+                    </div>
                 </div>
-            </Link>
-        </div>
+            </Link >
+        </div >
     )
 }
