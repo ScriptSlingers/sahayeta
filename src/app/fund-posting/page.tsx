@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function DonationForm() {
     const [selectedImage, setSelectedImage] = useState(null);
 
-    const handleImageUpload = (event) => {
+    const handleImageUpload = (event: any) => {
         const image = event.target.files[0];
         setSelectedImage(image);
     };
