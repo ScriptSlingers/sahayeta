@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import FrontCard from '@sahayeta/components/FrontCard';
 export default function Page() {
   return (
     <>
@@ -38,25 +39,13 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-10 justify-center items-center p-3 md:p-5 bg-white-100">
-        <div>Meta</div>
-        <div>Khalti</div>
-        <div>E-sewa</div>
-        <div>Ime Pay</div>
+      <div className='flex gap-8 m-5 justify-center align-middle'>
+        <FrontCard />
+        <FrontCard />
+        <FrontCard />
+
       </div>
-      <div className="flex bg-indigo-100 h-screen ">
-        <div className="flex items-center md:text-xl md:w-2/5 flex-col md:p-10 md:gap-14">
-        </div>
-        <div className='e-card flex h-64 w-64 bg-black'>
-          <div className='e-card-header'>
-            <div className='e-card-header-caption'>Our Services
-              <div className='e-card-header-title'>
-                image
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </>
   );
 }

@@ -27,7 +27,7 @@ export const Footer = () => {
                     <InstagramIcon />
                   </div>
                   <Typography className="group-hover:text-secondary">
-                    /Captura
+                    /Sahayata
                   </Typography>
                 </Link>
                 <Link
@@ -39,7 +39,7 @@ export const Footer = () => {
                     <FacebookIcon />
                   </div>
                   <Typography className="group-hover:text-secondary">
-                    /Captura
+                    /Sahayata
                   </Typography>
                 </Link>
               </div>
@@ -47,7 +47,7 @@ export const Footer = () => {
                 <div className="relative flex h-14 w-32 lg:h-20 lg:w-44 ">
                   <Link href="/">
                     <Image
-                      src="/assets/img/thankyou.png"
+                      src="/assets/img/logo.png"
                       alt="logo"
                       fill
                       className="object-contain"
@@ -55,8 +55,7 @@ export const Footer = () => {
                   </Link>
                 </div>
                 <Typography className="max-w-lg" align="center">
-                  We would like to give you a unique photography experience and
-                  capture your special moments.
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 </Typography>
                 <div className="ld:text-body grid grid-cols-3 gap-x-10 gap-y-2 text-center text-body-sm uppercase text-gray-600 lg:grid-cols-6">
                   <Link href="/" className="hover:text-secondary">
@@ -102,7 +101,7 @@ export const Footer = () => {
                     <EnvelopeIcon />
                   </div>
                   <Typography className="group-hover:text-secondary">
-                    /contact@captura.com
+                    /contact@Sahayata.com
                   </Typography>
                 </Link>
               </div>
@@ -110,9 +109,9 @@ export const Footer = () => {
 
             <div className="flex w-full justify-center border-t-1 border-black py-10 text-center">
               <Typography>
-                © Copyright Captura | Developed by
+                © Copyright Sahayata | Developed by
                 <Link href="#" target="_blank" className="hover:text-secondary">
-                  Captura
+                  Sahayata
                 </Link>
               </Typography>
             </div>
