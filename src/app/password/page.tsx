@@ -1,21 +1,7 @@
 'use client'
-import Image from 'next/image'
-import Donation from '../../../public/login.png'
-import { FcGoogle } from 'react-icons/fc'
-import { signIn, useSession } from 'next-auth/react'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
-export default function Login() {
-  const session = useSession()
-  const router = useRouter()
 
-  useEffect(() => {
-    if (session.data) {
-      router.replace('/')
-    }
-  }, [session, router])
-
+export default function Password() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f9f4f1] ">
       <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 ">
