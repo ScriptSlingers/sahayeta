@@ -1,7 +1,26 @@
+'use client'
 import FrontCard from '@sahayeta/components/FrontCard';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 export default function Page() {
+  const [campaign, setCampaign] = useState<any>()
+
+  useEffect(() => {
+    fetch(`/api/campaigns/`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const campaign = data
+        setCampaign(campaign);
+      })
+
+  }, [campaign])
+  console.log(campaign)
+
+
   return (
     <>
       <div className="w-full flex flex-col md:flex-row justify-center items-center bg-indigo-100 text-black gap-6">
@@ -39,13 +58,23 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className='flex gap-8 m-5 justify-center align-middle'>
-        <FrontCard />
-        <FrontCard />
-        <FrontCard />
-
+      <div className='flex gap-8 '>
+        <div className=''>
+          {campaign?.Campaigns.map((campaign: any) => {
+            return (
+              <FrontCard
+                key={campaign?.campaignId}
+                campaignId={campaign?.campaignId}
+                campaignImageURL={campaign?.campaignImageURL}
+                campaignTitle={campaign?.title}
+                campaignDescription={campaign?.description}
+                campaignCurrentAmount={campaign?.currentAmount}
+                campaignCollectedAmount={campaign?.collectedAmount}
+              />
+            )
+          })}
+        </div>
       </div>
-
     </>
   );
 }

@@ -1,13 +1,22 @@
+'use client';
 import React from 'react';
 import { BsBriefcaseFill } from 'react-icons/bs';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { AiFillSetting } from 'react-icons/ai';
 import { MdDashboard } from 'react-icons/md';
 import { BsFillBookmarkFill } from 'react-icons/bs';
+import UserListComponent from '@sahayeta/components/UserListComponent';
+import { useSession } from 'next-auth/react';
+
 
 export default function Profile() {
+
+
+
+
   return (
     <>
+
       <div className=' flex'>
         <section className='w-1/5 bg-blue-600'>
           <div className='m-3 p-2 '>

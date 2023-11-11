@@ -24,11 +24,11 @@ const UserProfile = () => {
                         <h1>Welcome, {session?.data?.user?.name}</h1>
                         <p>Email: {session?.data?.user?.email}</p>
                         <img src={session?.data?.user?.image || ""} alt={session?.data?.user?.name || ""} />
-                        {/* <p>Bio: {session?.data?.user?.bio}</p>
+                        <p>Bio: {session?.data?.user?.bio}</p>
                         <p>Phone Number: {session?.data?.user?.phoneNum}</p>
                         <p>Address: {session?.data?.user?.address}</p>
                         <p>Role: {session?.data?.user?.role}</p>
-                        <p>Donate Amount:{session?.data?.user?.amount}</p> */}
+                        <p>Donate Amount:{session?.data?.user?.amount}</p>
 
 
 

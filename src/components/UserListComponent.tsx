@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const UserListComponent = () => {
     const [users, setUsers] = useState([]);
@@ -14,13 +15,18 @@ const UserListComponent = () => {
         <div>
             <h2>User List</h2>
             <ul>
-                {users.map((user) => (
-                    // <li key={user.id}>
-                    //     <div>Name: {user.name}</div>
-                    //     <div>Email: {user.email}</div>
+                <ul>
+                    {users?.map((singleUser) => {
+                        return (
+                            <li key={singleUser?.id}>
+                                <div>name={singleUser?.name}</div>
+                                <div>email={singleUser?.email}</div>
+                                <div>image={singleUser?.profileImage}</div>
+                            </li>
+                        );
+                    })}
+                </ul>
 
-                    // </li>
-                ))}
             </ul>
         </div>
     );
