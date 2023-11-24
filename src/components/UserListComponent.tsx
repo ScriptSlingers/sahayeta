@@ -16,14 +16,14 @@ const UserListComponent = () => {
             <h2>User List</h2>
             <ul>
                 <ul>
-                    {users?.map((singleUser) => {
+                    {users?.map(User) => {
                         return (
-                            <li key={singleUser?.id}>
-                                <div>name={singleUser?.name}</div>
-                                <div>email={singleUser?.email}</div>
-                                <div>image={singleUser?.profileImage}</div>
-                            </li>
-                        );
+                    <li key={singleUser?.id}>
+                        <div>name={singleUser?.name}</div>
+                        <div>email={singleUser?.email}</div>
+                        <div>image={singleUser?.profileImage}</div>
+                    </li>
+                    );
                     })}
                 </ul>
 

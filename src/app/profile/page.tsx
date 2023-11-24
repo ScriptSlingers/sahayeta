@@ -5,18 +5,12 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { AiFillSetting } from 'react-icons/ai';
 import { MdDashboard } from 'react-icons/md';
 import { BsFillBookmarkFill } from 'react-icons/bs';
-import UserListComponent from '@sahayeta/components/UserListComponent';
-import { useSession } from 'next-auth/react';
+
 
 
 export default function Profile() {
-
-
-
-
   return (
     <>
-
       <div className=' flex'>
         <section className='w-1/5 bg-blue-600'>
           <div className='m-3 p-2 '>
@@ -99,6 +93,7 @@ export default function Profile() {
                       <input className='w-full border border-slate-800 p-2 rounded-lg text-black text-sm '
                         type="text"
                         id='text'
+                        value="hello"
                         required />
                     </div>
                     <div className="flex-1  py-2 ">
@@ -123,6 +118,7 @@ export default function Profile() {
                         type="text"
                         id='text'
                         required />
+
                     </div>
                     <div className="flex-1  py-2 ">
                       <p>State/Province</p>
