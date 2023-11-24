@@ -11,22 +11,22 @@ export default function Profile() {
     <div className=' flex'>
       <section className='w-1/5 bg-blue-600'>
         <div className='m-3 p-2 '>
-          <h1 className='text-white font-bold text-3xl text-center'>Weblance</h1>
+          <h1 className='text-white font-bold text-3xl text-center cursor-pointer'>Sahayata</h1>
         </div>
         <div className=' m-3 p-2  text-white'>
-          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4'>
-           <BsBriefcaseFill className='m-1'/> My Job Feed
+          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer'>
+           <BsBriefcaseFill className='m-1'/> Fundraising
           </div>
-          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4'>
+          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer'>
            <BsFillPersonFill className='m-1'/> Profile
           </div>
-          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4'>
-           <MdDashboard className='m-1'/> Dashboard
+          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer'>
+           <MdDashboard className='m-1'/> Connected Apps
           </div>
-          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4'>
-           <BsFillBookmarkFill className='m-1'/> Saved Jobs
+          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer'>
+           <BsFillBookmarkFill className='m-1'/> Payment 
           </div>
-          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4'>
+          <div className='text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer'>
            <AiFillSetting className='m-1'/> Settings
           </div>
           
@@ -54,15 +54,15 @@ export default function Profile() {
         </div>
         <div className="w-full bg-white rounded-lg mb-2 text-left p-5 shadow-md hover:border-2 border-slate-900">
           <div className='font-bold font-maven text-xl'>Notification</div>
-          <div className='font-maven text-slate-500'>Details about your Personal information</div>
+          <div className='font-maven text-slate-500'>Get Notification of campign</div>
         </div>
         <div className="w-full bg-white rounded-lg mb-2 text-left p-5 shadow-md hover:border-2 border-slate-900">
-          <div className='font-bold font-maven text-xl'>Membership Plan</div>
-          <div className='font-maven  text-slate-500'>Details about your Personal information</div>
+          <div className='font-bold font-maven text-xl'>Donation History</div>
+          <div className='font-maven  text-slate-500'>View donations and receipts</div>
         </div>
         <div className="w-full bg-white rounded-lg mb-2 text-left p-5 shadow-md hover:border-2 border-slate-900">
           <div className='font-bold font-maven text-xl'>Password & Security</div>
-          <div className='font-maven text-slate-500'>Details about your Personal information</div>
+          <div className='font-maven text-slate-500'>Manage your profile security</div>
         </div>
         </div>
         <div className='w-2/4  m-12 '>
