@@ -70,14 +70,16 @@ export const AppHeader = () => {
           {/* {JSON.stringify(session)} */}
           {session.data ? (
             <div className="flex gap-3">
-              <div className="relative rounded-full overflow-hidden">
-                <Image
-                  src={session?.data?.user?.image || ''}
-                  alt={session?.data?.user?.name || ''}
-                  height={40}
-                  width={50}
-                />
-              </div>
+              <Link href="/profile">
+                <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
+                  <Image
+                    src={session?.data?.user?.image || ''}
+                    alt={session?.data?.user?.name || ''}
+                    height={40}
+                    width={50}
+                  />
+                </div>
+              </Link>
               <button
                 className=" bg-purple-500 text-white hover:bg-purple-700 p-3 rounded font-bold "
                 onClick={() => signOut()}

@@ -1,6 +1,26 @@
+'use client'
+import FrontCard from '@sahayeta/components/FrontCard';
 import Image from 'next/image';
-import React from 'react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 export default function Page() {
+  const [campaign, setCampaign] = useState<any>()
+
+  useEffect(() => {
+    fetch(`/api/campaigns/`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const campaign = data
+        setCampaign(campaign);
+      })
+
+  }, [campaign])
+  console.log(campaign)
+
+
   return (
     <>
       <div className="w-full flex flex-col md:flex-row justify-center items-center bg-indigo-100 text-black gap-6">
@@ -16,12 +36,12 @@ export default function Page() {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
           <div className="flex">
-            <a
+            <Link
               href="#"
               className="items-center text-white bg-purple-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
             >
               Donate now
-            </a>
+            </Link>
           </div>
         </div>
         <div className="w-full md:w-1/2">
@@ -38,23 +58,21 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-10 justify-center items-center p-3 md:p-5 bg-white-100">
-        <div>Meta</div>
-        <div>Khalti</div>
-        <div>E-sewa</div>
-        <div>Ime Pay</div>
-      </div>
-      <div className="flex bg-indigo-100 h-screen ">
-        <div className="flex items-center md:text-xl md:w-2/5 flex-col md:p-10 md:gap-14">
-        </div>
-        <div className='e-card flex h-64 w-64 bg-black'>
-          <div className='e-card-header'>
-            <div className='e-card-header-caption'>Our Services
-              <div className='e-card-header-title'>
-                image
-              </div>
-            </div>
-          </div>
+      <div className='flex gap-8 '>
+        <div className=''>
+          {campaign?.Campaigns.map((campaign: any) => {
+            return (
+              <FrontCard
+                key={campaign?.campaignId}
+                campaignId={campaign?.campaignId}
+                campaignImageURL={campaign?.campaignImageURL}
+                campaignTitle={campaign?.title}
+                campaignDescription={campaign?.description}
+                campaignCurrentAmount={campaign?.currentAmount}
+                campaignCollectedAmount={campaign?.collectedAmount}
+              />
+            )
+          })}
         </div>
       </div>
     </>

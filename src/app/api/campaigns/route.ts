@@ -1,7 +1,7 @@
 import { prisma } from '@sahayeta/app/lib/prismadb'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const Campaigns = await prisma.campaign.findMany({
     where: {},
     select: {

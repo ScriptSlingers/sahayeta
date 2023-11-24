@@ -24,8 +24,7 @@ async function handlePOST(res: NextApiResponse, req: NextApiRequest) {
     where: { email: req.body.username },
     select: {
       id: true,
-      firstName: true,
-      lastName: true,
+      name: true,
       email: true,
       password: true,
       role: true
