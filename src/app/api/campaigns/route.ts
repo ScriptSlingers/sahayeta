@@ -8,6 +8,7 @@ export async function GET() {
       campaignId: true,
       title: true,
       isVerified: true,
+      image:true,
       description: true,
       goalAmount: true,
       currentAmount: true,

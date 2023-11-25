@@ -17,8 +17,8 @@ export default function FrontCard(
     console.log(campaignTitle)
     return (
         <div>
-            <div key={campaignId}>
-                <div className='flex flex-col bg-blue-50 p-5 w-96 h-96 shadow-2xl gap-5'>
+            <div key={campaignId} className='grid grid-cols-3'>
+                <div className='flex flex-col bg-blue-50 p-5 w-96  shadow-2xl gap-5'>
                     <div className="relative flex h-48 ">
                         <Link href="/">
                             <Image
@@ -40,18 +40,3 @@ export default function FrontCard(
         </div>
     );
 }
-{/* <div>
-          {user?.Users.map((user: any) => {
-            return (
-             
-                key={user?.campaignId}
-                campaignId={user?.campaignId}
-                name={user?.username}
-                email={user?.email}
-                campaignDescription={user?.description}
-                campaignCurrentAmount={user?.currentAmount}
-                campaignCollectedAmount={user?.collectedAmount}
-              
-            )
-          })}
-        </div> */}
