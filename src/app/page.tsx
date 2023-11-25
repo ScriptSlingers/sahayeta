@@ -1,5 +1,6 @@
 'use client'
-import FrontCard from '@sahayeta/components/FrontCard';
+import { HeroSection, TrendingSection, FrontCard, FeaturedSection, CausesSection, MessageSection } from '@sahayeta/components';
+import Test from '@sahayeta/components/Test';
 
 import { useEffect, useState } from 'react';
 export default function Page() {
@@ -20,29 +21,29 @@ export default function Page() {
 
   return (
     <>
-
-
-      <div className='container  p-3 grid grid-cols-3 justify-center items-center'>
-        {/* {campaign?.Campaigns.map} */}
-        {campaign?.Campaigns.map((campaign: any) => {
-          { JSON.stringify(campaign?.title) }
-
-          <FrontCard
-
-            key={campaign?.campaignId}
-            campaignId={campaign?.campaignId}
-            campaignImageURL={campaign?.image}
-            campaignTitle={campaign?.title}
-            campaignDescription={campaign?.description}
-            campaignCurrentAmount={campaign?.currentAmount}
-            campaignCollectedAmount={campaign?.collectedAmount}
-          />
+      <HeroSection />
+      <TrendingSection />
+      <FeaturedSection />
+      <CausesSection />
+      <MessageSection />
+      <div className='container text-black p-3 grid grid-cols-3 justify-center items-center'>
+        {campaign?.Campaigns.map(({ campaignId, image, title, description, currentAmount, collectedAmount }: any) => {
+          return (
+            < FrontCard
+              key={campaignId}
+              campaignId={campaignId}
+              campaignImageURL={image}
+              campaignTitle={title}
+              campaignDescription={description}
+              campaignCurrentAmount={currentAmount}
+              campaignCollectedAmount={collectedAmount}
+            />
+          )
         })}
       </div>
 
 
 
-      {/* <Test /> */}
       {/* <div className="w-full flex flex-col md:flex-row justify-center items-center bg-indigo-100 text-black ">
         <div className="w-full md:w-2/5 flex flex-col p-4 md:p-10  md:gap-6">
           <div className="text-3xl md:text-5xl font-serif font-extralight">

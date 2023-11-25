@@ -1,25 +1,22 @@
-import Image from 'next/image';
+import Image from 'next/image'
 import Link from 'next/link';
+import React from 'react'
 
-export default function FrontCard(
-    {
-        campaignId,
-        campaignImageURL,
-        campaignImageAlt,
-        campaignTitle,
-        campaignDescription,
-        campaignCurrentAmount,
-        campaignCollectedAmount
-    }: any
-
-
-) {
-    console.log(campaignTitle)
+export const FrontCard = ({
+    campaignId,
+    campaignImageURL,
+    campaignImageAlt,
+    campaignTitle,
+    campaignDescription,
+    campaignCurrentAmount,
+    campaignCollectedAmount
+}: any
+) => {
     return (
         <div>
             <div key={campaignId} className='grid grid-cols-3'>
                 <div className='flex flex-col bg-blue-50 p-5 w-96  shadow-2xl gap-5'>
-                    <div className="relative flex h-48 ">
+                    <div className="relative flex h-48 w-full ">
                         <Link href="/">
                             <Image
                                 src={campaignImageURL}
@@ -38,5 +35,6 @@ export default function FrontCard(
                 </div>
             </div>
         </div>
-    );
+    )
 }
+
