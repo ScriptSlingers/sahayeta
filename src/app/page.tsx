@@ -8,7 +8,7 @@ export default function Page() {
           <div className="text-3xl md:text-5xl font-serif font-extralight">
             Donation can change the world
           </div>
-          <p className="text-xl md:text-2xl font-semibold text-purple-500">
+          <p className="text-xl md:text-2xl font-semibold text-blue-500">
             Donation is a way of love
           </p>
           <p className="text-base md:text-lg">
@@ -18,7 +18,7 @@ export default function Page() {
           <div className="flex">
             <a
               href="#"
-              className="items-center text-white bg-purple-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
+              className="items-center text-white bg-blue-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
             >
               Donate now
             </a>
