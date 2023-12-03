@@ -5,6 +5,8 @@ import { FaHome } from "react-icons/fa";
 import { FaCalendarAlt } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineRise } from "react-icons/ai";
+import { BsCurrencyDollar } from "react-icons/bs";
+import { FaCircle } from "react-icons/fa";
 
 export default function Userinfo() {
   return (
@@ -35,28 +37,73 @@ export default function Userinfo() {
           </div>
         </div>
     </section>
-    <section className='w-4/5'>
-      <div className='text-black'>
-      <div className='m-3 p-2'>
+    <section className='w-4/5 text-black'> 
+      <div className='m-2 p-2'>
           <h6 className=' font-semibold text-lg  flex'><AiOutlineRise className='m-2 text-lg'/>Your Giving Status</h6>
         </div>
-        <div className='bg-slate-200 border-2 border-slate-500 flex mx-7 p-3'>
-          <div className='border-1 border-slate-400 bg-white m-2 text-center p-3 '>
-              <p>4</p>
-              <p>NUMBER OF DONATION</p>
+        <div className=' ml-7 flex items-start justify-start'>
+        <div className='bg-gray-100 border-2 border-slate-500 flex p-4 gap-5'>
+          <div className='border-1 border-slate-400 bg-white text-center w-[150px] h-[150px] p-5'>
+              <p className='text-blue-700 text-4xl'>4</p>
+              <p className='text-lg font-maven'>NUMBER OF DONATION</p>
           </div>  
-          <div className='border-1 border-slate-400 bg-white m-2 text-center p-3'>
-              <p>4</p>
-              <p>LIFETIME DONATIONS</p>
+          <div className='border-1 border-slate-400 bg-white text-center w-[150px] h-[150px] p-5'>
+              <p className='text-blue-700 text-4xl flex'><BsCurrencyDollar className='p-1'/>17k</p>
+              <p className='text-lg font-maven'>LIFETIME DONATIONS</p>
           </div>  
-          <div className='border-1 border-slate-400 bg-white m-2 text-center p-3'>
-              <p>4</p>
-              <p>AVERAGE DONATION</p>
+          <div className='border-1 border-slate-400 bg-white  text-center w-[150px] h-[150px] p-5'>
+              <p className='text-blue-700 text-4xl flex'><BsCurrencyDollar className='p-1'/>2.5k</p>
+              <p className='text-lg font-maven'>AVERAGE DONATION</p>
           </div>
         </div>
       </div>
-      <div className='bg-green-500'></div>
-
+      <div className='m-3 p-2'>
+          <h6 className='font-semibold text-lg  flex'><FaCalendarAlt className='m-2 text-lg'/>Recent Donations</h6>
+        </div>
+       <div className='border-1 border-slate-400 ml-7'>
+        <div className='flex items-start justify-between bg-gray-200 border-1 border-b-slate-400 p-2 text-xl'>
+         <div>DONATION</div>
+         <div>FORM</div>
+         <div>DATE</div>
+         <div>STATUS</div>
+        </div>
+        <div className='flex items-center justify-between p-4 text-xl  border-1 border-b-slate-400 '>
+         <div>$ 25.00</div>
+         <div className='ml-8'>Donation </div>
+         <div className='grid'>
+          <span>March 19,2021</span>
+          <span>12.27 pm</span>
+         </div>
+         <div className='flex'><FaCircle className='m-1 text-blue-800'/>Complete</div>
+        </div>
+        <div className='flex items-center justify-between p-4 text-xl  border-1 border-b-slate-400'>
+         <div>$ 25.00</div>
+         <div className='ml-8'>Donation </div>
+         <div className='grid'>
+          <span>March 19,2021</span>
+          <span>12.27 pm</span>
+         </div>
+         <div className='flex'><FaCircle className='m-1 text-blue-800'/>Complete</div>
+        </div>
+        <div className='flex items-center justify-between p-4 text-xl border-1 border-b-slate-400'>
+         <div>$ 25.00</div>
+         <div className='ml-8'>Donation </div>
+         <div className='grid'>
+          <span>March 19,2021</span>
+          <span>12.27 pm</span>
+         </div>
+         <div className='flex'><FaCircle className='m-1 text-blue-800'/>Complete</div>
+        </div>
+        <div className='flex items-center justify-between p-4 text-xl'>
+         <div>$ 25.00</div>
+         <div className='ml-8'>Donation </div>
+         <div className='grid'>
+          <span>March 19,2021</span>
+          <span>12.27 pm</span>
+         </div>
+         <div className='flex'><FaCircle className='m-1 text-blue-800'/>Complete</div>
+        </div>
+       </div>
     </section>
 
    </div>
