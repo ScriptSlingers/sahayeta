@@ -36,7 +36,7 @@ export default function Profile() {
       )}
       </div>
       <input type="file" onChange={handleFileChange}  className='m-5'/>
-      <button onClick={handleUpload} className='p-3 ml-5 rounded-md w-fit bg-blue-600 text-white text-start hover:border-2 hover:bg-white hover:border-blue-600 hover:text-black'>Upload</button>
+    
       
    </div>
       
@@ -111,7 +111,7 @@ export default function Profile() {
                    required />
             </div>
          </div>
-        <button className="w-full bg-blue-800 text-white p-2 rounded-lg mb-4 mt-5 hover:bg-blue-500 ">
+        <button onClick={handleUpload} className="w-full bg-blue-800 text-white p-2 rounded-lg mb-4 mt-5 hover:bg-blue-500 ">
               Update Information
         </button>
         </form>
