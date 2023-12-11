@@ -1,14 +1,14 @@
 'use client'
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 
 export default function Profile() {
 
-   const [selectedFile, setSelectedFile] = useState(null);
+   const [selectedFile, setSelectedFile] = useState <File | null>(null);
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+  const handleFileChange = (e : ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    setSelectedFile(file || null);
   };
 
   const handleUpload = () => {
@@ -36,7 +36,6 @@ export default function Profile() {
       )}
       </div>
       <input type="file" onChange={handleFileChange}  className='m-5'/>
-    
       
    </div>
       
