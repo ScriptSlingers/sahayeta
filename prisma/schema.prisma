@@ -78,6 +78,7 @@ model VerificationToken {
 model Campaign {
   campaignId      String         @id @default(cuid()) @map("_id")
   title           String
+  image           String
   isVerified      Boolean
   description     String
   goalAmount      Int

@@ -1,78 +1,60 @@
 'use client'
-import FrontCard from '@sahayeta/components/FrontCard'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { CausesSection, FeaturedSection, FrontCard, HeroSection, MessageSection, TrendingSection } from '@sahayeta/components';
+import LandingSection from '@sahayeta/components/LandingSection';
+import { useEffect, useState } from 'react';
+
 export default function Page() {
   const [campaign, setCampaign] = useState<any>()
 
   useEffect(() => {
     fetch(`/api/campaigns/`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
     })
-      .then(res => res.json())
-      .then(data => {
-        const campaign = data
-        setCampaign(campaign)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Network response was not ok: ${res.statusText}`);
+        }
+        return res.json();
       })
-  }, [campaign])
-  console.log(campaign)
+      .then((data) => {
+        setCampaign(data);
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+      });
+  }, []);
+
 
   return (
     <>
-      <div className="w-full flex flex-col md:flex-row justify-center items-center bg-indigo-100 text-black gap-6">
-        <div className="w-full md:w-2/5 flex flex-col p-4 md:p-10 gap-4 md:gap-6">
-          <div className="text-3xl md:text-5xl font-serif font-extralight">
-            Donation can change the world
-          </div>
-          <p className="text-xl md:text-2xl font-semibold text-blue-500">
-            Donation is a way of love
-          </p>
-          <p className="text-base md:text-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <div className="flex">
-            <Link
-              href="#"
-              className="items-center text-white bg-blue-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
-            >
-              Donate now
-            </Link>
-          </div>
-        </div>
-        <div className="w-full md:w-1/2">
-          <div className="relative">
-            <Image
-              src="/assets/img/herosection.png"
-              objectPosition="center"
-              alt="Hero Section"
-              width={500}
-              height={300}
-              className=""
-              quality={100}
+      <LandingSection />
+      {/* <TrendingSection />
+      <FeaturedSection />
+      <CausesSection />
+      <MessageSection /> */}
+      <div className='container text-black p-3 grid grid-cols-3 justify-center items-center'>
+        {campaign?.Campaigns.map(({ campaignId, image, title, description, currentAmount, collectedAmount }: any) => {
+          return (
+            < FrontCard
+              key={campaignId}
+              campaignId={campaignId}
+              campaignImageURL={image}
+              campaignTitle={title}
+              campaignDescription={description}
+              campaignCurrentAmount={currentAmount}
+              campaignCollectedAmount={collectedAmount}
             />
-          </div>
-        </div>
+          )
+        })}
       </div>
-      <div className="flex gap-8 ">
-        <div className="">
-          {campaign?.Campaigns.map((campaign: any) => {
-            return (
-              <FrontCard
-                key={campaign?.campaignId}
-                campaignId={campaign?.campaignId}
-                campaignImageURL={campaign?.campaignImageURL}
-                campaignTitle={campaign?.title}
-                campaignDescription={campaign?.description}
-                campaignCurrentAmount={campaign?.currentAmount}
-                campaignCollectedAmount={campaign?.collectedAmount}
-              />
-            )
-          })}
-        </div>
-      </div>
+
+
+
+
+
+
+
     </>
-  )
+  );
 }

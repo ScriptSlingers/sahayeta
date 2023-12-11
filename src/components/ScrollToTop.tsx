@@ -67,7 +67,7 @@ const CircularProgressBar = ({
           cy={circleWidth / 2}
           strokeWidth="3px"
           r={radius}
-          className="svg-stroke-rounded fill-none stroke-secondary"
+          className="svg-stroke-rounded fill-none stroke-blue-700"
           style={{
             strokeDasharray: dashArray,
             strokeDashoffset: dashOffset
@@ -75,7 +75,7 @@ const CircularProgressBar = ({
           transform={`rotate(-90 ${circleWidth / 2} ${circleWidth / 2})`}
         />
       </svg>
-      <div className="h-8 w-8 text-secondary">
+      <div className="h-8 w-8 text-blue-700">
         <ArrowUpIcon />
       </div>
     </button>

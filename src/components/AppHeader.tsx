@@ -45,18 +45,16 @@ export const AppHeader = () => {
             <Link href="/">
               <div>Home</div>
             </Link>
-            <Link href="/">
+            <Link href="">
               <div>Dashboard</div>
             </Link>
+            <div>Campaign</div>
+            <div>Charity</div>
             <div>Donate</div>
           </div>
         </div>
         <div className="flex items-center p-6 gap-6">
-          <div className="w-6 h-6">
-            <Link href="#">
-              <SearchIcon />
-            </Link>
-          </div>
+
           <div className="w-6 h-6">
             <Link href="#">
               <NotificationIcon />
@@ -81,18 +79,18 @@ export const AppHeader = () => {
                 </div>
               </Link>
               <button
-                className=" bg-purple-500 text-white hover:bg-purple-700 p-3 rounded font-bold "
+                className=" items-center text-white bg-blue-600 rounded p-3  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent d "
                 onClick={() => signOut()}
               >
                 Signout
               </button>
             </div>
           ) : (
-            <div className="w-6 h-6">
+            <div className="w-10 h-4 mx-2 flex justify-center items-center">
               <button>
                 <Link
                   href="/login"
-                  className=" bg-purple-500 text-white hover:bg-purple-700 p-3 rounded font-bold "
+                  className=" items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
                 >
                   Login
                 </Link>
