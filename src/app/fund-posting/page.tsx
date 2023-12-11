@@ -19,9 +19,6 @@ export default function DonationForm() {
         donationAmount: "",
         donorsNotes: ""
     });
-
-
-
     const handleChange = (event: any) => {
         fetch('https://dummyjson.com/posts/add', {
             method: 'POST',
@@ -38,8 +35,6 @@ export default function DonationForm() {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-
-
         fetch('https://dummyjson.com/posts/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

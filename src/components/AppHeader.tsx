@@ -45,18 +45,16 @@ export const AppHeader = () => {
             <Link href="/">
               <div>Home</div>
             </Link>
-            <Link href="/">
+            <Link href="">
               <div>Dashboard</div>
             </Link>
+            <div>Campaign</div>
+            <div>Charity</div>
             <div>Donate</div>
           </div>
         </div>
         <div className="flex items-center p-6 gap-6">
-          <div className="w-6 h-6">
-            <Link href="#">
-              <SearchIcon />
-            </Link>
-          </div>
+
           <div className="w-6 h-6">
             <Link href="#">
               <NotificationIcon />

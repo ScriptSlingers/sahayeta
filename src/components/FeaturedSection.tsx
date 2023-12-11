@@ -17,7 +17,7 @@ export const FeaturedSection = () => {
                         width={550}
                         height={200}
                         className=" shadow-2xl"
-                        quality={100}
+                        quality={50}
                     />
                     <div className="flex flex-col py-14 px-20 w-1/2 bg-blue-500 rounded-r-lg shadow-2xl">
                         <h1 className="flex justify-start text-white font-bold text-3xl">

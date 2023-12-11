@@ -14,7 +14,7 @@ export const Footer = () => {
   return (
     <>
       <div className="flex flex-col overflow-hidden">
-        <div className="flex w-full justify-center bg-accent">
+        <div className="flex w-full justify-center bg-[#c7ecff]">
           <div className="flex flex-col">
             <div className="min-h-96 container grid grid-cols-1 items-center gap-x-9 gap-y-12 py-14 lg:grid-cols-4">
               <div className="flex h-full flex-col items-center justify-center gap-4 border-r-1 lg:items-start lg:border-black">
@@ -23,10 +23,10 @@ export const Footer = () => {
                   href="#"
                   target="_blank"
                 >
-                  <div className="flex h-6 w-6 text-secondary">
+                  <div className="flex h-6 w-6 text-blue-700">
                     <InstagramIcon />
                   </div>
-                  <Typography className="group-hover:text-secondary">
+                  <Typography className="group-hover:text-blue-700">
                     /Sahayata
                   </Typography>
                 </Link>
@@ -35,10 +35,10 @@ export const Footer = () => {
                   href="#"
                   target="_blank"
                 >
-                  <div className="flex h-6 w-6 text-secondary">
+                  <div className="flex h-6 w-6 text-blue-700">
                     <FacebookIcon />
                   </div>
-                  <Typography className="group-hover:text-secondary">
+                  <Typography className="group-hover:text-blue-700">
                     /Sahayata
                   </Typography>
                 </Link>
@@ -55,25 +55,25 @@ export const Footer = () => {
                   </Link>
                 </div>
                 <Typography className="max-w-lg" align="center">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Sahayata Uniting Hearts, Transforming Lives – Be the Difference Today
                 </Typography>
-                <div className="ld:text-body grid grid-cols-3 gap-x-10 gap-y-2 text-center text-body-sm uppercase text-gray-600 lg:grid-cols-6">
-                  <Link href="/" className="hover:text-secondary">
+                <div className="ld:text-body grid grid-cols-3 gap-x-8 gap-y-2 text-center text-body-sm uppercase text-gray-600 lg:grid-cols-6">
+                  <Link href="/" className="hover:text-blue-700">
                     Home
                   </Link>
-                  <Link href="/about" className="hover:text-secondary">
-                    About
+                  <Link href="/about" className="hover:text-blue-700">
+                    Dashboard
                   </Link>
-                  <Link href="/blogs" className="hover:text-secondary">
-                    Blog
+                  <Link href="/blogs" className="hover:text-blue-700">
+                    Campaign
                   </Link>
-                  <Link href="/portfolio" className="hover:text-secondary">
-                    Portfolio
+                  <Link href="/portfolio" className="hover:text-blue-700">
+                    Support
                   </Link>
-                  <Link href="/our-team" className="hover:text-secondary">
+                  <Link href="/our-team" className="hover:text-blue-700">
                     Our Team
                   </Link>
-                  <Link href="/contact" className="hover:text-secondary">
+                  <Link href="/contact" className="hover:text-blue-700">
                     Contact
                   </Link>
                 </div>
@@ -85,10 +85,10 @@ export const Footer = () => {
                   href="tel:#"
                   target="_blank"
                 >
-                  <div className="flex h-6 w-6 text-secondary">
+                  <div className="flex h-6 w-6 text-blue-700">
                     <CallIcon />
                   </div>
-                  <Typography className="group-hover:text-secondary">
+                  <Typography className="group-hover:text-blue-700">
                     /(123) 456 - 7890
                   </Typography>
                 </Link>
@@ -97,10 +97,10 @@ export const Footer = () => {
                   href="mailto:#"
                   target="_blank"
                 >
-                  <div className="flex h-6 w-6 text-secondary">
+                  <div className="flex h-6 w-6 text-blue-700">
                     <EnvelopeIcon />
                   </div>
-                  <Typography className="group-hover:text-secondary">
+                  <Typography className="group-hover:text-blue-700">
                     /contact@Sahayata.com
                   </Typography>
                 </Link>
@@ -110,7 +110,7 @@ export const Footer = () => {
             <div className="flex w-full justify-center border-t-1 border-black py-10 text-center">
               <Typography>
                 © Copyright Sahayata | Developed by
-                <Link href="#" target="_blank" className="hover:text-secondary">
+                <Link href="#" target="_blank" className="hover:text-blue-700">
                   Sahayata
                 </Link>
               </Typography>
