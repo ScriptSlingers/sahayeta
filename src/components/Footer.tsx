@@ -109,7 +109,7 @@ export const Footer = () => {
 
             <div className="flex w-full justify-center border-t-1 border-black py-10 text-center">
               <Typography>
-                © Copyright Sahayata | Developed by
+                &copy; Copyright Sahayata | Developed by
                 <Link href="#" target="_blank" className="hover:text-blue-700">
                   Sahayata
                 </Link>

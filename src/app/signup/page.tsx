@@ -2,9 +2,7 @@
 import Image from 'next/image'
 import Donation from '../../../public/assets/img/4002785.jpg'
 
-
 export default function Signup() {
- 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f9f4f1]">
       <div className="relative flex flex-col m-5 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 ">
@@ -22,7 +20,7 @@ export default function Signup() {
             Create your account
           </span>
           <form action="#" className="flex flex-col">
-          <input
+            <input
               className="w-full border border-neutral-400 p-2 rounded-lg text-black text-sm mt-5"
               id="email"
               type="text"
@@ -47,14 +45,19 @@ export default function Signup() {
             <div className="flex justify-between w-full py-4">
               <div className="mr-24">
                 <input type="checkbox" name="ch" id="ch" className="mr-2" />
-                <span className="text-md">I accept <a href='#' className='text-blue-600 font-bold'>Terms of service and privacy policy</a></span>
+                <span className="text-md">
+                  I accept{' '}
+                  <a href="#" className="text-blue-600 font-bold">
+                    Terms of service and privacy policy
+                  </a>
+                </span>
               </div>
             </div>
 
             <button className="w-full bg-blue-600 text-white p-2 rounded-lg mb-6 hover:bg-blue-400 ">
               Create Account
             </button>
-            
+
             <div className="text-center text-gray-800">
               Already have an account?
               <a
