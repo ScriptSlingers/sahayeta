@@ -55,7 +55,8 @@ export const Footer = () => {
                   </Link>
                 </div>
                 <Typography className="max-w-lg" align="center">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry.
                 </Typography>
                 <div className="ld:text-body grid grid-cols-3 gap-x-10 gap-y-2 text-center text-body-sm uppercase text-gray-600 lg:grid-cols-6">
                   <Link href="/" className="hover:text-secondary">

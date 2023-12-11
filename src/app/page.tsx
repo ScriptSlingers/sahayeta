@@ -1,25 +1,23 @@
 'use client'
-import FrontCard from '@sahayeta/components/FrontCard';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import FrontCard from '@sahayeta/components/FrontCard'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 export default function Page() {
   const [campaign, setCampaign] = useState<any>()
 
   useEffect(() => {
     fetch(`/api/campaigns/`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         const campaign = data
-        setCampaign(campaign);
+        setCampaign(campaign)
       })
-
   }, [campaign])
   console.log(campaign)
-
 
   return (
     <>
@@ -28,7 +26,7 @@ export default function Page() {
           <div className="text-3xl md:text-5xl font-serif font-extralight">
             Donation can change the world
           </div>
-          <p className="text-xl md:text-2xl font-semibold text-purple-500">
+          <p className="text-xl md:text-2xl font-semibold text-blue-500">
             Donation is a way of love
           </p>
           <p className="text-base md:text-lg">
@@ -38,7 +36,7 @@ export default function Page() {
           <div className="flex">
             <Link
               href="#"
-              className="items-center text-white bg-purple-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
+              className="items-center text-white bg-blue-600 rounded-3xl py-2 px-4 md:px-6 font-medium inline-block mr-4 hover:bg-transparent hover:border-purple-400 hover:text-black duration-300 hover:border border border-transparent"
             >
               Donate now
             </Link>
@@ -58,8 +56,8 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className='flex gap-8 '>
-        <div className=''>
+      <div className="flex gap-8 ">
+        <div className="">
           {campaign?.Campaigns.map((campaign: any) => {
             return (
               <FrontCard
@@ -76,5 +74,5 @@ export default function Page() {
         </div>
       </div>
     </>
-  );
+  )
 }

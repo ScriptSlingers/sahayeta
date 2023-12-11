@@ -10,4 +10,4 @@ module.exports = {
 
   // Prettify only Markdown and JSON files
   '**/*.(md|json)': filenames => `yarn prettier --write ${filenames.join(' ')}`
-};
+}
