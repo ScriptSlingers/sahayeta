@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
       methodId: true,
       methodName: true,
       displayName: true,
-      Payment: true
+      payment: true
     }
   })
 
