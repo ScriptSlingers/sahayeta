@@ -1,6 +1,7 @@
 import { prisma } from '@sahayeta/app/lib/prismadb'
 import { NextRequest, NextResponse } from 'next/server'
 
+// GET endpoint
 export async function GET(request: NextRequest) {
   const PaymentMethods = await prisma.paymentMethod.findMany({
     where: {},
@@ -14,21 +15,17 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({ PaymentMethods })
 }
+
+// POST endpoint
 export async function POST(request: NextRequest) {
   try {
-    const paymentmethod = await request.json()
+    const paymentMethod = await request.json()
 
-    if (
-      !paymentmethod ||
-      !paymentmethod.methodId ||
-      !paymentmethod.methodName ||
-      !paymentmethod.displayName ||
-      !paymentmethod.payment
-    ) {
+    if (!paymentMethod.methodName || !paymentMethod.displayName) {
       throw new Error('Incomplete payment method data')
     }
 
-    const { methodName, displayName } = paymentmethod
+    const { methodName, displayName } = paymentMethod
 
     const newPaymentMethod = await prisma.paymentMethod.create({
       data: {

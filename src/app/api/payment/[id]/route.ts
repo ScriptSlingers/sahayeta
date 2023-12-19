@@ -6,20 +6,20 @@ export async function GET(req: NextRequest, { params }) {
   try {
     const { id } = params
 
-    const paymentMethod = await prisma.paymentMethod.findFirst({
-      where: { methodId: id }
+    const payment = await prisma.payment.findFirst({
+      where: { paymentId: id }
     })
 
-    if (!paymentMethod) {
+    if (!payment.paymentId) {
       return NextResponse.json(
-        { message: 'Category not found' },
+        { message: 'Payment not found' },
         { status: 404 }
       )
     }
-    return NextResponse.json(paymentMethod)
+    return NextResponse.json(payment)
   } catch (error) {
     return NextResponse.json(
-      { message: 'Error retriving the categories', error },
+      { message: 'Error retriving the Payment Details', error },
       { status: 500 }
     )
   }
@@ -29,25 +29,34 @@ export async function GET(req: NextRequest, { params }) {
 export async function PATCH(req: NextRequest, { params }) {
   try {
     const body = await req.json()
-    const { methodName, displayName } = body
+    const {
+      paymentType,
+      paymentDate,
+      expirationDate,
+      paymentById,
+      paymentMethodId
+    } = body
 
     const { id } = params
 
-    const updatePaymentMethod = await prisma.paymentMethod.update({
-      where: { methodId: id },
+    const updatedPayment = await prisma.payment.update({
+      where: { paymentId: id },
       data: {
-        methodName,
-        displayName
+        paymentType,
+        paymentDate,
+        expirationDate,
+        paymentById,
+        paymentMethodId
       }
     })
 
-    if (!updatePaymentMethod) {
+    if (!updatedPayment) {
       return NextResponse.json({ message: 'Method not found' }, { status: 404 })
     }
-    return NextResponse.json(updatePaymentMethod)
+    return NextResponse.json(updatedPayment)
   } catch (error) {
     return NextResponse.json(
-      { message: 'Error updating category', error },
+      { message: 'Error updating payment details', error },
       { status: 500 }
     )
   }
@@ -60,23 +69,23 @@ export async function DELETE(req: NextRequest, { params }) {
 
     if (!id) {
       return NextResponse.json(
-        { message: 'methodId is required for deletion' },
+        { message: 'paymentId is required for deletion' },
         { status: 400 }
       )
     }
 
-    const paymentMethod = await prisma.paymentMethod.findFirst({
-      where: { methodId: id }
+    const payment = await prisma.payment.findFirst({
+      where: { paymentId: id }
     })
 
-    if (!paymentMethod) {
+    if (!payment) {
       return NextResponse.json(
-        { message: 'paymentMethod not found' },
+        { message: 'Payment not found' },
         { status: 404 }
       )
     } else {
-      await prisma.paymentMethod.delete({
-        where: { methodId: id }
+      await prisma.payment.delete({
+        where: { paymentId: id }
       })
 
       if (
@@ -87,7 +96,7 @@ export async function DELETE(req: NextRequest, { params }) {
       } else {
         return new NextResponse(null, {
           status: 204,
-          statusText: 'paymentMethod deleted successfully'
+          statusText: 'payment deleted successfully'
         })
       }
     }
@@ -95,7 +104,7 @@ export async function DELETE(req: NextRequest, { params }) {
     console.error('Error:', error)
 
     return NextResponse.json(
-      { message: 'Error in deleting the paymentMethod', error },
+      { message: 'Error in deleting the payment', error },
       { status: 500 }
     )
   }
