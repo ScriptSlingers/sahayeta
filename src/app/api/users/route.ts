@@ -27,3 +27,56 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({ users })
 }
+
+export async function POST(request: NextRequest) {
+  try {
+    const user = await request.json()
+
+    const {
+      username,
+      name,
+      address,
+      phoneNum,
+      bio,
+      profileImage,
+      dob,
+      ctzImg,
+      balance,
+      orgName,
+      assignedOn,
+      postedOn,
+      createdAt,
+      updatedAt,
+      email,
+      password
+    } = user
+
+    const newuser = await prisma.user.create({
+      data: {
+        username,
+        name,
+        address,
+        phoneNum,
+        bio,
+        profileImage,
+        dob,
+        ctzImg,
+        balance,
+        orgName,
+        assignedOn,
+        postedOn,
+        createdAt,
+        updatedAt,
+        email,
+        password
+      }
+    })
+
+    return NextResponse.json(newuser)
+  } catch (error) {
+    return NextResponse.json(
+      { message: 'POST Error', error: error.message },
+      { status: 500 }
+    )
+  }
+}

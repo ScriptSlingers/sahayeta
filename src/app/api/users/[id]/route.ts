@@ -6,20 +6,17 @@ export async function GET(req: NextRequest, { params }) {
   try {
     const { id } = params
 
-    const campaign = await prisma.campaign.findFirst({
-      where: { campaignId: id }
+    const user = await prisma.user.findFirst({
+      where: { id }
     })
 
-    if (!campaign) {
-      return NextResponse.json(
-        { message: 'Category not found' },
-        { status: 404 }
-      )
+    if (!user) {
+      return NextResponse.json({ message: 'user not found' }, { status: 404 })
     }
-    return NextResponse.json(campaign)
+    return NextResponse.json(user)
   } catch (error) {
     return NextResponse.json(
-      { message: 'Error retriving the categories', error },
+      { message: 'Error retriving the user', error },
       { status: 500 }
     )
   }
@@ -31,18 +28,18 @@ export async function PATCH(req: NextRequest, { params }) {
 
     const { id } = params
 
-    const updatecampaign = await prisma.campaign.update({
-      where: { campaignId: id },
+    const updateuser = await prisma.user.update({
+      where: { id },
       data: body
     })
 
-    if (!updatecampaign) {
+    if (!updateuser) {
       return NextResponse.json({ message: 'Method not found' }, { status: 404 })
     }
-    return NextResponse.json(updatecampaign)
+    return NextResponse.json(updateuser)
   } catch (error) {
     return NextResponse.json(
-      { message: 'Error updating campaign', error },
+      { message: 'Error updating user', error },
       { status: 500 }
     )
   }
@@ -60,18 +57,15 @@ export async function DELETE(req: NextRequest, { params }) {
       )
     }
 
-    const campaign = await prisma.campaign.findFirst({
-      where: { campaignId: id }
+    const user = await prisma.user.findFirst({
+      where: { id }
     })
 
-    if (!campaign) {
-      return NextResponse.json(
-        { message: 'campaign not found' },
-        { status: 404 }
-      )
+    if (!user) {
+      return NextResponse.json({ message: 'user not found' }, { status: 404 })
     } else {
-      await prisma.campaign.delete({
-        where: { campaignId: id }
+      await prisma.user.delete({
+        where: { id }
       })
 
       if (
@@ -82,7 +76,7 @@ export async function DELETE(req: NextRequest, { params }) {
       } else {
         return new NextResponse(null, {
           status: 204,
-          statusText: 'campaign deleted successfully'
+          statusText: 'user deleted successfully'
         })
       }
     }
@@ -90,7 +84,7 @@ export async function DELETE(req: NextRequest, { params }) {
     console.error('Error:', error)
 
     return NextResponse.json(
-      { message: 'Error in deleting the campaign', error },
+      { message: 'Error in deleting the user', error },
       { status: 500 }
     )
   }

@@ -36,7 +36,6 @@ export async function POST(request: NextRequest) {
       !campaign.createdById ||
       !campaign.categoryId
     ) {
-      // Handle the case where some required properties are missing
       return NextResponse.json(
         { message: 'Missing required properties in the request' },
         { status: 400 }
