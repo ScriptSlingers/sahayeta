@@ -28,15 +28,15 @@ export async function PATCH(req: NextRequest, { params }) {
 
     const { id } = params
 
-    const updateuser = await prisma.user.update({
+    const updateUser = await prisma.user.update({
       where: { id },
       data: body
     })
 
-    if (!updateuser) {
+    if (!updateUser) {
       return NextResponse.json({ message: 'Method not found' }, { status: 404 })
     }
-    return NextResponse.json(updateuser)
+    return NextResponse.json(updateUser)
   } catch (error) {
     return NextResponse.json(
       { message: 'Error updating user', error },
