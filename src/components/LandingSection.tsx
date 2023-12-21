@@ -60,6 +60,7 @@ export default function LandingSection() {
                                     alt="Testimonial"
                                     quality={100}
                                     className="object-cober"
+
                                 />
                             </div>
                         </div>

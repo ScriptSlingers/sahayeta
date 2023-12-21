@@ -8,6 +8,10 @@ export const authOptions: NextAuthOptions = {
     signOut: '/logout',
     error: '/test'
   },
+  session: {
+    strategy: 'jwt'
+  },
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
@@ -15,22 +19,43 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, account }: any) {
-      if (account) {
-        token.accessToken = account.access_token
+    session: async ({ session }) => {
+      try {
+        const userDetails = await prisma.user.findFirst({
+          where: { email: session.user.email },
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            email: true,
+            profileImage: true
+          }
+        })
+        return {
+          ...session,
+          user: {
+            ...session.user,
+            userDetails
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error)
+        return session
+      }
+    },
+
+    jwt: ({ token, user }) => {
+      if (user) {
+        const newUser = user
+        return {
+          ...token,
+          id: newUser.id
+        }
       }
       return token
     },
-    async session({ session, token }: any) {
-      session.user.id = token.id
-      return session
-    },
 
-    /* TO DOs
-    1. Add user.id in the session return
-    */
-
-    async signIn(user: any) {
+    signIn: async (user: any) => {
       try {
         const existingUser = await prisma.user.findFirst({
           where: { email: user.profile.email }
@@ -44,9 +69,9 @@ export const authOptions: NextAuthOptions = {
               profileImage: user.profile.picture
             }
           })
-          return true
+          return user
         }
-        return true
+        return user
       } catch (error) {
         throw new Error('Error during sign-in process')
       }
