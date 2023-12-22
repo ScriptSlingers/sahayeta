@@ -7,11 +7,12 @@ import { CgProfile } from 'react-icons/cg'
 import { AiOutlineRise } from 'react-icons/ai'
 import { BsCurrencyDollar } from 'react-icons/bs'
 
+
 const data = [
   {
     donation: 25.0,
     form: 'Donation Form',
-    date: 19 - 3 - 2021,
+    date: 19- 3 - 2021,
     status: 'Completed'
   },
   {
@@ -37,16 +38,18 @@ const data = [
 export default function Userinfo() {
   return (
     <>
-      <section className="border-2 border-slate-300">
+     <div className='grid item-center justify-center my-5 bg-[#f9f4f1] '>
+      <div className='border-2 border-slate-500 bg-white'>
+      <section className="border-b-2 border-slate-500">
         <div className="flex items-center gap-3 ">
-          <div className="w-[150px] h-[150px] border border-accent m-3 bg-slate-300 rounded-full"></div>
-          <div className=" rounded-md p-2">
-            <p className="font-bold text-2xl">Sophia Browe</p>
-            <p className="text-slate-500 font-maven text-md  flex ">
+          <div className="w-20 h-20 border border-accent m-3 bg-slate-300 rounded-full"></div>
+          <div className=" rounded-md ">
+            <p className="font-bold text-base text-blue-600">Sophia Browe</p>
+            <p className="text-black font-maven text-sm  flex ">
               <TbAddressBook className="m-1" />
               Bharatpur, Chitwan
             </p>
-            <p className="text-slate-500 font-maven text-md  flex ">
+            <p className="text-black font-maven text-sm  flex ">
               <FaHeart className="m-1" />
               Donor for 7 months
             </p>
@@ -54,86 +57,86 @@ export default function Userinfo() {
         </div>
       </section>
       <div className="flex">
-        <section className="w-1/5 border-2 border-t-0 border-slate-300 hidden md:block">
-          <div className=" text-slate-700 ">
-            <div className="text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer">
-              <FaHome className="m-1" /> Dashboard
+        <section className="w-0.5/3  border-r-2 border-slate-500 ">
+          <div className=" text-black flex flex-col items-start justify-center p-4 gap-3 ">
+            <div className="text-md font-md font-maven  text-center flex gap-3 cursor-pointer">
+              <FaHome className="" /> Dashboard
             </div>
-            <div className="text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer">
-              <FaCalendarAlt className="m-1" /> Donation History
+            <div className="text-md font-md font-maven  text-center flex gap-3 cursor-pointer">
+              <FaCalendarAlt className="" /> History
             </div>
-            <div className="text-xl font-bold font-maven m-3 p-2 text-center flex gap-4 cursor-pointer">
-              <CgProfile className="m-1" /> Edit Profile
+            <div className="text-md font-md font-maven  text-center flex gap-3 cursor-pointer">
+              <CgProfile className="" /> Edit Profile
             </div>
           </div>
         </section>
-        <section className="w-4/5 text-black">
-          <div className="m-2 p-2">
-            <h6 className=" font-semibold text-lg  flex">
+        <section className="w-2.5/3 text-black p-3 flex flex-col items-start justify-center">
+          <div className="">
+            <h6 className=" font-md text-lg flex">
               <AiOutlineRise className="m-2 text-lg" />
               Your Giving Status
             </h6>
           </div>
-          <div className=" m-5 flex items-center justify-center ">
-            <div className="bg-gray-100 border-2 border-slate-500 flex p-6 gap-6 items-center justify-around h-[220px]">
-              <div className="border-1 border-slate-400 bg-white text-center w-[150px] h-[150px] p-5">
-                <p className="text-blue-700 text-4xl">4</p>
-                <p className="text-lg font-maven">NUMBER OF DONATION</p>
+          <div className="p-5 flex items-center justify-start w-full">
+            <div className="bg-gray-100 border-1 border-slate-500 flex gap-4 items-center justify-around p-3">
+              <div className="border-1 border-slate-400 bg-white text-center w-24 h-24 p-2">
+                <p className="text-blue-700 text-base">4</p>
+                <p className="text-sm font-maven">NUMBER OF DONATION</p>
               </div>
-              <div className="border-1 border-slate-400 bg-white text-center w-[150px] h-[150px] p-5">
-                <p className="text-blue-700 text-4xl flex">
-                  <BsCurrencyDollar className="p-1" />
-                  17k
-                </p>
-                <p className="text-lg font-maven">LIFETIME DONATIONS</p>
+              <div className="border-1 border-slate-400 bg-white text-center w-24 h-24 p-2">
+                <p className="text-blue-700 text-base">17K</p>
+                <p className="text-sm font-maven">LIFETIME DONATIONS</p>
               </div>
-              <div className="border-1 border-slate-400 bg-white  text-center w-[150px] h-[150px] p-5">
-                <p className="text-blue-700 text-4xl flex">
-                  <BsCurrencyDollar className="p-1" />
-                  2.5k
-                </p>
-                <p className="text-lg font-maven">AVERAGE DONATION</p>
+              <div className="border-1 border-slate-400 bg-white text-center w-24 h-24 p-2">
+                <p className="text-blue-700 text-base">2.5K</p>
+                <p className="text-sm font-maven">AVERAGE DONATION</p>
               </div>
+              
             </div>
           </div>
-          <div className="m-3 p-2">
-            <h6 className="font-semibold text-lg  flex">
-              <FaCalendarAlt className="m-2 text-lg" />
+          <div className="">
+            <h6 className="font-md text-lg flex">
+              <FaCalendarAlt className="m-2 text-md" />
               Recent Donations
             </h6>
           </div>
-          <div className=" flex items-center justify-start ">
-            <table className="border-2 border-slate-500 solid h-[300px]  m-5 sm:w-full lg:w-[80%]">
-              <tr className="bg-slate-200">
-                <th className="border-b-1 border-b-black font-maven">
-                  DONATION (Rs)
+          <div className=" flex items-center justify-start m-5 ">
+            <table className="table-auto w-full ">
+              <thead>
+              <tr className="bg-slate-200 text-center">
+                <th className="w-1/4 min-w-12 text-lg font-semibold text-black py-1 lg:py-1 px-3 lg:px-3 border-1 border-slate-500">
+                  DONATION
                 </th>
-                <th className="border-b-1 border-b-black font-maven">FORM</th>
-                <th className="border-b-1 border-b-black font-maven">DATE</th>
-                <th className="border-b-1 border-b-black font-maven">STATUS</th>
+                <th className="w-1/4 min-w-12 text-lg font-semibold text-black py-1 lg:py-1 px-3 lg:px-3 border-1 border-slate-500">FORM</th>
+                <th className="w-1/4 min-w-12 text-lg font-semibold text-black py-1 lg:py-1 px-3 lg:px-3 border-1 border-slate-500">DATE</th>
+                <th className="w-1/4 min-w-12 text-lg font-semibold text-black py-1 lg:py-1 px-3 lg:px-3 border-1 border-slate-500">STATUS</th>
               </tr>
-
+              </thead>
+              <tbody>
               {data.map((val, key) => {
                 return (
                   <tr key={key}>
-                    <td className="text-center text-xl font-maven ">
+                    <td className="text-center text-base font-md py-3 px-2 border-b border-1 border-black">
                       {val.donation}
                     </td>
-                    <td className="text-center text-xl font-maven">
+                    <td className="text-center text-base font-md py-3 px-2 border-b border-1 border-black">
                       {val.form}
                     </td>
-                    <td className="text-center text-xl font-maven">
+                    <td className="text-center text-base font-md py-3 px-2 border-b border-1 border-black">
                       {val.date}
                     </td>
-                    <td className="text-center text-xl font-maven">
+                    <td className="text-center text-base font-md py-3 px-2 border-b border-1 border-black">
                       {val.status}
                     </td>
                   </tr>
                 )
               })}
+              </tbody>
             </table>
           </div>
         </section>
+      </div>
+      </div>
       </div>
     </>
   )

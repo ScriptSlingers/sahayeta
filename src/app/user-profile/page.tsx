@@ -37,11 +37,11 @@ const UserProfile = () => {
             <p>Role: Admin
 
               <p>Bio:Hi my name is Anjali Poudel I'm a student of information technology and I am a passionate front-end developer. I possess a decent level of skill in Graphics Design, HTML, CSS and WordPress as well. </p>
-              {/* <p>Bio: {session?.data?.user?.bio}</p>
-                        <p>Phone Number: {session?.data?.user?.phoneNum}</p>
-                        <p>Address: {session?.data?.user?.address}</p>
-                        <p>Role: {session?.data?.user?.role}</p>
-                        <p>Donate Amount:{session?.data?.user?.amount}</p> */}
+              <p>Bio: {session?.data?.user?.bio}</p>
+                       <p>Phone Number: {session?.data?.user?.phoneNum}</p>
+                       <p>Address: {session?.data?.user?.address}</p>
+                       <p>Role: {session?.data?.user?.role}</p>
+                       <p>Donate Amount:{session?.data?.user?.amount}</p> 
 
             </p>
 
