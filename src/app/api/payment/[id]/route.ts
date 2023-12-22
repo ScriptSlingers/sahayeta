@@ -1,4 +1,5 @@
 import { prisma } from '@sahayeta/app/lib/prismadb'
+import { useServerSession } from '@sahayeta/app/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
 //GET endpoint
@@ -27,6 +28,13 @@ export async function GET(req: NextRequest, { params }) {
 
 // PATCH endpoint
 export async function PATCH(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const body = await req.json()
     const {
@@ -64,6 +72,13 @@ export async function PATCH(req: NextRequest, { params }) {
 
 // DELETE endpoint
 export async function DELETE(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const { id } = params
 

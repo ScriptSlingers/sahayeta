@@ -1,15 +1,14 @@
 import { prisma } from '@sahayeta/app/lib/prismadb'
+import { useServerSession } from '@sahayeta/app/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
 //GET endpoint
 export async function GET(req: NextRequest, { params }) {
   try {
     const { id } = params
-
     const paymentMethod = await prisma.paymentMethod.findFirst({
       where: { methodId: id }
     })
-
     if (!paymentMethod) {
       return NextResponse.json(
         { message: 'Category not found' },
@@ -27,6 +26,13 @@ export async function GET(req: NextRequest, { params }) {
 
 // PATCH endpoint
 export async function PATCH(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const body = await req.json()
     const { methodName, displayName } = body
@@ -55,6 +61,13 @@ export async function PATCH(req: NextRequest, { params }) {
 
 // DELETE endpoint
 export async function DELETE(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const { id } = params
 
