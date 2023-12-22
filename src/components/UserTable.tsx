@@ -1,8 +1,32 @@
-import React from 'react'
-import { BsPen, BsThreeDots, BsThreeDotsVertical } from 'react-icons/bs'
-export const Table = () => {
+'use client'
+import React, { useEffect, useState } from 'react'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+
+export default function UserTable() {
+
+    const [user, setUser] = useState()
+    useEffect(() => {
+        fetch(`/api/users/`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Network response was not ok: ${res.statusText}`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setUser(data);
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
+    }, []);
+
     return (
-        <div className="relative px-12   sm:rounded-lg">
+        <div className="relative px-12   sm:rounded-lg" >
+
             <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                 <div>
                     <button
@@ -73,6 +97,7 @@ export const Table = () => {
                     />
                 </div>
             </div>
+
             <table className="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
@@ -102,42 +127,54 @@ export const Table = () => {
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr className=" border-b hover:bg-gray-50 ">
-                        <td className="w-4 p-4">
-                            <div className="flex items-center">
-                                <input
-                                    id="checkbox-table-search-1"
-                                    type="checkbox"
-                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                />
-                                <label className="sr-only">checkbox</label>
-                            </div>
-                        </td>
-                        <th
-                            scope="row"
-                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                        >
-                            anjalip0udel"
-                        </th>
-                        <td className="px-6 py-4">Anjali Poudel</td>
-                        <td className="px-6 py-4">mail@anjali.info.np</td>
+                <tbody >
+                    {user?.users.map(({
+                        id,
+                        username,
+                        name,
+                        email,
+                        phoneNum,
+                        role,
+                        balance }: any) => {
+                        return (
 
-                        <td className="px-6 py-4">123456789</td>
-                        <td className="px-6 py-4">Admin</td>
-                        <td className="px-6 py-4">50000</td>
-                        <td className="px-6 py-4">
-                            <a
-                                href="#"
-                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                            >
-                                <BsThreeDotsVertical />
-                            </a>
-                        </td>
-                    </tr>
+                            < tr className=" border-b hover:bg-gray-50 " key={id}>
+                                <td className="w-4 p-4">
+                                    <div className="flex items-center">
+                                        <input
+                                            id="checkbox-table-search-1"
+                                            type="checkbox"
+                                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                        />
+                                        <label className="sr-only">checkbox</label>
+                                    </div>
+                                </td>
+                                <th
+                                    scope="row"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                                >
+                                    Username
+                                </th>
+                                <td className="px-6 py-4">Name</td>
+                                <td className="px-6 py-4">Email</td>
+
+                                <td className="px-6 py-4">Phone</td>
+                                <td className="px-6 py-4">Role</td>
+                                <td className="px-6 py-4">Balance</td>
+                                <td className="px-6 py-4">
+                                    <a
+                                        href="#"
+                                        className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    >
+                                        <BsThreeDotsVertical />
+                                    </a>
+                                </td>
+                            </tr>
+                        )
+                    })
+                    }
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }
-

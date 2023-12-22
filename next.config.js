@@ -11,6 +11,7 @@ const nextConfig = {
         hostname: 'q5n8c8q9.rocketcdn.me'
       }
     ]
+
   }
 }
 

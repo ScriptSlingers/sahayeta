@@ -61,7 +61,7 @@ export const AppHeader = () => {
               <Link href="/profile">
                 <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
                   <Image
-                    src={session?.data?.user?.image || ''}
+                    src="/assets/img/donateicon.png"
                     alt={session?.data?.user?.name || ''}
                     height={40}
                     width={50}
