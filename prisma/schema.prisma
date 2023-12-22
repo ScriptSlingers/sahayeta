@@ -87,12 +87,12 @@ model Campaign {
   startDate       DateTime?
   endDate         DateTime?
   createdById     String
-  createdBy       User           @relation(fields: [createdById], references: [id])
+  createdBy       User           @relation(fields: [createdById], references: [id], onDelete: Cascade)
   categoryId      String
-  category        Category       @relation(fields: [categoryId], references: [id])
+  category        Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   status          CampaignStatus @default(pendingApproval)
   paymentId       String?
-  payment         Payment?       @relation(fields: [paymentId], references: [paymentId])
+  payment         Payment?       @relation(fields: [paymentId], references: [paymentId], onDelete: Cascade)
 
   @@map("campaign")
 }

@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
       paymentBy: true,
       paymentMethodId: true,
       paymentMethod: true,
-      Campaign: true
+      campaign: true
     }
   })
 
