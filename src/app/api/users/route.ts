@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
       username: true,
       name: true,
       address: true,
+      role: true,
       phoneNum: true,
       bio: true,
       profileImage: true,

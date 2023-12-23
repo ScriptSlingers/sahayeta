@@ -1,10 +1,9 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
+import { useEffect, useState } from 'react';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 
 export default function UserTable() {
-
-    const [user, setUser] = useState()
+    const [users, setUsers] = useState({ users: [] });
     useEffect(() => {
         fetch(`/api/users/`, {
             method: "GET",
@@ -17,7 +16,7 @@ export default function UserTable() {
                 return res.json();
             })
             .then((data) => {
-                setUser(data);
+                setUsers(data);
             })
             .catch((error) => {
                 console.error("Fetch error:", error);
@@ -25,8 +24,7 @@ export default function UserTable() {
     }, []);
 
     return (
-        <div className="relative px-12   sm:rounded-lg" >
-
+        <div className="relative px-12  sm:rounded-lg" >
             <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                 <div>
                     <button
@@ -128,14 +126,7 @@ export default function UserTable() {
                     </tr>
                 </thead>
                 <tbody >
-                    {user?.users.map(({
-                        id,
-                        username,
-                        name,
-                        email,
-                        phoneNum,
-                        role,
-                        balance }: any) => {
+                    {users?.users.map(({ id, username, email, phoneNum, role }: any) => {
                         return (
 
                             < tr className=" border-b hover:bg-gray-50 " key={id}>
@@ -153,13 +144,13 @@ export default function UserTable() {
                                     scope="row"
                                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                                 >
-                                    Username
+                                    {id}
                                 </th>
-                                <td className="px-6 py-4">Name</td>
-                                <td className="px-6 py-4">Email</td>
+                                <td className="px-6 py-4">{username}</td>
+                                <td className="px-6 py-4">{email}</td>
 
-                                <td className="px-6 py-4">Phone</td>
-                                <td className="px-6 py-4">Role</td>
+                                <td className="px-6 py-4">{phoneNum}</td>
+                                <td className="px-6 py-4">{role}</td>
                                 <td className="px-6 py-4">Balance</td>
                                 <td className="px-6 py-4">
                                     <a
