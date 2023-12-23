@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
-export default function UsersListingPage() {
+export default function CampaignsListingPage() {
     const router = useRouter()
 
-    const [users, setUsers] = useState({ users: [] })
+    const [campaigns, setCampaigns] = useState<any>()
     const currentUser = useClientSession()
 
     if (currentUser && currentUser?.role !== 'admin') {
@@ -17,23 +17,43 @@ export default function UsersListingPage() {
 
     useEffect(() => {
         axios
-            .get('/api/users/', {
+            .get('/api/campaigns/', {
                 headers: { 'Content-Type': 'application/json' }
             })
             .then(response => {
-                setUsers(response.data)
+                setCampaigns(response.data)
             })
             .catch(error => {
                 console.error('Axios error:', error)
             })
     }, [])
 
+
+    const customStatus = (status) => {
+        switch (status) {
+            case 'approved':
+                return 'Approved';
+            case 'pendingApproval':
+                return 'Pending Approval';
+            case 'rejected':
+                return 'Rejected';
+            case 'completed':
+                return 'Completed';
+            case 'cancelled':
+                return 'Cancelled';
+            case 'inProgress':
+                return 'In Progress';
+            default:
+                return 'Pending Approval';
+        }
+    };
+
     return (
         <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
             <div className="container ">
                 <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
                     <div className="relative px-10 sm:rounded-lg">
-                        <p className="text-lg font-bold py-4 text-blue-700">Users List</p>
+                        <p className="text-lg font-bold py-4 text-blue-700">Campaigns List</p>
                         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                             <div>
                                 <button
@@ -106,22 +126,28 @@ export default function UsersListingPage() {
                                 <tr>
                                     <th scope="col" className="p-4"></th>
                                     <th scope="col" className="px-6 py-3">
-                                        User Name
+                                        Title
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Full Name
+                                        Category
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Email
+                                        Created By
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Phone Number
+                                        Start Date
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Role
+                                        End date
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Amount Donated
+                                        Goal Amount
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        Collected Amount
+                                    </th>
+                                    <th scope="col" className="px-6 py-3">
+                                        status
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Actions
@@ -129,10 +155,10 @@ export default function UsersListingPage() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users?.users.map(
-                                    ({ id, username, name, email, phoneNum, role }: any) => {
+                                {campaigns?.campaigns?.map(
+                                    ({ campaignId, title, status, goalAmount, category, createdBy, collectedAmount, startDate, endDate }: any) => {
                                         return (
-                                            <tr className=" border-b hover:bg-gray-50 " key={id}>
+                                            <tr className=" border-b hover:bg-gray-50 " key={campaignId}>
                                                 <td className="w-4 p-4">
                                                     <div className="flex items-center">
                                                         <input
@@ -147,14 +173,15 @@ export default function UsersListingPage() {
                                                     scope="row"
                                                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                                                 >
-                                                    {username}
+                                                    {title}
                                                 </th>
-                                                <td className="px-6 py-4">{name}</td>
-                                                <td className="px-6 py-4">{email}</td>
-
-                                                <td className="px-6 py-4">{phoneNum}</td>
-                                                <td className="px-6 py-4">{role}</td>
-                                                <td className="px-6 py-4">Balance</td>
+                                                <td className="px-6 py-4">{category?.name}</td>
+                                                <td className="px-6 py-4">{createdBy?.name}</td>
+                                                <td className="px-6 py-4">{startDate}</td>
+                                                <td className="px-6 py-4">{endDate}</td>
+                                                <td className="px-6 py-4">{goalAmount}</td>
+                                                <td className="px-6 py-4">{collectedAmount}</td>
+                                                <td className="px-6 py-4">{customStatus(status)}</td>
                                                 <td className="px-6 py-4">
                                                     <a
                                                         href="#"

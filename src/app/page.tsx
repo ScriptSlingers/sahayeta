@@ -28,7 +28,7 @@ export default function Page() {
     <>
       <LandingSection />
       <div className="container text-black p-3 grid grid-cols-3 justify-center items-center">
-        {campaign?.Campaigns.map(
+        {campaign?.campaigns.map(
           ({
             campaignId,
             image,
