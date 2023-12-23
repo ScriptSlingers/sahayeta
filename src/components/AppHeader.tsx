@@ -1,14 +1,10 @@
 'use client'
-import {
-  Hamburger,
-  NotificationIcon,
-  QuestionIcon
-} from '@sahayeta/icons'
+import { Hamburger, NotificationIcon, QuestionIcon } from '@sahayeta/icons'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { FaCircleNotch } from "react-icons/fa"
+import { FaCircleNotch } from 'react-icons/fa'
 
 export const AppHeader = () => {
   const session = useSession()
@@ -45,7 +41,6 @@ export const AppHeader = () => {
           </div>
         </div>
         <div className="flex items-center p-6 gap-6">
-
           <div className="w-6 h-6">
             <Link href="#">
               <NotificationIcon />
@@ -75,23 +70,22 @@ export const AppHeader = () => {
                 Signout
               </button>
             </div>
+          ) : session?.status == 'loading' ? (
+            <FaCircleNotch />
           ) : (
-            session?.status == 'loading' ? (
-              <FaCircleNotch />
-            ) :
-              <div className="w-10 h-4 mx-2 flex justify-center items-center">
-                <button>
-                  <Link
-                    href="/login"
-                    className=" items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
-                  >
-                    Login
-                  </Link>
-                </button>
-              </div>
+            <div className="w-10 h-4 mx-2 flex justify-center items-center">
+              <button>
+                <Link
+                  href="/login"
+                  className=" items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
+                >
+                  Login
+                </Link>
+              </button>
+            </div>
           )}
-        </div >
-      </div >
+        </div>
+      </div>
     </>
   )
 }

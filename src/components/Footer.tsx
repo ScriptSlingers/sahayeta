@@ -55,7 +55,8 @@ export const Footer = () => {
                   </Link>
                 </div>
                 <Typography className="max-w-lg" align="center">
-                  Sahayata Uniting Hearts, Transforming Lives – Be the Difference Today
+                  Sahayata Uniting Hearts, Transforming Lives – Be the
+                  Difference Today
                 </Typography>
                 <div className="ld:text-body grid grid-cols-3 gap-x-8 gap-y-2 text-center text-body-sm uppercase text-gray-600 lg:grid-cols-6">
                   <Link href="/" className="hover:text-blue-700">
