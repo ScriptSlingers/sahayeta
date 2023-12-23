@@ -14,8 +14,8 @@ export const FrontCard = ({
 ) => {
   return (
     <div>
-      <div key={campaignId} className='grid grid-cols-3'>
-        <div className='flex flex-col bg-blue-50 p-5 w-96  shadow-2xl gap-5'>
+      <div key={campaignId} className='grid grid-cols-3 '>
+        <div className='flex flex-col  p-5 w-[500px]  gap-5'>
           <div className="relative flex h-48 w-full ">
             <Link href="/">
               <Image

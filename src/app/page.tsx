@@ -1,5 +1,5 @@
 'use client'
-import { CausesSection, FeaturedSection, FrontCard, HeroSection, MessageSection, TrendingSection } from '@sahayeta/components';
+import { FrontCard } from '@sahayeta/components';
 import LandingSection from '@sahayeta/components/LandingSection';
 import { useEffect, useState } from 'react';
 
@@ -25,14 +25,9 @@ export default function Page() {
       });
   }, []);
 
-
   return (
     <>
       <LandingSection />
-      {/* <TrendingSection />
-      <FeaturedSection />
-      <CausesSection />
-      <MessageSection /> */}
       <div className='container text-black p-3 grid grid-cols-3 justify-center items-center'>
         {campaign?.Campaigns.map(({ campaignId, image, title, description, currentAmount, collectedAmount }: any) => {
           return (
@@ -48,13 +43,6 @@ export default function Page() {
           )
         })}
       </div>
-
-
-
-
-
-
-
     </>
   );
 }

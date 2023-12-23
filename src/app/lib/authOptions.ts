@@ -1,5 +1,6 @@
 import { prisma } from '@sahayeta/app/lib'
 import { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
@@ -16,6 +17,44 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+    }),
+
+    CredentialsProvider({
+      id: 'credentials',
+      name: 'credentials',
+      credentials: {
+        username: {
+          label: 'Email',
+          type: 'text',
+          placeholder: 'Email address'
+        },
+        password: {
+          label: 'Password',
+          type: 'password',
+          placeholder: '*************'
+        }
+      },
+      authorize: async (credentials, req) => {
+        const user = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            accept: 'application/json'
+          },
+          body: Object.entries(credentials)
+            .map(e => e.join('='))
+            .join('&')
+        })
+          .then(res => res.json())
+          .catch(error => {
+            return error
+          })
+        if (user) {
+          return user
+        } else {
+          return null
+        }
+      }
     })
   ],
   callbacks: {
@@ -25,19 +64,13 @@ export const authOptions: NextAuthOptions = {
           where: { email: session.user.email },
           select: {
             id: true,
-            name: true,
-            username: true,
-            email: true,
-            profileImage: true
+            role: true
           }
         })
-        return {
-          ...session,
-          user: {
-            ...session.user,
-            userDetails
-          }
-        }
+
+        session.user['id'] = userDetails.id
+        session.user['role'] = userDetails.role
+        return session
       } catch (error) {
         console.error('Error fetching user details:', error)
         return session

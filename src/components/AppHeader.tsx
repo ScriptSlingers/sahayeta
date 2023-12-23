@@ -1,32 +1,23 @@
 'use client'
-import Login from '@sahayeta/app/login/page'
 import {
+  Hamburger,
   NotificationIcon,
-  ProfileIcon,
-  QuestionIcon,
-  SearchIcon
+  QuestionIcon
 } from '@sahayeta/icons'
-import { Hamburger } from '@sahayeta/icons/Hamburger'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { FaCircleNotch } from "react-icons/fa"
 
 export const AppHeader = () => {
   const session = useSession()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [openMenuList, setOpenMenuList] = useState<number[]>([])
   return (
     <>
       <div className="flex w-full h-16 justify-between container">
         <div className="flex">
           <div className="flex gap-5 p-6">
-            <div
-              className="flex h-full justify-center"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <Hamburger />
-            </div>
             <div className="flex items-center">
               <div className="relative h-16 w-24 items-center">
                 <Link href="/">
@@ -65,13 +56,12 @@ export const AppHeader = () => {
               <QuestionIcon />
             </Link>
           </div>
-          {/* {JSON.stringify(session)} */}
           {session.data ? (
             <div className="flex gap-3">
               <Link href="/profile">
                 <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
                   <Image
-                    src={session?.data?.user?.image || ''}
+                    src="/assets/img/donateicon.png"
                     alt={session?.data?.user?.name || ''}
                     height={40}
                     width={50}
@@ -86,19 +76,22 @@ export const AppHeader = () => {
               </button>
             </div>
           ) : (
-            <div className="w-10 h-4 mx-2 flex justify-center items-center">
-              <button>
-                <Link
-                  href="/login"
-                  className=" items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
-                >
-                  Login
-                </Link>
-              </button>
-            </div>
+            session?.status == 'loading' ? (
+              <FaCircleNotch />
+            ) :
+              <div className="w-10 h-4 mx-2 flex justify-center items-center">
+                <button>
+                  <Link
+                    href="/login"
+                    className=" items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
+                  >
+                    Login
+                  </Link>
+                </button>
+              </div>
           )}
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   )
 }

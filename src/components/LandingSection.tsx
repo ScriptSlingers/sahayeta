@@ -1,8 +1,61 @@
+"use client"
 import { SearchIcon } from '@sahayeta/icons'
 import { ChevronDownIcon } from '@sahayeta/icons/ChevronDownIcon'
 import Image from 'next/image'
+import { useEffect, useState } from 'react';
 
 export default function LandingSection() {
+    const [categories, setCategories] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredCategories, setFilteredCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/category');
+                const data = await response.json();
+
+
+                const categoryNames = data.category.map((category) => category.name);
+
+                setCategories(categoryNames);
+            } catch (error) {
+                console.error('Error fetching category data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
+    const handleSearch = (value) => {
+        setSearchTerm(value);
+
+        // Filter categories based on the search term
+        const filtered = categories.filter((category) =>
+            category.toLowerCase().includes(value.toLowerCase())
+        );
+
+        setFilteredCategories(filtered);
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/category');
+                const data = await response.json();
+
+
+                const categoryNames = data.category.map((category) => category.name);
+
+                setCategories(categoryNames);
+            } catch (error) {
+                console.error('Error fetching category data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
     return (
         <>
             <div className='flex flex-col lg:py-16 justify-center gap-10 py-8 items-center bg-blue-700 w-full px-5'>
@@ -12,19 +65,40 @@ export default function LandingSection() {
                 <div className='flex items-center rounded justify-between lg:w-1/2 bg-white'>
                     <div className='flex text-sm px-5 gap-3 justify-center items-center'>
 
-                        <p>Category</p>
-                        <div className='relative'>
-                            <div className='flex items-center text-black h-5 w-5 relative'>
-                                {ChevronDownIcon}
-                            </div>
-                        </div>
-                    </div>
-                    <input type='text' className='h-14 w-full outline-none px-5 border-l border-gray-600 ' placeholder='Search '
-                    />
+                        <select className='flex outline-none gap-3'>
 
-                    <div className='px-5'>
-                        <div className='flex text-gray-500 w-5 h-5 items-center '>
-                            {SearchIcon}
+                            <option value='' disabled selected className='flex text-base  gap-3 justify-center items-center'>
+                                Category
+                            </option>
+                            {categories.map((category) => (
+                                <option value={category} key={category} className='flex text-base  gap-3 justify-center items-center'>
+                                    {category}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className='relative w-full'>
+                        <input
+                            type='text'
+                            className='h-14 w-full outline-none px-5 border-l border-gray-600'
+                            placeholder='Search'
+                            value={searchTerm}
+                            onChange={(e) => handleSearch(e.target.value)}
+                        />
+                        <div className=''>
+                            {filteredCategories.length > 0 &&
+                                filteredCategories.map((category) => (
+                                    <div
+                                        key={category}
+
+                                        onClick={() => {
+
+                                            console.log(`Selected category: ${category}`);
+                                        }}
+                                    >
+                                        {category}
+                                    </div>
+                                ))}
                         </div>
                     </div>
                 </div>
