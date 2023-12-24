@@ -10,8 +10,8 @@ export async function GET() {
         id: true,
         name: true,
         displayName: true,
-        description: true,
-        campaign: true
+        description: true
+        // campaign: true
       }
     })
 

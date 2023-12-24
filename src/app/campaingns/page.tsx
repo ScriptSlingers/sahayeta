@@ -35,9 +35,10 @@ export default function page() {
           <span className="text-2xl font-normal">
             Articles to make you healthier, happier and smarter.
           </span>
-          <span className="text-base font-normal">
-            Follow us on <Link href="https://www.facebook.com/"> Facebook</Link>{' '}
-            and <Link href="#">X</Link> to get the latest posts.
+          <span className="text-base font-normal text-blue-700">
+            <Link href='/create-campaign'>
+              Click here to create campaign
+            </Link>
           </span>
           <div className="h-[1px] bg-black w-[95%]"></div>
 
@@ -64,7 +65,7 @@ export default function page() {
         </div>
       </div>
       <div className="container text-black p-3 gap-3 grid grid-cols-3 justify-center items-center">
-        {campaign?.Campaigns.map(
+        {campaign?.campaigns.map(
           ({
             campaignId,
             image,
@@ -87,7 +88,7 @@ export default function page() {
           }
         )}
       </div>
-      <h1>Create Campaign</h1>
+
     </div>
   )
 }

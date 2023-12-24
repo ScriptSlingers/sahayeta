@@ -1,28 +1,24 @@
-'use client'
-import { FrontCard, LandingSection } from '@sahayeta/components'
-import { useEffect, useState } from 'react'
+'use client';
+import { FrontCard, LandingSection } from '@sahayeta/components';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-export default function Page() {
-  const [campaign, setCampaign] = useState<any>()
+export default function HomePage() {
+  const [campaign, setCampaign] = useState<any>();
 
   useEffect(() => {
-    fetch(`/api/campaigns/`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+    axios.get('/api/campaigns/', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`Network response was not ok: ${res.statusText}`)
-        }
-        return res.json()
-      })
-      .then(data => {
-        setCampaign(data)
+      .then(response => {
+        setCampaign(response.data);
       })
       .catch(error => {
-        console.error('Fetch error:', error)
-      })
-  }, [])
+        console.error('Axios error:', error);
+      });
+  }, []);
 
   return (
     <>
@@ -47,10 +43,10 @@ export default function Page() {
                 campaignCurrentAmount={currentAmount}
                 campaignCollectedAmount={collectedAmount}
               />
-            )
+            );
           }
         )}
       </div>
     </>
-  )
+  );
 }

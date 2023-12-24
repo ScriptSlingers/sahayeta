@@ -34,7 +34,7 @@ export const LandingSection = () => {
         <>
             <div className="flex flex-col lg:py-16 justify-center gap-10 py-8 items-center bg-blue-700 w-full px-5">
                 <div className="lg:text-3xl text-xl font-medium text-white lg:font-bold text-center">
-                    "Empower Change, Inspire Hope Your Contribution Makes a Difference"{' '}
+                    Empower Change, Inspire Hope Your Contribution Makes a Difference
                 </div>
                 <div className="lg:text-xl text-sm text-white text-center">
                     Sahayata Uniting Hearts, Transforming Lives – Be the Difference Today!

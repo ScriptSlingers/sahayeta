@@ -35,9 +35,8 @@ export async function POST(request: NextRequest) {
   try {
     const campaign = await request.json()
     if (
+      !campaign ||
       !campaign.title ||
-      !campaign.image ||
-      !campaign.isVerified ||
       !campaign.description ||
       !campaign.goalAmount ||
       !campaign.createdById ||
