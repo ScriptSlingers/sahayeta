@@ -7,7 +7,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/login',
     signOut: '/logout',
-    error: '/test'
+    error: '/error'
   },
   session: {
     strategy: 'jwt'
@@ -35,24 +35,29 @@ export const authOptions: NextAuthOptions = {
         }
       },
       authorize: async (credentials, req) => {
-        const user = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            accept: 'application/json'
-          },
-          body: Object.entries(credentials)
-            .map(e => e.join('='))
-            .join('&')
-        })
-          .then(res => res.json())
-          .catch(error => {
-            return error
+        const body = JSON.stringify(credentials)
+        try {
+          const user = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: body
           })
-        if (user) {
-          return user
-        } else {
-          return null
+            .then(res => res.json())
+            .catch(error => {
+              throw new Error('Error during fetch', error)
+            })
+
+          if (user) {
+            return user
+          } else {
+            throw new Error('No user received from /api/login')
+          }
+        } catch (error) {
+          console.error('Error during authorization:', error)
+          throw new Error('AccessDenied') // Customize the error message if needed
         }
       }
     })
@@ -77,34 +82,33 @@ export const authOptions: NextAuthOptions = {
       }
     },
 
-    jwt: ({ token, user }) => {
-      if (user) {
-        const newUser = user
-        return {
-          ...token,
-          id: newUser.id
-        }
-      }
+    async jwt({ token }) {
       return token
     },
 
-    signIn: async (user: any) => {
+    signIn: async (session: any) => {
       try {
+        if (!session.user.email) {
+          throw new Error('Invalid User Details')
+        }
         const existingUser = await prisma.user.findFirst({
-          where: { email: user.profile.email }
+          where: { email: session.user.email }
         })
+
         if (!existingUser) {
           await prisma.user.create({
             data: {
-              username: user.profile.email.split('@')[0],
-              email: user.profile.email,
-              name: user.profile.name,
-              profileImage: user.profile.picture
+              username: session.user.email.split('@')[0],
+              email: session.user.email,
+              name: session.user.name,
+              profileImage: session.user.image
             }
           })
-          return user
+        } else {
+          return session.user
         }
-        return user
+
+        return null
       } catch (error) {
         throw new Error('Error during sign-in process')
       }

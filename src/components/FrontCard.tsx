@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link';
+import Link from 'next/link'
 import React from 'react'
 
 export const FrontCard = ({
@@ -10,12 +10,11 @@ export const FrontCard = ({
   campaignDescription,
   campaignCurrentAmount,
   campaignCollectedAmount
-}: any
-) => {
+}: any) => {
   return (
     <div>
-      <div key={campaignId} className='grid grid-cols-3 '>
-        <div className='flex flex-col  p-5 w-[500px]  gap-5'>
+      <div key={campaignId} className="grid grid-cols-3 ">
+        <div className="flex flex-col  p-5 w-[500px]  gap-5">
           <div className="relative flex h-48 w-full ">
             <Link href="/">
               <Image
@@ -26,9 +25,11 @@ export const FrontCard = ({
               />
             </Link>
           </div>
-          <div className='text-xl font-semibold'>{campaignTitle}</div>
-          <div className="text-gray-500 flex justify-center align-middle ">{campaignDescription}</div>
-          <div className='flex justify-between font-medium'>
+          <div className="text-xl font-semibold">{campaignTitle}</div>
+          <div className="text-gray-500 flex justify-center align-middle ">
+            {campaignDescription}
+          </div>
+          <div className="flex justify-between font-medium">
             <div className="">NRP {campaignCurrentAmount} Raised</div>
             <div className="">NRP {campaignCollectedAmount} Donations</div>
           </div>
