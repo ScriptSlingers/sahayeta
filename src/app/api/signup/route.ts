@@ -1,4 +1,4 @@
-import { prisma } from '@sahayeta/app/lib'
+import { prisma } from '@sahayeta/lib'
 import { SHA256 } from 'crypto-js'
 import { NextRequest, NextResponse } from 'next/server'
 

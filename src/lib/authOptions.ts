@@ -1,4 +1,4 @@
-import { prisma } from '@sahayeta/app/lib'
+import { prisma } from '@sahayeta/lib'
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'

@@ -1,14 +1,13 @@
 'use client'
-import { Hamburger, NotificationIcon, QuestionIcon } from '@sahayeta/icons'
-import { signOut, useSession } from 'next-auth/react'
+import { NotificationIcon, QuestionIcon } from '@sahayeta/icons'
+import { useClientSession } from '@sahayeta/utils'
+import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 import { FaCircleNotch } from 'react-icons/fa'
 
 export const AppHeader = () => {
-  const session = useSession()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const session = useClientSession()
   return (
     <>
       <div className="flex w-full h-16 justify-between container">
@@ -35,7 +34,9 @@ export const AppHeader = () => {
             <Link href="">
               <div>Dashboard</div>
             </Link>
-            <div>Campaign</div>
+            <Link href="/campaingns">
+              <div>Campaign</div>
+            </Link>
             <div>Charity</div>
             <div>Donate</div>
           </div>
@@ -51,13 +52,13 @@ export const AppHeader = () => {
               <QuestionIcon />
             </Link>
           </div>
-          {session.data ? (
+          {session ? (
             <div className="flex gap-3">
               <Link href="/profile">
                 <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
                   <Image
-                    src="/assets/img/donateicon.png"
-                    alt={session?.data?.user?.name || ''}
+                    src={'/assets/img/profile.jpg'}
+                    alt={session?.name || ''}
                     height={40}
                     width={50}
                   />
@@ -70,7 +71,7 @@ export const AppHeader = () => {
                 Signout
               </button>
             </div>
-          ) : session?.status == 'loading' ? (
+          ) : session === null ? (
             <FaCircleNotch />
           ) : (
             <div className="w-10 h-4 mx-2 flex justify-center items-center">
