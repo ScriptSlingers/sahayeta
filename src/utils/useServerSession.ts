@@ -1,4 +1,4 @@
-import { authOptions } from '@sahayeta/app/lib'
+import { authOptions } from '@sahayeta/lib'
 import { getServerSession } from 'next-auth'
 
 type User = {

@@ -1,5 +1,5 @@
-import { prisma } from '@sahayeta/app/lib/prismadb'
-import { useServerSession } from '@sahayeta/app/utils/useServerSession'
+import { prisma } from '@sahayeta/lib/prismadb'
+import { useServerSession } from '@sahayeta/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
@@ -34,20 +34,6 @@ export async function POST(request: NextRequest) {
   }
   try {
     const campaign = await request.json()
-    if (
-      !campaign ||
-      !campaign.title ||
-      !campaign.description ||
-      !campaign.goalAmount ||
-      !campaign.createdById ||
-      !campaign.categoryId
-    ) {
-      return NextResponse.json(
-        { message: 'Missing required properties in the request' },
-        { status: 400 }
-      )
-    }
-
     const {
       title,
       image,

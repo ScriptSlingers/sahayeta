@@ -1,6 +1,6 @@
-import { prisma } from '@sahayeta/app/lib'
+import { prisma } from '@sahayeta/lib'
 import { NextRequest, NextResponse } from 'next/server'
-import { useServerSession } from '../../utils/useServerSession'
+import { useServerSession } from '../../../utils/useServerSession'
 
 export async function GET() {
   const currentUser = await useServerSession()

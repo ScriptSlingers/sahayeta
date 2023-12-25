@@ -1,5 +1,5 @@
-import { prisma } from '@sahayeta/app/lib/prismadb'
-import { useServerSession } from '@sahayeta/app/utils/useServerSession'
+import { prisma } from '@sahayeta/lib/prismadb'
+import { useServerSession } from '@sahayeta/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
 // GET endpoint

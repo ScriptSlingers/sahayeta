@@ -36,9 +36,7 @@ export default function page() {
             Articles to make you healthier, happier and smarter.
           </span>
           <span className="text-base font-normal text-blue-700">
-            <Link href='/create-campaign'>
-              Click here to create campaign
-            </Link>
+            <Link href="/create-campaign">Click here to create campaign</Link>
           </span>
           <div className="h-[1px] bg-black w-[95%]"></div>
 
@@ -88,7 +86,6 @@ export default function page() {
           }
         )}
       </div>
-
     </div>
   )
 }

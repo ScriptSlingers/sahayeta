@@ -3,10 +3,11 @@ import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { FcGoogle } from 'react-icons/fc'
 import donationImage from '../../../public/assets/img/children.jpg'
-import { useClientSession } from '../utils'
-import { useForm } from 'react-hook-form'
+import { useClientSession } from '../../utils'
+
 export default function Login(csrfToken) {
   const currentUser = useClientSession()
 
@@ -17,22 +18,18 @@ export default function Login(csrfToken) {
     }
   }, [currentUser, router])
 
-
   const {
     handleSubmit,
     register,
-    formState: { isSubmitting },
-  } = useForm();
-
+    formState: { isSubmitting }
+  } = useForm()
 
   async function onSubmit(values) {
-    await signIn("credentials", {
+    await signIn('credentials', {
       ...values,
-      callbackUrl: 'http://localhost:3000/',
-
-    });
-    console.log(values);
-
+      callbackUrl: 'http://localhost:3000/'
+    })
+    console.log(values)
   }
 
   return (
@@ -55,14 +52,14 @@ export default function Login(csrfToken) {
             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
 
             <input
-              {...register("email")}
+              {...register('email')}
               className="w-full border border-neutral-400 p-2 rounded-lg text-black text-sm mt-5"
               type="text"
               placeholder="Email"
               required
             />
             <input
-              {...register("password")}
+              {...register('password')}
               className="w-full border border-neutral-400 p-2 rounded-lg text-black text-sm mt-5"
               type="text"
               placeholder="Password"
@@ -79,14 +76,17 @@ export default function Login(csrfToken) {
               </a>
             </div>
 
-            <button type="submit"
-              className="w-full bg-blue-600 text-white p-2 rounded-lg mb-6 hover:bg-blue-400 ">
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white p-2 rounded-lg mb-6 hover:bg-blue-400 "
+            >
               {isSubmitting ? <>Signing In</> : <>Login</>}
             </button>
           </form>
           <p className="font-medium text-sm text-[#9A9A9A] text-center ">
             --- Or login with ---
-          </p>a
+          </p>
+          a
           <br />
           <button
             className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black"
@@ -108,6 +108,6 @@ export default function Login(csrfToken) {
           </div>
         </section>
       </div>
-    </div >
+    </div>
   )
 }
