@@ -29,22 +29,24 @@ export default function CreateCampaign() {
   const [campaignGoalAmountLabel, setCampaignGoalAmountLabel] =
     useState('Goal Amount')
 
-  if (currentUser?.id === null) {
+
+  if (currentUser?.id == null) {
     router.push('/login')
-  } else {
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`/api/users/${currentUser.id}`)
-          const res = response.data
-          setLoggedInUser(res)
-        } catch (error) {
-          console.error('Error fetching user data:', error)
-        }
-      }
-      fetchData()
-    }, [currentUser?.id])
   }
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api/users/${currentUser.id}`)
+        const res = response.data
+        setLoggedInUser(res)
+      } catch (error) {
+        console.error('Error fetching user data:', error)
+      }
+    }
+    fetchData()
+  }, [currentUser?.id])
 
   const {
     handleSubmit,
@@ -84,7 +86,7 @@ export default function CreateCampaign() {
           }
         }
       )
-      router.refresh()
+      router.push("/create-campaign")
       console.log('Campaign created sucessfully')
     } catch (error) {
       console.error(error)
