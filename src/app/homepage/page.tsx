@@ -9,7 +9,7 @@ import { FaHandshake } from 'react-icons/fa'
 export default function Page() {
   return (
     <>
-      <div className="flex flex-col py-10">
+      <div className="md:flex flex-col py-10">
         <h1 className="flex justify-center text-black font-bold text-4xl">
           Trending Fundraiser
         </h1>
