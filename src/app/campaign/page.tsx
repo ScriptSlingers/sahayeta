@@ -4,8 +4,8 @@ import Image from 'next/image'
 export default function Page() {
   return (
     <>
-      <div className="p-4 flex flex-row gap-12 ">
-        <div className="flex flex-col bg-neutral-100 w-1/6 h-1/2 rounded-lg ml-20 pb-14 ">
+      <div className="p-4 flex flex-row gap-8 ">
+        <div className="flex flex-col bg-neutral-100 w-1/6 h-1/2 rounded-lg ml-20 mt-28 pb-14 ">
           <div className="justify-center ml-8 mt-10 text-gray-500 space-y-12 font-semibold text-xl">
             <h1 className="font-semibold text-2xl ">CATEGORIES</h1>
             <p className="text-blue-500">All Categories</p>
@@ -21,7 +21,7 @@ export default function Page() {
           </div>
         </div>
         <div className="">
-          <h1 className="justify-center ml-8 mt-10 font-semibold text-gray-500 text-xl ">
+          <h1 className="justify-center ml-8 mt-10 font-semibold text-gray-500 text-2xl ">
             Showing Fundraiser For :
           </h1>
           <div className="flex flex-row gap-8 ">
