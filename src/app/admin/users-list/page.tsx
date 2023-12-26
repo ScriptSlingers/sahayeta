@@ -1,5 +1,4 @@
 'use client'
-import PopUpDelete from '@sahayeta/components/PopUpDelete'
 import { useClientSession } from '@sahayeta/utils/useClientSession'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -53,30 +52,32 @@ export default function UsersListingPage() {
 
   const PopUp = ({ onClose }) => {
     return (
-      <div className="w-96 flex-col justify-center items-center bg-white shadow-2xl rounded p-4">
-        <div className="flex flex-col gap-3 justify-center items-center text-center">
-          <p className="text-base font-medium font-poppins text-black">
-            Are you sure to Delete this ticket?
-          </p>
-          <span className="text-xs ">
-            If you delete this ticket it will be removed from your system
-            pernmentley, you can’t get it back.
-          </span>
-          <span className="text-xs font-medium  font-poppins text-black">
+      <div className='fixed top-0 left-0 w-full h-full bg-black/10 flex justify-center items-center'>
+        <div className="relative w-96 flex-col justify-center items-center bg-white shadow-2xl rounded p-4">
+          <div className="flex flex-col gap-3 justify-center items-center text-center">
+            <p className="text-base font-medium font-poppins text-black">
+              Are you sure to Delete this ticket?
+            </p>
+            <span className="text-xs ">
+              If you delete this ticket it will be removed from your system
+              pernmentley, you can’t get it back.
+            </span>
+            <span className="text-xs font-medium  font-poppins text-black">
 
-            Yes, I want to remove this ticket now.
-          </span>
-        </div>
+              Yes, I want to remove this ticket now.
+            </span>
+          </div>
 
-        <div className="flex justify-between p-3">
-          <button
-            className="w-[80px] h-[37px] rounded-3xl bg-black text-white flex justify-center items-center gap-1"
-            onClick={onClose}
-          > Cancel
-          </button>
-          <button className="w-[80px] h-[37px] rounded-3xl bg-black text-white flex justify-center items-center gap-1">
-            Delete
-          </button>
+          <div className="flex justify-between p-3">
+            <button
+              className="w-[80px] h-[37px] rounded-3xl bg-black text-white flex justify-center items-center gap-1"
+              onClick={onClose}
+            > Cancel
+            </button>
+            <button className="w-[80px] h-[37px] rounded-3xl bg-black text-white flex justify-center items-center gap-1">
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     );

@@ -16,6 +16,7 @@ export default function CreateCampaign() {
   const router = useRouter()
   const currentUser = useClientSession()
 
+  const [file, setFile] = useState<File>()
   const [loggedInUser, setLoggedInUser] = useState<loggedInUser | null>(null)
 
   const [categories, setCategories] = useState([])
@@ -29,12 +30,9 @@ export default function CreateCampaign() {
   const [campaignGoalAmountLabel, setCampaignGoalAmountLabel] =
     useState('Goal Amount')
 
-
-  if (currentUser?.id == null) {
+  if (currentUser?.id === null) {
     router.push('/login')
   }
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,11 +71,26 @@ export default function CreateCampaign() {
 
   async function onSubmit(values) {
     try {
+      const data = new FormData()
+      data.set('file', file)
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: data
+      })
+
+      if (!res.ok) {
+        throw new Error(await res.json())
+      }
+      const resData = await res.json()
+
+      values.image = resData.path
       await axios.post(
         '/api/campaigns',
         {
           ...values,
-          createdById: currentUser?.id
+          createdById: currentUser?.id,
+
         },
         {
           headers: {
@@ -86,8 +99,7 @@ export default function CreateCampaign() {
           }
         }
       )
-      router.push("/create-campaign")
-      console.log('Campaign created sucessfully')
+      router.refresh()
     } catch (error) {
       console.error(error)
       return error
@@ -297,38 +309,16 @@ export default function CreateCampaign() {
               />
             </div>
           </div>
-          {/* <div className="w-full md:w-1/2 flex flex-col justify-start">
-                        <div className="flex flex-col justify-center w-full items-center">
-                            <input
-                                type="file"
-                                accept="image/*"
-                                id="imageUpload"
-                                required
-                                onChange={handleImageUpload}
-                                className="hidden"
-                            />
-                            {selectedImage && (
-                                <div className="h-52 w-72 object-cover">
-                                    <Image
-                                        src={URL.createObjectURL(selectedImage)}
-                                        alt="Selected"
-                                        layout="responsive"
-                                        width={300}
-                                        height={200}
-                                        className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
-                                    />
-                                </div>
-                            )}
-
-                            <label
-                                htmlFor="imageUpload"
-                                className=" w-[126px] h-[37px] rounded-3xl flex justify-center items-cente  cursor-pointer bg-black text-white  py-2 px-4"
-                            >
-                                Upload
-                            </label>
-                            <p className="pt-2 text-sm">Only JPG, PNG images </p>
-                        </div>
-                    </div> */}
+          <div className="w-full md:w-1/2 flex flex-col justify-start">
+            <div className="flex flex-col justify-center w-full items-center">
+              <input
+                type="file"
+                name="file"
+                onChange={(e) => setFile(e.target.files?.[0])}
+              />
+              <p className="pt-2 text-sm">Only JPG, PNG images </p>
+            </div>
+          </div>
         </div>
 
         <div className="flex gap-20">

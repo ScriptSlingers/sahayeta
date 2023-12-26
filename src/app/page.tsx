@@ -23,7 +23,7 @@ export default function HomePage() {
   }, [])
 
   // Display only the first 6 campaigns
-  const displayedCampaigns = campaigns.slice(0, 6)
+  const displayedCampaigns = campaigns.slice(0, 15)
 
   return (
     <>

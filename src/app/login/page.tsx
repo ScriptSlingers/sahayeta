@@ -86,7 +86,6 @@ export default function Login(csrfToken) {
           <p className="font-medium text-sm text-[#9A9A9A] text-center ">
             --- Or login with ---
           </p>
-          a
           <br />
           <button
             className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black"
