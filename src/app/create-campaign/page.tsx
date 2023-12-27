@@ -1,9 +1,11 @@
 'use client'
 import { useClientSession } from '@sahayeta/utils'
 import axios from 'axios'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 type loggedInUser = {
   id: string
@@ -49,6 +51,7 @@ export default function CreateCampaign() {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { isSubmitting }
   } = useForm({
     defaultValues: {
@@ -99,16 +102,21 @@ export default function CreateCampaign() {
           }
         }
       )
-      router.refresh()
+      reset();
+      toast.success('Campaign created successfully !')
     } catch (error) {
       console.error(error)
+      toast.error('Error in creating the campaign')
       return error
     }
   }
 
   const handleImageUpload = (e: any) => {
-    const image = e.target.files[0]
-    setSelectedImage(image)
+    const selectedFile = e.target.files?.[0];
+
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
   }
   const handleTitleChange = e => {
     setCampaignNameLabel(e.target.value)
@@ -141,22 +149,23 @@ export default function CreateCampaign() {
       })
   }, [])
   return (
-    <div className="flex flex-col gap-5 ">
+    <div className="flex flex-col gap-5 pt-10">
       <div className=" container flex flex-col justify-center items-center w-full gap-10">
-        <div className="flex flex-col justify-between w-full  lg:flex-row lg:justify-between  lg:px-16">
+        <div className="flex flex-col justify-between w-full  lg:flex-row lg:justify-between  lg:px-32">
           <div className="flex flex-col justify-center items-start gap-3 mb-20 ">
-            <div className="w-12 h-12 rounded-3xl overflow-hidden">
-              <div className="w-100% h-100% object-cover rounded-xl">
-                <img
-                  src={loggedInUser?.profileImage || '/assets/img/profile.jpg'}
-                  alt={loggedInUser?.name}
-                />
-              </div>
+            <div className="object-cover w-32 h-32 rounded overflow-hidden">
+              <Image
+                src={loggedInUser?.profileImage || ""}
+                width={200}
+                height={200}
+                alt={loggedInUser?.name}
+                quality={100}
+              />
             </div>
             <div>
               <div className="flex gap-3">
                 <div className="text-base font-semibold">
-                  Organization Name/ Name:
+                  Full Name:
                 </div>
                 <div className="text-base font-normal">
                   {loggedInUser?.orgName || loggedInUser?.name}
@@ -165,11 +174,13 @@ export default function CreateCampaign() {
               <div className="flex gap-1">
                 <div className="text-base font-normal">Verified by</div>
                 <div className="w-[100px] h-[21px]">
-                  <img src="/assets/img/logo.png" alt="demo" />
+                  <Image src="/assets/img/logo.png" alt="demo"
+                    width={200}
+                    height={200} />
                 </div>
               </div>
               <div>
-                <div className="  bg-[#ECEEFF] w-96 h-7 flex justify-center items-center mt-3 text-base font-semibold font-poppins ">
+                <div className="  bg-[#ECEEFF] h-7 flex justify-center items-center mt-3 text-base font-semibold font-poppins ">
                   Total Created Campaigns(5)
                 </div>
                 <div className="flex justify-center gap-3 py-3">
@@ -187,11 +198,29 @@ export default function CreateCampaign() {
           <div className="flex flex-col gap-3 items-center justify-center ">
             <div className=" flex flex-col shadow-sm rounded-2xl lg:w-[403px] w-full  bg-[#FAFAFE] p-3">
               <div className="flex items-center justify-center pt-3">
-                <img
-                  src="/assets/img/children.jpg"
-                  alt="doctor image"
-                  className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
-                />
+                {file ? (
+                  <div className='w-80 object-contain'>
+                    <Image
+                      src={URL.createObjectURL(file)}
+                      alt='Selected'
+                      layout='responsive'
+                      width={300}
+                      height={200}
+                      className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                    />
+                  </div>
+                ) :
+                  <div className='w-72 object-contain'>
+                    <Image
+                      src="/assets/img/placeholder.png"
+                      alt='Selected'
+                      layout='responsive'
+                      width={300}
+                      height={200}
+                      className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                    />
+                  </div>
+                }
               </div>
               <div className="flex flex-col p-3">
                 <span className="text-base font-semibold font-poppins">
@@ -211,10 +240,12 @@ export default function CreateCampaign() {
               <div className="flex flex-col p-1 ">
                 <div className="flex justify-between  ">
                   <div className="flex gap-2">
-                    <img
+                    <Image
                       src={
-                        loggedInUser?.profileImage || '/assets/img/profile.jpg'
+                        loggedInUser?.profileImage || ""
                       }
+                      width={200}
+                      height={200}
                       alt="doc image"
                       className="w-8 h-8 rounded-full"
                     />
@@ -271,7 +302,7 @@ export default function CreateCampaign() {
                   defaultValue={'Select'}
                   className="w-44 py-2 px-3 rounded outline-none border-1 border-gray-400"
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled >
                     Select a Category
                   </option>
                   {categories?.map(category => (
@@ -310,12 +341,34 @@ export default function CreateCampaign() {
             </div>
           </div>
           <div className="w-full md:w-1/2 flex flex-col justify-start">
-            <div className="flex flex-col justify-center w-full items-center">
-              <input
-                type="file"
-                name="file"
-                onChange={(e) => setFile(e.target.files?.[0])}
-              />
+            <div className="flex flex-col justify-center w-full items-center gap-10">
+              <input type='file' name="file" accept='image/*' id='imageUpload' required onChange={handleImageUpload} className='hidden' />
+              {file ? (
+                <div className='w-72 object-contain'>
+                  <Image
+                    src={URL.createObjectURL(file)}
+                    alt='Selected'
+                    layout='responsive'
+                    width={300}
+                    height={200}
+                    className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                  />
+                </div>
+              ) :
+                <div className='w-72 object-contain'>
+                  <Image
+                    src="/assets/img/placeholder.png"
+                    alt='Selected'
+                    layout='responsive'
+                    width={300}
+                    height={200}
+                    className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                  />
+                </div>
+              }
+              <label htmlFor='imageUpload' className=' w-[126px] h-[37px] rounded-3xl flex justify-center items-cente  cursor-pointer bg-black text-white  py-2 px-4'>
+                Upload
+              </label>
               <p className="pt-2 text-sm">Only JPG, PNG images </p>
             </div>
           </div>
@@ -333,6 +386,6 @@ export default function CreateCampaign() {
           </button>
         </div>
       </form>
-    </div>
+    </div >
   )
 }

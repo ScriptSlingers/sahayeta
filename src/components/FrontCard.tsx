@@ -9,14 +9,14 @@ export const FrontCard = ({
   campaignTitle,
   campaignDescription,
   campaignCurrentAmount,
-  campaignCollectedAmount
+  campaignCollectedAmount,
 }: any) => {
   return (
     <div>
-      <div key={campaignId} className="grid grid-cols-3 ">
-        <div className="flex flex-col  p-5 w-[500px]  gap-5">
+      <div key={campaignId} className="grid grid-cols-3 shadow  ">
+        <div className="flex flex-col  p-5 w-[500px]  gap-6">
           <div className="relative flex h-48 w-full ">
-            <Link href="/">
+            <Link href={"/campaigns/" + campaignId}>
               <Image
                 src={campaignImageURL}
                 alt={campaignImageAlt}
@@ -26,6 +26,7 @@ export const FrontCard = ({
             </Link>
           </div>
           <div className="text-xl font-semibold">{campaignTitle}</div>
+
           <div className="text-gray-500 flex justify-center align-middle ">
             {campaignDescription}
           </div>

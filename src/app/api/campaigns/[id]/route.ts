@@ -8,7 +8,17 @@ export async function GET(req: NextRequest, { params }) {
     const { id } = params
 
     const campaign = await prisma.campaign.findFirst({
-      where: { campaignId: id }
+      where: { campaignId: id },
+      select: {
+        campaignId: true,
+        title: true,
+        image: true,
+        description: true,
+        goalAmount: true,
+        createdBy: true,
+        startDate: true,
+        endDate: true
+      }
     })
 
     if (!campaign) {
