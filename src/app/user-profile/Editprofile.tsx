@@ -21,24 +21,24 @@ export default function Profile() {
   return (
     <>
       <div className=" flex flex-col items-start justify-center ">
-        <h1 className="text-3xl font-maven font-medium p-4">
+        <h1 className="text-3xl  font-base p-4">
           Edit Profile
         </h1>
-        <div className="flex flex-col items-center justify-center  w-[90%]">
+        <div className="flex flex-col items-center justify-center w-[90%]">
           <div className="grid items-center justify-center w-full ">
-            <div className="border-2 border-slate-500 w-[153px] h-[153px] rounded-full bg-slate-300 m-2">
+            <div className="border-1 w-24 h-24 rounded-full bg-slate-300 ">
               {selectedFile && (
                 <img
                   src={URL.createObjectURL(selectedFile)}
                   alt="Selected"
-                  className="w-[150px] h-[150px] rounded-full"
+                  className="w-24 h-24 rounded-full"
                 />
               )}
             </div>
-            <input type="file" onChange={handleFileChange} className="m-5" />
+            <input type="file" onChange={handleFileChange} className="mt-2" />
           </div>
 
-          <div className="w-full  rounded-lg mb-2 text-left p-5 shadow-md">
+          <div className="w-full  rounded-lg mb-2 text-left p-5">
             <form action="#" className="flex flex-col">
                 <div className="flex-1  py-2 ">
                   <p>Full Name*</p>
@@ -62,7 +62,7 @@ export default function Profile() {
                 <p>Phone Number*</p>
                 <input
                   className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
-                  type="number"
+                  type="text"
                   id="text"
                   required
                 />

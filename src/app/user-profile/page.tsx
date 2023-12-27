@@ -16,12 +16,12 @@ const TabSelector = () => {
 
   return (
     <div className="p-4 flex items-center justify-center ">
-      <div className='flex w-[50%] border-2 border-slate-200 shadow-lg rounded-xl'>
+      <div className='flex w-[50%] border-2 border-slate-200  rounded-xl'>
         <section className=" w-1/5 flex flex-col items-start justify-start bg-blue-600 text-white rounded-l-xl">
           <div className=' p-6 text-white text-center  w-full'>
             <span className=' text-2xl font-xl font-bold'>SAHAYATA</span>
           </div>
-          <div className='flex flex-col w-full text-lg font-semibold items-start justify-center '>
+          <div className='flex flex-col w-full text-lg font-base items-start justify-center '>
             <button
               className={`${selectedTab === 'Dashboard' ? 'text-2xl  text-white' : ''
                 } px-4 py-2 flex gap-2`}
@@ -44,7 +44,7 @@ const TabSelector = () => {
           </div>
           <div className='flex'>
           <section className='w-2/5 '>
-          <div className='flex flex-col w-full text-md font-semibold items-start  h-full border-r-1.5 shadow-md '>
+          <div className='flex flex-col w-full text-md font-base items-start  h-full border-r-1.5 shadow-md '>
             <button
               className={`${selectedTab === 'Edit' ? 'text-2xl  text-black' : ''
                 } px-4 py-4 flex gap-2 border-2 border-l-slate-300 w-full`}
