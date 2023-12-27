@@ -51,7 +51,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                         <Link href="/">
                             <Image
                                 src={campaign?.image}
-                                alt="logo"
+                                alt={campaign?.title}
                                 fill
                                 className="object-cover rounded-xl"
                             />

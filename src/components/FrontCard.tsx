@@ -10,7 +10,6 @@ export const FrontCard = ({
   campaignDescription,
   campaignCurrentAmount,
   campaignCollectedAmount,
-  campaignCategory
 }: any) => {
   return (
     <div>

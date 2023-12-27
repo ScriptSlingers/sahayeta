@@ -256,6 +256,7 @@ export const LandingSection = () => {
               <FrontCard
                 key={campaignId}
                 campaignId={campaignId}
+                campaignImageAlt={title}
                 campaignImageURL={image}
                 campaignTitle={title}
                 campaignDescription={description}
