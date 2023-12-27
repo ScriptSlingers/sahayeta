@@ -11,9 +11,11 @@ export default function CampaignsListingPage() {
   const [campaigns, setCampaigns] = useState<any>()
   const currentUser = useClientSession()
 
-  if (currentUser && currentUser?.role !== 'admin') {
-    router.push('/login')
-  }
+  useEffect(() => {
+    if (currentUser && currentUser?.role !== 'admin') {
+      router.push('/login');
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     axios

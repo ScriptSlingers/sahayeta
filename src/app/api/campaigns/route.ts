@@ -1,5 +1,5 @@
-import { prisma } from '@sahayeta/lib/prismadb'
-import { useServerSession } from '@sahayeta/utils/useServerSession'
+import { prisma } from '@sahayeta/lib'
+import { useServerSession } from '@sahayeta/utils'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
