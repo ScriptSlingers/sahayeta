@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
       goalAmount,
       createdById,
       categoryId
+      
     } = campaign
 
     const newCampaign = await prisma.campaign.create({

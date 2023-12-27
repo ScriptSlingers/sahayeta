@@ -31,10 +31,10 @@ export const AppHeader = () => {
             <Link href="/">
               <div>Home</div>
             </Link>
-            <Link href="">
+            <Link href="/dashboard">
               <div>Dashboard</div>
             </Link>
-            <Link href="/campaingns">
+            <Link href="/campaigns">
               <div>Campaign</div>
             </Link>
             <div>Charity</div>
@@ -57,7 +57,7 @@ export const AppHeader = () => {
               <Link href="/profile">
                 <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
                   <Image
-                    src={'/assets/img/profile.jpg'}
+                    src={session?.image || ''}
                     alt={session?.name || ''}
                     height={40}
                     width={50}
