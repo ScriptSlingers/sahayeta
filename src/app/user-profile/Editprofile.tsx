@@ -20,12 +20,12 @@ export default function Profile() {
 
   return (
     <>
-      <div className="bg-white">
-        <h1 className="text-3xl font-maven font-semibold  py-2 text-center">
+      <div className=" flex flex-col items-start justify-center ">
+        <h1 className="text-3xl font-maven font-medium p-4">
           Edit Profile
         </h1>
-        <div className="grid items-center justify-center ">
-          <div className="grid items-center justify-start w-full ">
+        <div className="flex flex-col items-center justify-center  w-[90%]">
+          <div className="grid items-center justify-center w-full ">
             <div className="border-2 border-slate-500 w-[153px] h-[153px] rounded-full bg-slate-300 m-2">
               {selectedFile && (
                 <img
@@ -40,40 +40,29 @@ export default function Profile() {
 
           <div className="w-full  rounded-lg mb-2 text-left p-5 shadow-md">
             <form action="#" className="flex flex-col">
-              <div className="flex items-stretch gap-3 mt-2">
                 <div className="flex-1  py-2 ">
                   <p>Full Name*</p>
                   <input
-                    className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
+                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
                     type="text"
                     id="text"
                     required
                   />
                 </div>
-                <div className="flex-1  py-2 ">
-                  <p>Last Name*</p>
-                  <input
-                    className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
-                    type="text"
-                    id="text"
-                    required
-                  />
-                </div>
-              </div>
               <div className="mt-2">
                 <p>Email*</p>
                 <input
-                  className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
+                  className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
                   type="text"
                   id="text"
                   required
                 />
               </div>
               <div className="mt-2">
-                <p>Contact*</p>
+                <p>Phone Number*</p>
                 <input
-                  className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
-                  type="text"
+                  className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
+                  type="number"
                   id="text"
                   required
                 />
@@ -81,7 +70,7 @@ export default function Profile() {
               <div className="mt-2">
                 <p>Address*</p>
                 <input
-                  className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
+                  className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
                   type="text"
                   id="text"
                   required
@@ -89,18 +78,9 @@ export default function Profile() {
               </div>
               <div className="flex items-stretch gap-3 mt-2">
                 <div className="flex-1  py-2 ">
-                  <p>City</p>
+                  <p>Role</p>
                   <input
-                    className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
-                    type="text"
-                    id="text"
-                    required
-                  />
-                </div>
-                <div className="flex-1  py-2 ">
-                  <p>State/Province</p>
-                  <input
-                    className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
+                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
                     type="text"
                     id="text"
                     required
@@ -109,27 +89,18 @@ export default function Profile() {
               </div>
               <div className="flex items-stretch gap-3 mt-2">
                 <div className="flex-1  py-2 ">
-                  <p>Zip Code</p>
+                  <p>Bio</p>
                   <input
-                    className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
+                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
                     type="text"
                     id="text"
                     required
                   />
-                </div>
-                <div className="flex-1  py-2 ">
-                  <p>Country</p>
-                  <input
-                    className="w-full border border-slate-800 p-2 rounded-lg text-black text-sm "
-                    type="text"
-                    id="text"
-                    required
-                  />
-                </div>
+                </div> 
               </div>
               <button
                 onClick={handleUpload}
-                className="w-full bg-blue-800 text-white p-2 rounded-lg mb-4 mt-5 hover:bg-blue-500 "
+                className="w-fit bg-blue-800 text-white p-2 rounded-lg mb-4 mt-5 hover:bg-blue-500 "
               >
                 Update Information
               </button>

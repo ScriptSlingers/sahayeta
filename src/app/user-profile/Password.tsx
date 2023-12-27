@@ -2,11 +2,10 @@
 
 export default function Password() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f9f4f1] ">
-      <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 ">
-        <section className="flex flex-col justify-center p-8 md:p-14">
-          <span className="mb-3 text-4xl font-bold">Change your Password</span>
-          <span className="font-light text-gray-400 mb-8">
+    <div className="min-h-screen flex items-start  ">
+      <div className=" md:flex-row md:space-y-0 ">
+        <section className="flex flex-col md:p-14">
+          <span className="font-light text-black mb-8">
             Enter your new password below to change your password
           </span>
           <form action="#" className="flex flex-col">
