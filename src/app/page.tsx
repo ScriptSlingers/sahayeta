@@ -1,8 +1,4 @@
-'use client'
-import { FrontCard, LandingSection } from '@sahayeta/components'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import Link from 'next/link'
+import { LandingSection } from '@sahayeta/components/LandingSection'
 
 export default function HomePage() {
   return (

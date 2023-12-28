@@ -9,7 +9,7 @@ import { FaCircleNotch } from 'react-icons/fa'
 export const AppHeader = () => {
   const session = useClientSession()
   return (
-    <>
+    <div className='shadow'>
       <div className="flex w-full h-16 justify-between container">
         <div className="flex">
           <div className="flex gap-5 p-6">
@@ -55,12 +55,13 @@ export const AppHeader = () => {
           {session ? (
             <div className="flex gap-3">
               <Link href="/profile">
-                <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
+                <div className="relative rounded-full h-12 w-12 overflow-hidden hover:cursor-pointer">
                   <Image
                     src={session?.image || ''}
                     alt={session?.name || ''}
-                    height={40}
-                    width={50}
+                    fill
+                    className='object-cover'
+                    sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
               </Link>
@@ -87,6 +88,6 @@ export const AppHeader = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   )
 }
