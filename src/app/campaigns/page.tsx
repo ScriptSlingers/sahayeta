@@ -26,14 +26,7 @@ export default function CampaignsPage() {
   }, [])
   return (
     <div className='flex justify-center items-center flex-col py-5'>
-      <button>
-        <Link
-          href="/create-campaign"
-          className=" items-center text-white bg-blue-600 rounded p-3  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
-        >
-          Create Campaigns
-        </Link>
-      </button>
+
       <div className="container text-black p-3 gap-3 grid grid-cols-3 justify-center items-center">
         {campaign?.campaigns.map(
           ({

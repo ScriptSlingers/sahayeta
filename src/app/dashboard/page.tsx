@@ -1,5 +1,6 @@
 'use client'
 import CampaignsListing from './CampaignList'
+import NotificationListing from './Notification'
 import UsersListing from './UserList'
 import React, { useState } from 'react'
 
@@ -17,15 +18,22 @@ export default function TabSelector() {
                     onClick={() => handleTabClick('userlist')} className=''
                 >User List
                 </button>
+
                 <button
 
                     onClick={() => handleTabClick('campaignlist')}
                 >       Campaign List
                 </button>
+                <button
+
+                    onClick={() => handleTabClick('notification')}
+                >       Notification
+                </button>
             </div>
             <div>
                 {selectedTab === 'userlist' && <UsersListing />}
                 {selectedTab === 'campaignlist' && <CampaignsListing />}
+                {selectedTab === 'notification' && <NotificationListing />}
             </div>
         </div>
     )
