@@ -1,95 +1,54 @@
 
 'use client'
-import Link from 'next/link';
+import axios from 'axios';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { format } from 'date-fns';
-import axios from 'axios';
-
-
-interface Campaign {
-    campaignId: string;
-    title: string;
-    category: {
-        title: string;
-    };
-    description: string;
-    image: string;
-    createdBy: {
-        id: string;
-        username: string;
-        profileImage: string;
-    };
-}
-
-type ApiResponse = Campaign[];
 
 
 const SearchBox: React.FC = () => {
     const [creatorId, setCreatorId] = useState('');
-    const [campaigns, setCampaigns] = useState<ApiResponse>([]);
+    const [campaigns, setCampaigns] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-    const [result, setResult] = useState<ApiResponse>([]);
+    const [result, setResult] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const postsPerPage = 5;
+    const postsPerPage = 4;
 
     const offset = currentPage * postsPerPage;
     const paginatedPosts = result.slice(offset, offset + postsPerPage);
     const pageCount = Math.ceil(result.length / postsPerPage);
+
 
     const handlePageChange = ({ selected }: { selected: number }) => {
         setCurrentPage(selected);
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/campaigns');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data: ApiResponse = await response.json();
-                setCampaigns(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        const filteredCampaigns = Array.isArray(campaigns)
-            ? campaigns.filter(campaign => campaign?.createdBy.id === creatorId)
-            : [];
+        const filteredCampaigns = campaigns.filter(campaign => campaign?.createdBy.id === creatorId)
 
         setResult(filteredCampaigns);
     }, [campaigns, creatorId]);
 
     const handleSubmit = (query: string) => {
-        const filteredPosts = campaigns?.filter(post => {
-            const categoryString = typeof post.category === 'string' ? post.category : '';
+        const filteredPosts = campaigns?.filter(campaign => {
+            const categoryString = typeof campaign.category === 'string' ? campaign.category : '';
             const matchCategory = categoryString.toLowerCase().includes(query.toLowerCase());
-            const matchTitle = post.title.toLowerCase().includes(query.toLowerCase());
+            const matchTitle = campaign.title.toLowerCase().includes(query.toLowerCase());
             return matchCategory || matchTitle;
         });
         setResult(filteredPosts);
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleInputChange = (e: any) => {
         const query = e.target.value;
         setSearchQuery(query);
 
         if (query.trim() === '') {
-            setResult(campaigns.filter(campaign => campaign?.createdBy.id === creatorId));
+            setResult(campaigns);
         } else {
             handleSubmit(query);
         }
     };
-
-
-    const [categories, setCategories] = useState<string[]>([]);
 
     useEffect(() => {
         axios
@@ -117,76 +76,44 @@ const SearchBox: React.FC = () => {
                     onChange={handleInputChange}
                     className='bg-[#ECEEFF] w-2/3 px-3 py-2 rounded-3xl  text-sm placeholder-gray-500 outline-none'
                 />
-                <select className='flex w-1/4' onChange={handleInputChange}
-                >
-                    <option value='' disabled selected>
-                        Select
-                    </option>
-                    {categories?.map((item) => (
-                        <option value={item} key={item}>
-                            {item}
-                        </option>
-                    ))}
-
-                </select>
             </div>
-            <div>
-                <div className="bg-[#546DEA] flex justify-center items-center h-16 w-full text-white text-xl">
-                    My Created Blogs ( {result.length} )
+            <div className=' flex  justify-center items-center flex-col'>
+                <div className="bg-[#546DEA] flex justify-center items-center h-16 w-full text-white text-xl my-5">
+                    My Created Blogs ( {result?.length} )
                 </div>
 
-                {paginatedPosts.map((post) => (
-                    <div className="bg-white container shadow-2xl rounded-2xl p-5 mb-3" key={post.campaignId}>
+                {paginatedPosts.map((campaign) => (
+                    <div className="bg-white container shadow-2xl rounded-2xl my-2 p-5 gap-5" key={campaign?.campaignId}>
                         <div className='lg:flex gap-20 justify-between'>
-                            <div className='flex flex-col w-full lg:w-1/2'>
-                                <span className="text-base font-semibold font-poppins">
-                                    {post.title}
-                                </span>
-                                <span className="text-[#2540C4] text-xs font-normal">Category: {post.category.title}</span>
-                                <span className="text-sm text-gray-500 font-normal font-poppins" dangerouslySetInnerHTML={{ __html: post.description }} />
+                            <div className='flex flex-col w-full lg:w-1/2 gap-2'>
+                                <button className=" py-1 rounded-3xl bg-green-500 text-white w-40 text-sm">
+                                    <span>{campaign?.status}</span>
+                                </button>
+                                <p className="text-base font-semibold font-poppins">
+                                    {campaign?.title}
+                                </p>
+                                <p className="text-[#2540C4] text-xs font-normal">Category: {campaign?.category?.name}</p>
+                                <p className="text-sm text-gray-500 font-normal font-poppins" >
+                                    {campaign?.description}
+                                </p>
                             </div>
-                            <div className="flex flex-col gap-2 lg:items-center justify-center mt-1 ">
+                            <div className="flex relative flex-col gap-2 lg:items-center justify-center w-64 h-auto">
                                 <div>
-                                    <img
-                                        src={post.image} // Assuming 'image' is the property containing the image URL
+                                    <Image
+                                        src={campaign?.image}
                                         alt="campaign image"
+                                        fill
                                         className="w-80 flex p-1 bg-slate-400 rounded-2xl"
                                     />
                                 </div>
-                                <div className='flex lg:items-center justify-center'>
-                                    <button className="w-[126px] h-[37px] rounded-3xl bg-green-500 text-white flex justify-center items-center gap-1">
-                                        <span>Published</span>
-                                        <img src="/img/tik.svg" alt="done" />
-                                    </button>
-                                </div>
                             </div>
                         </div>
-
-                        <div className='lg:flex lg:gap-16'>
-                            <div className='flex gap-8 lg:gap-16 mt-3'>
-                                <div className='flex gap-2'>
-                                    <img src={post.createdBy.profileImage} alt="user image" className="w-8 h-8 rounded-full" />
-                                    <div className='flex flex-col'>
-                                        <div className='text-xs font-semibold'> Written by {post.createdBy.username}</div>
-                                        {/* <div className='text-xs'>Published on {format(new Date(post.createdAt), 'yyyy-MM-dd')}</div> */}
-                                        <img src="/img/carehorn.png" alt="`carehorn" className='w-20 h-auto' />
-                                    </div>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <Link href={"https://facebook.com/share.php?"} className='cursor-pointer'>
-                                        <div className='flex gap-2 cursor-pointer'>
-                                            <div className='text-xs'>Share</div>
-                                            <img src="/img/shareicon.svg" alt="icon" className="w-3 h-3" />
-                                        </div>
-                                    </Link>
-                                    <div className='text-xs'>Blocked: No</div>
-                                </div>
-                            </div>
+                        <div className='text-xs font-semibold'>
+                            Written by {campaign?.createdBy?.name}
                         </div>
                     </div>
-                ))}
-
-
+                ))
+                }
                 <ReactPaginate
                     pageCount={pageCount}
                     pageRangeDisplayed={3}
@@ -195,11 +122,11 @@ const SearchBox: React.FC = () => {
                     containerClassName={'pagination flex justify-center mt-4'}
                     pageClassName={'bg-[#546DEA] text-white px-4 py-2 mr-2 rounded-md cursor-pointer'}
                     activeClassName={'bg-[#2540C4]'}
-                    previousClassName={'border border-[#546DEA] text-[#546DEA] px-4 py-2 mr-2 rounded-md cursor-pointer'}
+                    previousClassName={'border border-[#546DEA] text-[#546DEA] hover:bg-[#2540C4 px-4 py-2 mr-2 rounded-md cursor-pointer'}
                     nextClassName={'border border-[#546DEA] text-[#546DEA] px-4 py-2 ml-2 rounded-md cursor-pointer'}
-                    breakClassName={'bg-[#546DEA] text-white px-4 py-2 mr-2 rounded-md cursor-pointer'}
+                    breakClassName={'bg-white text-white px-4 py-2 mr-2 rounded-md cursor-pointer'}
                 />
-            </div>
+            </div >
         </div >
     );
 };
