@@ -1,6 +1,6 @@
 export default function Password() {
   return (
-        <div className="px-10 py-5 w-full">
+        <div className="px-10 py-5 w-full ">
           <span className="font-light text-black mb-8">
             Enter your new password below to change your password
           </span>
