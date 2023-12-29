@@ -1,113 +1,43 @@
 'use client'
-import React, { ChangeEvent, useState } from 'react'
 
-export default function Profile() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0]
-    setSelectedFile(file || null)
-  }
-
-  const handleUpload = () => {
-    if (selectedFile) {
-      const formData = new FormData()
-      formData.append('file', selectedFile)
-    } else {
-      console.log('No file selected!')
-    }
-  }
-
+export default function Password() {
   return (
-    <>
-      <div className=" flex flex-col items-start justify-center ">
-        <h1 className="text-3xl  font-base p-4">
-          Edit Profile
-        </h1>
-        <div className="flex flex-col items-center justify-center w-[90%]">
-          <div className="grid items-center justify-center w-full ">
-            <div className="border-1 w-24 h-24 rounded-full bg-slate-300 ">
-              {selectedFile && (
-                <img
-                  src={URL.createObjectURL(selectedFile)}
-                  alt="Selected"
-                  className="w-24 h-24 rounded-full"
-                />
-              )}
+    <div className="min-h-screen flex items-start w-full ">
+      <div className=" md:flex-row md:space-y-0 ">
+        <section className="flex flex-col md:p-14">
+          <span className="font-light text-black mb-8">
+            Enter your new password below to change your password
+          </span>
+          <form action="#" className="flex flex-col">
+            <div className="mt-2 ">
+              <p>New Password</p>
+              <input
+                className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm "
+                type="text"
+                id="text"
+                placeholder="New password"
+                required
+              />
             </div>
-            <input type="file" onChange={handleFileChange} className="mt-2" />
-          </div>
+            <div className="mt-2">
+              <p>Confirm Password</p>
+              <input
+                className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm "
+                type="text"
+                id="text"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
 
-          <div className="w-full  rounded-lg mb-2 text-left p-5">
-            <form action="#" className="flex flex-col">
-                <div className="flex-1  py-2 ">
-                  <p>Full Name*</p>
-                  <input
-                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
-                    type="text"
-                    id="text"
-                    required
-                  />
-                </div>
-              <div className="mt-2">
-                <p>Email*</p>
-                <input
-                  className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
-                  type="text"
-                  id="text"
-                  required
-                />
-              </div>
-              <div className="mt-2">
-                <p>Phone Number*</p>
-                <input
-                  className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
-                  type="text"
-                  id="text"
-                  required
-                />
-              </div>
-              <div className="mt-2">
-                <p>Address*</p>
-                <input
-                  className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
-                  type="text"
-                  id="text"
-                  required
-                />
-              </div>
-              <div className="flex items-stretch gap-3 mt-2">
-                <div className="flex-1  py-2 ">
-                  <p>Role</p>
-                  <input
-                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
-                    type="text"
-                    id="text"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="flex items-stretch gap-3 mt-2">
-                <div className="flex-1  py-2 ">
-                  <p>Bio</p>
-                  <input
-                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm "
-                    type="text"
-                    id="text"
-                    required
-                  />
-                </div> 
-              </div>
-              <button
-                onClick={handleUpload}
-                className="w-fit bg-blue-800 text-white p-2 rounded-lg mb-4 mt-5 hover:bg-blue-500 "
-              >
-                Update Information
+            <div className="flex justify-between w-full py-3">
+              <button className="w-full bg-blue-600 text-white p-2 rounded-lg mb-2 mt-2 hover:bg-blue-400 ">
+                CHANGE PASSWORD
               </button>
-            </form>
-          </div>
-        </div>
+            </div>
+          </form>
+        </section>
       </div>
-    </>
+    </div>
   )
 }

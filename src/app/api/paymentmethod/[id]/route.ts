@@ -1,14 +1,14 @@
-import { prisma } from '@sahayeta/app/lib/prismadb'
+import { prisma } from '@sahayeta/lib/prismadb'
+import { useServerSession } from '@sahayeta/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
+//GET endpoint
 export async function GET(req: NextRequest, { params }) {
   try {
-    const { methodId } = params
-
+    const { id } = params
     const paymentMethod = await prisma.paymentMethod.findFirst({
-      where: { methodId }
+      where: { methodId: id }
     })
-
     if (!paymentMethod) {
       return NextResponse.json(
         { message: 'Category not found' },
@@ -24,15 +24,23 @@ export async function GET(req: NextRequest, { params }) {
   }
 }
 
+// PATCH endpoint
 export async function PATCH(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const body = await req.json()
     const { methodName, displayName } = body
 
-    const { methodId } = params
+    const { id } = params
 
     const updatePaymentMethod = await prisma.paymentMethod.update({
-      where: { methodId },
+      where: { methodId: id },
       data: {
         methodName,
         displayName
@@ -51,38 +59,57 @@ export async function PATCH(req: NextRequest, { params }) {
   }
 }
 
-// export async function DELETE(req: NextRequest, { params }) {
-//   try {
-//     const { id } = params
-//     const category = await prisma.category.findUnique({
-//       where: { id }
-//     })
+// DELETE endpoint
+export async function DELETE(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
+  try {
+    const { id } = params
 
-//     if (!category) {
-//       return NextResponse.json(
-//         { message: 'Category not found' },
-//         { status: 404 }
-//       )
-//     } else {
-//       await prisma.category.delete({
-//         where: { id: category.id }
-//       })
-//       if (
-//         req.method === 'DELETE' &&
-//         req.headers.get('accept') === 'application/json'
-//       ) {
-//         return new NextResponse(null, { status: 204 })
-//       } else {
-//         return new NextResponse(null, {
-//           status: 204,
-//           statusText: 'Category deleted successfully'
-//         })
-//       }
-//     }
-//   } catch (error) {
-//     return NextResponse.json(
-//       { message: 'Error in deleting the category', error },
-//       { status: 500 }
-//     )
-//   }
-// }
+    if (!id) {
+      return NextResponse.json(
+        { message: 'methodId is required for deletion' },
+        { status: 400 }
+      )
+    }
+
+    const paymentMethod = await prisma.paymentMethod.findFirst({
+      where: { methodId: id }
+    })
+
+    if (!paymentMethod) {
+      return NextResponse.json(
+        { message: 'paymentMethod not found' },
+        { status: 404 }
+      )
+    } else {
+      await prisma.paymentMethod.delete({
+        where: { methodId: id }
+      })
+
+      if (
+        req.method === 'DELETE' &&
+        req.headers.get('accept') === 'application/json'
+      ) {
+        return new NextResponse(null, { status: 204 })
+      } else {
+        return new NextResponse(null, {
+          status: 204,
+          statusText: 'paymentMethod deleted successfully'
+        })
+      }
+    }
+  } catch (error) {
+    console.error('Error:', error)
+
+    return NextResponse.json(
+      { message: 'Error in deleting the paymentMethod', error },
+      { status: 500 }
+    )
+  }
+}

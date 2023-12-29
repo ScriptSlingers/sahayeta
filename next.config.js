@@ -5,9 +5,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'q5n8c8q9.rocketcdn.me'
       }
     ]
+
   }
 }
 
-module.exports = nextConfig
+

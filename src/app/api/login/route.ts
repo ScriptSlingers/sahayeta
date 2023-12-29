@@ -1,39 +1,31 @@
-import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from '../../lib/prismadb'
-import sha256 from 'crypto-js/sha256'
-import { omit } from 'lodash'
+import { prisma } from '@sahayeta/lib'
+import { SHA256 } from 'crypto-js'
+import { NextRequest, NextResponse } from 'next/server'
 
-export default async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === 'POST') {
-    await handlePOST(res, req)
-    res.json({ message: 'test' })
-  } else {
-    res.status(405).json({ message: 'Method not found.' })
+export async function POST(req: NextRequest, res: NextResponse) {
+  const hashPassword = (password: string) => {
+    return SHA256(password).toString()
   }
-}
-
-const hashPassword = (password: string) => {
-  return sha256(password).toString()
-}
-
-async function handlePOST(res: NextApiResponse, req: NextApiRequest) {
-  const user = await prisma.user.findFirst({
-    where: { email: req.body.username },
-    select: {
-      id: true,
-      name: true,
-      email: true,
-      password: true,
-      role: true
+  try {
+    const user = await req.json()
+    if (!user.email || !user.password) {
+      throw new Error('Incomplete login data')
     }
-  })
-  if (user && user.password == hashPassword(req.body.password)) {
-    res.json(omit(user, 'password'))
-  } else {
-    console.log('Invalid credentials')
-    res.status(400).end('Invalid credentials')
+    const userLogin = await prisma.user.findFirst({
+      where: { email: user.email }
+    })
+    if (userLogin && userLogin.password === hashPassword(user.password)) {
+      delete userLogin.password
+      return NextResponse.json(userLogin, { status: 200 })
+    }
+    return NextResponse.json(
+      { message: 'Invalid credentials' },
+      { status: 404 }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      { message: 'POST Error', error: error.message },
+      { status: 500 }
+    )
   }
 }

@@ -39,7 +39,7 @@ model Session {
 
 model User {
   id            String     @id @default(cuid()) @map("_id")
-  username      String
+  username      String?
   email         String
   emailVerified DateTime?  @map("email_verified")
   password      String?
@@ -81,9 +81,9 @@ model Campaign {
   image           String
   isVerified      Boolean
   description     String
-  goalAmount      Int
-  currentAmount   Int?
-  collectedAmount Int?
+  goalAmount      String
+  currentAmount   String?
+  collectedAmount String?
   startDate       DateTime?
   endDate         DateTime?
   createdById     String

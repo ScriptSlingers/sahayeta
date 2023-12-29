@@ -1,32 +1,18 @@
 'use client'
-import Login from '@sahayeta/app/login/page'
-import {
-  NotificationIcon,
-  ProfileIcon,
-  QuestionIcon,
-  SearchIcon
-} from '@sahayeta/icons'
-import { Hamburger } from '@sahayeta/icons/Hamburger'
-import { signOut, useSession } from 'next-auth/react'
+import { NotificationIcon, QuestionIcon } from '@sahayeta/icons'
+import { useClientSession } from '@sahayeta/utils'
+import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { FaCircleNotch } from 'react-icons/fa'
 
 export const AppHeader = () => {
-  const session = useSession()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [openMenuList, setOpenMenuList] = useState<number[]>([])
+  const session = useClientSession()
   return (
     <>
       <div className="flex w-full h-16 justify-between container">
         <div className="flex">
           <div className="flex gap-5 p-6">
-            <div
-              className="flex h-full justify-center"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <Hamburger />
-            </div>
             <div className="flex items-center">
               <div className="relative h-16 w-24 items-center">
                 <Link href="/">
@@ -48,13 +34,14 @@ export const AppHeader = () => {
             <Link href="">
               <div>Dashboard</div>
             </Link>
-            <div>Campaign</div>
+            <Link href="/campaingns">
+              <div>Campaign</div>
+            </Link>
             <div>Charity</div>
             <div>Donate</div>
           </div>
         </div>
         <div className="flex items-center p-6 gap-6">
-
           <div className="w-6 h-6">
             <Link href="#">
               <NotificationIcon />
@@ -65,14 +52,13 @@ export const AppHeader = () => {
               <QuestionIcon />
             </Link>
           </div>
-          {/* {JSON.stringify(session)} */}
-          {session.data ? (
+          {session ? (
             <div className="flex gap-3">
               <Link href="/profile">
                 <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
                   <Image
-                    src={session?.data?.user?.image || ''}
-                    alt={session?.data?.user?.name || ''}
+                    src={'/assets/img/profile.jpg'}
+                    alt={session?.name || ''}
                     height={40}
                     width={50}
                   />
@@ -85,6 +71,8 @@ export const AppHeader = () => {
                 Signout
               </button>
             </div>
+          ) : session === null ? (
+            <FaCircleNotch />
           ) : (
             <div className="w-10 h-4 mx-2 flex justify-center items-center">
               <button>

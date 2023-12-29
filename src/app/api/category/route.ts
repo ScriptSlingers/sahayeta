@@ -1,4 +1,5 @@
-import { prisma } from '@sahayeta/app/lib/prismadb'
+import { prisma } from '@sahayeta/lib/prismadb'
+import { useServerSession } from '@sahayeta/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
@@ -9,8 +10,8 @@ export async function GET() {
         id: true,
         name: true,
         displayName: true,
-        description: true,
-        campaign: true
+        description: true
+        // campaign: true
       }
     })
 
@@ -21,6 +22,13 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const category = await req.json()
     if (

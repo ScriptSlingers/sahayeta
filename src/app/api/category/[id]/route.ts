@@ -1,4 +1,5 @@
-import { prisma } from '@sahayeta/app/lib/prismadb'
+import { prisma } from '@sahayeta/lib/prismadb'
+import { useServerSession } from '@sahayeta/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest, { params }) {
@@ -25,6 +26,13 @@ export async function GET(req: NextRequest, { params }) {
 }
 
 export async function PATCH(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const body = await req.json()
     const { name, displayName, description } = body
@@ -56,6 +64,13 @@ export async function PATCH(req: NextRequest, { params }) {
 }
 
 export async function DELETE(req: NextRequest, { params }) {
+  const currentUser = await useServerSession()
+  if (!currentUser) {
+    return NextResponse.json(
+      { message: 'You must be logged in.' },
+      { status: 404 }
+    )
+  }
   try {
     const { id } = params
     const category = await prisma.category.findUnique({
