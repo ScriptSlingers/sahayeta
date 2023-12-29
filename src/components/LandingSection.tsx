@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { SearchIcon } from '@sahayeta/icons'
 import axios from 'axios'
 import Image from 'next/image'
@@ -7,7 +7,7 @@ import { FrontCard } from '.'
 import Link from 'next/link'
 import { Loading } from '@sahayeta/components'
 
-export const LandingSection = () => {
+export default function LandingSection() {
   const [categories, setCategories] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredCategories, setFilteredCategories] = useState([])
