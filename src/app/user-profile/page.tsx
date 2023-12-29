@@ -27,20 +27,20 @@ const UserProfile = () => {
         >
           <div>
             <h1>Welcome, {session?.data?.user?.name}</h1>
-            <img
+            {/* <img
               src={session?.data?.user?.image || ''}
               alt={session?.data?.user?.name || ''}
-            />
+            /> */}
             <p>Email: {session?.data?.user?.email}</p>
             <p>Phone Number:9845952673</p>
             <p>Address: Madi-1 Baruwa</p>
             <p>
               Role: Admin
               <p>
-                Bio:Hi my name is Anjali Poudel I'm a student of information
+                Bio:Hi my name is Anjali Poudel I&apos;m a student of information
                 technology and I am a passionate front-end developer. I possess
                 a decent level of skill in Graphics Design, HTML, CSS and
-                WordPress as well.{' '}
+                WordPress as well.
               </p>
               {/* <p>Bio: {session?.data?.user?.bio}</p>
                         <p>Phone Number: {session?.data?.user?.phoneNum}</p>
