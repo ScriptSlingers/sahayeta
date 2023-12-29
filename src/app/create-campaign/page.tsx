@@ -173,10 +173,15 @@ export default function CreateCampaign() {
               </div>
               <div className="flex gap-1">
                 <div className="text-base font-normal">Verified by</div>
-                <div className="w-[100px] h-[21px]">
-                  <Image src="/assets/img/logo.png" alt="demo"
+                <div className="w-[100px] h-[21px] relative">
+                  <Image
+                    src="/assets/img/logo.png"
+                    alt="Logo Sahayata"
                     width={200}
-                    height={200} />
+                    height={200}
+
+                    sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
                 </div>
               </div>
               <div>
