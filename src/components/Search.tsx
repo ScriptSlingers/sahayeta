@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 
-const Search = ({ onSearch }) => {
+export const Search = ({ onSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleInputChange = (e) => {
@@ -24,5 +24,3 @@ const Search = ({ onSearch }) => {
         </div>
     );
 };
-
-export default Search;
