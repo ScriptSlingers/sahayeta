@@ -15,7 +15,7 @@ export default function UsersListing() {
     if (currentUser && currentUser?.role !== 'admin') {
       router.push('/login');
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   useEffect(() => {
     axios

@@ -16,7 +16,7 @@ export default function NotificationListing() {
         if (currentUser && currentUser?.role !== 'admin') {
             router.push('/login')
         }
-    }, [currentUser])
+    }, [currentUser, router])
 
     useEffect(() => {
         axios

@@ -38,7 +38,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             }
         }
         fetchCampaignData()
-    }, [])
+    }, [campaignId])
 
     return (
         <>

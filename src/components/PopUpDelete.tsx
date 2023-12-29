@@ -14,7 +14,7 @@ const PopUp = ({ onClose, onDelete }) => {
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 flex-col justify-center items-center bg-white shadow-2xl rounded p-4">
             <div className="flex flex-col gap-3 justify-center items-center text-center">
                 <p className="text-base font-medium font-poppins text-black">
-                    " Are you sure to Delete this user? "
+                    &quot; Are you sure to Delete this user? &quot;
                 </p>
                 <span className="text-xs ">
                     If you delete this user it will be removed from your system

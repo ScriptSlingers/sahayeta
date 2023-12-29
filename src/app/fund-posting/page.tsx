@@ -64,13 +64,13 @@ export default function DonationForm() {
             id="imageUpload"
             onChange={handleImageUpload}
           />
-          {selectedImage && (
+          {/* {selectedImage && (
             <img
               src={URL.createObjectURL(selectedImage)}
               alt="Selected"
               className="mt-2"
             />
-          )}
+          )} */}
         </div>
         <div className="flex gap-8">
           <div className="mb-4">
