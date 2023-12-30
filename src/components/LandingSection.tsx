@@ -28,7 +28,7 @@ export default function LandingSection() {
       })
   }, [])
 
-  const displayedCampaigns = campaigns.slice(0, 6)
+  const displayedCampaigns = campaigns.slice(0, 3)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -228,7 +228,7 @@ export default function LandingSection() {
           </Link>
         </button>
       </div>
-
+      <p className='text-center text-xl font-semibold font-serif py-6 '>Join the Urgent Cause</p>
       {displayedCampaigns.length !== 0 ? (
 
         < div className='flex w-full container flex-col'>
