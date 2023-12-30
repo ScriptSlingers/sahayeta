@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { SearchIcon } from '@sahayeta/icons'
 import axios from 'axios'
 import Image from 'next/image'
@@ -7,7 +7,7 @@ import { FrontCard } from '.'
 import Link from 'next/link'
 import { Loading } from '@sahayeta/components'
 
-export const LandingSection = () => {
+export default function LandingSection() {
   const [categories, setCategories] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredCategories, setFilteredCategories] = useState([])
@@ -28,7 +28,7 @@ export const LandingSection = () => {
       })
   }, [])
 
-  const displayedCampaigns = campaigns.slice(0, 6)
+  const displayedCampaigns = campaigns.slice(0, 3)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -228,7 +228,7 @@ export const LandingSection = () => {
           </Link>
         </button>
       </div>
-
+      <p className='text-center text-xl font-semibold font-serif py-6 '>Join the Urgent Cause</p>
       {displayedCampaigns.length !== 0 ? (
 
         < div className='flex w-full container flex-col'>
