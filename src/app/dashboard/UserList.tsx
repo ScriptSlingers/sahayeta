@@ -1,21 +1,26 @@
 'use client'
+import { Delete } from '@sahayeta/components'
 import { useClientSession } from '@sahayeta/utils/useClientSession'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
+import {
+  BsEye,
+  BsPencil,
+
+  BsTrash
+} from 'react-icons/bs'
 
 export default function UsersListing() {
   const router = useRouter()
-
   const [users, setUsers] = useState({ users: [] })
   const currentUser = useClientSession()
 
   useEffect(() => {
     if (currentUser && currentUser?.role !== 'admin') {
-      router.push('/login');
+      router.push('/login')
     }
-  }, [currentUser]);
+  }, [currentUser])
 
   useEffect(() => {
     axios
@@ -30,69 +35,15 @@ export default function UsersListing() {
       })
   }, [])
 
-
-
-  const [selectedUserId, setSelectedUserId] = useState(null);
-
-  const toggleDropdown = (userId) => {
-    setSelectedUserId(userId === selectedUserId ? null : userId);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/users/${id}`);
+      console.log(`Deleted user  ${id}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleEdit = (userId) => {
-    console.log(`Edit clicked for user with ID: ${userId}`);
-  };
-
-  const handleView = (userId) => {
-    console.log(`View clicked for user with ID: ${userId}`);
-  };
-
-  const handleDelete = (userId) => {
-    console.log(`Delete clicked for user with ID: ${userId}`);
-  };
-
-  const PopUp = ({ onClose }) => {
-    return (
-      <div className='fixed top-0 left-0 w-full h-full bg-black/10 flex justify-center items-center'>
-        <div className="relative w-96 flex-col justify-center items-center bg-white shadow-2xl rounded p-4">
-          <div className="flex flex-col gap-3 justify-center items-center text-center">
-            <p className="text-base font-medium font-poppins text-black">
-              Are you sure to Delete this ticket?
-            </p>
-            <span className="text-xs ">
-              If you delete this ticket it will be removed from your system
-              pernmentley, you can’t get it back.
-            </span>
-            <span className="text-xs font-medium  font-poppins text-black">
-
-              Yes, I want to remove this ticket now.
-            </span>
-          </div>
-
-          <div className="flex justify-between p-3">
-            <button
-              className="w-[80px] h-[37px] rounded-3xl bg-black text-white flex justify-center items-center gap-1"
-              onClick={onClose}
-            > Cancel
-            </button>
-            <button className="w-[80px] h-[37px] rounded-3xl bg-black text-white flex justify-center items-center gap-1">
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  };
-  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-
-  const handleDeleteClick = () => {
-    // Open the pop-up
-    setIsPopUpOpen(true);
-  };
-
-  const handleClosePopUp = () => {
-    // Close the pop-up
-    setIsPopUpOpen(false);
-  };
   return (
     <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
       <div className="container ">
@@ -194,83 +145,67 @@ export default function UsersListing() {
                 </tr>
               </thead>
               <tbody>
-                {users?.users.map(({ id, username, name, email, phoneNum, role }: any) => {
-                  return (
-                    <tr className=" border-b hover:bg-gray-50 " key={id}>
-                      <td className="w-4 p-4">
-                        <div className="flex items-center">
-                          <input
-                            id="checkbox-table-search-1"
-                            type="checkbox"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                          />
-                          <label className="sr-only">checkbox</label>
-                        </div>
-                      </td>
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                      >
-                        {username}
-                      </th>
-                      <td className="px-6 py-4">{name}</td>
-                      <td className="px-6 py-4">{email}</td>
-
-                      <td className="px-6 py-4">{phoneNum}</td>
-                      <td className="px-6 py-4">{role}</td>
-                      <td className="px-6 py-4">Balance</td>
-                      <td className="px-6 py-4">
-                        <div className="relative text-center z-10 flex items-center justify-center">
-                          <div>
-                            <button
-                              type="button"
-                              onClick={() => toggleDropdown(id)}
-                              className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                            >
-                              <BsThreeDotsVertical />
-
-                            </button>
+                {users?.users.map(
+                  ({ id, username, name, email, phoneNum, role }: any) => {
+                    return (
+                      <tr className=" border-b hover:bg-gray-50 " key={id}>
+                        <td className="w-4 p-4">
+                          <div className="flex items-center">
+                            <input
+                              id="checkbox-table-search-1"
+                              type="checkbox"
+                              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                            <label className="sr-only">checkbox</label>
                           </div>
+                        </td>
+                        <th
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                        >
+                          {username}
+                        </th>
+                        <td className="px-6 py-4">{name}</td>
+                        <td className="px-6 py-4">{email}</td>
 
-                          {selectedUserId === id && (
-                            <div className="absolute left-14  w-32 mt-10  bg-white border border-gray-200 rounded-md shadow-lg">
-                              <div className="py-1 flex flex-col items-center ">
-                                <a
-                                  href="#"
-                                  onClick={() => handleEdit(id)}
-                                  className="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700"
-                                >
-                                  Edit
-                                </a>
-                                <a
-                                  href="#"
-                                  onClick={() => handleView(id)}
-                                  className="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700">
-                                  View
-                                </a>
-                                <div
-                                  onClick={handleDeleteClick}
-                                  className="block px-4 py-2 text-sm text-gray-700 hover:text-blue-700   justify-center items-center "
-                                >
-                                  <span>  Delete</span>
-                                  {isPopUpOpen && <PopUp onClose={handleClosePopUp} />}
-                                </div>
-                              </div>
+                        <td className="px-6 py-4">{phoneNum}</td>
+                        <td className="px-6 py-4">{role}</td>
+                        <td className="px-6 py-4">Balance</td>
+                        <td className="px-6 py-4">
+                          <div className="relative text-center z-10 flex items-center justify-center">
+                            <div className="flex gap-3">
+                              <button
+                                type="button"
+                                onClick={() => handleDelete(id)}
+                                className="font-medium text-red-600 text-base"
+                              >
+                                <Delete />
+
+                              </button>
+                              <button
+                                type="button"
+                                className="font-medium text-blue-700 text-base"
+                              >
+                                <BsPencil />
+                              </button>
+                              <button
+                                type="button"
+                                className="font-medium text-black text-base"
+                              >
+                                <BsEye />
+                              </button>
                             </div>
-                          )}
-                        </div>
-
-                      </td>
-
-                    </tr>
-                  )
-                }
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  }
                 )}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   )
 }

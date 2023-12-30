@@ -65,15 +65,15 @@ export const Search: React.FC = () => {
     }, []);
 
     return (
-        <div className="w-full">
+        <div className="w-full pt-16">
 
-            <div className='flex justify-between container py-3 w-full'>
+            <div className='flex justify-center items-center container py-3  w-full'>
                 <input
                     type="text"
                     placeholder="Search anything related to the Campaign...."
                     value={searchQuery}
                     onChange={handleInputChange}
-                    className='bg-[#ECEEFF] w-2/3 p-4  text-sm placeholder-gray-500 outline-none rounded'
+                    className='bg-[#ECEEFF] w-2/3 p-4  text-sm placeholder-gray-500 outline-none rounded placeholder:flex placeholder:justify-center placeholder:items-center placeholder:text-center'
                 />
 
             </div>
