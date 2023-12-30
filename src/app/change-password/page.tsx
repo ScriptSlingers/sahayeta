@@ -16,7 +16,7 @@ export default function Password() {
             <input className='w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none'
         type="text"
         id='text'
-        placeholder='New password'
+        placeholder='Current password'
         required />
           </div>
           <div className='mt-2 '>

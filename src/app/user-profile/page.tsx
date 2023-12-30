@@ -1,10 +1,8 @@
 'use client'
 import React, { useState } from 'react';
 import Profile from './Editprofile';
-import { FaHome } from 'react-icons/fa'
 import { MdEdit } from "react-icons/md";
 import { SiSpringsecurity } from "react-icons/si";
-import { CgProfile } from 'react-icons/cg'
 import Password from './Password';
 import Donation from './Donation';
 
