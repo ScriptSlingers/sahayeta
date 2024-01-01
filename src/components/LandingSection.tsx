@@ -228,10 +228,11 @@ export default function LandingSection() {
           </Link>
         </button>
       </div>
-      <p className='text-center text-xl font-semibold font-serif py-6 '>Join the Urgent Cause</p>
+
       {displayedCampaigns.length !== 0 ? (
 
         < div className='flex w-full container flex-col'>
+          <p className='text-center text-xl font-semibold font-serif py-6 '>Join the Urgent Cause</p>
           <div className=" text-black p-3 grid grid-cols-3 justify-center items-center gap-5">
             {displayedCampaigns.map(
               ({

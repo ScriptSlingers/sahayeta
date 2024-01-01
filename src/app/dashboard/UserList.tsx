@@ -6,9 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import {
   BsEye,
-  BsPencil,
-
-  BsTrash
+  BsPencil
 } from 'react-icons/bs'
 
 export default function UsersListing() {
@@ -35,10 +33,11 @@ export default function UsersListing() {
       })
   }, [])
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: any) => {
     try {
-      await axios.delete(`http://localhost:3000/api/users/${id}`);
-      console.log(`Deleted user  ${id}`);
+      const response = await axios.delete(`/api/users/${id}`);
+      console.log(response.data); // Log the response data
+      console.log(`Deleted user ${id}`);
     } catch (error) {
       console.error(error);
     }

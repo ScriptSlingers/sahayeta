@@ -24,7 +24,6 @@ interface CampaignData {
 
 export default function SingleCampaign({ params }: { params: { id: string } }) {
     const campaignId = params.id
-    const userId = params.id
     const [campaign, setCampaign] = useState<CampaignData | null>(null);
 
     useEffect(() => {
@@ -41,14 +40,6 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
         fetchCampaignData()
     }, [])
 
-    const handleDelete = async () => {
-        try {
-            await axios.delete(`http://localhost:3000/api/users/${userId}`);
-            console.log(`Deleted user  ${userId}`);
-        } catch (error) {
-            console.error(error);
-        }
-    };
     return (
         <>
             <div className="container flex gap-7 ">

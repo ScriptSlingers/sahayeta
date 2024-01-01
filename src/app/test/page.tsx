@@ -1,107 +1,84 @@
 "use client"
-import { Dialog, Transition } from '@headlessui/react'
-import axios from 'axios'
-import { useRouter } from 'next/navigation'
-import { Fragment, useState } from 'react'
-import { BsTrash } from 'react-icons/bs'
-
-export default function MyModal({ params }: { params: { id: string } }) {
-    let [isOpen, setIsOpen] = useState(true)
-    const userId = params.id
-
-    function closeModal() {
-        setIsOpen(false)
-    }
-
-    function openModal() {
-        setIsOpen(true)
-    }
+import { useClientSession } from '@sahayeta/utils';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 
-    const handleDelete = async () => {
-        try {
-            await axios.delete(`http://localhost:3000/api/users/${userId}`);
-            console.log(`Deleted user  ${userId}`);
-        } catch (error) {
-            console.error(error);
+
+const YourPage = () => {
+    const [campaigns, setCampaigns] = useState<any>();
+    const [createdByInfo, setCreatedByInfo] = useState<any>();
+    const currentUser = useClientSession();
+
+    useEffect(() => {
+        if (currentUser) {
+            axios
+                .get('/api/campaigns/', {
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(response => {
+                    const userCampaigns = response.data.campaigns.filter(
+                        (campaign: any) => campaign.createdBy && campaign.createdBy.id === currentUser.id
+                    );
+                    setCampaigns(userCampaigns);
+
+
+                    const firstCampaignCreatedBy = userCampaigns.length > 0 ? userCampaigns[0].createdBy : null;
+                    setCreatedByInfo(firstCampaignCreatedBy);
+                })
+                .catch(error => {
+                    console.error('Axios error:', error);
+                });
         }
-    };
-
+    }, [currentUser]);
 
     return (
-        <>
-            <div className="fixed inset-0 flex items-center justify-center">
-                <button
-                    type="button"
-                    onClick={openModal}
-                    className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-                >
-                    <BsTrash />
-                </button>
-            </div>
+        <div>
+            {createdByInfo && (
+                <div className='bg-blue-500 p-4 mb-4'>
+                    <h2>Created By Information:</h2>
+                    <p>Name: {createdByInfo.name}</p>
+                    <p>Bio: {createdByInfo.bio}</p>
+                    <p>Email: {createdByInfo.email}</p>
+                    {/* Add more createdByInfo fields as needed */}
+                </div>
+            )}
 
-            <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
-                    <Transition.Child
-                        as={Fragment}
-                        enter="ease-out duration-300"
-                        enterFrom="opacity-0"
-                        enterTo="opacity-100"
-                        leave="ease-in duration-200"
-                        leaveFrom="opacity-100"
-                        leaveTo="opacity-0"
-                    >
-                        <div className="fixed inset-0 bg-black/25" />
-                    </Transition.Child>
+            {campaigns && campaigns.length > 0 && (
+                <table className='border-collapse border w-full'>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Goal Amount</th>
+                            <th>Category</th>
+                            {/* Add more table headers as needed */}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {campaigns.map(
+                            ({
+                                campaignId,
+                                title,
+                                goalAmount,
+                                category,
+                                collectedAmount,
+                                startDate,
+                                endDate
+                            }: any) => (
+                                <tr key={campaignId} className='border'>
+                                    <td>{title}</td>
+                                    <td>{goalAmount}</td>
+                                    <td>{category?.name}</td>
+                                    {/* Add more table data cells as needed */}
+                                </tr>
+                            )
+                        )}
+                    </tbody>
+                </table>
+            )}
+        </div>
+    );
+};
 
-                    <div className="fixed inset-0 overflow-y-auto">
-                        <div className="flex min-h-full items-center justify-center p-4 text-center">
-                            <Transition.Child
-                                as={Fragment}
-                                enter="ease-out duration-300"
-                                enterFrom="opacity-0 scale-95"
-                                enterTo="opacity-100 scale-100"
-                                leave="ease-in duration-200"
-                                leaveFrom="opacity-100 scale-100"
-                                leaveTo="opacity-0 scale-95"
-                            >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
-                                    <Dialog.Title
-                                        as="h3"
-                                        className="text-lg text-center font-medium leading-6 text-gray-900"
-                                    >
-                                        Are you sure to Delete this Users?
-                                    </Dialog.Title>
-                                    <div className="mt-2 ">
-                                        <p className="text-sm text-gray-500 text-center">
-                                            If you delete this user it will be removed from your system
-                                            pernmentley, you can’t get it back.
-                                        </p>
-                                    </div>
-
-                                    <div className="mt-4 flex justify-center items-center gap-10 ">
-                                        <button
-                                            type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
-                                        >
-                                            Cancle
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={handleDelete}
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
-                        </div>
-                    </div>
-                </Dialog>
-            </Transition>
-        </>
-    )
-}
+export default YourPage;
