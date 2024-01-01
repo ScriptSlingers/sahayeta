@@ -11,31 +11,29 @@ export const CampaignCard = ({
   campaignCollectedAmount
 }: any) => {
   return (
-    <div className=" flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg">
+    <div
+      key={campaignId}
+      className="flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg"
+    >
       <div className="">
-        <Link href="/">
+        <Link href={'/campaign/' + campaignId}>
           <Image
-            src="/assets/img/donation.jpg"
-            alt="Hero Section"
+            src={campaignImageURL}
+            alt={campaignImageAlt}
             width={400}
             height={100}
             className="rounded-t-lg"
             quality={100}
           />
         </Link>
-        <div className="m-2 space-y-3 ml-5 pt-2 ">
-          <p className="font-semibold text-black text-heading6">
-            Help This Child Get A Second Chance At Life.
-          </p>
-          <h1 className="font-semibold text-2xl text-black">$ 1500</h1>
-          <p className="font-semibold text-gray-500">raised of $ 10,000 goal</p>
-          <progress
-            value={100}
-            className="rounded-lg w-80 h-2.5 bg-blue-500"
-          ></progress>
-          <div className="flex flex-row gap-36 text-gray-500 font-semibold pb-4">
-            <p>10 days left</p>
-            <p>10 supporters</p>
+        <div className="text-xl font-semibold">{campaignTitle}</div>
+        <div className="text-gray-500 flex justify-center align-middle text-justify">
+          {campaignDescription}
+        </div>
+        <div className="flex justify-between font-medium">
+          <div className="">NRP. {campaignCurrentAmount || '0'} Raised</div>
+          <div className="">
+            NRP. {campaignCollectedAmount || '0'} Donations
           </div>
         </div>
       </div>

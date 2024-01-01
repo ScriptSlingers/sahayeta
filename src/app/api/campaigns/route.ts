@@ -1,9 +1,9 @@
-import { prisma } from '@sahayeta/app/lib/prismadb'
-import { useServerSession } from '@sahayeta/app/utils/useServerSession'
+import { prisma } from '@sahayeta/lib'
+import { useServerSession } from '@sahayeta/utils'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
-  const Campaigns = await prisma.campaign.findMany({
+  const campaigns = await prisma.campaign.findMany({
     where: {},
     select: {
       campaignId: true,
@@ -22,7 +22,7 @@ export async function GET() {
       payment: true
     }
   })
-  return NextResponse.json({ Campaigns })
+  return NextResponse.json({ campaigns })
 }
 export async function POST(request: NextRequest) {
   const currentUser = await useServerSession()
@@ -34,21 +34,6 @@ export async function POST(request: NextRequest) {
   }
   try {
     const campaign = await request.json()
-    if (
-      !campaign.title ||
-      !campaign.image ||
-      !campaign.isVerified ||
-      !campaign.description ||
-      !campaign.goalAmount ||
-      !campaign.createdById ||
-      !campaign.categoryId
-    ) {
-      return NextResponse.json(
-        { message: 'Missing required properties in the request' },
-        { status: 400 }
-      )
-    }
-
     const {
       title,
       image,
@@ -57,6 +42,7 @@ export async function POST(request: NextRequest) {
       goalAmount,
       createdById,
       categoryId
+      
     } = campaign
 
     const newCampaign = await prisma.campaign.create({

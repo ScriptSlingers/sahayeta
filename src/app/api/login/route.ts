@@ -1,4 +1,4 @@
-import { prisma } from '@sahayeta/app/lib'
+import { prisma } from '@sahayeta/lib'
 import { SHA256 } from 'crypto-js'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -18,8 +18,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       delete userLogin.password
       return NextResponse.json(userLogin, { status: 200 })
     }
-    console.log(hashPassword(user.password))
-
     return NextResponse.json(
       { message: 'Invalid credentials' },
       { status: 404 }

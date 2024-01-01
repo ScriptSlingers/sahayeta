@@ -40,4 +40,5 @@ next-env.d.ts
 
 
 # ommit test files
-/src/app/test
+# /src/app/test
+# /src/app/dummyfile

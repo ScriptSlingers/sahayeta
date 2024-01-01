@@ -28,18 +28,16 @@ export const ScrollToTopButton = () => {
   return (
     <div className="fixed bottom-12 right-8 z-20 flex items-center justify-center lg:right-20">
       {isVisible && (
-        <CircularProgressBar percentage={scrollProgress} circleWidth={100} />
+        <CircularProgressBar percentage={scrollProgress} />
       )}
     </div>
   )
 }
 
 const CircularProgressBar = ({
-  percentage,
-  circleWidth
+  percentage
 }: {
   percentage: number
-  circleWidth: number
 }) => {
   const radius = 32
   const dashArray = radius * Math.PI * 2
@@ -51,20 +49,20 @@ const CircularProgressBar = ({
     >
       <svg
         className="absolute"
-        width={circleWidth}
-        height={circleWidth}
-        viewBox={'0 0 ${circleWidth} ${circleWidth}'}
+        width="100"
+        height="100"
+        viewBox={'0 0 100 100'}
       >
         <circle
-          cx={circleWidth / 2}
-          cy={circleWidth / 2}
+          cx={50}
+          cy={50}
           strokeWidth="3px"
           r={radius}
           className="fill-none stroke-primary"
         />
         <circle
-          cx={circleWidth / 2}
-          cy={circleWidth / 2}
+          cx={50}
+          cy={50}
           strokeWidth="3px"
           r={radius}
           className="svg-stroke-rounded fill-none stroke-blue-700"
@@ -72,12 +70,12 @@ const CircularProgressBar = ({
             strokeDasharray: dashArray,
             strokeDashoffset: dashOffset
           }}
-          transform={`rotate(-90 ${circleWidth / 2} ${circleWidth / 2})`}
+          transform={`rotate(-90 ${50} ${50})`}
         />
       </svg>
       <div className="h-8 w-8 text-blue-700">
         <ArrowUpIcon />
       </div>
-    </button>
+    </button >
   )
 }

@@ -1,5 +1,5 @@
-import { prisma } from '@sahayeta/app/lib/prismadb'
-import { useServerSession } from '@sahayeta/app/utils/useServerSession'
+import { prisma } from '@sahayeta/lib/prismadb'
+import { useServerSession } from '@sahayeta/utils/useServerSession'
 import { NextRequest, NextResponse } from 'next/server'
 
 //GET endpoint
@@ -8,7 +8,17 @@ export async function GET(req: NextRequest, { params }) {
     const { id } = params
 
     const campaign = await prisma.campaign.findFirst({
-      where: { campaignId: id }
+      where: { campaignId: id },
+      select: {
+        campaignId: true,
+        title: true,
+        image: true,
+        description: true,
+        goalAmount: true,
+        createdBy: true,
+        startDate: true,
+        endDate: true
+      }
     })
 
     if (!campaign) {

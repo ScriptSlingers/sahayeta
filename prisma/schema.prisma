@@ -81,9 +81,9 @@ model Campaign {
   image           String
   isVerified      Boolean
   description     String
-  goalAmount      Int
-  currentAmount   Int?
-  collectedAmount Int?
+  goalAmount      String
+  currentAmount   String?
+  collectedAmount String?
   startDate       DateTime?
   endDate         DateTime?
   createdById     String
