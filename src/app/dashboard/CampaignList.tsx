@@ -1,6 +1,8 @@
 'use client'
+import { OpenLinkIcon, SearchIcon } from '@sahayeta/icons'
 import { useClientSession } from '@sahayeta/utils/useClientSession'
 import axios from 'axios'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
@@ -15,7 +17,7 @@ export default function CampaignsListing() {
     if (currentUser && currentUser?.role !== 'admin') {
       router.push('/login');
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   useEffect(() => {
     axios
@@ -49,10 +51,18 @@ export default function CampaignsListing() {
     }
   }
 
+  function formatDate(endDate) {
+    const date = new Date(endDate);
+    const formattedDate = date.toLocaleDateString(); // This gets the date part
+
+    return formattedDate;
+  }
+
+
   return (
     <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
       <div className="container ">
-        <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
+        <div className="bg-slate-200 min-w-[1366px] flex flex-col w-full py-5 rounded-xl  ">
           <div className="relative px-10 sm:rounded-lg">
             <p className="text-lg font-bold py-4 text-blue-700">
               Campaigns List
@@ -84,9 +94,9 @@ export default function CampaignsListing() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 1 4 4 4-4"
                     />
                   </svg>
@@ -147,7 +157,7 @@ export default function CampaignsListing() {
                     Goal Amount
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Collected Amount
+                    Coll. Amount
                   </th>
                   <th scope="col" className="px-6 py-3">
                     status
@@ -159,17 +169,7 @@ export default function CampaignsListing() {
               </thead>
               <tbody>
                 {campaigns?.campaigns?.map(
-                  ({
-                    campaignId,
-                    title,
-                    status,
-                    goalAmount,
-                    category,
-                    createdBy,
-                    collectedAmount,
-                    startDate,
-                    endDate
-                  }: any) => {
+                  ({ campaignId, title, status, goalAmount, category, createdBy, collectedAmount, startDate, endDate }: any) => {
                     return (
                       <tr
                         className=" border-b hover:bg-gray-50 "
@@ -189,12 +189,17 @@ export default function CampaignsListing() {
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                         >
-                          {title}
+                          <Link href={`/campaigns/${campaignId}`} className='text-blue-700 flex gap-2 items-center'>
+                            {`${title.slice(0, 13)}${title.length > 13 ? '...' : ''}`}
+                            <div className='h-4 w-4'>
+                              <OpenLinkIcon />
+                            </div>
+                          </Link>
                         </th>
                         <td className="px-6 py-4">{category?.name}</td>
                         <td className="px-6 py-4">{createdBy?.name}</td>
-                        <td className="px-6 py-4">{startDate}</td>
-                        <td className="px-6 py-4">{endDate}</td>
+                        <td className="px-6 py-4">{formatDate(startDate)}</td>
+                        <td className="px-6 py-4">{formatDate(endDate)}</td>
                         <td className="px-6 py-4">{goalAmount}</td>
                         <td className="px-6 py-4">{collectedAmount}</td>
                         <td className="px-6 py-4">{customStatus(status)}</td>
@@ -215,6 +220,6 @@ export default function CampaignsListing() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
