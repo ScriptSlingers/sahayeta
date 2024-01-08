@@ -53,7 +53,7 @@ export default function NotificationListing() {
     return (
         <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
             <div className="container ">
-                <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
+                <div className="bg-slate-200 min-w-[1366px] flex flex-col w-full py-5 rounded-xl  ">
                     <div className="relative px-10 sm:rounded-lg">
                         <p className="text-lg font-bold py-4 text-blue-700">Notification</p>
                         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 gap-96">
@@ -83,9 +83,9 @@ export default function NotificationListing() {
                                     >
                                         <path
                                             stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
                                             d="m1 1 4 4 4-4"
                                         />
                                     </svg>
@@ -132,7 +132,7 @@ export default function NotificationListing() {
                                     alt="doc image"
                                     className="w-12 h-12 rounded-full"
                                 />
-                                <p>Anjali Poudel craeted a Campaign !!</p>
+                                <p>Anjali Poudel created a Campaign !!</p>
                             </div>
                         </div>
                     </div>
