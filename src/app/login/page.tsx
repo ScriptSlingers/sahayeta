@@ -99,7 +99,7 @@ export default function Login(csrfToken) {
           <div className="text-center text-gray-600">
             Don&apos;thave an account?
             <a
-              href="#"
+              href="/signup"
               className="text-black text-md font-bold hover:text-blue-500 "
             >
               Sign Up

@@ -23,7 +23,11 @@ type loggedInUser = {
 } 
  
 
-export default function page() {
+export default function EditProfile() {
+
+   
+
+
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,13 +68,12 @@ export default function page() {
       
         <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
             <div className="container flex items-center justify-center ">
-                <div className="bg-slate-200 flex flex-col w-[50%] py-5 rounded-xl  ">
+                <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
                     <div className="relative px-10 sm:rounded-lg">
                         <p className="text-lg font-bold py-4 text-blue-700">User Information</p>
                     </div>
                     <div className='m-3'>
-                     
-                        <div className="  flex items-center gap-3 rounded-md bg-gray-50 border mb-3">
+                        <div className="  flex items-center gap-3 rounded-md bg-gray-50 border mb-3 mx-5">
                             <div className="relative w-24 h-24 border border-accent m-3 bg-slate-300 rounded-full">
                             <Image
                                  src={loggedInUser?.profileImage || ""}
@@ -93,12 +96,13 @@ export default function page() {
                             </div>
                         </div>
                         <div className="w-full  mb-2 text-left p-5 ">
-                    <form action="#" className="flex flex-col">
+                    <form action="#" className="flex flex-col" >
                         <div className="mt-2">
                             <p>Phone Number*</p>
                             <input
                                 className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                 type="number"
+                                name='phoneNum'
                                 id="text"
                                 required
                             />
@@ -107,7 +111,8 @@ export default function page() {
                             <p>Date of Birth</p>
                             <input
                                 className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
-                                type="number"
+                                type="date"
+                                name='dob'
                                 id="text"
                                 required
                             />
@@ -119,6 +124,7 @@ export default function page() {
                                 className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                 type="text"
                                 id="text"
+                                name='address'
                                 required
                             />
                         </div>
@@ -129,6 +135,7 @@ export default function page() {
                                     className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                     type="text"
                                     id="text"
+                                    name='role'
                                     required
                                 />
                             </div>
@@ -139,6 +146,7 @@ export default function page() {
                                 <textarea
                                     className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                     id="text"
+                                    name='bio'
                                     required
                                 />
                             </div>
@@ -158,7 +166,7 @@ export default function page() {
                             />
                         )}
                                     </div>
-                                    <input type="file" onChange={handleFileChange} className="mt-2" />
+                                    <input type="file" name="ctzImg" onChange={handleFileChange} className="mt-2" />
                                 </div>
                             </div>
                         </div>

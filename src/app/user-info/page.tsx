@@ -1,7 +1,27 @@
 'use client'
-import { ChangeEvent, useState } from "react";
-import Image from "next/image";
+import React, { ChangeEvent, useEffect, useState }  from 'react'
+import axios from 'axios'
+import Image from 'next/image';
+import { useClientSession } from '@sahayeta/utils';
+import { TbAddressBook, } from "react-icons/tb";
+import { FaHeart } from "react-icons/fa";
+import { FaCalendarAlt } from "react-icons/fa";
 
+type loggedInUser = { 
+    id: string 
+    name: string 
+    orgName: string 
+    profileImage: string 
+    email: string 
+    role: string 
+    bio: string 
+    phoneNum: string 
+    address: string 
+    dob: string 
+    ctzImg: string 
+    balance: string 
+} 
+ 
 
 export default function page() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -10,6 +30,7 @@ export default function page() {
         const file = e.target.files && e.target.files[0]
         setSelectedFile(file || null)
     }
+
 
     const handleUpload = () => {
         if (selectedFile) {
@@ -20,58 +41,63 @@ export default function page() {
         }
     }
 
+  
+    const currentUser = useClientSession(); 
+    const [loggedInUser, setLoggedInUser] = useState<loggedInUser | null>(null); 
+
+    useEffect(() => { 
+        const fetchData = async () => { 
+            try { 
+                if (currentUser?.id) { 
+                    const response = await axios.get(`/api/users/${currentUser.id}`); 
+                    const res = response.data; 
+                    setLoggedInUser(res); 
+                } 
+            } catch (error) { 
+                console.error('Error fetching user data:', error); 
+            } 
+        }; 
+ 
+        fetchData(); 
+    }, [currentUser?.id]); 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-[#f9f4f1] ">
-            <h1 className="text-3xl font-semibold text-center">Edit Profile</h1>
-            <div className="flex flex-col m-6 w-[40%] bg-white">
-                <div className="flex flex-col items-start justify-center w-full pl-5 pt-5">
-                    <div className="relative border w-24 h-24 rounded-full bg-slate-300 ">
-                        {selectedFile && (
+      
+        <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+            <div className="container flex items-center justify-center ">
+                <div className="bg-slate-200 flex flex-col w-[50%] py-5 rounded-xl  ">
+                    <div className="relative px-10 sm:rounded-lg">
+                        <p className="text-lg font-bold py-4 text-blue-700">User Information</p>
+                    </div>
+                    <div className='m-3'>
+                     
+                        <div className="  flex items-center gap-3 rounded-md bg-gray-50 border mb-3">
+                            <div className="relative w-24 h-24 border border-accent m-3 bg-slate-300 rounded-full">
                             <Image
-                                src={URL.createObjectURL(selectedFile)}
+                                 src={loggedInUser?.profileImage || ""}
                                 alt="Profile image"
                                 fill
                                 className="rounded-full"
 
                             />
-                        )}
-                    </div>
-                    <input type="file" onChange={handleFileChange} className="mt-2" />
-                </div>
-
-                <div className="w-full  mb-2 text-left p-5 ">
+                            </div>
+                            <div className=" rounded-md p-2">
+                                <p className='font-medium text-xl'>{loggedInUser?.name}</p>
+                                <p className='text-slate-500 font-maven text-md  flex '><TbAddressBook className='m-1' />{loggedInUser?.email}</p>
+                                <p className='text-slate-500 font-maven text-md  flex '><FaHeart className='m-1' />{loggedInUser?.role}</p>
+                            </div>
+                        </div>
+                       
+                        <div className='w-full'>
+                            <div className='p-4'>
+                                <h6 className='font-semibold text-lg flex'><FaCalendarAlt className='m-2 text-lg' />Edit Information</h6>
+                            </div>
+                        </div>
+                        <div className="w-full  mb-2 text-left p-5 ">
                     <form action="#" className="flex flex-col">
-                        <div className="mt-2">
-                            <p>Username</p>
-                            <input
-                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
-                                type="text"
-                                id="text"
-
-                            />
-                        </div>
-                        <div className="mt-2">
-                            <p>Full Name*</p>
-                            <input
-                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
-                                type="text"
-                                id="text"
-                                required
-                            />
-                        </div>
-                        <div className="mt-2">
-                            <p>Email*</p>
-                            <input
-                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
-                                type="text"
-                                id="text"
-                                required
-                            />
-                        </div>
                         <div className="mt-2">
                             <p>Phone Number*</p>
                             <input
-                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
+                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                 type="number"
                                 id="text"
                                 required
@@ -80,7 +106,7 @@ export default function page() {
                         <div className="mt-2">
                             <p>Date of Birth</p>
                             <input
-                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
+                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                 type="number"
                                 id="text"
                                 required
@@ -90,7 +116,7 @@ export default function page() {
                         <div className="mt-2">
                             <p>Address*</p>
                             <input
-                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
+                                className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                 type="text"
                                 id="text"
                                 required
@@ -100,7 +126,7 @@ export default function page() {
                             <div className="flex-1  py-2 ">
                                 <p>Role</p>
                                 <input
-                                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
+                                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                     type="text"
                                     id="text"
                                     required
@@ -111,7 +137,7 @@ export default function page() {
                             <div className="flex-1  py-2 ">
                                 <p>Bio</p>
                                 <textarea
-                                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none"
+                                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
                                     id="text"
                                     required
                                 />
@@ -121,32 +147,19 @@ export default function page() {
                             <span className="text-lg font-maven mb-2">Citizenship Image</span>
                             <div className="  flex items-center justify-center gap-7">
                                 <div className=" ">
-                                    <div className='w-72 object-contain'>
-                                        <Image
-                                            src="/assets/img/placeholder.png"
-                                            alt='Selected'
-                                            layout='responsive'
-                                            width={300}
-                                            height={200}
-                                            className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
-                                        />
-                                    </div>
-                                    <input type="file" onChange={handleFileChange} className="mt-2" />
-                                </div>
-                                <div className="">
-                                    <div className='w-72 object-contain'>
-                                        <Image
-                                            src="/assets/img/placeholder.png"
-                                            alt='Selected'
-                                            layout='responsive'
-                                            width={300}
-                                            height={200}
-                                            className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
-                                        />
-                                    </div>
-                                    <input type="file" onChange={handleFileChange} className="mt-2" />
-                                </div>
+                                    <div className='w-72 h-52 relative border bg-slate-300 rounded-md'>
+                                    {selectedFile && (
+                            <Image
+                                src={URL.createObjectURL(selectedFile)}
+                                alt="Citizenship image"
+                                fill
+                                className=""
 
+                            />
+                        )}
+                                    </div>
+                                    <input type="file" onChange={handleFileChange} className="mt-2" />
+                                </div>
                             </div>
                         </div>
                         <button
@@ -155,6 +168,8 @@ export default function page() {
                             Update Information
                         </button>
                     </form>
+                </div>
+                    </div>
                 </div>
             </div>
         </div>
