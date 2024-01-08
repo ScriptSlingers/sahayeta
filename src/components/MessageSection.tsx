@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 
-
 // export const MessageSection = () => {
 //     return (
 //         <div className="flex flex-row items-center mr-14">

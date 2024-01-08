@@ -1,9 +1,8 @@
-import { AppHeader, AuthProvider, Footer } from '@sahayeta/components';
-import type { Metadata } from 'next';
-import NextTopLoader from 'nextjs-toploader';
-import './globals.css';
-import { Toaster } from 'react-hot-toast';
-
+import { AppHeader, AuthProvider, Footer } from '@sahayeta/components'
+import type { Metadata } from 'next'
+import NextTopLoader from 'nextjs-toploader'
+import './globals.css'
+import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
   title: 'SAHAYATA',

@@ -3,7 +3,7 @@ import { SearchIcon } from '@sahayeta/icons'
 import axios from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { FrontCard } from '@sahayeta/components'
+import { CamapaignCard } from '@sahayeta/components'
 import Link from 'next/link'
 import { Loading } from '@sahayeta/components'
 
@@ -238,7 +238,7 @@ export default function LandingSection() {
                 collectedAmount
               }: any) => {
                 return (
-                  <FrontCard
+                  <CamapaignCard
                     key={campaignId}
                     campaignId={campaignId}
                     campaignImageAlt={title}

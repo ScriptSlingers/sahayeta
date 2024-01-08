@@ -8,7 +8,13 @@ import { useRouter } from 'next/navigation'
 import { Fragment, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { BsEye, BsPencil, BsPencilFill, BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
+import {
+  BsEye,
+  BsPencil,
+  BsPencilFill,
+  BsThreeDotsVertical,
+  BsTrash
+} from 'react-icons/bs'
 
 export default function CampaignsListing() {
   const router = useRouter()
@@ -18,9 +24,9 @@ export default function CampaignsListing() {
 
   useEffect(() => {
     if (currentUser && currentUser?.role !== 'admin') {
-      router.push('/login');
+      router.push('/login')
     }
-  }, [currentUser, router]);
+  }, [currentUser, router])
 
   useEffect(() => {
     axios
@@ -55,12 +61,11 @@ export default function CampaignsListing() {
   }
 
   function formatDate(endDate) {
-    const date = new Date(endDate);
-    const formattedDate = date.toLocaleDateString(); // This gets the date part
+    const date = new Date(endDate)
+    const formattedDate = date.toLocaleDateString() // This gets the date part
 
-    return formattedDate;
+    return formattedDate
   }
-
 
   return (
     <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
@@ -172,7 +177,18 @@ export default function CampaignsListing() {
               </thead>
               <tbody>
                 {campaigns?.campaigns?.map(
-                  ({ campaignId, title, status, description, goalAmount, category, createdBy, collectedAmount, startDate, endDate }: any) => {
+                  ({
+                    campaignId,
+                    title,
+                    status,
+                    description,
+                    goalAmount,
+                    category,
+                    createdBy,
+                    collectedAmount,
+                    startDate,
+                    endDate
+                  }: any) => {
                     return (
                       <tr
                         className=" border-b hover:bg-gray-50 "
@@ -192,9 +208,14 @@ export default function CampaignsListing() {
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                         >
-                          <Link href={`/campaigns/${campaignId}`} className='text-blue-700 flex gap-2 items-center'>
-                            {`${title.slice(0, 13)}${title.length > 13 ? '...' : ''}`}
-                            <div className='h-4 w-4'>
+                          <Link
+                            href={`/campaigns/${campaignId}`}
+                            className="text-blue-700 flex gap-2 items-center"
+                          >
+                            {`${title.slice(0, 13)}${
+                              title.length > 13 ? '...' : ''
+                            }`}
+                            <div className="h-4 w-4">
                               <OpenLinkIcon />
                             </div>
                           </Link>
@@ -220,7 +241,10 @@ export default function CampaignsListing() {
                                   goalAmount={goalAmount}
                                 />
                               </div>
-                              <Link href={`/campaigns/${campaignId}`} className="font-medium text-black text-base">
+                              <Link
+                                href={`/campaigns/${campaignId}`}
+                                className="font-medium text-black text-base"
+                              >
                                 <BsEye />
                               </Link>
                             </div>
@@ -235,10 +259,9 @@ export default function CampaignsListing() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
-
 
 export const DeleteModal = ({ campaignId }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -250,25 +273,23 @@ export const DeleteModal = ({ campaignId }) => {
     setIsOpen(true)
   }
 
-  const handleDelete = async (campaignId) => {
+  const handleDelete = async campaignId => {
     try {
-      await axios.delete(`/api/campaigns/${campaignId}`);
-      toast.success(`Campaign Deleted Successfully`);
-      closeModal();
+      await axios.delete(`/api/campaigns/${campaignId}`)
+      toast.success(`Campaign Deleted Successfully`)
+      closeModal()
     } catch (error) {
-      console.error('Error deleting Campaign:', error);
-      toast.error('Error Deleting Campaign: Activity associated with user exists.');
+      console.error('Error deleting Campaign:', error)
+      toast.error(
+        'Error Deleting Campaign: Activity associated with user exists.'
+      )
     }
-  };
+  }
 
   return (
     <>
       <div className="">
-        <button
-          type="button"
-          onClick={openModal}
-          className=""
-        >
+        <button type="button" onClick={openModal} className="">
           <BsTrash />
         </button>
       </div>
@@ -307,18 +328,16 @@ export const DeleteModal = ({ campaignId }) => {
                   </Dialog.Title>
                   <div className="mt-2 ">
                     <p className="text-sm text-gray-500 text-center">
-                      If you delete this Campaign it will be removed from your system
-                      permanently, you cannot get it back.
+                      If you delete this Campaign it will be removed from your
+                      system permanently, you cannot get it back.
                     </p>
                   </div>
 
                   <div className="mt-4 flex justify-center items-center gap-10 ">
-
                     <button
                       type="button"
                       onClick={() => handleDelete(campaignId)}
                       className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-
                     >
                       Delete
                     </button>
@@ -335,34 +354,39 @@ export const DeleteModal = ({ campaignId }) => {
             </div>
           </div>
         </Dialog>
-      </Transition >
+      </Transition>
     </>
   )
 }
 
 export const EditModal = ({ campaignId, title, description, goalAmount }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm({
     defaultValues: {
       title: title,
       description: description,
       goalAmount: goalAmount
-
     }
-  });
+  })
 
-  const handleEdit = async (values) => {
+  const handleEdit = async values => {
     try {
-      await axios.patch(`/api/campaigns/${campaignId}`, { ...values },
+      await axios.patch(
+        `/api/campaigns/${campaignId}`,
+        { ...values },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -370,22 +394,17 @@ export const EditModal = ({ campaignId, title, description, goalAmount }) => {
           }
         }
       )
-      toast.success(`Campaign Edited Successfully`);
-      closeModal();
+      toast.success(`Campaign Edited Successfully`)
+      closeModal()
     } catch (error) {
-      console.error('Error Editing Campaign:', error);
+      console.error('Error Editing Campaign:', error)
     }
-  };
-
+  }
 
   return (
     <>
       <div>
-        <button
-          type="button"
-          onClick={openModal}
-          className=""
-        >
+        <button type="button" onClick={openModal} className="">
           <BsPencil />
         </button>
       </div>
@@ -422,26 +441,46 @@ export const EditModal = ({ campaignId, title, description, goalAmount }) => {
                   >
                     Editing Campaign {title}
                   </Dialog.Title>
-                  <form onSubmit={handleSubmit(handleEdit)} className="flex flex-col gap-4">
+                  <form
+                    onSubmit={handleSubmit(handleEdit)}
+                    className="flex flex-col gap-4"
+                  >
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Title
                       </label>
-                      <input {...register('title')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Full Name" defaultValue={title} />
+                      <input
+                        {...register('title')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="Full Name"
+                        defaultValue={title}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Description
                       </label>
-                      <textarea {...register('description')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows={10} placeholder="Full Name" defaultValue={description} />
+                      <textarea
+                        {...register('description')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        rows={10}
+                        placeholder="Full Name"
+                        defaultValue={description}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Goal Amount
                       </label>
-                      <input {...register('goalAmount')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Email" defaultValue={goalAmount} />
+                      <input
+                        {...register('goalAmount')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="number"
+                        placeholder="Email"
+                        defaultValue={goalAmount}
+                      />
                     </div>
-
 
                     <div className="mt-4 flex justify-center items-center gap-10 ">
                       <button
@@ -464,7 +503,7 @@ export const EditModal = ({ campaignId, title, description, goalAmount }) => {
             </div>
           </div>
         </Dialog>
-      </Transition >
+      </Transition>
     </>
-  );
-};
+  )
+}
