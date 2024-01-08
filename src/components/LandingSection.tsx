@@ -1,9 +1,9 @@
-"use client"
+'use client'
 import { SearchIcon } from '@sahayeta/icons'
 import axios from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { FrontCard } from '.'
+import { FrontCard } from '@sahayeta/components'
 import Link from 'next/link'
 import { Loading } from '@sahayeta/components'
 
@@ -122,8 +122,7 @@ export default function LandingSection() {
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 container w-full items-center justify-center">
           <div className="flex flex-col gap-2 items-center ">
-            <div
-              className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
+            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
               <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
                 <Image
                   src="/assets/img/health.avif"
@@ -140,8 +139,7 @@ export default function LandingSection() {
             </div>
           </div>
           <div className="flex flex-col gap-2 items-center ">
-            <div
-              className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
+            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
               <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
                 <Image
                   src="/assets/img/education.jpg"
@@ -158,8 +156,7 @@ export default function LandingSection() {
             </div>
           </div>
           <div className="flex flex-col gap-2 items-center ">
-            <div
-              className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
+            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
               <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
                 <Image
                   src="/assets/img/children.jpg"
@@ -176,8 +173,7 @@ export default function LandingSection() {
             </div>
           </div>
           <div className="flex flex-col gap-2 items-center ">
-            <div
-              className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
+            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
               <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
                 <Image
                   src="/assets/img/animal.jpeg"
@@ -194,8 +190,7 @@ export default function LandingSection() {
             </div>
           </div>
           <div className="flex flex-col gap-2 items-center ">
-            <div
-              className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
+            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
               <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
                 <Image
                   src="/assets/img/memorial.webp"
@@ -204,7 +199,6 @@ export default function LandingSection() {
                   quality={100}
                   className="object-cover"
                   sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw"
-
                 />
               </div>
             </div>
@@ -228,11 +222,11 @@ export default function LandingSection() {
           </Link>
         </button>
       </div>
-
+      <p className="text-center text-xl font-semibold font-serif py-6 ">
+        Join the Urgent Cause
+      </p>
       {displayedCampaigns.length !== 0 ? (
-
-        < div className='flex w-full container flex-col'>
-          <p className='text-center text-xl font-semibold font-serif py-6 '>Join the Urgent Cause</p>
+        <div className="flex w-full container flex-col">
           <div className=" text-black p-3 grid grid-cols-3 justify-center items-center gap-5">
             {displayedCampaigns.map(
               ({
@@ -268,12 +262,12 @@ export default function LandingSection() {
               </Link>
             </button>
           </div>
-        </div >
+        </div>
       ) : (
-        <div className='h-48 justify-center items-center flex'>
+        <div className="h-48 justify-center items-center flex">
           <Loading />
-        </div>)
-      }
+        </div>
+      )}
     </>
   )
 }
