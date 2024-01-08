@@ -48,7 +48,7 @@ export const AppHeader = () => {
             </Link>
           </div>
           <div className="w-6 h-6">
-            <Link href="#">
+            <Link href='#'>
               <QuestionIcon />
             </Link>
           </div>
