@@ -1,8 +1,87 @@
 'use client'
 
+import { useClientSession } from '@sahayeta/utils'
+import axios from 'axios'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+
+type UserType = {
+  id: string;
+  username: string;
+  email: string;
+  name: string;
+  address: string;
+  phoneNum: string;
+  bio: string;
+  profileImage: string;
+  dob: string;
+  ctzImg: string | null;
+  balance: number;
+  orgName: string;
+  createdAt: string;
+  updatedAt: string | null;
+  role: "admin" | "charity" | "donor" | "fundraiser";
+};
 
 export default function Page() {
+  const currentUser = useClientSession()
+  const userId = currentUser?.id
+  const [user, setUser] = useState<UserType>(null);
+
+  useEffect(() => {
+    try {
+      axios
+        .get(`/api/userProfile`,
+          {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+        .then(response => {
+          setUser(response.data);
+        })
+        .catch(error => {
+          console.error('Axios error:', error);
+          toast.error('Error fetching user data. Please try again.');
+        });
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast.error('An unexpected error occurred. Please try again.');
+    }
+  }, [userId]);
+  console.log(user)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: {
+      name: user?.name
+
+    }
+  })
+
+  const updateUser = async values => {
+    try {
+      await axios.patch(
+        `/api/userProfile`,
+        { ...values },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            accept: 'application/json'
+          }
+        }
+      )
+      toast.success(`User Edited Successfully`)
+    } catch (error) {
+      console.error('Error Editing user:', error)
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f9f4f1] ">
       <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 ">
@@ -13,23 +92,26 @@ export default function Page() {
           <span className="font-medium text-red-600 mt-2">
             All fields must be filled out.
           </span>
-          <form action="#" className="flex flex-col">
+          <div className="font-medium text-blue-700 text-base">
+          </div>
+          <form onSubmit={handleSubmit(updateUser)}
+            className="flex flex-col">
             <div className="mt-2 ">
-              <p>Full Name</p>
+              <label>Full Name</label>
               <input
+                {...register('name')}
                 className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
                 type="text"
-                id="text"
+                defaultValue={user?.name}
                 placeholder="Enter Your Full Name"
                 required
               />
             </div>
             <div className="mt-2">
-              <p>Dtae of Birth</p>
+              <p>Date of Birth</p>
               <input
                 className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
                 type="text"
-                id="text"
                 placeholder="Enter Your Date Of Birth"
                 required
               />
@@ -40,7 +122,6 @@ export default function Page() {
                 <input
                   className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
                   type="text"
-                  id="text"
                   placeholder="Enter your Citizenship Number"
                   required
                 />
@@ -50,7 +131,6 @@ export default function Page() {
                 <input
                   className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
                   type="text"
-                  id="text"
                   placeholder="Enter your National Identity Number"
                   required
                 />
@@ -61,7 +141,6 @@ export default function Page() {
               <input
                 className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
                 type="text"
-                id="text"
                 placeholder="Enter Your Phone Number"
                 required
               />
@@ -71,7 +150,6 @@ export default function Page() {
               <input
                 className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
                 type="text"
-                id="text"
                 placeholder="Enter Your full Address"
                 required
               />
@@ -81,7 +159,6 @@ export default function Page() {
               <input
                 className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
                 type="text"
-                id="text"
                 placeholder="Enter Your Gender"
                 required
               />
@@ -90,10 +167,10 @@ export default function Page() {
               <p>Bio</p>
               <textarea
                 className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
-                id="text"
                 placeholder="Enter Your Bio"
                 required
-              ></textarea>
+              >
+              </textarea>
             </div>
 
             <div className="flex flex-col gap-3 mt-2">
@@ -125,8 +202,8 @@ export default function Page() {
             </div>
 
             <div className="flex w-full py-3">
-              <button className="w-48 bg-blue-600 text-white p-2 rounded-lg mb-2 mt-2 hover:bg-blue-400 ">
-                SUBMIT
+              <button type='submit' className="w-48 bg-blue-600 text-white p-2 rounded-lg mb-2 mt-2 hover:bg-blue-400 ">
+                Update
               </button>
             </div>
           </form>
