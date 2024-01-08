@@ -4,7 +4,6 @@ import { useClientSession } from '@sahayeta/utils'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Profile from '@sahayeta/app/profile/page'
 import { FaCircleNotch } from 'react-icons/fa'
 
 export const AppHeader = () => {
