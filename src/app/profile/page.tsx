@@ -61,6 +61,7 @@ const page = () => {
                     className="max-w-2xl mx-auto bg-white p-4 shadow-lg rounded-lg"
                 >
                     <div>
+                        <p>Edit</p>
                         <h1>Welcome, {loggedInUser?.name}</h1>
                         <div className="object-cover w-32 h-32 rounded overflow-hidden">
                             <Image
