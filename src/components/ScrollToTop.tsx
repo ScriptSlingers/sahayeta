@@ -27,18 +27,12 @@ export const ScrollToTopButton = () => {
 
   return (
     <div className="fixed bottom-12 right-8 z-20 flex items-center justify-center lg:right-20">
-      {isVisible && (
-        <CircularProgressBar percentage={scrollProgress} />
-      )}
+      {isVisible && <CircularProgressBar percentage={scrollProgress} />}
     </div>
   )
 }
 
-const CircularProgressBar = ({
-  percentage
-}: {
-  percentage: number
-}) => {
+const CircularProgressBar = ({ percentage }: { percentage: number }) => {
   const radius = 32
   const dashArray = radius * Math.PI * 2
   const dashOffset = dashArray - (dashArray * percentage) / 100
@@ -76,6 +70,6 @@ const CircularProgressBar = ({
       <div className="h-8 w-8 text-blue-700">
         <ArrowUpIcon />
       </div>
-    </button >
+    </button>
   )
 }

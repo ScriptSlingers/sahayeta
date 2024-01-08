@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'
 
 type loggedInUser = {
   id: string
@@ -33,8 +33,7 @@ export default function CreateCampaign() {
     useState('Goal Amount')
   const [campaignStartDateLabel, setcampaignStartDateLabel] =
     useState('startDate')
-  const [campaignEndDateLabel, setCampaignEndDateLabel] =
-    useState('endDate')
+  const [campaignEndDateLabel, setCampaignEndDateLabel] = useState('endDate')
 
   if (currentUser?.id === null) {
     router.push('/login')
@@ -98,8 +97,7 @@ export default function CreateCampaign() {
         '/api/campaigns',
         {
           ...values,
-          createdById: currentUser?.id,
-
+          createdById: currentUser?.id
         },
         {
           headers: {
@@ -108,7 +106,7 @@ export default function CreateCampaign() {
           }
         }
       )
-      reset();
+      reset()
       toast.success('Campaign created successfully !')
     } catch (error) {
       console.error(error)
@@ -118,10 +116,10 @@ export default function CreateCampaign() {
   }
 
   const handleImageUpload = (e: any) => {
-    const selectedFile = e.target.files?.[0];
+    const selectedFile = e.target.files?.[0]
 
     if (selectedFile) {
-      setFile(selectedFile);
+      setFile(selectedFile)
     }
   }
   const handleTitleChange = e => {
@@ -167,7 +165,7 @@ export default function CreateCampaign() {
           <div className="flex flex-col justify-center items-start gap-3 mb-20 ">
             <div className="object-cover w-32 h-32 rounded overflow-hidden">
               <Image
-                src={loggedInUser?.profileImage || ""}
+                src={loggedInUser?.profileImage || ''}
                 width={200}
                 height={200}
                 alt={loggedInUser?.name}
@@ -176,9 +174,7 @@ export default function CreateCampaign() {
             </div>
             <div>
               <div className="flex gap-3">
-                <div className="text-base font-semibold">
-                  Full Name:
-                </div>
+                <div className="text-base font-semibold">Full Name:</div>
                 <div className="text-base font-normal">
                   {loggedInUser?.orgName || loggedInUser?.name}
                 </div>
@@ -191,7 +187,6 @@ export default function CreateCampaign() {
                     alt="Logo Sahayata"
                     width={200}
                     height={200}
-
                     sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
@@ -216,28 +211,28 @@ export default function CreateCampaign() {
             <div className=" flex flex-col shadow-sm rounded-2xl lg:w-[403px] w-full  bg-[#FAFAFE] p-3">
               <div className="flex items-center justify-center pt-3">
                 {file ? (
-                  <div className='w-80 object-contain'>
+                  <div className="w-80 object-contain">
                     <Image
                       src={URL.createObjectURL(file)}
-                      alt='Selected'
-                      layout='responsive'
+                      alt="Selected"
+                      layout="responsive"
                       width={300}
                       height={200}
-                      className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                      className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
                     />
                   </div>
-                ) :
-                  <div className='w-72 object-contain'>
+                ) : (
+                  <div className="w-72 object-contain">
                     <Image
                       src="/assets/img/placeholder.png"
-                      alt='Selected'
-                      layout='responsive'
+                      alt="Selected"
+                      layout="responsive"
                       width={300}
                       height={200}
-                      className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                      className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
                     />
                   </div>
-                }
+                )}
               </div>
               <div className="flex flex-col p-3">
                 <span className="text-base font-semibold font-poppins">
@@ -258,9 +253,7 @@ export default function CreateCampaign() {
                 <div className="flex justify-between  ">
                   <div className="flex gap-2">
                     <Image
-                      src={
-                        loggedInUser?.profileImage || ""
-                      }
+                      src={loggedInUser?.profileImage || ''}
                       width={200}
                       height={200}
                       alt="doc image"
@@ -319,7 +312,7 @@ export default function CreateCampaign() {
                   defaultValue={'Select'}
                   className="w-44 py-2 px-3 rounded outline-none border-1 border-gray-400"
                 >
-                  <option value="" disabled >
+                  <option value="" disabled>
                     Select a Category
                   </option>
                   {categories?.map(category => (
@@ -387,31 +380,42 @@ export default function CreateCampaign() {
           </div>
           <div className="w-full md:w-1/2 flex flex-col justify-start">
             <div className="flex flex-col justify-center w-full items-center gap-10">
-              <input type='file' name="file" accept='image/*' id='imageUpload' required onChange={handleImageUpload} className='hidden' />
+              <input
+                type="file"
+                name="file"
+                accept="image/*"
+                id="imageUpload"
+                required
+                onChange={handleImageUpload}
+                className="hidden"
+              />
               {file ? (
-                <div className='w-72 object-contain'>
+                <div className="w-72 object-contain">
                   <Image
                     src={URL.createObjectURL(file)}
-                    alt='Selected'
-                    layout='responsive'
+                    alt="Selected"
+                    layout="responsive"
                     width={300}
                     height={200}
-                    className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                    className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
                   />
                 </div>
-              ) :
-                <div className='w-72 object-contain'>
+              ) : (
+                <div className="w-72 object-contain">
                   <Image
                     src="/assets/img/placeholder.png"
-                    alt='Selected'
-                    layout='responsive'
+                    alt="Selected"
+                    layout="responsive"
                     width={300}
                     height={200}
-                    className=' flex p-1 bg-slate-400 rounded-2xl  justify-center items-center'
+                    className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
                   />
                 </div>
-              }
-              <label htmlFor='imageUpload' className=' w-[126px] h-[37px] rounded-3xl flex justify-center items-cente  cursor-pointer bg-black text-white  py-2 px-4'>
+              )}
+              <label
+                htmlFor="imageUpload"
+                className=" w-[126px] h-[37px] rounded-3xl flex justify-center items-cente  cursor-pointer bg-black text-white  py-2 px-4"
+              >
                 Upload
               </label>
               <p className="pt-2 text-sm">Only JPG, PNG images </p>
@@ -431,6 +435,6 @@ export default function CreateCampaign() {
           </button>
         </div>
       </form>
-    </div >
+    </div>
   )
 }

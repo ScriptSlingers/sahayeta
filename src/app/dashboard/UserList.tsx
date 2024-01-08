@@ -17,14 +17,13 @@ export default function UsersListing() {
   useEffect(() => {
     try {
       if (currentUser && currentUser?.role !== 'admin') {
-        router.push('/login');
+        router.push('/login')
       }
     } catch (error) {
-      console.error('Unexpected error during redirect:', error);
-      toast.error('An unexpected error occurred. Please try again.');
+      console.error('Unexpected error during redirect:', error)
+      toast.error('An unexpected error occurred. Please try again.')
     }
-  }, [currentUser, router]);
-
+  }, [currentUser, router])
 
   useEffect(() => {
     try {
@@ -33,20 +32,17 @@ export default function UsersListing() {
           headers: { 'Content-Type': 'application/json' }
         })
         .then(response => {
-          setUsers(response.data);
+          setUsers(response.data)
         })
         .catch(error => {
-          console.error('Axios error:', error);
-          toast.error('Error fetching users. Please try again.');
-        });
+          console.error('Axios error:', error)
+          toast.error('Error fetching users. Please try again.')
+        })
     } catch (error) {
-      console.error('Unexpected error:', error);
-      toast.error('An unexpected error occurred. Please try again.');
+      console.error('Unexpected error:', error)
+      toast.error('An unexpected error occurred. Please try again.')
     }
-  }, [users]);
-
-
-
+  }, [users])
 
   return (
     <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center ">
@@ -149,58 +145,72 @@ export default function UsersListing() {
                 </tr>
               </thead>
               <tbody>
-                {users?.users.map(({ id, username, name, email, phoneNum, role, address }: any) => {
-                  return (
-                    <tr className=" border-b hover:bg-gray-50 " key={id}>
-                      <td className="w-4 p-4">
-                        <div className="flex items-center">
-                          <input
-                            id="checkbox-table-search-1"
-                            type="checkbox"
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                          />
-                          <label className="sr-only">checkbox</label>
-                        </div>
-                      </td>
-                      <td scope="row" className="px-6 py-4">{name}</td>
-                      <td className="px-6 py-4">{username}</td>
-                      <td className="px-6 py-4">{email}</td>
-                      <td className="px-6 py-4">{phoneNum}</td>
-                      <td className="px-6 py-4">{role}</td>
-                      <td className="px-6 py-4">Balance</td>
-                      <td className="px-6 py-4">
-                        <div className="relative text-center z-10 flex items-center justify-center">
-                          <div className="flex gap-3">
-                            <div className="font-medium text-red-600 text-base">
-                              <DeleteModal id={id} />
-                            </div>
-                            <div className="font-medium text-blue-700 text-base">
-                              <EditModal
-                                id={id}
-                                username={username}
-                                name={name}
-                                email={email}
-                                address={address}
-                                phoneNum={phoneNum}
-                                role={role}
-                              />
-                            </div>
-                            <Link href={`/dashboard/user/${id}`} className="font-medium text-black text-base">
-                              <BsEye />
-                            </Link>
+                {users?.users.map(
+                  ({
+                    id,
+                    username,
+                    name,
+                    email,
+                    phoneNum,
+                    role,
+                    address
+                  }: any) => {
+                    return (
+                      <tr className=" border-b hover:bg-gray-50 " key={id}>
+                        <td className="w-4 p-4">
+                          <div className="flex items-center">
+                            <input
+                              id="checkbox-table-search-1"
+                              type="checkbox"
+                              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            />
+                            <label className="sr-only">checkbox</label>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                  )
-                }
+                        </td>
+                        <td scope="row" className="px-6 py-4">
+                          {name}
+                        </td>
+                        <td className="px-6 py-4">{username}</td>
+                        <td className="px-6 py-4">{email}</td>
+                        <td className="px-6 py-4">{phoneNum}</td>
+                        <td className="px-6 py-4">{role}</td>
+                        <td className="px-6 py-4">Balance</td>
+                        <td className="px-6 py-4">
+                          <div className="relative text-center z-10 flex items-center justify-center">
+                            <div className="flex gap-3">
+                              <div className="font-medium text-red-600 text-base">
+                                <DeleteModal id={id} />
+                              </div>
+                              <div className="font-medium text-blue-700 text-base">
+                                <EditModal
+                                  id={id}
+                                  username={username}
+                                  name={name}
+                                  email={email}
+                                  address={address}
+                                  phoneNum={phoneNum}
+                                  role={role}
+                                />
+                              </div>
+                              <Link
+                                href={`/dashboard/user/${id}`}
+                                className="font-medium text-black text-base"
+                              >
+                                <BsEye />
+                              </Link>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  }
                 )}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   )
 }
 
@@ -214,25 +224,21 @@ export const DeleteModal = ({ id }) => {
     setIsOpen(true)
   }
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     try {
-      await axios.delete(`/api/users/${id}`);
-      toast.success(`User Deleted Successfully`);
-      closeModal();
+      await axios.delete(`/api/users/${id}`)
+      toast.success(`User Deleted Successfully`)
+      closeModal()
     } catch (error) {
-      console.error('Error deleting user:', error);
-      toast.error('Error Deleting User: Activity associated with user exists.');
+      console.error('Error deleting user:', error)
+      toast.error('Error Deleting User: Activity associated with user exists.')
     }
-  };
+  }
 
   return (
     <>
       <div className="">
-        <button
-          type="button"
-          onClick={openModal}
-          className=""
-        >
+        <button type="button" onClick={openModal} className="">
           <BsTrash />
         </button>
       </div>
@@ -271,18 +277,16 @@ export const DeleteModal = ({ id }) => {
                   </Dialog.Title>
                   <div className="mt-2 ">
                     <p className="text-sm text-gray-500 text-center">
-                      If you delete this user it will be removed from your system
-                      permanently, you cannot get it back.
+                      If you delete this user it will be removed from your
+                      system permanently, you cannot get it back.
                     </p>
                   </div>
 
                   <div className="mt-4 flex justify-center items-center gap-10 ">
-
                     <button
                       type="button"
                       onClick={() => handleDelete(id)}
                       className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-
                     >
                       Delete
                     </button>
@@ -299,23 +303,35 @@ export const DeleteModal = ({ id }) => {
             </div>
           </div>
         </Dialog>
-      </Transition >
+      </Transition>
     </>
   )
 }
 
-export const EditModal = ({ id, username, name, email, address, phoneNum, role }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const EditModal = ({
+  id,
+  username,
+  name,
+  email,
+  address,
+  phoneNum,
+  role
+}) => {
+  const [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
-    setIsOpen(false);
+    setIsOpen(false)
   }
 
   function openModal() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm({
     defaultValues: {
       username: username,
       name: name,
@@ -323,13 +339,14 @@ export const EditModal = ({ id, username, name, email, address, phoneNum, role }
       phoneNum: phoneNum,
       address: address,
       role: role
-
     }
-  });
+  })
 
-  const handleEdit = async (values) => {
+  const handleEdit = async values => {
     try {
-      await axios.patch(`/api/users/${id}`, { ...values },
+      await axios.patch(
+        `/api/users/${id}`,
+        { ...values },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -337,22 +354,17 @@ export const EditModal = ({ id, username, name, email, address, phoneNum, role }
           }
         }
       )
-      toast.success(`User Edited Successfully`);
-      closeModal();
+      toast.success(`User Edited Successfully`)
+      closeModal()
     } catch (error) {
-      console.error('Error Editing user:', error);
+      console.error('Error Editing user:', error)
     }
-  };
-
+  }
 
   return (
     <>
       <div>
-        <button
-          type="button"
-          onClick={openModal}
-          className=""
-        >
+        <button type="button" onClick={openModal} className="">
           <BsPencil />
         </button>
       </div>
@@ -389,42 +401,79 @@ export const EditModal = ({ id, username, name, email, address, phoneNum, role }
                   >
                     Editing User {name}
                   </Dialog.Title>
-                  <form onSubmit={handleSubmit(handleEdit)} className="flex flex-col gap-4">
+                  <form
+                    onSubmit={handleSubmit(handleEdit)}
+                    className="flex flex-col gap-4"
+                  >
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Username
                       </label>
-                      <input disabled className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" value={username} />
+                      <input
+                        disabled
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Name
                       </label>
-                      <input {...register('name')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Full Name" defaultValue={name} />
+                      <input
+                        {...register('name')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="Full Name"
+                        defaultValue={name}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Email
                       </label>
-                      <input {...register('email')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="Email" defaultValue={email} />
+                      <input
+                        {...register('email')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="email"
+                        placeholder="Email"
+                        defaultValue={email}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Phone
                       </label>
-                      <input {...register('phoneNum')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Phone" defaultValue={phoneNum} />
+                      <input
+                        {...register('phoneNum')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="Phone"
+                        defaultValue={phoneNum}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Address
                       </label>
-                      <input {...register('address')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Address" defaultValue={address} />
+                      <input
+                        {...register('address')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="Address"
+                        defaultValue={address}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="text-gray-600 text-sm font-bold ">
                         Role
                       </label>
-                      <select {...register('role')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" defaultValue={role} >
+                      <select
+                        {...register('role')}
+                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        defaultValue={role}
+                      >
                         <option value="admin">Admin</option>
                         <option value="charity">Charity</option>
                         <option value="donor">Donor</option>
@@ -453,7 +502,7 @@ export const EditModal = ({ id, username, name, email, address, phoneNum, role }
             </div>
           </div>
         </Dialog>
-      </Transition >
+      </Transition>
     </>
-  );
-};
+  )
+}
