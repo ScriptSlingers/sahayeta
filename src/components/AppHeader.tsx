@@ -4,7 +4,7 @@ import { useClientSession } from '@sahayeta/utils'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Profile from '@sahayeta/app/user-information/page'
+import Profile from '@sahayeta/app/profile/page'
 import { FaCircleNotch } from 'react-icons/fa'
 
 export const AppHeader = () => {
@@ -55,7 +55,7 @@ export const AppHeader = () => {
           </div>
           {session ? (
             <div className="flex gap-3">
-              <Link href="/user-information">
+              <Link href="/profile">
                 <div className="relative rounded-full h-12 w-12 overflow-hidden hover:cursor-pointer">
                   <Image
                     src={session?.image || ''}
