@@ -31,6 +31,10 @@ export default function CreateCampaign() {
     useState('Campaign Detail')
   const [campaignGoalAmountLabel, setCampaignGoalAmountLabel] =
     useState('Goal Amount')
+  const [campaignStartDateLabel, setcampaignStartDateLabel] =
+    useState('startDate')
+  const [campaignEndDateLabel, setCampaignEndDateLabel] =
+    useState('endDate')
 
   if (currentUser?.id === null) {
     router.push('/login')
@@ -60,7 +64,9 @@ export default function CreateCampaign() {
       image: '',
       goalAmount: '',
       description: '',
-      categoryId: ''
+      categoryId: '',
+      startDate: '',
+      endDate: ''
     }
   })
 
@@ -132,8 +138,14 @@ export default function CreateCampaign() {
     setCampaignCategoryLabel(selectedCategory.name)
   }
 
-  const handleDetailChange = e => {
+  const handleStartDateChange = e => {
+    setcampaignStartDateLabel(e.target.value)
+  }
+  const handleEndDateChange = e => {
     setCampaignDetailLabel(e.target.value)
+  }
+  const handleDetailChange = e => {
+    setCampaignEndDateLabel(e.target.value)
   }
 
   useEffect(() => {
@@ -344,6 +356,34 @@ export default function CreateCampaign() {
                 className="w-full border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
               />
             </div>
+            {/* <div className="flex flex-col gap-2">
+              <span className="text-gray-500">
+                EndDate
+                <span className="text-red-500"> *</span>
+              </span>
+              <input
+                type="date"
+                required
+                placeholder="Enter the  End Date here"
+                {...register('endDate')}
+                onChange={handleEndDateChange}
+                className="w-full border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-gray-500">
+                StartDate
+                <span className="text-red-500"> *</span>
+              </span>
+              <input
+                type="date"
+                required
+                placeholder="Enter the  Start Date  here"
+                {...register('startDate')}
+                onChange={handleStartDateChange}
+                className="w-full border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+              />
+            </div> */}
           </div>
           <div className="w-full md:w-1/2 flex flex-col justify-start">
             <div className="flex flex-col justify-center w-full items-center gap-10">

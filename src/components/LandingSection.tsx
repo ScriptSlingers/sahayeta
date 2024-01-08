@@ -3,7 +3,7 @@ import { SearchIcon } from '@sahayeta/icons'
 import axios from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { FrontCard } from '@sahayeta/components/FrontCard'
+import { FrontCard } from '@sahayeta/components'
 import Link from 'next/link'
 import { Loading } from '@sahayeta/components'
 

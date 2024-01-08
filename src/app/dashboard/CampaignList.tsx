@@ -1,9 +1,14 @@
 'use client'
+import { Dialog, Transition } from '@headlessui/react'
+import { OpenLinkIcon, SearchIcon } from '@sahayeta/icons'
 import { useClientSession } from '@sahayeta/utils/useClientSession'
 import axios from 'axios'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { BsThreeDotsVertical } from 'react-icons/bs'
+import { Fragment, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { BsEye, BsPencil, BsPencilFill, BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
 
 export default function CampaignsListing() {
   const router = useRouter()
@@ -15,7 +20,7 @@ export default function CampaignsListing() {
     if (currentUser && currentUser?.role !== 'admin') {
       router.push('/login');
     }
-  }, [currentUser]);
+  }, [currentUser, router]);
 
   useEffect(() => {
     axios
@@ -28,7 +33,7 @@ export default function CampaignsListing() {
       .catch(error => {
         console.error('Axios error:', error)
       })
-  }, [])
+  }, [campaigns])
 
   const customStatus = status => {
     switch (status) {
@@ -49,10 +54,18 @@ export default function CampaignsListing() {
     }
   }
 
+  function formatDate(endDate) {
+    const date = new Date(endDate);
+    const formattedDate = date.toLocaleDateString(); // This gets the date part
+
+    return formattedDate;
+  }
+
+
   return (
     <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
       <div className="container ">
-        <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
+        <div className="bg-slate-200 min-w-[1366px] flex flex-col w-full py-5 rounded-xl  ">
           <div className="relative px-10 sm:rounded-lg">
             <p className="text-lg font-bold py-4 text-blue-700">
               Campaigns List
@@ -84,9 +97,9 @@ export default function CampaignsListing() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m1 1 4 4 4-4"
                     />
                   </svg>
@@ -147,7 +160,7 @@ export default function CampaignsListing() {
                     Goal Amount
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Collected Amount
+                    Coll. Amount
                   </th>
                   <th scope="col" className="px-6 py-3">
                     status
@@ -159,17 +172,7 @@ export default function CampaignsListing() {
               </thead>
               <tbody>
                 {campaigns?.campaigns?.map(
-                  ({
-                    campaignId,
-                    title,
-                    status,
-                    goalAmount,
-                    category,
-                    createdBy,
-                    collectedAmount,
-                    startDate,
-                    endDate
-                  }: any) => {
+                  ({ campaignId, title, status, description, goalAmount, category, createdBy, collectedAmount, startDate, endDate }: any) => {
                     return (
                       <tr
                         className=" border-b hover:bg-gray-50 "
@@ -189,22 +192,39 @@ export default function CampaignsListing() {
                           scope="row"
                           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
                         >
-                          {title}
+                          <Link href={`/campaigns/${campaignId}`} className='text-blue-700 flex gap-2 items-center'>
+                            {`${title.slice(0, 13)}${title.length > 13 ? '...' : ''}`}
+                            <div className='h-4 w-4'>
+                              <OpenLinkIcon />
+                            </div>
+                          </Link>
                         </th>
                         <td className="px-6 py-4">{category?.name}</td>
                         <td className="px-6 py-4">{createdBy?.name}</td>
-                        <td className="px-6 py-4">{startDate}</td>
-                        <td className="px-6 py-4">{endDate}</td>
+                        <td className="px-6 py-4">{formatDate(startDate)}</td>
+                        <td className="px-6 py-4">{formatDate(endDate)}</td>
                         <td className="px-6 py-4">{goalAmount}</td>
                         <td className="px-6 py-4">{collectedAmount}</td>
                         <td className="px-6 py-4">{customStatus(status)}</td>
                         <td className="px-6 py-4">
-                          <a
-                            href="#"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                          >
-                            <BsThreeDotsVertical />
-                          </a>
+                          <div className="relative text-center z-10 flex items-center justify-center">
+                            <div className="flex gap-3">
+                              <div className="font-medium text-red-600 text-base">
+                                <DeleteModal campaignId={campaignId} />
+                              </div>
+                              <div className="font-medium text-blue-700 text-base">
+                                <EditModal
+                                  campaignId={campaignId}
+                                  title={title}
+                                  description={description}
+                                  goalAmount={goalAmount}
+                                />
+                              </div>
+                              <Link href={`/campaigns/${campaignId}`} className="font-medium text-black text-base">
+                                <BsEye />
+                              </Link>
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     )
@@ -215,6 +235,236 @@ export default function CampaignsListing() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
+
+
+export const DeleteModal = ({ campaignId }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  function closeModal() {
+    setIsOpen(false)
+  }
+
+  function openModal() {
+    setIsOpen(true)
+  }
+
+  const handleDelete = async (campaignId) => {
+    try {
+      await axios.delete(`/api/campaigns/${campaignId}`);
+      toast.success(`Campaign Deleted Successfully`);
+      closeModal();
+    } catch (error) {
+      console.error('Error deleting Campaign:', error);
+      toast.error('Error Deleting Campaign: Activity associated with user exists.');
+    }
+  };
+
+  return (
+    <>
+      <div className="">
+        <button
+          type="button"
+          onClick={openModal}
+          className=""
+        >
+          <BsTrash />
+        </button>
+      </div>
+
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg text-center font-medium leading-6 text-gray-900"
+                  >
+                    Are you sure to Delete this Campaign?
+                  </Dialog.Title>
+                  <div className="mt-2 ">
+                    <p className="text-sm text-gray-500 text-center">
+                      If you delete this Campaign it will be removed from your system
+                      permanently, you cannot get it back.
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex justify-center items-center gap-10 ">
+
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(campaignId)}
+                      className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+
+                    >
+                      Delete
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition >
+    </>
+  )
+}
+
+export const EditModal = ({ campaignId, title, description, goalAmount }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+    defaultValues: {
+      title: title,
+      description: description,
+      goalAmount: goalAmount
+
+    }
+  });
+
+  const handleEdit = async (values) => {
+    try {
+      await axios.patch(`/api/campaigns/${campaignId}`, { ...values },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            accept: 'application/json'
+          }
+        }
+      )
+      toast.success(`Campaign Edited Successfully`);
+      closeModal();
+    } catch (error) {
+      console.error('Error Editing Campaign:', error);
+    }
+  };
+
+
+  return (
+    <>
+      <div>
+        <button
+          type="button"
+          onClick={openModal}
+          className=""
+        >
+          <BsPencil />
+        </button>
+      </div>
+
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black/25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white px-6 py-10 text-left align-middle shadow-xl transition-all ">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg text-center font-medium leading-6 text-gray-900"
+                  >
+                    Editing Campaign {title}
+                  </Dialog.Title>
+                  <form onSubmit={handleSubmit(handleEdit)} className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+                      <label className="text-gray-600 text-sm font-bold ">
+                        Title
+                      </label>
+                      <input {...register('title')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Full Name" defaultValue={title} />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-gray-600 text-sm font-bold ">
+                        Description
+                      </label>
+                      <textarea {...register('description')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows={10} placeholder="Full Name" defaultValue={description} />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-gray-600 text-sm font-bold ">
+                        Goal Amount
+                      </label>
+                      <input {...register('goalAmount')} className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder="Email" defaultValue={goalAmount} />
+                    </div>
+
+
+                    <div className="mt-4 flex justify-center items-center gap-10 ">
+                      <button
+                        type="submit"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                      >
+                        {isSubmitting ? <>Updating...</> : <>Update</>}
+                      </button>
+                      <button
+                        type="button"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={closeModal}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition >
+    </>
+  );
+};
