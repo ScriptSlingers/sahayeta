@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 
 
-export default function page() {
+export default function Page() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
