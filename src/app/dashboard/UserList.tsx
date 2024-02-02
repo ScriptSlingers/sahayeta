@@ -44,8 +44,10 @@ export default function UsersListing() {
     }
   }, [users])
 
+  let count = 1;
+
   return (
-    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6 ">
+    <div className="flex w-full flex-col items-center justify-center rounded bg-blue-50">
       <div className="container">
         <div className="flex w-full min-w-[1366px] flex-col rounded-xl bg-slate-200 py-5 ">
           <div className="relative px-10 sm:rounded-lg">
@@ -117,10 +119,10 @@ export default function UsersListing() {
                 />
               </div>
             </div>
-            <table className="h-full w-full text-left text-sm text-gray-500 rtl:text-right">
+            <table className="w-full text-left text-sm text-gray-500 rtl:text-right">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                 <tr>
-                  <th scope="col" className="p-4"></th>
+                  <th scope="col" className="p-4">S.N.</th>
                   <th scope="col" className="px-6 py-3">
                     User Name
                   </th>
@@ -158,14 +160,7 @@ export default function UsersListing() {
                     return (
                       <tr className=" border-b hover:bg-gray-50 " key={id}>
                         <td className="w-4 p-4">
-                          <div className="flex items-center">
-                            <input
-                              id="checkbox-table-search-1"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
-                            />
-                            <label className="sr-only">checkbox</label>
-                          </div>
+                          {count++}
                         </td>
                         <td scope="row" className="px-6 py-4">
                           {name}

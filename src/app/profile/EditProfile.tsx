@@ -1,15 +1,17 @@
 'use client'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import { useClientSession } from '@sahayeta/utils'
 import axios from 'axios'
 import Image from 'next/image'
-import { useClientSession } from '@sahayeta/utils'
-import { TbAddressBook } from 'react-icons/tb'
-import { FaHeart } from 'react-icons/fa'
-import { FaCalendarAlt } from 'react-icons/fa'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { FaAddressBook, FaCalendarAlt, FaHeart } from 'react-icons/fa'
+import { FaShield } from 'react-icons/fa6'
 
 type loggedInUser = {
   id: string
   name: string
+  username: string
   orgName: string
   profileImage: string
   email: string
@@ -57,130 +59,178 @@ export default function EditProfile() {
 
     fetchData()
   }, [currentUser?.id])
+
+  const profileImageUrl = (loggedInUser?.profileImage || '/assets/img/avatar.jpg').replace(
+    '=s96-c',
+    '=s1000-c'
+  )
+
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: {
+      username: loggedInUser?.username,
+      name: loggedInUser?.name,
+      email: loggedInUser?.email,
+      phoneNum: loggedInUser?.phoneNum,
+      address: loggedInUser?.address,
+      role: loggedInUser?.role
+    }
+  })
+
+  const handleEdit = async values => {
+    try {
+      await axios.patch(
+        `/api/users/${loggedInUser?.id}`,
+        { ...values },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            accept: 'application/json'
+          }
+        }
+      ).then(response => {
+        const updatedUser = response.data;
+        setLoggedInUser(updatedUser);
+      })
+
+
+      toast.success(`User Edited Successfully`)
+    } catch (error) {
+      console.error('Error Editing user:', error)
+    }
+  }
+
   return (
-    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
       <div className="container flex items-center justify-center ">
-        <div className="flex w-full flex-col rounded-xl bg-slate-200 py-5  ">
-          <div className="relative px-10 sm:rounded-lg">
+        <div className="flex w-full flex-col rounded-xl bg-slate-200 p-5">
+          <div className="relative sm:rounded-lg">
             <p className="py-4 text-lg font-bold text-blue-700">
               User Information
             </p>
           </div>
-          <div className="m-3">
-            <div className="  mx-5 mb-3 flex items-center gap-3 rounded-md border bg-gray-50">
-              <div className="relative m-3 h-24 w-24 rounded-full border border-accent bg-slate-300">
+          <div>
+            <div className="flex items-center gap-3 rounded-lg border bg-gray-50 p-3">
+              <div className="relative h-24 w-24 rounded-full border border-accent bg-slate-300">
                 <Image
-                  src={loggedInUser?.profileImage || ''}
+                  src={profileImageUrl}
                   alt="Profile image"
                   fill
                   className="rounded-full"
                 />
               </div>
-              <div className=" rounded-md p-2">
+              <div className="rounded-md">
                 <p className="text-xl font-medium">{loggedInUser?.name}</p>
-                <p className="text-md flex font-maven  text-slate-500 ">
-                  <TbAddressBook className="m-1" />
+                <p className="text-md flex font-maven text-slate-500 gap-2 items-center">
+                  <FaAddressBook />
                   {loggedInUser?.email}
                 </p>
-                <p className="text-md flex font-maven  text-slate-500 ">
-                  <FaHeart className="m-1" />
+                <p className="text-md flex font-maven text-slate-500 gap-2 items-center">
+                  <FaShield />
                   {loggedInUser?.role}
                 </p>
               </div>
             </div>
 
             <div className="w-full">
-              <div className="p-4">
-                <h6 className="flex text-lg font-semibold">
-                  <FaCalendarAlt className="m-2 text-lg" />
-                  Edit Information
-                </h6>
-              </div>
+              <h6 className="flex text-lg font-semibold">
+                <FaCalendarAlt className="text-lg" />
+                Edit Information
+              </h6>
             </div>
-            <div className="mb-2  w-full p-5 text-left ">
-              <form action="#" className="flex flex-col">
-                <div className="mt-2">
-                  <p>Phone Number*</p>
+            <div className="w-full text-left ">
+              <form
+                onSubmit={handleSubmit(handleEdit)}
+                className="flex flex-col gap-3"
+              >
+                <div className="flex flex-col gap-1">
+                  <label className="text-sm font-bold text-gray-600 ">
+                    Username
+                  </label>
                   <input
-                    className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
-                    type="number"
-                    name="phoneNum"
-                    id="text"
-                    required
+                    disabled
+                    className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+                    type="text"
+                    placeholder="Username"
+                    value={loggedInUser?.username}
                   />
                 </div>
-                <div className="mt-2">
-                  <p>Date of Birth</p>
+                <div className="flex flex-col gap-1">
+                  <label className="text-sm font-bold text-gray-600 ">
+                    Name
+                  </label>
                   <input
-                    className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
-                    type="date"
-                    name="dob"
-                    id="text"
-                    required
+                    {...register('name')}
+                    className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+                    type="text"
+                    placeholder="Full Name"
+                    defaultValue={loggedInUser?.name}
                   />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-sm font-bold text-gray-600 ">
+                    Email
+                  </label>
+                  <input
+                    {...register('email')}
+                    className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+                    type="email"
+                    placeholder="Email"
+                    defaultValue={loggedInUser?.email}
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-sm font-bold text-gray-600 ">
+                    Phone
+                  </label>
+                  <input
+                    {...register('phoneNum')}
+                    className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+                    type="text"
+                    placeholder="Phone"
+                    defaultValue={loggedInUser?.phoneNum}
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <label className="text-sm font-bold text-gray-600 ">
+                    Address
+                  </label>
+                  <input
+                    {...register('address')}
+                    className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+                    type="text"
+                    placeholder="Address"
+                    defaultValue={loggedInUser?.address}
+                  />
+                </div>
+                <div className="flex flex-col gap-">
+                  <label className="text-sm font-bold text-gray-600 ">
+                    Role
+                  </label>
+                  <select
+                    {...register('role')}
+                    className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
+                    defaultValue={loggedInUser?.role}
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="charity">Charity</option>
+                    <option value="donor">Donor</option>
+                    <option value="fundraiser">Fundraiser</option>
+                  </select>
                 </div>
 
-                <div className="mt-2">
-                  <p>Address*</p>
-                  <input
-                    className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
-                    type="text"
-                    id="text"
-                    name="address"
-                    required
-                  />
+                <div className="mt-4 flex items-center justify-center gap-10 ">
+                  <button
+                    type="submit"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                  >
+                    {isSubmitting ? <>Updating...</> : <>Update</>}
+                  </button>
                 </div>
-                <div className="mt-2 flex items-stretch gap-3">
-                  <div className="flex-1  py-2 ">
-                    <p>Role</p>
-                    <input
-                      className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
-                      type="text"
-                      id="text"
-                      name="role"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="mt-2 flex items-stretch gap-3">
-                  <div className="flex-1  py-2 ">
-                    <p>Bio</p>
-                    <textarea
-                      className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
-                      id="text"
-                      name="bio"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="flex w-full flex-col items-start justify-center pl-2 pt-3">
-                  <span className="mb-2 font-maven text-lg">
-                    Citizenship Image
-                  </span>
-                  <div className="  flex items-center justify-center gap-7">
-                    <div className=" ">
-                      <div className="relative h-52 w-72 rounded-md border bg-slate-300">
-                        {selectedFile && (
-                          <Image
-                            src={URL.createObjectURL(selectedFile)}
-                            alt="Citizenship image"
-                            fill
-                            className=""
-                          />
-                        )}
-                      </div>
-                      <input
-                        type="file"
-                        name="ctzImg"
-                        onChange={handleFileChange}
-                        className="mt-2"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <button className="mb-4 mt-5 w-fit rounded-lg bg-blue-800 p-2 text-white hover:bg-blue-500 ">
-                  Update Information
-                </button>
               </form>
             </div>
           </div>

@@ -1,6 +1,6 @@
 'use client'
 import { Dialog, Transition } from '@headlessui/react'
-import { OpenLinkIcon, SearchIcon } from '@sahayeta/icons'
+import { OpenLinkIcon } from '@sahayeta/icons'
 import { useClientSession } from '@sahayeta/utils/useClientSession'
 import axios from 'axios'
 import Link from 'next/link'
@@ -11,8 +11,6 @@ import toast from 'react-hot-toast'
 import {
   BsEye,
   BsPencil,
-  BsPencilFill,
-  BsThreeDotsVertical,
   BsTrash
 } from 'react-icons/bs'
 
@@ -60,15 +58,17 @@ export default function CampaignsListing() {
     }
   }
 
-  function formatDate(endDate) {
+  function formatDate(endDate: any) {
     const date = new Date(endDate)
     const formattedDate = date.toLocaleDateString() // This gets the date part
 
     return formattedDate
   }
 
+  let count = 1;
+
   return (
-    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
       <div className="container ">
         <div className="flex w-full min-w-[1366px] flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">
@@ -145,7 +145,7 @@ export default function CampaignsListing() {
             <table className="w-full text-left text-sm text-gray-500 rtl:text-right">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                 <tr>
-                  <th scope="col" className="p-4"></th>
+                  <th scope="col" className="p-4">S.N.</th>
                   <th scope="col" className="px-6 py-3">
                     Title
                   </th>
@@ -195,14 +195,7 @@ export default function CampaignsListing() {
                         key={campaignId}
                       >
                         <td className="w-4 p-4">
-                          <div className="flex items-center">
-                            <input
-                              id="checkbox-table-search-1"
-                              type="checkbox"
-                              className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
-                            />
-                            <label className="sr-only">checkbox</label>
-                          </div>
+                          {count++}
                         </td>
                         <th
                           scope="row"
@@ -212,9 +205,8 @@ export default function CampaignsListing() {
                             href={`/campaigns/${campaignId}`}
                             className="flex items-center gap-2 text-blue-700"
                           >
-                            {`${title.slice(0, 13)}${
-                              title.length > 13 ? '...' : ''
-                            }`}
+                            {`${title.slice(0, 13)}${title.length > 13 ? '...' : ''
+                              }`}
                             <div className="h-4 w-4">
                               <OpenLinkIcon />
                             </div>
@@ -263,7 +255,7 @@ export default function CampaignsListing() {
   )
 }
 
-export const DeleteModal = ({ campaignId }) => {
+export const DeleteModal = ({ campaignId }: any) => {
   const [isOpen, setIsOpen] = useState(false)
   function closeModal() {
     setIsOpen(false)
@@ -359,7 +351,7 @@ export const DeleteModal = ({ campaignId }) => {
   )
 }
 
-export const EditModal = ({ campaignId, title, description, goalAmount }) => {
+export const EditModal = ({ campaignId, title, description, goalAmount }: any) => {
   const [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {

@@ -13,48 +13,42 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className=" flex justify-center  bg-blue-50 p-6 ">
-      <div className="my-6 flex w-48 flex-col rounded-xl bg-slate-200 py-5 shadow">
+    <div className="flex justify-center bg-blue-50 p-6 ">
+      <div className="flex w-48 flex-col rounded-xl divide-y-1 bg-slate-200 shadow py-5">
         <button
           onClick={() => handleTabClick('userlist')}
-          className={`text-left font-medium px-2${
-            selectedTab === 'userlist'
-              ? ' w-full bg-blue-700 px-5 py-3 text-white'
-              : 'px-5 py-3 text-black'
-          }`}
+          className={`text-left font-medium px-5 py-3 ${selectedTab === 'userlist'
+            ? ' w-full bg-blue-700 text-white'
+            : 'text-black'
+            }`}
         >
           Users List
         </button>
-
         <button
           onClick={() => handleTabClick('campaignlist')}
-          className={`text-left font-medium px-2${
-            selectedTab === 'campaignlist'
-              ? ' w-full bg-blue-700 px-5 py-3 text-white'
-              : 'px-5 py-3 text-black'
-          }`}
+          className={`text-left font-medium px-5 py-3 ${selectedTab === 'campaignlist'
+            ? ' w-full bg-blue-700 text-white'
+            : 'text-black'
+            }`}
         >
-          {' '}
           Campaign List
         </button>
         <button
           onClick={() => handleTabClick('notification')}
-          className={`text-left font-medium px-2${
-            selectedTab === 'notification'
-              ? ' w-full bg-blue-700 px-5 py-3 text-white'
-              : 'px-5 py-3 text-black'
-          }`}
+          className={`text-left font-medium px-5 py-3 ${selectedTab === 'notification'
+            ? ' w-full bg-blue-700 text-white'
+            : 'text-black'
+            }`}
         >
           {' '}
           Notification
         </button>
         <button
           onClick={() => handleTabClick('category')}
-          className={`text-left font-medium px-2${
-            selectedTab === 'category'
-              ? ' w-full bg-blue-700 px-5 py-3 text-white'
-              : 'px-5 py-3 text-black'
-          }`}
+          className={`text-left font-medium px-5 py-3 ${selectedTab === 'category'
+            ? ' w-full bg-blue-700 text-white'
+            : 'text-black'
+            }`}
         >
           {' '}
           Category

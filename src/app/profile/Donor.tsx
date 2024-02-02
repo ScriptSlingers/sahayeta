@@ -37,7 +37,7 @@ export default function Donor() {
   }, [currentUser])
 
   return (
-    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
       <div className="container flex items-center justify-center ">
         <div className="flex w-full flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">

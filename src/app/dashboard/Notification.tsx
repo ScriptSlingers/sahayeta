@@ -16,7 +16,7 @@ export default function NotificationListing() {
     if (currentUser && currentUser?.role !== 'admin') {
       router.push('/login')
     }
-  }, [currentUser])
+  }, [currentUser, router])
 
   useEffect(() => {
     axios
@@ -51,7 +51,7 @@ export default function NotificationListing() {
   }
 
   return (
-    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
       <div className="container ">
         <div className="flex w-full min-w-[1366px] flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">
