@@ -47,11 +47,11 @@ export default function Profile() {
   }, [currentUser?.id])
 
   return (
-    <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
       <div className="container flex items-center justify-center ">
-        <div className="bg-slate-200 flex flex-col w-full py-5 items-center justify-center rounded-xl  ">
-          <div className="flex flex-col items-center justify-center p-8 m-5 bg-white rounded-xl">
-            <div className="relative w-32 h-32 border border-accent m-3 bg-slate-300 ">
+        <div className="flex w-full flex-col items-center justify-center rounded-xl bg-slate-200 py-5  ">
+          <div className="m-5 flex flex-col items-center justify-center rounded-xl bg-white p-8">
+            <div className="relative m-3 h-32 w-32 border border-accent bg-slate-300 ">
               <Image
                 src={loggedInUser?.profileImage || ''}
                 alt="Profile image"
@@ -59,51 +59,51 @@ export default function Profile() {
                 className=""
               />
             </div>
-            <figcaption className="text-black text-center text-xl font-semibold">
+            <figcaption className="text-center text-xl font-semibold text-black">
               {loggedInUser?.name}
             </figcaption>
             <div className="flex flex-col items-start justify-center">
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <MdOutlineMailOutline className="mt-1.5" />
                 Email:
                 <span className="text-xl"> {loggedInUser?.email}</span>
               </div>
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <MdAdminPanelSettings className="mt-1.5" />
                 Role:
                 <span className="text-xl"> {loggedInUser?.role}</span>
               </div>
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <IoMdContact className="mt-1.5" />
                 Contact:
                 <span className="text-xl"> {loggedInUser?.phoneNum}</span>
               </div>
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <FaRegAddressBook className="mt-1.5" />
                 Address:
                 <span className="text-xl"> {loggedInUser?.address}</span>
               </div>
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <CiCalendarDate className="mt-1.5" />
                 Date Of Birth:
                 <span className="text-xl"> {loggedInUser?.dob}</span>
               </div>
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <FaMoneyCheckAlt className="mt-1.5" />
                 Balance:
                 <span className="text-xl"> {loggedInUser?.balance}</span>
               </div>
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <GoOrganization className="mt-1.5" />
                 Organization Name:
                 <span className="text-xl"> {loggedInUser?.orgName}</span>
               </div>
-              <div className="text-xl py-2 flex gap-2">
+              <div className="flex gap-2 py-2 text-xl">
                 <MdOutlineDescription className="mt-1.5" />
                 Bio:
                 <span className="text-xl"> {loggedInUser?.bio}</span>
               </div>
-              <div className="text-xl py-2">
+              <div className="py-2 text-xl">
                 Citizenship Image:
                 <span className="text-xl"> {loggedInUser?.ctzImg}</span>
               </div>

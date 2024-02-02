@@ -37,18 +37,18 @@ export default function Donor() {
   }, [currentUser])
 
   return (
-    <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
       <div className="container flex items-center justify-center ">
-        <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
+        <div className="flex w-full flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">
-            <p className="text-lg font-bold py-4 text-blue-700">
+            <p className="py-4 text-lg font-bold text-blue-700">
               User Information
             </p>
           </div>
           <div className="m-3">
             {createdByInfo && (
-              <div className="  flex items-center gap-3 rounded-md bg-gray-50 border mb-3 ">
-                <div className="relative w-24 h-24 border border-accent m-3 bg-slate-300 rounded-full">
+              <div className="  mb-3 flex items-center gap-3 rounded-md border bg-gray-50 ">
+                <div className="relative m-3 h-24 w-24 rounded-full border border-accent bg-slate-300">
                   <Image
                     src={createdByInfo?.profileImage || ''}
                     alt="Profile image"
@@ -57,12 +57,12 @@ export default function Donor() {
                   />
                 </div>
                 <div className=" rounded-md p-2">
-                  <p className="font-medium text-xl">{createdByInfo?.name}</p>
-                  <p className="text-slate-500 font-maven text-md  flex ">
+                  <p className="text-xl font-medium">{createdByInfo?.name}</p>
+                  <p className="text-md flex font-maven  text-slate-500 ">
                     <TbAddressBook className="m-1" />
                     {createdByInfo?.address}
                   </p>
-                  <p className="text-slate-500 font-maven text-md  flex ">
+                  <p className="text-md flex font-maven  text-slate-500 ">
                     <FaHeart className="m-1" />
                     {createdByInfo?.role}
                   </p>
@@ -71,15 +71,15 @@ export default function Donor() {
             )}
             <div className="w-full">
               <div className="p-4">
-                <h6 className="font-semibold text-lg flex">
+                <h6 className="flex text-lg font-semibold">
                   <FaCalendarAlt className="m-2 text-lg" />
                   Donation Information
                 </h6>
               </div>
             </div>
             {campaigns && campaigns.length > 0 && (
-              <table className="w-full text-sm text-left rtl:text-right text-gray-500 mt-2">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+              <table className="mt-2 w-full text-left text-sm text-gray-500 rtl:text-right">
+                <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                   <tr>
                     <th scope="col" className="px-6 py-3">
                       Title

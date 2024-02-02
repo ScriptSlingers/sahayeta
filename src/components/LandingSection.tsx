@@ -55,17 +55,17 @@ export default function LandingSection() {
 
   return (
     <>
-      <div className="flex flex-col lg:py-16 justify-center gap-10 py-8 items-center bg-blue-700 w-full px-5">
-        <div className="lg:text-3xl text-xl font-medium text-white lg:font-bold text-center">
+      <div className="flex w-full flex-col items-center justify-center gap-10 bg-blue-700 px-5 py-8 lg:py-16">
+        <div className="text-center text-xl font-medium text-white lg:text-3xl lg:font-bold">
           Empower Change, Inspire Hope Your Contribution Makes a Difference
         </div>
-        <div className="lg:text-xl text-sm text-white text-center">
+        <div className="text-center text-sm text-white lg:text-xl">
           Sahayata Uniting Hearts, Transforming Lives – Be the Difference Today!
         </div>
 
-        <div className="flex items-center rounded justify-between lg:w-1/2 bg-white">
-          <div className="flex text-sm px-5 gap-3 justify-center items-center">
-            <select className="w-44 py-2 px-3 rounded outline-none ">
+        <div className="flex items-center justify-between rounded bg-white lg:w-1/2">
+          <div className="flex items-center justify-center gap-3 px-5 text-sm">
+            <select className="w-44 rounded px-3 py-2 outline-none ">
               <option value="" className="w-full">
                 Select Category
               </option>
@@ -79,7 +79,7 @@ export default function LandingSection() {
           <div className="relative w-full">
             <input
               type="text"
-              className="h-14 w-full outline-none px-5 border-l border-gray-600"
+              className="h-14 w-full border-l border-gray-600 px-5 outline-none"
               placeholder="Search for "
               value={searchTerm}
               onChange={e => handleSearch(e.target.value)}
@@ -100,30 +100,30 @@ export default function LandingSection() {
           </div>
         </div>
         <div className="flex gap-3">
-          <div className="flex bg-slate-100/30 justify-center items-center rounded  text-white h-6 p-3">
-            <div className="text-white w-4 h-4 flex items-center ">
+          <div className="flex h-6 items-center justify-center rounded  bg-slate-100/30 p-3 text-white">
+            <div className="flex h-4 w-4 items-center text-white ">
               {SearchIcon}
             </div>
             <p className="text-xs">Funding</p>
           </div>
-          <div className="flex bg-slate-100/30 justify-center items-center rounded  text-white h-6 p-3">
-            <div className="text-white w-4 h-4 flex items-center">
+          <div className="flex h-6 items-center justify-center rounded  bg-slate-100/30 p-3 text-white">
+            <div className="flex h-4 w-4 items-center text-white">
               {SearchIcon}
             </div>
             <p className="text-xs">Campaign</p>
           </div>
-          <div className="flex bg-slate-100/30 justify-center items-center rounded  text-white h-6 p-3">
-            <div className="text-white w-4 h-4 flex items-center">
+          <div className="flex h-6 items-center justify-center rounded  bg-slate-100/30 p-3 text-white">
+            <div className="flex h-4 w-4 items-center text-white">
               {SearchIcon}
             </div>
             <p className="text-xs">Charity</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-5 container w-full items-center justify-center">
-          <div className="flex flex-col gap-2 items-center ">
-            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
-              <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
+        <div className="container grid w-full grid-cols-2 items-center justify-center gap-5 lg:grid-cols-5">
+          <div className="flex flex-col items-center gap-2 ">
+            <div className="h-28 w-44 rounded-2xl border-4 border-blue-300 p-0.5">
+              <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                 <Image
                   src="/assets/img/health.avif"
                   fill
@@ -134,13 +134,13 @@ export default function LandingSection() {
                 />
               </div>
             </div>
-            <div className=" text-white  items-center flex font-medium">
+            <div className=" flex  items-center font-medium text-white">
               Health
             </div>
           </div>
-          <div className="flex flex-col gap-2 items-center ">
-            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
-              <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
+          <div className="flex flex-col items-center gap-2 ">
+            <div className="h-28 w-44 rounded-2xl border-4 border-blue-300 p-0.5">
+              <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                 <Image
                   src="/assets/img/education.jpg"
                   fill
@@ -151,13 +151,13 @@ export default function LandingSection() {
                 />
               </div>
             </div>
-            <div className=" text-white  items-center flex font-medium">
+            <div className=" flex  items-center font-medium text-white">
               Education
             </div>
           </div>
-          <div className="flex flex-col gap-2 items-center ">
-            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
-              <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
+          <div className="flex flex-col items-center gap-2 ">
+            <div className="h-28 w-44 rounded-2xl border-4 border-blue-300 p-0.5">
+              <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                 <Image
                   src="/assets/img/children.jpg"
                   fill
@@ -168,13 +168,13 @@ export default function LandingSection() {
                 />
               </div>
             </div>
-            <div className=" text-white  items-center flex font-medium">
+            <div className=" flex  items-center font-medium text-white">
               Children
             </div>
           </div>
-          <div className="flex flex-col gap-2 items-center ">
-            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
-              <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
+          <div className="flex flex-col items-center gap-2 ">
+            <div className="h-28 w-44 rounded-2xl border-4 border-blue-300 p-0.5">
+              <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                 <Image
                   src="/assets/img/animal.jpeg"
                   fill
@@ -185,13 +185,13 @@ export default function LandingSection() {
                 />
               </div>
             </div>
-            <div className=" text-white  items-center flex font-medium">
+            <div className=" flex  items-center font-medium text-white">
               Animal
             </div>
           </div>
-          <div className="flex flex-col gap-2 items-center ">
-            <div className="h-28 w-44 p-0.5 rounded-2xl border-4 border-blue-300">
-              <div className="w-full h-full relative rounded-xl overflow-hidden  items-center">
+          <div className="flex flex-col items-center gap-2 ">
+            <div className="h-28 w-44 rounded-2xl border-4 border-blue-300 p-0.5">
+              <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                 <Image
                   src="/assets/img/memorial.webp"
                   fill
@@ -202,32 +202,32 @@ export default function LandingSection() {
                 />
               </div>
             </div>
-            <div className=" text-white  items-center flex font-medium">
+            <div className=" flex  items-center font-medium text-white">
               Memorial
             </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row  bg-[#c7ecff] w-full  items-center justify-between gap-5 py-8 lg:px-64">
-        <p className="items-center flex font-semibold ">
+      <div className="flex w-full flex-col  items-center justify-between  gap-5 bg-[#c7ecff] py-8 lg:flex-row lg:px-64">
+        <p className="flex items-center font-semibold ">
           Harmony in Giving Sahayata, Your Bridge to Positive Change.
         </p>
 
         <button>
           <Link
             href="/create-campaign"
-            className=" items-center text-white bg-blue-600 rounded p-3  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
+            className=" inline-block items-center rounded border border-transparent  bg-blue-600 p-3 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
           >
             Create Campaigns
           </Link>
         </button>
       </div>
-      <p className="text-center text-xl font-semibold font-serif py-6 ">
+      <p className="py-6 text-center font-serif text-xl font-semibold ">
         Join the Urgent Cause
       </p>
       {displayedCampaigns.length !== 0 ? (
-        <div className="flex w-full container flex-col">
-          <div className=" text-black p-3 grid grid-cols-3 justify-center items-center gap-5">
+        <div className="container flex w-full flex-col">
+          <div className=" grid grid-cols-3 items-center justify-center gap-5 p-3 text-black">
             {displayedCampaigns.map(
               ({
                 campaignId,
@@ -252,11 +252,11 @@ export default function LandingSection() {
               }
             )}
           </div>
-          <div className="container py-8 flex justify-center items-center ">
+          <div className="container flex items-center justify-center py-8 ">
             <button>
               <Link
                 href="/campaigns"
-                className=" items-center text-white bg-blue-600 rounded p-3  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
+                className=" inline-block items-center rounded border border-transparent  bg-blue-600 p-3 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
               >
                 View more Campaigns
               </Link>
@@ -264,7 +264,7 @@ export default function LandingSection() {
           </div>
         </div>
       ) : (
-        <div className="h-48 justify-center items-center flex">
+        <div className="flex h-48 items-center justify-center">
           <Loading />
         </div>
       )}

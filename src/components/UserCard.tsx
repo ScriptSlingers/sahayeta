@@ -21,7 +21,7 @@ export default function UserCard({
               src={userImageURL}
               alt={userImageAlt}
               fill
-              className="object-cover rounded"
+              className="rounded object-cover"
             />
           </Link>
         </div>

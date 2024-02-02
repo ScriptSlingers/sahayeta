@@ -68,59 +68,59 @@ export const Search: React.FC = () => {
 
   return (
     <div className="w-full pt-16">
-      <div className="flex justify-center items-center container py-3  w-full">
+      <div className="container flex w-full items-center justify-center  py-3">
         <input
           type="text"
           placeholder="Search anything related to the Campaign...."
           value={searchQuery}
           onChange={handleInputChange}
-          className="bg-[#ECEEFF] w-2/3 p-4  text-sm placeholder-gray-500 outline-none rounded placeholder:flex placeholder:justify-center placeholder:items-center placeholder:text-center"
+          className="w-2/3 rounded bg-[#ECEEFF]  p-4 text-sm placeholder-gray-500 outline-none placeholder:flex placeholder:items-center placeholder:justify-center placeholder:text-center"
         />
       </div>
-      <div className=" flex  justify-center items-center flex-col">
-        <div className="bg-blue-700 flex justify-center items-center p-4 container text-white text-base my-3 ">
+      <div className=" flex  flex-col items-center justify-center">
+        <div className="container my-3 flex items-center justify-center bg-blue-700 p-4 text-base text-white ">
           Total Created Campaigns ( {result?.length} )
         </div>
 
         {paginatedPosts.map(campaign => (
           <div
-            className="bg-white container shadow-2xl rounded-2xl my-2 p-5 gap-5"
+            className="container my-2 gap-5 rounded-2xl bg-white p-5 shadow-2xl"
             key={campaign?.campaignId}
           >
-            <div className="lg:flex gap-20 p-10 justify-between">
-              <div className="flex flex-col w-full lg:w-1/2 gap-2">
-                <button className=" w-44 items-center text-white bg-blue-700 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent">
+            <div className="justify-between gap-20 p-10 lg:flex">
+              <div className="flex w-full flex-col gap-2 lg:w-1/2">
+                <button className="inline-block w-36 items-center rounded-full border border-transparent bg-blue-700 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black">
                   <span>{campaign?.status}</span>
                 </button>
-                <p className="text-base font-semibold font-poppins">
+                <p className="font-poppins text-base font-semibold">
                   {campaign?.title}
                 </p>
-                <p className="text-[#2540C4] text-xs font-normal">
+                <p className="text-xs font-normal text-[#2540C4]">
                   Category: {campaign?.category?.name}
                 </p>
-                <p className="text-sm text-gray-500 font-normal font-poppins">
+                <p className="font-poppins text-sm font-normal text-gray-500">
                   {campaign?.description}
                 </p>
                 <div className="text-xs font-semibold">
                   Written by {campaign?.createdBy?.name}
                 </div>
               </div>
-              <div className="flex relative flex-col gap-2 lg:items-center justify-center w-96 h-auto">
+              <div className="relative flex h-auto w-96 flex-col justify-center gap-2 lg:items-center">
                 <div>
                   <Image
                     src={campaign?.image}
                     alt="campaign image"
                     fill
-                    className="w-96 flex p-1 bg-slate-400 rounded-2xl"
+                    className="flex w-96 rounded-2xl bg-slate-400 p-1"
                   />
                 </div>
               </div>
             </div>
-            <div className="flex justify-end items-center gap-28 px-12">
+            <div className="flex items-center justify-end gap-28 px-12">
               <button>
                 <Link
                   href={'/campaigns/' + campaign.campaignId}
-                  className="w-28 items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
+                  className="inline-block w-28 items-center rounded border border-transparent  bg-blue-600 p-2 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
                 >
                   View
                 </Link>
@@ -128,7 +128,7 @@ export const Search: React.FC = () => {
               <button>
                 <Link
                   href="/create-campaign"
-                  className=" w-28 items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
+                  className=" inline-block w-28 items-center rounded border border-transparent  bg-blue-600 p-2 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
                 >
                   Donate
                 </Link>

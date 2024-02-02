@@ -3,21 +3,21 @@ import React from 'react'
 
 export default function ChangePassword() {
   return (
-    <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
       <div className="container flex items-center justify-center ">
-        <div className="bg-slate-200 flex flex-col w-full py-5 items-center justify-center rounded-xl  ">
-          <div className="flex flex-col justify-center p-8 m-5 bg-white rounded-xl">
+        <div className="flex w-full flex-col items-center justify-center rounded-xl bg-slate-200 py-5  ">
+          <div className="m-5 flex flex-col justify-center rounded-xl bg-white p-8">
             <span className="mb-3 text-4xl font-bold">
               Change your Password
             </span>
-            <span className="font-light text-gray-400 mb-8">
+            <span className="mb-8 font-light text-gray-400">
               Enter your new password below to change your password
             </span>
             <form action="#" className="flex flex-col">
               <div className="mt-2 ">
                 <p>Current Password</p>
                 <input
-                  className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
+                  className="w-full rounded-lg border border-slate-500 p-2 text-sm text-black outline-none"
                   type="text"
                   id="text"
                   placeholder="Current password"
@@ -27,7 +27,7 @@ export default function ChangePassword() {
               <div className="mt-2 ">
                 <p>New Password</p>
                 <input
-                  className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
+                  className="w-full rounded-lg border border-slate-500 p-2 text-sm text-black outline-none"
                   type="text"
                   id="text"
                   placeholder="New password"
@@ -37,7 +37,7 @@ export default function ChangePassword() {
               <div className="mt-2">
                 <p>Confirm Password</p>
                 <input
-                  className="w-full border border-slate-500 p-2 rounded-lg text-black text-sm outline-none"
+                  className="w-full rounded-lg border border-slate-500 p-2 text-sm text-black outline-none"
                   type="text"
                   id="text"
                   placeholder="Confirm your password"
@@ -45,8 +45,8 @@ export default function ChangePassword() {
                 />
               </div>
 
-              <div className="flex justify-between w-full py-3">
-                <button className="w-full bg-blue-600 text-white p-2 rounded-lg mb-2 mt-2 hover:bg-blue-400 ">
+              <div className="flex w-full justify-between py-3">
+                <button className="mb-2 mt-2 w-full rounded-lg bg-blue-600 p-2 text-white hover:bg-blue-400 ">
                   CHANGE PASSWORD
                 </button>
               </div>

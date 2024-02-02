@@ -16,7 +16,7 @@ export const Footer = () => {
       <div className="flex flex-col overflow-hidden">
         <div className="flex w-full justify-center bg-[#c7ecff]">
           <div className="flex flex-col">
-            <div className="min-h-96 container grid grid-cols-1 items-center gap-x-9 gap-y-12 py-14 lg:grid-cols-4">
+            <div className="container grid min-h-96 grid-cols-1 items-center gap-x-9 gap-y-12 py-14 lg:grid-cols-4">
               <div className="flex h-full flex-col items-center justify-center gap-4 border-r-1 lg:items-start lg:border-black">
                 <Link
                   className="group flex items-center gap-3"

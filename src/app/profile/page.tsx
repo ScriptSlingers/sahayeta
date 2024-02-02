@@ -15,23 +15,17 @@ export default function Page() {
 
   return (
     <div className=" flex justify-center  bg-blue-50 p-6 ">
-      <div className="w-48 flex-col gap-8 shadow bg-slate-200 py-5 rounded-xl my-6 flex">
+      <div className="my-6 flex w-48 flex-col gap-8 rounded-xl bg-slate-200 py-5 shadow">
         <button onClick={() => handleTabClick('profile')} className="">
-          {' '}
           Profile
         </button>
         <button onClick={() => handleTabClick('editprofile')} className="">
           Edit Profile
         </button>
-
         <button onClick={() => handleTabClick('changepassword')}>
-          {' '}
           Change Password
         </button>
-        <button onClick={() => handleTabClick('fundraiser')}>
-          {' '}
-          Fundraiser
-        </button>
+        <button onClick={() => handleTabClick('fundraiser')}>Fundraiser</button>
         <button onClick={() => handleTabClick('donor')}> Donor</button>
       </div>
       <div className="w-[60%]">

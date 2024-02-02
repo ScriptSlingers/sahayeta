@@ -47,12 +47,12 @@ export default function DonationForm() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white border rounded shadow-lg">
-      <h2 className="text-xl font-bold mb-4">Title of the Project</h2>
+    <div className="mx-auto mt-10 max-w-md rounded border bg-white p-6 shadow-lg">
+      <h2 className="mb-4 text-xl font-bold">Title of the Project</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="mb-2 block text-sm font-bold text-gray-700"
             htmlFor="imageUpload"
           >
             Upload Image
@@ -60,7 +60,7 @@ export default function DonationForm() {
           <input
             type="file"
             accept="image/*"
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
             id="imageUpload"
             onChange={handleImageUpload}
           />
@@ -74,11 +74,11 @@ export default function DonationForm() {
         </div>
         <div className="flex gap-8">
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="mb-2 block text-sm font-bold text-gray-700">
               Name
             </label>
             <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
               type="text"
               placeholder="Enter your Fullname"
               value={formData.name}
@@ -86,11 +86,11 @@ export default function DonationForm() {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="mb-2 block text-sm font-bold text-gray-700">
               Address
             </label>
             <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
               type="text"
               placeholder="Enter  Address"
               value={formData.address}
@@ -100,11 +100,11 @@ export default function DonationForm() {
         </div>
         <div className="flex gap-8">
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="mb-2 block text-sm font-bold text-gray-700">
               Email
             </label>
             <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
               type="text"
               placeholder="Enter your email"
               value={formData.email}
@@ -112,11 +112,11 @@ export default function DonationForm() {
             />
           </div>{' '}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="mb-2 block text-sm font-bold text-gray-700">
               Phone Number
             </label>
             <input
-              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
               type="text"
               placeholder="Enter Phone Number"
               value={formData.phoneNumber}
@@ -126,7 +126,7 @@ export default function DonationForm() {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-700">
             Type of Donation
           </label>
           <div>
@@ -139,7 +139,7 @@ export default function DonationForm() {
               />
               <span className="ml-2">Money</span>
             </label>
-            <label className="inline-flex items-center ml-6">
+            <label className="ml-6 inline-flex items-center">
               <input
                 type="radio"
                 className="form-radio h-5 w-5 text-blue-600"
@@ -148,7 +148,7 @@ export default function DonationForm() {
               />
               <span className="ml-2">Goods</span>
             </label>
-            <label className="inline-flex items-center ml-6">
+            <label className="ml-6 inline-flex items-center">
               <input
                 type="radio"
                 className="form-radio h-5 w-5 text-blue-600"
@@ -160,11 +160,11 @@ export default function DonationForm() {
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="mb-2 block text-sm font-bold text-gray-700">
             Donation Amount (Rs.)
           </label>
           <input
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
             type="text"
             placeholder="Enter amount"
             value={formData.donationAmount}
@@ -174,13 +174,13 @@ export default function DonationForm() {
 
         <div className="mb-4">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="mb-2 block text-sm font-bold text-gray-700"
             htmlFor="amount"
           >
             Doners notes
           </label>
           <textarea
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
             placeholder="Notes...."
             value={formData.donorsNotes}
             onChange={handleChange}
@@ -188,13 +188,13 @@ export default function DonationForm() {
         </div>
         <div className="flex justify-end gap-3">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             type="submit"
           >
             Submit
           </button>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
             type="button"
           >
             Cancel

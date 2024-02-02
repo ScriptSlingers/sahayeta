@@ -14,22 +14,22 @@ export const CamapaignCard = ({
   return (
     <div
       key={campaignId}
-      className="flex flex-col h-full shadow p-5 gap-5 justify-between"
+      className="flex h-full flex-col justify-between gap-5 p-5 shadow"
     >
       <div className="flex flex-col gap-5">
         <Link href={'/campaigns/' + campaignId}>
-          <div className="relative flex h-48 w-full rounded-lg overflow-hidden ">
+          <div className="relative flex h-48 w-full overflow-hidden rounded-lg ">
             <Image
               src={campaignImageURL}
               alt={campaignImageAlt}
               fill
-              className="object-cover rounded"
+              className="rounded object-cover"
               sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw"
             />
           </div>
         </Link>
         <div className="text-xl font-semibold">{campaignTitle}</div>
-        <div className="text-gray-500 flex justify-center align-middle text-justify ">
+        <div className="flex justify-center text-justify align-middle text-gray-500 ">
           {`${campaignDescription.slice(0, 500)}${
             campaignDescription.length > 1000000 ? '...' : ''
           }`}

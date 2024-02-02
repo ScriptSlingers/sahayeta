@@ -160,10 +160,10 @@ export default function CreateCampaign() {
   }, [])
   return (
     <div className="flex flex-col gap-5 pt-10">
-      <div className=" container flex flex-col justify-center items-center w-full gap-10">
-        <div className="flex flex-col justify-between w-full  lg:flex-row lg:justify-between  lg:px-32">
-          <div className="flex flex-col justify-center items-start gap-3 mb-20 ">
-            <div className="object-cover w-32 h-32 rounded overflow-hidden">
+      <div className=" container flex w-full flex-col items-center justify-center gap-10">
+        <div className="flex w-full flex-col justify-between  lg:flex-row lg:justify-between  lg:px-32">
+          <div className="mb-20 flex flex-col items-start justify-center gap-3 ">
+            <div className="h-32 w-32 overflow-hidden rounded object-cover">
               <Image
                 src={loggedInUser?.profileImage || ''}
                 width={200}
@@ -181,7 +181,7 @@ export default function CreateCampaign() {
               </div>
               <div className="flex gap-1">
                 <div className="text-base font-normal">Verified by</div>
-                <div className="w-[100px] h-[21px] relative">
+                <div className="relative h-[21px] w-[100px]">
                   <Image
                     src="/assets/img/logo.png"
                     alt="Logo Sahayata"
@@ -192,14 +192,14 @@ export default function CreateCampaign() {
                 </div>
               </div>
               <div>
-                <div className="  bg-[#ECEEFF] h-7 flex justify-center items-center mt-3 text-base font-semibold font-poppins ">
+                <div className="  font-poppins mt-3 flex h-7 items-center justify-center bg-[#ECEEFF] text-base font-semibold ">
                   Total Created Campaigns(5)
                 </div>
                 <div className="flex justify-center gap-3 py-3">
-                  <div className="  bg-[#ECEEFF] w-44 h-7 flex justify-center items-center text-base font-normal font-poppins ">
+                  <div className="  font-poppins flex h-7 w-44 items-center justify-center bg-[#ECEEFF] text-base font-normal ">
                     Approved:(4)
                   </div>
-                  <div className="  bg-[#ECEEFF] text-red-600 w-44 h-7 flex justify-center items-center text-base font-normal  font-poppins ">
+                  <div className="  font-poppins flex h-7 w-44 items-center justify-center bg-[#ECEEFF] text-base font-normal  text-red-600 ">
                     Blocked: (1)
                   </div>
                 </div>
@@ -207,8 +207,8 @@ export default function CreateCampaign() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 items-center justify-center ">
-            <div className=" flex flex-col shadow-sm rounded-2xl lg:w-[403px] w-full  bg-[#FAFAFE] p-3">
+          <div className="flex flex-col items-center justify-center gap-3 ">
+            <div className=" flex w-full flex-col rounded-2xl bg-[#FAFAFE] p-3  shadow-sm lg:w-[403px]">
               <div className="flex items-center justify-center pt-3">
                 {file ? (
                   <div className="w-80 object-contain">
@@ -218,7 +218,7 @@ export default function CreateCampaign() {
                       layout="responsive"
                       width={300}
                       height={200}
-                      className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
+                      className=" flex items-center justify-center rounded-2xl  bg-slate-400 p-1"
                     />
                   </div>
                 ) : (
@@ -229,16 +229,16 @@ export default function CreateCampaign() {
                       layout="responsive"
                       width={300}
                       height={200}
-                      className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
+                      className=" flex items-center justify-center rounded-2xl  bg-slate-400 p-1"
                     />
                   </div>
                 )}
               </div>
               <div className="flex flex-col p-3">
-                <span className="text-base font-semibold font-poppins">
+                <span className="font-poppins text-base font-semibold">
                   Title: {campaignNameLabel}
                 </span>
-                <span className="text-[#2540C4] text-xs font-normal">
+                <span className="text-xs font-normal text-[#2540C4]">
                   Category: {campaignCategoryLabel}
                 </span>
                 <span className=" text-xs font-normal">
@@ -257,7 +257,7 @@ export default function CreateCampaign() {
                       width={200}
                       height={200}
                       alt="doc image"
-                      className="w-8 h-8 rounded-full"
+                      className="h-8 w-8 rounded-full"
                     />
                     <div className="flex flex-col">
                       <div className="text-xs font-semibold">
@@ -270,20 +270,20 @@ export default function CreateCampaign() {
                 </div>
               </div>
             </div>
-            <span className="text-xs text-grey-100 ">Preview</span>
+            <span className="text-grey-100 text-xs ">Preview</span>
           </div>
         </div>
       </div>
       <hr className="border-b border-solid border-black" />
-      <span className="flex justify-center items-center text-4xl font-semibold  mt-30 px-20 text-blue-600">
+      <span className="mt-30 flex items-center justify-center px-20  text-4xl font-semibold text-blue-600">
         Create New Campaign
       </span>
 
       <form
-        className="container flex flex-col justify-center items-center w-full gap-10 py-6"
+        className="container flex w-full flex-col items-center justify-center gap-10 py-6"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex justify-between w-full flex-col md:flex-row gap-2 ">
+        <div className="flex w-full flex-col justify-between gap-2 md:flex-row ">
           <div className="flex w-full  flex-col gap-3">
             <div className="flex flex-col gap-2">
               <span className="text-gray-500">
@@ -296,7 +296,7 @@ export default function CreateCampaign() {
                 placeholder="Enter the  Campaign title here"
                 {...register('title')}
                 onChange={handleTitleChange}
-                className="w-full border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+                className="w-full border-b-[1.5px] border-gray-400 text-base font-medium focus:outline-none  "
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -310,7 +310,7 @@ export default function CreateCampaign() {
                   required
                   onChange={e => handleCategoryInputChange(e.target.value)}
                   defaultValue={'Select'}
-                  className="w-44 py-2 px-3 rounded outline-none border-1 border-gray-400"
+                  className="w-44 rounded border-1 border-gray-400 px-3 py-2 outline-none"
                 >
                   <option value="" disabled>
                     Select a Category
@@ -332,7 +332,7 @@ export default function CreateCampaign() {
                 placeholder="Enter the  Campaign description here"
                 {...register('description')}
                 onChange={handleDetailChange}
-                className="w-full border-[1.5px] h-32 border-gray-400 focus:outline-none rounded p-2.5"
+                className="h-32 w-full rounded border-[1.5px] border-gray-400 p-2.5 focus:outline-none"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -346,7 +346,7 @@ export default function CreateCampaign() {
                 placeholder="Enter the  Goal Amount here"
                 {...register('goalAmount')}
                 onChange={handleGoalAmountChange}
-                className="w-full border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+                className="w-full border-b-[1.5px] border-gray-400 text-base font-medium focus:outline-none  "
               />
             </div>
             {/* <div className="flex flex-col gap-2">
@@ -378,8 +378,8 @@ export default function CreateCampaign() {
               />
             </div> */}
           </div>
-          <div className="w-full md:w-1/2 flex flex-col justify-start">
-            <div className="flex flex-col justify-center w-full items-center gap-10">
+          <div className="flex w-full flex-col justify-start md:w-1/2">
+            <div className="flex w-full flex-col items-center justify-center gap-10">
               <input
                 type="file"
                 name="file"
@@ -397,7 +397,7 @@ export default function CreateCampaign() {
                     layout="responsive"
                     width={300}
                     height={200}
-                    className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
+                    className=" flex items-center justify-center rounded-2xl  bg-slate-400 p-1"
                   />
                 </div>
               ) : (
@@ -408,13 +408,13 @@ export default function CreateCampaign() {
                     layout="responsive"
                     width={300}
                     height={200}
-                    className=" flex p-1 bg-slate-400 rounded-2xl  justify-center items-center"
+                    className=" flex items-center justify-center rounded-2xl  bg-slate-400 p-1"
                   />
                 </div>
               )}
               <label
                 htmlFor="imageUpload"
-                className=" w-[126px] h-[37px] rounded-3xl flex justify-center items-cente  cursor-pointer bg-black text-white  py-2 px-4"
+                className=" items-cente flex h-[37px] w-[126px] cursor-pointer justify-center  rounded-3xl bg-black px-4  py-2 text-white"
               >
                 Upload
               </label>
@@ -426,11 +426,11 @@ export default function CreateCampaign() {
         <div className="flex gap-20">
           <button
             type="submit"
-            className="w-[126px] h-[37px] rounded-3xl bg-[#1560DB] text-white flex justify-center items-center"
+            className="flex h-[37px] w-[126px] items-center justify-center rounded-3xl bg-[#1560DB] text-white"
           >
             {isSubmitting ? <>Creating...</> : <>Create</>}
           </button>
-          <button className="w-[126px] h-[37px] rounded-3xl bg-red-600 text-white flex justify-center items-center">
+          <button className="flex h-[37px] w-[126px] items-center justify-center rounded-3xl bg-red-600 text-white">
             Cancel
           </button>
         </div>

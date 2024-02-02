@@ -51,21 +51,21 @@ export default function NotificationListing() {
   }
 
   return (
-    <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
       <div className="container ">
-        <div className="bg-slate-200 min-w-[1366px] flex flex-col w-full py-5 rounded-xl  ">
+        <div className="flex w-full min-w-[1366px] flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">
-            <p className="text-lg font-bold py-4 text-blue-700">Notification</p>
-            <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4 gap-96">
+            <p className="py-4 text-lg font-bold text-blue-700">Notification</p>
+            <div className="flex-column flex flex-wrap items-center justify-between gap-96 space-y-4 pb-4 sm:flex-row sm:space-y-0">
               <div>
                 <button
                   id="dropdownRadioButton"
                   data-dropdown-toggle="dropdownRadio"
-                  className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded text-sm px-3 py-1.5"
+                  className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-1.5  text-sm font-medium text-gray-500 hover:bg-gray-100 focus:outline-none"
                   type="button"
                 >
                   <svg
-                    className="w-3 h-3 text-gray-500 dark:text-gray-400 me-3"
+                    className="me-3 h-3 w-3 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -75,7 +75,7 @@ export default function NotificationListing() {
                   </svg>
                   Last 30 days
                   <svg
-                    className="w-2.5 h-2.5 ms-2.5"
+                    className="ms-2.5 h-2.5 w-2.5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -92,7 +92,7 @@ export default function NotificationListing() {
                 </button>
                 <div
                   id="dropdownRadio"
-                  className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow"
+                  className="z-10 hidden w-48 divide-y divide-gray-100 rounded-lg bg-white shadow"
                   data-popper-reference-hidden=""
                   data-popper-escaped=""
                   data-popper-placement="top"
@@ -100,9 +100,9 @@ export default function NotificationListing() {
               </div>
               <label className="sr-only">Search</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+                <div className="rtl:inset-r-0 pointer-events-none absolute inset-y-0 left-0 flex items-center ps-3 rtl:right-0">
                   <svg
-                    className="w-5 h-5 text-gray-500"
+                    className="h-5 w-5 text-gray-500"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -118,19 +118,19 @@ export default function NotificationListing() {
                 <input
                   type="text"
                   id="table-search"
-                  className="block outline-none p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-80 rounded border border-gray-300 bg-gray-50 p-2 ps-10 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Search for items"
                 />
               </div>
             </div>
-            <div className="flex items-center h-28 bg-white shadow rounded">
-              <div className="flex gap-2 justify-between items-center  px-10">
+            <div className="flex h-28 items-center rounded bg-white shadow">
+              <div className="flex items-center justify-between gap-2  px-10">
                 <Image
                   src="/assets/img/profile.jpg"
                   width={200}
                   height={200}
                   alt="doc image"
-                  className="w-12 h-12 rounded-full"
+                  className="h-12 w-12 rounded-full"
                 />
                 <p>Anjali Poudel created a Campaign !!</p>
               </div>

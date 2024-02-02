@@ -68,23 +68,23 @@ export default function CampaignsListing() {
   }
 
   return (
-    <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
       <div className="container ">
-        <div className="bg-slate-200 min-w-[1366px] flex flex-col w-full py-5 rounded-xl  ">
+        <div className="flex w-full min-w-[1366px] flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">
-            <p className="text-lg font-bold py-4 text-blue-700">
+            <p className="py-4 text-lg font-bold text-blue-700">
               Campaigns List
             </p>
-            <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
+            <div className="flex-column flex flex-wrap items-center justify-between space-y-4 pb-4 sm:flex-row sm:space-y-0">
               <div>
                 <button
                   id="dropdownRadioButton"
                   data-dropdown-toggle="dropdownRadio"
-                  className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded text-sm px-3 py-1.5"
+                  className="inline-flex items-center rounded border border-gray-300 bg-white px-3 py-1.5  text-sm font-medium text-gray-500 hover:bg-gray-100 focus:outline-none"
                   type="button"
                 >
                   <svg
-                    className="w-3 h-3 text-gray-500 dark:text-gray-400 me-3"
+                    className="me-3 h-3 w-3 text-gray-500 dark:text-gray-400"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -94,7 +94,7 @@ export default function CampaignsListing() {
                   </svg>
                   Last 30 days
                   <svg
-                    className="w-2.5 h-2.5 ms-2.5"
+                    className="ms-2.5 h-2.5 w-2.5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -111,7 +111,7 @@ export default function CampaignsListing() {
                 </button>
                 <div
                   id="dropdownRadio"
-                  className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow"
+                  className="z-10 hidden w-48 divide-y divide-gray-100 rounded-lg bg-white shadow"
                   data-popper-reference-hidden=""
                   data-popper-escaped=""
                   data-popper-placement="top"
@@ -119,9 +119,9 @@ export default function CampaignsListing() {
               </div>
               <label className="sr-only">Search</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+                <div className="rtl:inset-r-0 pointer-events-none absolute inset-y-0 left-0 flex items-center ps-3 rtl:right-0">
                   <svg
-                    className="w-5 h-5 text-gray-500"
+                    className="h-5 w-5 text-gray-500"
                     aria-hidden="true"
                     fill="currentColor"
                     viewBox="0 0 20 20"
@@ -137,13 +137,13 @@ export default function CampaignsListing() {
                 <input
                   type="text"
                   id="table-search"
-                  className="block outline-none p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-80 rounded border border-gray-300 bg-gray-50 p-2 ps-10 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Search for items"
                 />
               </div>
             </div>
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+            <table className="w-full text-left text-sm text-gray-500 rtl:text-right">
+              <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                 <tr>
                   <th scope="col" className="p-4"></th>
                   <th scope="col" className="px-6 py-3">
@@ -199,18 +199,18 @@ export default function CampaignsListing() {
                             <input
                               id="checkbox-table-search-1"
                               type="checkbox"
-                              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                              className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
                             />
                             <label className="sr-only">checkbox</label>
                           </div>
                         </td>
                         <th
                           scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                          className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 "
                         >
                           <Link
                             href={`/campaigns/${campaignId}`}
-                            className="text-blue-700 flex gap-2 items-center"
+                            className="flex items-center gap-2 text-blue-700"
                           >
                             {`${title.slice(0, 13)}${
                               title.length > 13 ? '...' : ''
@@ -228,12 +228,12 @@ export default function CampaignsListing() {
                         <td className="px-6 py-4">{collectedAmount}</td>
                         <td className="px-6 py-4">{customStatus(status)}</td>
                         <td className="px-6 py-4">
-                          <div className="relative text-center z-10 flex items-center justify-center">
+                          <div className="relative z-10 flex items-center justify-center text-center">
                             <div className="flex gap-3">
-                              <div className="font-medium text-red-600 text-base">
+                              <div className="text-base font-medium text-red-600">
                                 <DeleteModal campaignId={campaignId} />
                               </div>
-                              <div className="font-medium text-blue-700 text-base">
+                              <div className="text-base font-medium text-blue-700">
                                 <EditModal
                                   campaignId={campaignId}
                                   title={title}
@@ -243,7 +243,7 @@ export default function CampaignsListing() {
                               </div>
                               <Link
                                 href={`/campaigns/${campaignId}`}
-                                className="font-medium text-black text-base"
+                                className="text-base font-medium text-black"
                               >
                                 <BsEye />
                               </Link>
@@ -322,18 +322,18 @@ export const DeleteModal = ({ campaignId }) => {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all ">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg text-center font-medium leading-6 text-gray-900"
+                    className="text-center text-lg font-medium leading-6 text-gray-900"
                   >
                     Are you sure to Delete this Campaign?
                   </Dialog.Title>
                   <div className="mt-2 ">
-                    <p className="text-sm text-gray-500 text-center">
+                    <p className="text-center text-sm text-gray-500">
                       If you delete this Campaign it will be removed from your
                       system permanently, you cannot get it back.
                     </p>
                   </div>
 
-                  <div className="mt-4 flex justify-center items-center gap-10 ">
+                  <div className="mt-4 flex items-center justify-center gap-10 ">
                     <button
                       type="button"
                       onClick={() => handleDelete(campaignId)}
@@ -437,7 +437,7 @@ export const EditModal = ({ campaignId, title, description, goalAmount }) => {
                 <Dialog.Panel className="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white px-6 py-10 text-left align-middle shadow-xl transition-all ">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg text-center font-medium leading-6 text-gray-900"
+                    className="text-center text-lg font-medium leading-6 text-gray-900"
                   >
                     Editing Campaign {title}
                   </Dialog.Title>
@@ -446,43 +446,43 @@ export const EditModal = ({ campaignId, title, description, goalAmount }) => {
                     className="flex flex-col gap-4"
                   >
                     <div className="flex flex-col gap-2">
-                      <label className="text-gray-600 text-sm font-bold ">
+                      <label className="text-sm font-bold text-gray-600 ">
                         Title
                       </label>
                       <input
                         {...register('title')}
-                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                         type="text"
                         placeholder="Full Name"
                         defaultValue={title}
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-gray-600 text-sm font-bold ">
+                      <label className="text-sm font-bold text-gray-600 ">
                         Description
                       </label>
                       <textarea
                         {...register('description')}
-                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                         rows={10}
                         placeholder="Full Name"
                         defaultValue={description}
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-gray-600 text-sm font-bold ">
+                      <label className="text-sm font-bold text-gray-600 ">
                         Goal Amount
                       </label>
                       <input
                         {...register('goalAmount')}
-                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                         type="number"
                         placeholder="Email"
                         defaultValue={goalAmount}
                       />
                     </div>
 
-                    <div className="mt-4 flex justify-center items-center gap-10 ">
+                    <div className="mt-4 flex items-center justify-center gap-10 ">
                       <button
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"

@@ -11,7 +11,7 @@ export const AppHeader = () => {
   const session = useClientSession()
   return (
     <div className="shadow">
-      <div className="flex w-full h-16 justify-between container">
+      <div className="container flex h-16 w-full justify-between">
         <div className="flex">
           <div className="flex gap-5 p-6">
             <div className="flex items-center">
@@ -28,7 +28,7 @@ export const AppHeader = () => {
             </div>
             <div className="border-r border-slate-700"></div>
           </div>
-          <div className="hidden md:flex gap-6 items-center p-6 text-base font-medium">
+          <div className="hidden items-center gap-6 p-6 text-base font-medium md:flex">
             <Link href="/">
               <div>Home</div>
             </Link>
@@ -44,8 +44,8 @@ export const AppHeader = () => {
             <div>Donate</div>
           </div>
         </div>
-        <div className="flex items-center p-6 gap-6">
-          <div className="flex justify-center items-center p-3 border-2 border-blue-700 text-blue-700 hover:text-white hover:bg-blue-700 rounded-full ">
+        <div className="flex items-center gap-6 p-6">
+          <div className="flex items-center justify-center rounded-full border-2 border-blue-700 p-3 text-blue-700 hover:bg-blue-700 hover:text-white ">
             <Link href="#">
               <BsBell />
             </Link>
@@ -53,7 +53,7 @@ export const AppHeader = () => {
           {session ? (
             <div className="flex gap-3">
               <Link href="/profile">
-                <div className="relative rounded-full h-12 w-12 overflow-hidden hover:cursor-pointer">
+                <div className="relative h-12 w-12 overflow-hidden rounded-full hover:cursor-pointer">
                   <Image
                     src={session?.image || ''}
                     alt={session?.name || ''}
@@ -64,7 +64,7 @@ export const AppHeader = () => {
                 </div>
               </Link>
               <button
-                className=" items-center text-white bg-blue-600 rounded p-3  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent d "
+                className=" d inline-block items-center rounded border  border-transparent bg-blue-600 p-3 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
                 onClick={() => signOut()}
               >
                 Signout
@@ -73,11 +73,11 @@ export const AppHeader = () => {
           ) : session === null ? (
             <FaCircleNotch />
           ) : (
-            <div className="w-10 h-4 mx-2 flex justify-center items-center">
+            <div className="mx-2 flex h-4 w-10 items-center justify-center">
               <button>
                 <Link
                   href="/login"
-                  className=" items-center text-white bg-blue-600 rounded p-2  font-medium inline-block hover:bg-transparent hover:border-blue-400 hover:text-black duration-300 hover:border border border-transparent "
+                  className=" inline-block items-center rounded border border-transparent  bg-blue-600 p-2 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
                 >
                   Login
                 </Link>

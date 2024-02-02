@@ -5,24 +5,24 @@ import { FaCalendarAlt } from 'react-icons/fa'
 
 export default function page() {
   return (
-    <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
       <div className="container ">
-        <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
+        <div className="flex w-full flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">
-            <p className="text-lg font-bold py-4 text-blue-700">
+            <p className="py-4 text-lg font-bold text-blue-700">
               User Information
             </p>
           </div>
           <div className="m-3">
-            <div className="  flex items-center gap-3 rounded-md bg-gray-50 border mb-3">
-              <div className="w-24 h-24 border border-accent m-3 bg-slate-300 rounded-full"></div>
+            <div className="  mb-3 flex items-center gap-3 rounded-md border bg-gray-50">
+              <div className="m-3 h-24 w-24 rounded-full border border-accent bg-slate-300"></div>
               <div className=" rounded-md p-2">
-                <p className="font-medium text-xl">Aanchal Subedi</p>
-                <p className="text-slate-500 font-maven text-md  flex ">
+                <p className="text-xl font-medium">Aanchal Subedi</p>
+                <p className="text-md flex font-maven  text-slate-500 ">
                   <TbAddressBook className="m-1" />
                   Bharatpur, Chitwan
                 </p>
-                <p className="text-slate-500 font-maven text-md  flex ">
+                <p className="text-md flex font-maven  text-slate-500 ">
                   <FaHeart className="m-1" />
                   Fundraiser for 7 months
                 </p>
@@ -30,15 +30,15 @@ export default function page() {
             </div>
             <div className="w-full">
               <div className="p-4">
-                <h6 className="font-semibold text-lg flex">
+                <h6 className="flex text-lg font-semibold">
                   <FaCalendarAlt className="m-2 text-lg" />
                   Donation Information
                 </h6>
               </div>
             </div>
 
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 mt-2">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+            <table className="mt-2 w-full text-left text-sm text-gray-500 rtl:text-right">
+              <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                 <tr>
                   <th scope="col" className="px-6 py-3">
                     Campaign Name
@@ -64,7 +64,7 @@ export default function page() {
                 <tr className=" border-b hover:bg-gray-50 ">
                   <td
                     scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
+                    className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 "
                   >
                     jajarkot
                   </td>

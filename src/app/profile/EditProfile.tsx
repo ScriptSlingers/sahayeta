@@ -58,17 +58,17 @@ export default function EditProfile() {
     fetchData()
   }, [currentUser?.id])
   return (
-    <div className="bg-blue-50 rounded w-full  flex flex-col p-6 justify-center items-center">
+    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50 p-6">
       <div className="container flex items-center justify-center ">
-        <div className="bg-slate-200 flex flex-col w-full py-5 rounded-xl  ">
+        <div className="flex w-full flex-col rounded-xl bg-slate-200 py-5  ">
           <div className="relative px-10 sm:rounded-lg">
-            <p className="text-lg font-bold py-4 text-blue-700">
+            <p className="py-4 text-lg font-bold text-blue-700">
               User Information
             </p>
           </div>
           <div className="m-3">
-            <div className="  flex items-center gap-3 rounded-md bg-gray-50 border mb-3 mx-5">
-              <div className="relative w-24 h-24 border border-accent m-3 bg-slate-300 rounded-full">
+            <div className="  mx-5 mb-3 flex items-center gap-3 rounded-md border bg-gray-50">
+              <div className="relative m-3 h-24 w-24 rounded-full border border-accent bg-slate-300">
                 <Image
                   src={loggedInUser?.profileImage || ''}
                   alt="Profile image"
@@ -77,12 +77,12 @@ export default function EditProfile() {
                 />
               </div>
               <div className=" rounded-md p-2">
-                <p className="font-medium text-xl">{loggedInUser?.name}</p>
-                <p className="text-slate-500 font-maven text-md  flex ">
+                <p className="text-xl font-medium">{loggedInUser?.name}</p>
+                <p className="text-md flex font-maven  text-slate-500 ">
                   <TbAddressBook className="m-1" />
                   {loggedInUser?.email}
                 </p>
-                <p className="text-slate-500 font-maven text-md  flex ">
+                <p className="text-md flex font-maven  text-slate-500 ">
                   <FaHeart className="m-1" />
                   {loggedInUser?.role}
                 </p>
@@ -91,18 +91,18 @@ export default function EditProfile() {
 
             <div className="w-full">
               <div className="p-4">
-                <h6 className="font-semibold text-lg flex">
+                <h6 className="flex text-lg font-semibold">
                   <FaCalendarAlt className="m-2 text-lg" />
                   Edit Information
                 </h6>
               </div>
             </div>
-            <div className="w-full  mb-2 text-left p-5 ">
+            <div className="mb-2  w-full p-5 text-left ">
               <form action="#" className="flex flex-col">
                 <div className="mt-2">
                   <p>Phone Number*</p>
                   <input
-                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
+                    className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
                     type="number"
                     name="phoneNum"
                     id="text"
@@ -112,7 +112,7 @@ export default function EditProfile() {
                 <div className="mt-2">
                   <p>Date of Birth</p>
                   <input
-                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
+                    className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
                     type="date"
                     name="dob"
                     id="text"
@@ -123,18 +123,18 @@ export default function EditProfile() {
                 <div className="mt-2">
                   <p>Address*</p>
                   <input
-                    className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
+                    className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
                     type="text"
                     id="text"
                     name="address"
                     required
                   />
                 </div>
-                <div className="flex items-stretch gap-3 mt-2">
+                <div className="mt-2 flex items-stretch gap-3">
                   <div className="flex-1  py-2 ">
                     <p>Role</p>
                     <input
-                      className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
+                      className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
                       type="text"
                       id="text"
                       name="role"
@@ -142,24 +142,24 @@ export default function EditProfile() {
                     />
                   </div>
                 </div>
-                <div className="flex items-stretch gap-3 mt-2">
+                <div className="mt-2 flex items-stretch gap-3">
                   <div className="flex-1  py-2 ">
                     <p>Bio</p>
                     <textarea
-                      className="w-full border border-slate-400 p-2 rounded-lg text-black text-sm outline-none bg-gray-50"
+                      className="w-full rounded-lg border border-slate-400 bg-gray-50 p-2 text-sm text-black outline-none"
                       id="text"
                       name="bio"
                       required
                     />
                   </div>
                 </div>
-                <div className="flex flex-col items-start justify-center w-full pl-2 pt-3">
-                  <span className="text-lg font-maven mb-2">
+                <div className="flex w-full flex-col items-start justify-center pl-2 pt-3">
+                  <span className="mb-2 font-maven text-lg">
                     Citizenship Image
                   </span>
                   <div className="  flex items-center justify-center gap-7">
                     <div className=" ">
-                      <div className="w-72 h-52 relative border bg-slate-300 rounded-md">
+                      <div className="relative h-52 w-72 rounded-md border bg-slate-300">
                         {selectedFile && (
                           <Image
                             src={URL.createObjectURL(selectedFile)}
@@ -178,7 +178,7 @@ export default function EditProfile() {
                     </div>
                   </div>
                 </div>
-                <button className="w-fit bg-blue-800 text-white p-2 rounded-lg mb-4 mt-5 hover:bg-blue-500 ">
+                <button className="mb-4 mt-5 w-fit rounded-lg bg-blue-800 p-2 text-white hover:bg-blue-500 ">
                   Update Information
                 </button>
               </form>
