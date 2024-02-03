@@ -201,7 +201,7 @@ export default function Donations() {
                       <td className="px-6 py-4">
                         {
                           category && payments ?
-                            category.find(category => category.id === payment.campaign[0].categoryId)?.name || "Category not found"
+                            category.find(category => category.id === payment.campaign[0].categoryId)?.displayName || "Category not found"
                             : "Loading..."
                         }
                       </td>
