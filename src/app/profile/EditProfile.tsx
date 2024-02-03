@@ -69,33 +69,47 @@ export default function EditProfile() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting }
-  } = useForm()
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    defaultValues: {
+      name: loggedInUser?.name,
+      email: loggedInUser?.email,
+      phoneNum: loggedInUser?.phoneNum,
+      address: loggedInUser?.address,
+    },
+  });
 
-  const handleEdit = async values => {
+
+  const handleEdit = async (values) => {
     try {
+      const formData = new FormData();
+
+      // Append values from the form
+      Object.keys(values).forEach((key) => {
+        formData.append(key, values[key]);
+      });
+
+      // Append file if available
+      if (selectedFile) {
+        formData.append('file', selectedFile);
+      }
+
       await axios.patch(
         `/api/users/${loggedInUser?.id}`,
-        { ...values },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            accept: 'application/json'
-          }
-        }
-      ).then(response => {
+        formData
+      ).then((response) => {
         const updatedUser = response.data;
-        console.log("updatedUser ==>>", updatedUser)
-        console.log("values ==>>", values)
+        console.log("updatedUser ==>>", updatedUser);
+        console.log("values ==>>", values);
         setLoggedInUser(updatedUser);
-      })
+      });
 
-
-      toast.success(`User Edited Successfully`)
+      toast.success(`User Edited Successfully`);
     } catch (error) {
-      console.error('Error Editing user:', error)
+      console.error('Error Editing user:', error);
     }
-  }
+  };
 
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">

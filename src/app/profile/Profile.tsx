@@ -109,7 +109,7 @@ export default function Profile() {
                   <FaPhone />
                   <span className="font-semibold">Contact:</span>
                 </div>
-                <span className="text-lg">{loggedInUser?.phoneNum || "N/A"}</span>
+                <span className="text-lg">{loggedInUser?.phoneNum || "Not specified"}</span>
               </div>
 
               <div className="flex gap-2 py-2 text-lg">
@@ -117,7 +117,7 @@ export default function Profile() {
                   <FaMap />
                   <span className="font-semibold">Address:</span>
                 </div>
-                <span className="text-lg">{loggedInUser?.address || "N/A"}</span>
+                <span className="text-lg">{loggedInUser?.address || "Not specified"}</span>
               </div>
 
               <div className="flex gap-2 py-2 text-lg">
@@ -125,7 +125,7 @@ export default function Profile() {
                   <FaCalendar />
                   <span className="font-semibold">Date Of Birth:</span>
                 </div>
-                <span className="text-lg">{formatDate(loggedInUser?.dob) || "N/A"}</span>
+                <span className="text-lg">{formatDate(loggedInUser?.dob) || "Not specified"}</span>
               </div>
 
               <div className="flex gap-2 py-2 text-lg">
@@ -133,7 +133,7 @@ export default function Profile() {
                   <FaMoneyBill />
                   <span className="font-semibold">Balance:</span>
                 </div>
-                <span className="text-lg">NRs. {loggedInUser?.balance || "N/A"}</span>
+                <span className="text-lg">NRs. {loggedInUser?.balance || "Not specified"}</span>
               </div>
 
               <div className="flex gap-2 py-2 text-lg">
@@ -141,7 +141,7 @@ export default function Profile() {
                   <FaBuilding />
                   <span className="font-semibold">Organization Name:</span>
                 </div>
-                <span className="text-lg">{loggedInUser?.orgName || "N/A"}</span>
+                <span className="text-lg">{loggedInUser?.orgName || "Not specified"}</span>
               </div>
 
               <div className="flex gap-2 py-2 text-lg">
@@ -149,7 +149,7 @@ export default function Profile() {
                   <FaFileWord />
                   <span className="font-semibold">Bio:</span>
                 </div>
-                <span className="text-lg text-justify pr-10">{loggedInUser?.bio || "N/A"}</span>
+                <span className="text-lg text-justify pr-10">{loggedInUser?.bio || "Not specified"}</span>
               </div>
               <div className="py-2 text-lg">
                 <div className="flex items-start gap-2">

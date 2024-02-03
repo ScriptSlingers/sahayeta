@@ -9,8 +9,9 @@ import { FaCalendarAlt } from 'react-icons/fa'
 import { DeleteModal, EditModal } from '../dashboard/CampaignList'
 import Link from 'next/link'
 import { BsEye } from 'react-icons/bs'
+import { OpenLinkIcon } from '@sahayeta/icons'
 
-export default function Fundraiser() {
+export default function Campaigns() {
   const [campaigns, setCampaigns] = useState<any>()
   const [createdByInfo, setCreatedByInfo] = useState<any>()
   const currentUser = useClientSession()
@@ -27,11 +28,6 @@ export default function Fundraiser() {
               campaign.createdBy && campaign.createdBy.id === currentUser.id
           )
           setCampaigns(userCampaigns)
-
-          // Assuming createdBy is the same for all campaigns, fetch it once
-          const firstCampaignCreatedBy =
-            userCampaigns.length > 0 ? userCampaigns[0].createdBy : null
-          setCreatedByInfo(firstCampaignCreatedBy)
         })
         .catch(error => {
           console.error('Axios error:', error)
@@ -119,92 +115,78 @@ export default function Fundraiser() {
                 />
               </div>
             </div>
-            {campaigns && campaigns.length > 0 && (
-              <table className="mt-2 w-full text-left text-sm text-gray-500 rtl:text-right ">
-                <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">
-                      S.N.
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Title
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Category
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Start Date
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Goal Amount
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Collected Amount
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      End Date
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Status
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {campaigns?.map(
-                    ({
-                      campaignId,
-                      title,
-                      goalAmount,
-                      category,
-                      collectedAmount,
-                      startDate,
-                      endDate,
-                      Action
-                    }: any) => (
-                      <tr
-                        key={campaignId}
-                        className=" border-b hover:bg-gray-50 "
+            <table className="mt-2 w-full text-left text-sm text-gray-500 rtl:text-right ">
+              <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    S.N.
+                  </th>
+                  <th scope="col" >
+                    Title
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Start Date
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Goal Amount
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Collected Amount
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    End Date
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {campaigns?.map(
+                  ({
+                    campaignId,
+                    title,
+                    goalAmount,
+                    category,
+                    collectedAmount,
+                    startDate,
+                    endDate,
+                    status
+                  }: any) => (
+                    <tr
+                      key={campaignId}
+                      className=" border-b hover:bg-gray-50 "
+                    >
+                      <td className="px-6 py-4">{count++}</td>
+                      <td
+                        scope="row"
+                        className="font-medium text-gray-900 "
                       >
-                        <td className="px-6 py-4">{count++}</td>
-                        <td className="px-6 py-4">{title}</td>
-                        <td className="px-6 py-4">{category?.name}</td>
-                        <td className="px-6 py-4">{startDate}</td>
-                        <td className="px-6 py-4">{goalAmount}</td>
-                        <td className="px-6 py-4">{collectedAmount}</td>
-                        <td className="px-6 py-4">{endDate}</td>
-                        <td className="px-6 py-4">{status}</td>
-                        <td className="px-6 py-4">
-                          <div className="relative z-10 flex items-center justify-center text-center">
-                            <div className="flex gap-3">
-                              <div className="text-base font-medium text-red-600">
-                                <DeleteModal campaignId={campaignId} />
-                              </div>
-                              <div className="text-base font-medium text-blue-700">
-                                <EditModal
-                                  campaignId={campaignId}
-                                  title={title}
-
-                                  goalAmount={goalAmount}
-                                />
-                              </div>
-                              <Link
-                                href={`/campaigns/${campaignId}`}
-                                className="text-base font-medium text-black"
-                              >
-                                <BsEye />
-                              </Link>
-                            </div>
+                        <Link
+                          href={`/campaigns/${campaignId}`}
+                          className="flex items-center gap-2 text-blue-700"
+                        >
+                          {`${title.slice(0, 20)}${title.length > 20 ? '...' : ''
+                            }`}
+                          <div className="h-4 w-4">
+                            <OpenLinkIcon />
                           </div>
-                        </td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </table>
-            )}
+                        </Link>
+                      </td>
+                      <td className="px-6 py-4">{category?.name}</td>
+                      <td className="px-6 py-4">{startDate || "Not specified"}</td>
+                      <td className="px-6 py-4">{goalAmount || "Not specified"}</td>
+                      <td className="px-6 py-4">{collectedAmount || "Not specified"}</td>
+                      <td className="px-6 py-4">{endDate || "Not specified"}</td>
+                      <td className="px-6 py-4">{status}</td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

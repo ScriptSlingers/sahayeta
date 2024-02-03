@@ -2,16 +2,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useClientSession } from '@sahayeta/utils'
+import { OpenLinkIcon } from '@sahayeta/icons'
+import Link from 'next/link'
 
 
-export default function Donor() {
+export default function Donations() {
   const [payments, setPayments] = useState<any>()
   const currentUser = useClientSession()
 
   useEffect(() => {
     if (currentUser) {
-      console.log('Current User:', currentUser);
-
       axios
         .get('/api/payment/', {
           headers: { 'Content-Type': 'application/json' }
@@ -22,8 +22,6 @@ export default function Donor() {
               payment => payment?.paymentBy?.id === currentUser?.id
             );
             setPayments(userCampaigns);
-            console.log('Payments Data:', userCampaigns);
-
           } else {
             console.log('Unexpected response structure:', response.data);
           }
@@ -36,8 +34,6 @@ export default function Donor() {
         });
     }
   }, [currentUser]);
-
-
 
   let count = 1;
 
@@ -119,50 +115,66 @@ export default function Donor() {
                 />
               </div>
             </div>
-            {payments && payments.length > 0 && (
-              <table className="mt-2 w-full text-left text-sm text-gray-500 rtl:text-right">
-                <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">
-                      S.N.
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Title
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Category
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Date
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Amount
-                    </th>
-                    <th scope="col" className="px-6 py-3">
-                      Status
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  {payments.map((payment, index) => {
-
-                    // const { campaign, balance, category, Date } = payment;
-
-                    return (
-                      <tr key={payment.paymentId} className="border-b hover:bg-gray-50">
-                        <td className="px-6 py-4">{count++}</td>
-                        <td className="px-6 py-4">{payment.paymentBy.id}</td>
-                        <td className="px-6 py-4">{payment.paymentBy.username}</td>
-                        <td className="px-6 py-4">{payment.expirationDate}</td>
-                        <td className="px-6 py-4">{payment.type}</td>
-                        {/* <td className="px-6 py-4">{campaign[0].status}</td> */}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            )}
+            <table className="mt-2 w-full text-left text-sm text-gray-500 rtl:text-right">
+              <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    S.N.
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Title
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Category
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Start Date
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Goal Amount
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Collected Amount
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    End Date
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {payments?.map((payment, index) => {
+                  return (
+                    <tr key={payment.paymentId} className="border-b hover:bg-gray-50">
+                      <td className="px-6 py-4">{count++}</td>
+                      <td className="px-6 py-4"><td
+                        scope="row"
+                        className=" font-medium text-gray-900 "
+                      >
+                        <Link
+                          href={`/campaigns/${payment.paymentId}`}
+                          className="flex items-center gap-2 text-blue-700"
+                        >
+                          {`${payment.campaign[0].title.slice(0, 20)}${payment.campaign[0].title.length > 20 ? '...' : ''
+                            }`}
+                          <div className="h-4 w-4">
+                            <OpenLinkIcon />
+                          </div>
+                        </Link>
+                      </td></td>
+                      <td className="px-6 py-4">{payment.campaign[0].categoryId}</td>
+                      <td className="px-6 py-4">{payment.campaign[0].startDate || "Not specified"}</td>
+                      <td className="px-6 py-4">{payment.campaign[0].goalAmount || "Not specified"}</td>
+                      <td className="px-6 py-4">{payment.campaign[0].collectedAmount || "Not specified"}</td>
+                      <td className="px-6 py-4">{payment.campaign[0].endDate || "Not specified"}</td>
+                      <td className="px-6 py-4">{payment.campaign[0].status || "Not specified"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

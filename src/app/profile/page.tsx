@@ -2,11 +2,11 @@
 import ChangePassword from './ChangePassword'
 import EditProfile from './EditProfile'
 import React, { useState } from 'react'
-import Fundraiser from './Fundraiser'
-import Donor from './Donor'
+import Campaigns from './Campaigns'
+import Donations from './Donations'
 import Profile from './Profile'
 
-export default function Page() {
+export default function ProfilePage() {
   const [selectedTab, setSelectedTab] = useState('profile')
 
   const handleTabClick = tab => {
@@ -35,21 +35,21 @@ export default function Page() {
             }`}>
             Change Password
           </button>
-          <button onClick={() => handleTabClick('fundraiser')} className={`text-left font-medium  px-5 py-3 ${selectedTab === 'fundraiser'
+          <button onClick={() => handleTabClick('campaigns')} className={`text-left font-medium  px-5 py-3 ${selectedTab === 'campaigns'
             ? ' w-full bg-blue-700  text-white'
             : ' text-black'
-            }`}>Fundraiser</button>
-          <button onClick={() => handleTabClick('donor')} className={`text-left font-medium  px-5 py-3 ${selectedTab === 'donor'
+            }`}>Campaign List</button>
+          <button onClick={() => handleTabClick('donations')} className={`text-left font-medium  px-5 py-3 ${selectedTab === 'donations'
             ? ' w-full bg-blue-700  text-white'
             : ' text-black'
-            }`}> Donor</button>
+            }`}>Donations List</button>
         </div>
         <div className="w-5/6">
           {selectedTab === 'profile' && <Profile />}
           {selectedTab === 'editprofile' && <EditProfile />}
           {selectedTab === 'changepassword' && <ChangePassword />}
-          {selectedTab === 'fundraiser' && <Fundraiser />}
-          {selectedTab === 'donor' && <Donor />}
+          {selectedTab === 'campaigns' && <Campaigns />}
+          {selectedTab === 'donations' && <Donations />}
         </div>
       </div>
     </div>

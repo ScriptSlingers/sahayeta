@@ -197,7 +197,7 @@ export default function CampaignsListing() {
                         <td className="w-4 p-4">
                           {count++}
                         </td>
-                        <th
+                        <td
                           scope="row"
                           className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 "
                         >
@@ -211,7 +211,7 @@ export default function CampaignsListing() {
                               <OpenLinkIcon />
                             </div>
                           </Link>
-                        </th>
+                        </td>
                         <td className="px-6 py-4">{category?.name}</td>
                         <td className="px-6 py-4">{createdBy?.name}</td>
                         <td className="px-6 py-4">{formatDate(startDate)}</td>
