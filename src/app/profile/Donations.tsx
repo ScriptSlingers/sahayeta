@@ -121,7 +121,7 @@ export default function Donations() {
                   <th scope="col" className="px-6 py-3">
                     S.N.
                   </th>
-                  <th scope="col" className="px-6 py-3">
+                  <th scope="col" >
                     Title
                   </th>
                   <th scope="col" className="px-6 py-3">
@@ -149,7 +149,7 @@ export default function Donations() {
                   return (
                     <tr key={payment.paymentId} className="border-b hover:bg-gray-50">
                       <td className="px-6 py-4">{count++}</td>
-                      <td className="px-6 py-4"><td
+                      <td
                         scope="row"
                         className=" font-medium text-gray-900 "
                       >
@@ -163,7 +163,7 @@ export default function Donations() {
                             <OpenLinkIcon />
                           </div>
                         </Link>
-                      </td></td>
+                      </td>
                       <td className="px-6 py-4">{payment.campaign[0].categoryId}</td>
                       <td className="px-6 py-4">{payment.campaign[0].startDate || "Not specified"}</td>
                       <td className="px-6 py-4">{payment.campaign[0].goalAmount || "Not specified"}</td>
