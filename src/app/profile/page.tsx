@@ -1,12 +1,23 @@
 'use client'
 import ChangePassword from './ChangePassword'
 import EditProfile from './EditProfile'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Campaigns from './Campaigns'
 import Donations from './Donations'
 import Profile from './Profile'
+import { useClientSession } from '@sahayeta/utils'
+import { useRouter } from 'next/navigation'
 
 export default function ProfilePage() {
+
+  const currentUser = useClientSession()
+
+  const router = useRouter()
+  useEffect(() => {
+    if (!currentUser) {
+      router.replace('/login')
+    }
+  }, [currentUser, router])
   const [selectedTab, setSelectedTab] = useState('profile')
 
   const handleTabClick = tab => {

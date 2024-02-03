@@ -1,11 +1,23 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CampaignsListing from './CampaignList'
 import CategoryEdit from './CategoryEdit'
 import NotificationListing from './Notification'
 import UsersListing from './UserList'
+import { useClientSession } from '@sahayeta/utils'
+import { useRouter } from 'next/navigation'
 
 export default function DashboardPage() {
+
+  const currentUser = useClientSession()
+
+  const router = useRouter()
+  useEffect(() => {
+    if (currentUser?.role !== 'admin') {
+      router.replace('/')
+    }
+  }, [currentUser, router])
+
   const [selectedTab, setSelectedTab] = useState('userlist')
 
   const handleTabClick = tab => {
