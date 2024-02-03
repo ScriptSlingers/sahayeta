@@ -70,16 +70,7 @@ export default function EditProfile() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm({
-    defaultValues: {
-      username: loggedInUser?.username,
-      name: loggedInUser?.name,
-      email: loggedInUser?.email,
-      phoneNum: loggedInUser?.phoneNum,
-      address: loggedInUser?.address,
-      role: loggedInUser?.role
-    }
-  })
+  } = useForm()
 
   const handleEdit = async values => {
     try {
@@ -94,6 +85,8 @@ export default function EditProfile() {
         }
       ).then(response => {
         const updatedUser = response.data;
+        console.log("updatedUser ==>>", updatedUser)
+        console.log("values ==>>", values)
         setLoggedInUser(updatedUser);
       })
 
@@ -156,7 +149,7 @@ export default function EditProfile() {
                     className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                     type="text"
                     placeholder="Username"
-                    value={loggedInUser?.username}
+                    defaultValue={loggedInUser?.username}
                   />
                 </div>
                 <div className="flex flex-col gap-1">
@@ -204,25 +197,8 @@ export default function EditProfile() {
                     className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                     type="text"
                     placeholder="Address"
-                    defaultValue={loggedInUser?.address}
                   />
                 </div>
-                <div className="flex flex-col gap-">
-                  <label className="text-sm font-bold text-gray-600 ">
-                    Role
-                  </label>
-                  <select
-                    {...register('role')}
-                    className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
-                    defaultValue={loggedInUser?.role}
-                  >
-                    <option value="admin">Admin</option>
-                    <option value="charity">Charity</option>
-                    <option value="donor">Donor</option>
-                    <option value="fundraiser">Fundraiser</option>
-                  </select>
-                </div>
-
                 <div className="mt-4 flex items-center justify-center gap-10 ">
                   <button
                     type="submit"
