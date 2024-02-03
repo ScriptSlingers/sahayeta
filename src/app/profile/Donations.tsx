@@ -9,6 +9,7 @@ import Link from 'next/link'
 export default function Donations() {
   const [payments, setPayments] = useState<any>()
   const currentUser = useClientSession()
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
     if (currentUser) {
@@ -35,7 +36,39 @@ export default function Donations() {
     }
   }, [currentUser]);
 
+
+  useEffect(() => {
+
+    axios.get('/api/category/', { headers: { 'Content-Type': 'application/json' } })
+      .then(response => {
+        if (response.data && response.data.category) {
+          setCategory(response.data.category);
+        } else {
+          console.log('Categories data is not in the expected format:', response.data);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+  }, []);
+
+
+
   let count = 1;
+  function formatDate(dateString) {
+    if (!dateString) {
+      return "Not specified";
+    }
+
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+
+    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  }
+
 
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
@@ -128,7 +161,7 @@ export default function Donations() {
                     Category
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    Start Date
+                    payment Date
                   </th>
                   <th scope="col" className="px-6 py-3">
                     Goal Amount
@@ -137,15 +170,16 @@ export default function Donations() {
                     Collected Amount
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    End Date
+                    Payment Method
                   </th>
+
                   <th scope="col" className="px-6 py-3">
                     Status
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {payments?.map((payment, index) => {
+                {payments?.map((payment) => {
                   return (
                     <tr key={payment.paymentId} className="border-b hover:bg-gray-50">
                       <td className="px-6 py-4">{count++}</td>
@@ -164,11 +198,19 @@ export default function Donations() {
                           </div>
                         </Link>
                       </td>
-                      <td className="px-6 py-4">{payment.campaign[0].categoryId}</td>
-                      <td className="px-6 py-4">{payment.campaign[0].startDate || "Not specified"}</td>
+                      <td className="px-6 py-4">
+                        {
+                          category && payments ?
+                            category.find(category => category.id === payment.campaign[0].categoryId)?.name || "Category not found"
+                            : "Loading..."
+                        }
+                      </td>
+
+                      <td className="px-6 py-4">{formatDate(payment.paymentDate)}</td>
                       <td className="px-6 py-4">{payment.campaign[0].goalAmount || "Not specified"}</td>
                       <td className="px-6 py-4">{payment.campaign[0].collectedAmount || "Not specified"}</td>
-                      <td className="px-6 py-4">{payment.campaign[0].endDate || "Not specified"}</td>
+                      <td className="px-6 py-4">{payment.paymentMethod.methodName || "Not specified"}</td>
+
                       <td className="px-6 py-4">{payment.campaign[0].status || "Not specified"}</td>
                     </tr>
                   );
