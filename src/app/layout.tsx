@@ -1,9 +1,15 @@
-import { AppHeader, AuthProvider, Footer } from '@sahayeta/components';
-import type { Metadata } from 'next';
-import NextTopLoader from 'nextjs-toploader';
-import './globals.css';
-import { Toaster } from 'react-hot-toast';
+import { AppHeader, AuthProvider, Footer } from '@sahayeta/components'
+import type { Metadata } from 'next'
+import NextTopLoader from 'nextjs-toploader'
+import './globals.css'
+import { Toaster } from 'react-hot-toast'
+import { Poppins } from 'next/font/google'
 
+const poppins = Poppins({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'],
+  display: 'swap'
+})
 
 export const metadata: Metadata = {
   title: 'SAHAYATA',
@@ -17,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={poppins.className}>
         <NextTopLoader
           height={2}
           color="#2563EB"

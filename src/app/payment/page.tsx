@@ -1,13 +1,13 @@
 import React from 'react'
 export default function Payment() {
-  const handlePayment = async (payment_method: string) => {
-    const url = ''
-    const data = {
-      amount: 100,
-      products: [{ product: 'test', amount: 100, quantity: 1 }],
-      payment_method
-    }
-  }
+  // const handlePayment = (payment_method: string) => {
+  //   const url = ''
+  //   const data = {
+  //     amount: 100,
+  //     products: [{ product: 'test', amount: 100, quantity: 1 }],
+  //     payment_method
+  //   }
+  // }
   return (
     <>
       <div className="">
@@ -30,7 +30,7 @@ export default function Payment() {
             </div>
             <div className="md:flex py-4">
               <button className="rounded w-full py-2 px-3 text-center font-semibold bg-blue-500 text-white leading-tight focus:outline-none focus:shadow-outline hover:bg-transparent hover:border-blue-400 hover:text-blue-500 duration-500 hover:border border border-transparent">
-                onClick={() => handlePayment('esewa')}
+                {/* onClick={() => handlePayment('esewa')} */}
                 Donate with khalti
               </button>
             </div>

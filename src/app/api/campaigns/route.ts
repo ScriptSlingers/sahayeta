@@ -19,7 +19,9 @@ export async function GET() {
       createdBy: true,
       category: true,
       status: true,
-      payment: true
+      payment: true,
+      latitude: true,
+      longitude: true
     }
   })
   return NextResponse.json({ campaigns })
@@ -42,7 +44,8 @@ export async function POST(request: NextRequest) {
       goalAmount,
       createdById,
       categoryId
-      
+      // endDate,
+      // startDate
     } = campaign
 
     const newCampaign = await prisma.campaign.create({
@@ -54,6 +57,8 @@ export async function POST(request: NextRequest) {
         goalAmount,
         createdById,
         categoryId
+        // endDate,
+        // startDate
       }
     })
 

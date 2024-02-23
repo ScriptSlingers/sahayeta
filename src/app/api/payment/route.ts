@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
     select: {
       paymentId: true,
       paymentType: true,
+      paymentDate: true,
       expirationDate: true,
       paymentBy: true,
       paymentMethod: true,

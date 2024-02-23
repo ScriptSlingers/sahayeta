@@ -17,7 +17,9 @@ export async function GET(req: NextRequest, { params }) {
         goalAmount: true,
         createdBy: true,
         startDate: true,
-        endDate: true
+        endDate: true,
+        latitude: true,
+        longitude: true
       }
     })
 

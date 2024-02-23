@@ -49,7 +49,8 @@ module.exports = {
         },
         secondary: '#4E8397',
         accent: '#D5CABD',
-        primary: '#D5CABD'
+        primary: '#D5CABD',
+        newPrimary: '#203bc4'
       },
       fontFamily: {
         playfair: ['Playfair Display', 'serif'],
