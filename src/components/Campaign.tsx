@@ -36,7 +36,7 @@ export default function Campaign() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/category')
+        const response = await fetch('/api/category')
         const data = await response.json()
 
         const categoryNames = data.category.map(category => category.name)
@@ -54,9 +54,9 @@ export default function Campaign() {
       <div className="flex flex-row gap-8 p-4 ">
         <div className="ml-20 mt-28  flex h-1/2 w-1/6 flex-col rounded-lg bg-neutral-100 pb-14 ">
           <div className="ml-8  mt-10 justify-center space-y-12 text-xl font-semibold text-gray-500">
-            <h1 className="text-2xl font-semibold ">CATEGORIES</h1>
+            <h1 className="text-2xl font-semibold ">Categories</h1>
             <div className="gap-20">
-              <option value="allcategories" className="hover:text-blue-500 ">
+              <option value="all categories" className="hover:text-blue-500 ">
                 All Categories
               </option>
               <option value="education" className="hover:text-blue-500 ">
