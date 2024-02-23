@@ -25,6 +25,7 @@ interface CampaignData {
   goalAmount: string
   longitude: string
   latitude: string
+  address: string
 }
 
 export default function SingleCampaign({ params }: { params: { id: string } }) {
@@ -140,7 +141,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             <div className="flex  gap-7">
             <div className=" w-full">
               {campaign && 
-              <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude} />
+              <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude}
+                address={campaign?.address} />
               }
               </div>
             </div>

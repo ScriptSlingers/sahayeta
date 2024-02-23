@@ -32,7 +32,7 @@ function GoogleMap() {
 }
 
 export default function OsmMap({
-  longitude, latitude
+  longitude, latitude, address
 }) {
   return (
     <MapContainer preferCanvas={true} center={[latitude, longitude]} zoom={13} scrollWheelZoom={true} className='h-80'>
@@ -42,7 +42,7 @@ export default function OsmMap({
   />
   <Marker position={[latitude, longitude]}>
       <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
+        {address}
       </Popup>
     </Marker>
 </MapContainer>
