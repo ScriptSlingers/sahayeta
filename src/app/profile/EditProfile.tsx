@@ -85,12 +85,12 @@ export default function EditProfile() {
     try {
       const formData = new FormData();
 
-      // Append values from the form
+
       Object.keys(values).forEach((key) => {
         formData.append(key, values[key]);
       });
 
-      // Append file if available
+
       if (selectedFile) {
         formData.append('file', selectedFile);
       }

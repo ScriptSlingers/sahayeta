@@ -339,20 +339,18 @@ export const EditModal = ({
 
   const handleEdit = async values => {
     try {
-      await axios.patch(
-        `/api/users/${id}`,
-        { ...values },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            accept: 'application/json'
-          }
+      await axios.patch(`/api/users/${loggedInUser?.id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // or any other required headers
+          // 'Authorization': `Bearer ${token}`, // if authorization is needed
         }
-      )
+      })
+
       toast.success(`User Edited Successfully`)
       closeModal()
     } catch (error) {
-      console.error('Error Editing user:', error)
+      console.error('Error Editing user:', error);
+      console.log(error.response); // Check the response from the server
     }
   }
 
