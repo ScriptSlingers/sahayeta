@@ -4,6 +4,11 @@ import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { log } from 'console'
+const OsmMap = dynamic(() => import('@sahayeta/components/MapComponent'), {
+  ssr: false
+})
 
 interface CampaignData {
   id: string
@@ -18,6 +23,8 @@ interface CampaignData {
   }
   endDate: string
   goalAmount: string
+  longitude: string
+  latitude: string
 }
 
 export default function SingleCampaign({ params }: { params: { id: string } }) {
@@ -28,6 +35,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
     const fetchCampaignData = async () => {
       try {
         const res = await axios.get(`/api/campaigns/${campaignId}`)
+        console.log(res.data);
         setCampaign(res.data)
       } catch (error) {
         return error
@@ -128,6 +136,15 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             </div>
           </div>
           <div className="border-b border-slate-500"></div>
+          <div className="flex flex-col gap-2">
+            <div className="flex  gap-7">
+            <div className=" w-full">
+              {campaign && 
+              <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude} />
+              }
+              </div>
+            </div>
+          </div>
         </div>
         <div className=" relative m-7 mt-12 flex h-fit flex-col rounded-2xl bg-white shadow-2xl md:flex-row md:space-y-0 lg:w-1/3 ">
           <section className="m-2 flex flex-col p-8 md:p-10">
@@ -139,9 +156,9 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             <button className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-t from-orange-400 to-yellow-300 p-2 text-black hover:border-2">
               Share{' '}
             </button>
-            <link href="/payment" className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-b from-orange-400 to-yellow-400 p-2 text-black hover:border-2">
+            <Link href="/payment" className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-b from-orange-400 to-yellow-400 p-2 text-black hover:border-2">
               Donate now{' '}
-            </link>
+            </Link>
             <div className="mb-2 mt-2 flex items-center gap-3">
               <Link href="/profile">
                 <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
