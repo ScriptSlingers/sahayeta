@@ -1,1 +1,96 @@
-import { prisma } from '@sahayeta/lib'import { NextAuthOptions } from 'next-auth'import CredentialsProvider from 'next-auth/providers/credentials'import GoogleProvider from 'next-auth/providers/google'export const authOptions: NextAuthOptions = {  pages: {    signIn: '/login',    signOut: '/logout',    error: '/error'  },  session: {    strategy: 'jwt'  },  providers: [    GoogleProvider({      clientId: process.env.GOOGLE_CLIENT_ID || '',      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''    }),    CredentialsProvider({      id: 'credentials',      name: 'credentials',      credentials: {        username: {          label: 'Email',          type: 'text',          placeholder: 'Email address'        },        password: {          label: 'Password',          type: 'password',          placeholder: '*************'        }      },      authorize: async (credentials, req) => {        const body = JSON.stringify(credentials)        try {          const user = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {            method: 'POST',            headers: {              'Content-Type': 'application/json',              Accept: 'application/json'            },            body: body          })            .then(res => res.json())            .catch(error => {              throw new Error('Error during fetch', error)            })          if (user) {            return user          } else {            throw new Error('No user received from /api/login')          }        } catch (error) {          console.error('Error during authorization:', error)          throw new Error('AccessDenied') // Customize the error message if needed        }      }    })  ],  callbacks: {    session: async ({ session }) => {      try {        const userDetails = await prisma.user.findFirst({          where: { email: session.user.email },          select: {            id: true,            role: true          }        })        session.user['id'] = userDetails.id        session.user['role'] = userDetails.role        return session      } catch (error) {        console.error('Error fetching user details:', error)        return session      }    },    async jwt({ token }) {      return token    },    signIn: async (session: any) => {      try {        if (!session.user.email) {          throw new Error('Invalid User Details')        }        const existingUser = await prisma.user.findFirst({          where: { email: session.user.email }        })        if (!existingUser) {          await prisma.user.create({            data: {              username: session.user.email.split('@')[0],              email: session.user.email,              name: session.user.name,              profileImage: session.user.image            }          })        } else {          return session.user        }        return null      } catch (error) {        throw new Error('Error during sign-in process')      }    }  }}
+import { prisma } from '@sahayeta/lib';
+import { compare } from "bcryptjs";
+import { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+
+export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: '/login',
+    signOut: '/logout',
+    error: '/error'
+  },
+  session: {
+    strategy: 'jwt'
+  },
+
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || ''
+    }),
+
+    CredentialsProvider({
+      id: 'credentials',
+      name: 'credentials',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'email@example.com'
+        },
+        password: { label: "Password", type: "password" },
+
+      },
+      authorize: async (credentials, req) => {
+        const generatedRandomKey = [...Array(10)].map(() => Math.random().toString(36).charAt(2)).join('');
+
+        if (!credentials?.email || !credentials.password) {
+          return null;
+      }
+      const user = await prisma.user.findFirst({
+        where: {
+            email: credentials.email,
+        }
+    });
+    if (
+      !user ||
+      !(await compare(credentials.password, user.password!))
+  ) {
+      return null;
+  }
+   return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      randomKey: generatedRandomKey,
+  };
+      }
+    })
+  ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      const userDetails = await prisma.user.findFirst({
+        where: { email: session.user.email },
+        select: {
+          id: true,
+          role: true
+        }
+      })
+      session.user['role'] = userDetails.role
+
+      return {
+          ...session,
+          user: {
+              ...session.user,
+              id: token.id,
+              randomKey: token.randomKey,
+          },
+      };
+  },
+    async jwt({ token, user }) {
+      if (user) {
+        const newUser = user as unknown as any;
+        return {
+            ...token,
+            id: newUser.id,
+            randomKey: newUser.randomKey,
+        };
+    }
+    return token;
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+
+}

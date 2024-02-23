@@ -1,38 +1,58 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
+import { prisma } from "@sahayeta/lib";
+import { hash } from "bcryptjs";
+import { NextResponse } from "next/server";
 
-const app = express()
-const PORT = process.env.PORT || 3000
+export async function POST(req: Request) {
+    try {
+        const { name, email, password, username } = (await req.json()) as {
+            name: string;
+            email: string;
+            password: string;
+            username: string;
+        };
 
-// Middleware to parse JSON bodies
-app.use(bodyParser.json())
+        const lowerCaseEmail = email.toLowerCase();
 
-// Define the register route
-app.post('/api/register', async (req, res) => {
-  try {
-    // Extract the user details from the request body
-    const { name, email, password } = req.body
+        const existingUser = await prisma.user.findFirst({
+            where: {
+                email: lowerCaseEmail,
+            },
+        });
 
-    // You should add validation for name, email, and password here
+        if (existingUser) {
+            return new NextResponse(
+                JSON.stringify({
+                    status: "error",
+                    message: "Email already in use",
+                }),
+                { status: 400 } 
+            );
+        }
 
-    // Hash the password before storing it in the database
-    const hashedPassword = await bcrypt.hash(password, 10)
+        const hashed_password = await hash(password, 12);
+        const generatedUsername = await email.split("@")[0];
+        const user = await prisma.user.create({
+            data: {
+                name,
+                username: generatedUsername,
+                email: lowerCaseEmail,
+                password: hashed_password
+            },
+        });
 
-    // Save the user to the database
-    // Replace this with your actual database logic
-    // Example: await User.create({ name, email, password: hashedPassword });
-
-    // Send a success response
-    res.status(201).send('User registered successfully')
-  } catch (error) {
-    // Handle any errors
-    console.error(error)
-    res.status(500).send('An error occurred')
-  }
-})
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
-})
+        return NextResponse.json({
+            user: {
+                name: user.name,
+                email: user.email,
+            },
+        });
+    } catch (error: any) {
+        return new NextResponse(
+            JSON.stringify({
+                status: "error",
+                message: error.message,
+            }),
+            { status: 500 }
+        );
+    }
+}
