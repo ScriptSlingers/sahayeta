@@ -29,7 +29,7 @@ export default function Page() {
   return (
     <>
       <Campaign />
-      <div className="container text-black p-3 grid grid-cols-6 justify-center items-center">
+      <div className="container grid grid-cols-6 items-center justify-center p-3 text-black">
         {campaign?.Campaigns.map(
           ({
             campaignId,

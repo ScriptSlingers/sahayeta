@@ -1,7 +1,8 @@
-import { prisma } from '@sahayeta/lib'
-import { NextAuthOptions } from 'next-auth'
-import CredentialsProvider from 'next-auth/providers/credentials'
-import GoogleProvider from 'next-auth/providers/google'
+import { prisma } from '@sahayeta/lib';
+import { compare } from "bcryptjs";
+import { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -23,95 +24,73 @@ export const authOptions: NextAuthOptions = {
       id: 'credentials',
       name: 'credentials',
       credentials: {
-        username: {
+        email: {
           label: 'Email',
-          type: 'text',
-          placeholder: 'Email address'
+          type: 'email',
+          placeholder: 'email@example.com'
         },
-        password: {
-          label: 'Password',
-          type: 'password',
-          placeholder: '*************'
-        }
+        password: { label: "Password", type: "password" },
+
       },
       authorize: async (credentials, req) => {
-        const body = JSON.stringify(credentials)
-        try {
-          const user = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json'
-            },
-            body: body
-          })
-            .then(res => res.json())
-            .catch(error => {
-              throw new Error('Error during fetch', error)
-            })
+        const generatedRandomKey = [...Array(10)].map(() => Math.random().toString(36).charAt(2)).join('');
 
-          if (user) {
-            return user
-          } else {
-            throw new Error('No user received from /api/login')
-          }
-        } catch (error) {
-          console.error('Error during authorization:', error)
-          throw new Error('AccessDenied') // Customize the error message if needed
+        if (!credentials?.email || !credentials.password) {
+          return null;
+      }
+      const user = await prisma.user.findFirst({
+        where: {
+            email: credentials.email,
         }
+    });
+    if (
+      !user ||
+      !(await compare(credentials.password, user.password!))
+  ) {
+      return null;
+  }
+   return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      randomKey: generatedRandomKey,
+  };
       }
     })
   ],
   callbacks: {
-    session: async ({ session }) => {
-      try {
-        const userDetails = await prisma.user.findFirst({
-          where: { email: session.user.email },
-          select: {
-            id: true,
-            role: true
-          }
-        })
-
-        session.user['id'] = userDetails.id
-        session.user['role'] = userDetails.role
-        return session
-      } catch (error) {
-        console.error('Error fetching user details:', error)
-        return session
-      }
-    },
-
-    async jwt({ token }) {
-      return token
-    },
-
-    signIn: async (session: any) => {
-      try {
-        if (!session.user.email) {
-          throw new Error('Invalid User Details')
+    session: async ({ session, token }) => {
+      const userDetails = await prisma.user.findFirst({
+        where: { email: session.user.email },
+        select: {
+          id: true,
+          role: true
         }
-        const existingUser = await prisma.user.findFirst({
-          where: { email: session.user.email }
-        })
+      })
+      session.user['role'] = userDetails.role
 
-        if (!existingUser) {
-          await prisma.user.create({
-            data: {
-              username: session.user.email.split('@')[0],
-              email: session.user.email,
-              name: session.user.name,
-              profileImage: session.user.image
-            }
-          })
-        } else {
-          return session.user
-        }
-
-        return null
-      } catch (error) {
-        throw new Error('Error during sign-in process')
-      }
+      return {
+          ...session,
+          user: {
+              ...session.user,
+              id: token.id,
+              randomKey: token.randomKey,
+          },
+      };
+  },
+    async jwt({ token, user }) {
+      if (user) {
+        const newUser = user as unknown as any;
+        return {
+            ...token,
+            id: newUser.id,
+            randomKey: newUser.randomKey,
+        };
     }
-  }
+    return token;
+    },
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+
 }

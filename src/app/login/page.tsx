@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { FcGoogle } from 'react-icons/fc'
 import donationImage from '../../../public/assets/img/children.jpg'
 import { useClientSession } from '../../utils'
+import toast from 'react-hot-toast'
 
 export default function Login(csrfToken) {
   const currentUser = useClientSession()
@@ -28,81 +29,81 @@ export default function Login(csrfToken) {
     await signIn('credentials', {
       ...values,
       callbackUrl: 'http://localhost:3000/'
-    })
-    console.log(values)
+    });
+    toast.success("Logged in successfully");
+    console.log(values);
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f9f4f1] ">
-      <div className="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 overflow-hidden">
+    <div className="flex min-h-screen items-center justify-center bg-[#f9f4f1] ">
+      <div className="relative flex flex-col rounded-2xl bg-white shadow-2xl md:flex-row overflow-hidden">
         <section className=" relative">
           <Image
             src={donationImage}
             alt="Login page image"
-            className="w-[450px] h-full hidden md:block object-cover"
+            className="hidden h-full w-[450px] object-cover md:block"
           />
         </section>
 
         <section className="flex flex-col justify-center p-8 md:p-14">
-          <span className="mb-3 text-4xl font-bold">Welcome back</span>
-          <span className="font-light text-gray-400 mb-8">
+          <span className="mb-3 text-4xl font-bold">Welcome to Sahayata</span>
+          <span className="mb-8 font-light text-gray-400">
             Welcome back! Please enter your details
           </span>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <input
               {...register('email')}
-              className="w-full border border-neutral-400 p-2 rounded-lg text-black text-sm mt-5"
+              className="w-full rounded border border-neutral-400 p-3 text-sm text-black"
               type="text"
               placeholder="Email"
               required
             />
             <input
               {...register('password')}
-              className="w-full border border-neutral-400 p-2 rounded-lg text-black text-sm mt-5"
-              type="text"
+              className="w-full rounded border border-neutral-400 p-3 text-sm text-black"
+              type="password"
               placeholder="Password"
               required
             />
 
-            <div className="flex justify-between w-full py-4">
-              <div className="mr-24">
-                <input type="checkbox" name="ch" id="ch" className="mr-2" />
+            <div className="flex w-full justify-between py-4">
+              <div className='flex gap-2'>
+                <input type="checkbox" name="ch" id="ch" />
                 <span className="text-md">Remember Me</span>
               </div>
-              <a href="#" className="text-black text-md  hover:text-blue-500 ">
+              <a href="#" className="text-md text-black  hover:text-blue-500 ">
                 Forget Password?
               </a>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white p-2 rounded-lg mb-6 hover:bg-blue-400 "
+              className="mb-6 w-full rounded-lg bg-blue-600 p-2 text-white hover:bg-blue-400 "
+              disabled={isSubmitting}
             >
               {isSubmitting ? <>Signing In</> : <>Login</>}
             </button>
           </form>
-          <p className="font-medium text-sm text-[#9A9A9A] text-center ">
+          <p className="text-center text-sm font-medium text-[#9A9A9A] ">
             --- Or login with ---
           </p>
           <br />
           <button
-            className="w-full bg-black text-white p-2 rounded-lg mb-6 hover:text-black hover:bg-white border border-black"
+            className="mb-6 w-full rounded-lg border border-black bg-black p-2 text-white hover:bg-white hover:text-black"
             onClick={() =>
               signIn('google', { callbackUrl: 'https://localhost:3000/' })
             }
           >
-            <FcGoogle className="w-6 g-6 inline mr-2" />
+            <FcGoogle className="g-6 mr-2 inline w-6" />
             Sign in with Google
           </button>
           <div className="text-center text-gray-600">
             Don&apos;thave an account?
             <a
               href="/signup"
-              className="text-black text-md font-bold hover:text-blue-500 "
+              className="text-md font-bold text-black hover:text-blue-500 "
             >
-              Sign Up
+              {" "}  Sign Up
             </a>
           </div>
         </section>

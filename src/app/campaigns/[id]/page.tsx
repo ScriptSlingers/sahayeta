@@ -4,6 +4,11 @@ import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { log } from 'console'
+const OsmMap = dynamic(() => import('@sahayeta/components/MapComponent'), {
+  ssr: false
+})
 
 interface CampaignData {
   id: string
@@ -18,6 +23,9 @@ interface CampaignData {
   }
   endDate: string
   goalAmount: string
+  longitude: string
+  latitude: string
+  address: string
 }
 
 export default function SingleCampaign({ params }: { params: { id: string } }) {
@@ -28,6 +36,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
     const fetchCampaignData = async () => {
       try {
         const res = await axios.get(`/api/campaigns/${campaignId}`)
+        console.log(res.data);
         setCampaign(res.data)
       } catch (error) {
         return error
@@ -39,8 +48,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="container flex gap-7 ">
-        <div className="lg:w-2/3 sm:w-full flex flex-col p-10 gap-6 ">
-          <div className="text-xl font-maven font-semibold">
+        <div className="flex flex-col gap-6 p-10 sm:w-full lg:w-2/3 ">
+          <div className="font-maven text-xl font-semibold">
             {campaign?.title}
           </div>
           <div className="relative flex h-96 ">
@@ -49,12 +58,12 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 src={campaign?.image}
                 alt={campaign?.title}
                 fill
-                className="object-cover rounded-xl"
+                className="rounded-xl object-cover"
               />
             </Link>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 border border-accent p-3 rounded-full">
+            <div className="h-12 w-12 rounded-full border border-accent p-3">
               <Link href="#">
                 <ProfileIcon />
               </Link>
@@ -68,21 +77,21 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
           <div className="border-b border-slate-500"></div>
           <div>Hello my name is {campaign?.createdBy?.name},</div>
           <div className="text-justify">{campaign?.description}</div>
-          <div className="lg:flex  gap-3 items-center justify-center bg-white  shadow rounded w-full p-3 ">
+          <div className="w-full  items-center justify-center gap-3 rounded  bg-white p-3 shadow lg:flex ">
             <div>
-              <div className="relative flex w-20 h-20 ">
+              <div className="relative flex h-20 w-20 ">
                 <Link href="/">
                   <Image
                     src="/assets/img/donateicon.png"
                     alt="logo"
                     fill
-                    className="object-cover rounded-full"
+                    className="rounded-full object-cover"
                   />
                 </Link>
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="font-semibold font-maven text-lg">
+              <div className="font-maven text-lg font-semibold">
                 `Give Rs.500 and be a founding donor`
               </div>
               <div className="text-slate-600">
@@ -90,7 +99,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 journey to success. Your early support inspires others to
                 donate.
               </div>
-              <button className="w-full bg-[#fdb72f] text-black p-2 rounded-lg mb-6 hover:bg-orange-300 ">
+              <button className="mb-6 w-full rounded-lg bg-[#fdb72f] p-2 text-black hover:bg-orange-300 ">
                 Make a donation
               </button>
             </div>
@@ -99,7 +108,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
           <div className="flex flex-col gap-2">
             <div className="flex  gap-7">
               <Link href="/profile">
-                <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
+                <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
                   <Image
                     src={campaign?.createdBy?.profileImage}
                     alt={campaign?.createdBy?.name}
@@ -108,8 +117,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                   />
                 </div>
               </Link>
-              <div className=" rounded-md flex flex-col gap-2 ">
-                <div className=" font-semibold font-maven text-lg ">
+              <div className=" flex flex-col gap-2 rounded-md ">
+                <div className=" font-maven text-lg font-semibold ">
                   {campaign?.createdBy?.name}
                 </div>
                 <div className="text-slate-800">Organizer</div>
@@ -128,23 +137,33 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             </div>
           </div>
           <div className="border-b border-slate-500"></div>
+          <div className="flex flex-col gap-2">
+            <div className="flex  gap-7">
+            <div className=" w-full">
+              {campaign && 
+              <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude}
+                address={campaign?.address} />
+              }
+              </div>
+            </div>
+          </div>
         </div>
-        <div className=" lg:w-1/3 h-fit relative flex flex-col m-7 mt-12 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0 ">
-          <section className="flex flex-col p-8 m-2 md:p-10">
-            <div className="text-slate-800 mb-5">
+        <div className=" relative m-7 mt-12 flex h-fit flex-col rounded-2xl bg-white shadow-2xl md:flex-row md:space-y-0 lg:w-1/3 ">
+          <section className="m-2 flex flex-col p-8 md:p-10">
+            <div className="mb-5 text-slate-800">
               {' '}
               Npr. {campaign?.goalAmount} goal
             </div>
 
-            <button className="w-full bg-gradient-to-t from-orange-400 to-yellow-300 border text-black p-2 rounded-lg mb-2 mt-2 hover:border-2">
+            <button className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-t from-orange-400 to-yellow-300 p-2 text-black hover:border-2">
               Share{' '}
             </button>
-            <button className="w-full bg-gradient-to-b from-orange-400 to-yellow-400 border text-black p-2 rounded-lg mb-2 mt-2 hover:border-2">
+            <Link href="/payment" className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-b from-orange-400 to-yellow-400 p-2 text-black hover:border-2">
               Donate now{' '}
-            </button>
-            <div className="flex items-center gap-3 mt-2 mb-2">
+            </Link>
+            <div className="mb-2 mt-2 flex items-center gap-3">
               <Link href="/profile">
-                <div className="relative rounded-full overflow-hidden hover:cursor-pointer">
+                <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
                   <Image
                     src="/assets/img/help.png"
                     alt="help icon"
@@ -155,13 +174,13 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
               </Link>
               <div className=" rounded-md p-2">
                 <p className="font-medium">Become the first supporter</p>
-                <p className="text-slate-500 font-maven text-sm mt-1">
+                <p className="mt-1 font-maven text-sm text-slate-500">
                   Your Donation matters
                 </p>
               </div>
             </div>
             <div className="mt-2">
-              <h1 className="font-medium mb-2">
+              <h1 className="mb-2 font-medium">
                 Sahayata protects your donation
               </h1>
               <div>

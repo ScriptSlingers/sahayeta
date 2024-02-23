@@ -19,7 +19,10 @@ export async function GET() {
       createdBy: true,
       category: true,
       status: true,
-      payment: true
+      payment: true,
+      latitude: true,
+      longitude: true,
+      address: true
     }
   })
   return NextResponse.json({ campaigns })

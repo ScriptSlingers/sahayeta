@@ -51,10 +51,10 @@ export default function Campaign() {
   }, [])
   return (
     <>
-      <div className="p-4 flex flex-row gap-8 ">
-        <div className="flex flex-col  bg-neutral-100 w-1/6 h-1/2 rounded-lg ml-20 mt-28 pb-14 ">
-          <div className="justify-center  ml-8 mt-10 text-gray-500 space-y-12 font-semibold text-xl">
-            <h1 className="font-semibold text-2xl ">CATEGORIES</h1>
+      <div className="flex flex-row gap-8 p-4 ">
+        <div className="ml-20 mt-28  flex h-1/2 w-1/6 flex-col rounded-lg bg-neutral-100 pb-14 ">
+          <div className="ml-8  mt-10 justify-center space-y-12 text-xl font-semibold text-gray-500">
+            <h1 className="text-2xl font-semibold ">CATEGORIES</h1>
             <div className="gap-20">
               <option value="allcategories" className="hover:text-blue-500 ">
                 All Categories
@@ -81,7 +81,7 @@ export default function Campaign() {
                 <option
                   value={category}
                   key={category}
-                  className="flex text-base  gap-3 justify-center items-center"
+                  className="flex items-center  justify-center gap-3 text-base"
                 >
                   {category}
                 </option>
@@ -102,17 +102,17 @@ export default function Campaign() {
                   ))}
               </div>
             </div>
-            <button className="flex justify-center w-2/3 h-10 bg-blue-500 text-white border border-blue-500 hover:border-blue-500 rounded py-1 hover:bg-transparent hover:text-blue-500 duration-300  ">
+            <button className="flex h-10 w-2/3 justify-center rounded border border-blue-500 bg-blue-500 py-1 text-white duration-300 hover:border-blue-500 hover:bg-transparent hover:text-blue-500  ">
               Start a fundraiser
             </button>
           </div>
         </div>
         <div className="">
-          <h1 className="justify-center ml-8 mt-10 font-semibold text-gray-500 text-2xl ">
+          <h1 className="ml-8 mt-10 justify-center text-2xl font-semibold text-gray-500 ">
             Showing Fundraiser For :
           </h1>
           <div className="flex flex-row gap-8 ">
-            <div className=" flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg">
+            <div className=" ml-8 mt-10 flex h-2/3  w-2/5 flex-col rounded-lg bg-neutral-200">
               <div className="">
                 <Image
                   src="/assets/img/donation.jpg"
@@ -122,26 +122,26 @@ export default function Campaign() {
                   className="rounded-t-lg"
                   quality={100}
                 />
-                <div className="m-2 space-y-3 ml-5 pt-2 ">
-                  <p className="font-semibold text-black text-heading6">
+                <div className="m-2 ml-5 space-y-3 pt-2 ">
+                  <p className="text-heading6 font-semibold text-black">
                     Help This Child Get A Second Chance At Life.
                   </p>
-                  <h1 className="font-semibold text-2xl text-black">$ 1500</h1>
+                  <h1 className="text-2xl font-semibold text-black">$ 1500</h1>
                   <p className="font-semibold text-gray-500">
                     raised of $ 10,000 goal
                   </p>
                   <progress
                     value={100}
-                    className="rounded-lg w-80 h-2.5 bg-blue-500"
+                    className="h-2.5 w-80 rounded-lg bg-blue-500"
                   ></progress>
-                  <div className="flex flex-row gap-36 text-gray-500 font-semibold pb-4">
+                  <div className="flex flex-row gap-36 pb-4 font-semibold text-gray-500">
                     <p>10 days left</p>
                     <p>10 supporters</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg">
+            <div className=" ml-8 mt-10 flex h-2/3  w-2/5 flex-col rounded-lg bg-neutral-200">
               <div className="">
                 <Image
                   src="/assets/img/donation.jpg"
@@ -151,26 +151,26 @@ export default function Campaign() {
                   className="rounded-t-lg"
                   quality={100}
                 />
-                <div className="m-2 space-y-3 ml-5 pt-2 ">
-                  <p className="font-semibold text-black text-heading6">
+                <div className="m-2 ml-5 space-y-3 pt-2 ">
+                  <p className="text-heading6 font-semibold text-black">
                     Help This Child Get A Second Chance At Life.
                   </p>
-                  <h1 className="font-semibold text-2xl text-black">$ 1500</h1>
+                  <h1 className="text-2xl font-semibold text-black">$ 1500</h1>
                   <p className="font-semibold text-gray-500">
                     raised of $ 10,000 goal
                   </p>
                   <progress
                     value={100}
-                    className="rounded-lg w-80 h-2.5 bg-blue-500"
+                    className="h-2.5 w-80 rounded-lg bg-blue-500"
                   ></progress>
-                  <div className="flex flex-row gap-36 text-gray-500 font-semibold pb-4">
+                  <div className="flex flex-row gap-36 pb-4 font-semibold text-gray-500">
                     <p>10 days left</p>
                     <p>10 supporters</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg">
+            <div className=" ml-8 mt-10 flex h-2/3  w-2/5 flex-col rounded-lg bg-neutral-200">
               <div className="">
                 <Image
                   src="/assets/img/donation.jpg"
@@ -180,19 +180,19 @@ export default function Campaign() {
                   className="rounded-t-lg"
                   quality={100}
                 />
-                <div className="m-2 space-y-3 ml-5 pt-2 ">
-                  <p className="font-semibold text-black text-heading6">
+                <div className="m-2 ml-5 space-y-3 pt-2 ">
+                  <p className="text-heading6 font-semibold text-black">
                     Help This Child Get A Second Chance At Life.
                   </p>
-                  <h1 className="font-semibold text-2xl text-black">$ 1500</h1>
+                  <h1 className="text-2xl font-semibold text-black">$ 1500</h1>
                   <p className="font-semibold text-gray-500">
                     raised of $ 10,000 goal
                   </p>
                   <progress
                     value={100}
-                    className="rounded-lg w-80 h-2.5 bg-blue-500"
+                    className="h-2.5 w-80 rounded-lg bg-blue-500"
                   ></progress>
-                  <div className="flex flex-row gap-36 text-gray-500 font-semibold pb-4">
+                  <div className="flex flex-row gap-36 pb-4 font-semibold text-gray-500">
                     <p>10 days left</p>
                     <p>10 supporters</p>
                   </div>
@@ -201,7 +201,7 @@ export default function Campaign() {
             </div>
           </div>
           <div className="flex flex-row gap-8 ">
-            <div className=" flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg">
+            <div className=" ml-8 mt-10 flex h-2/3  w-2/5 flex-col rounded-lg bg-neutral-200">
               <div className="">
                 <Image
                   src="/assets/img/donation.jpg"
@@ -211,26 +211,26 @@ export default function Campaign() {
                   className="rounded-t-lg"
                   quality={100}
                 />
-                <div className="m-2 space-y-3 ml-5 pt-2 ">
-                  <p className="font-semibold text-black text-heading6">
+                <div className="m-2 ml-5 space-y-3 pt-2 ">
+                  <p className="text-heading6 font-semibold text-black">
                     Help This Child Get A Second Chance At Life.
                   </p>
-                  <h1 className="font-semibold text-2xl text-black">$ 1500</h1>
+                  <h1 className="text-2xl font-semibold text-black">$ 1500</h1>
                   <p className="font-semibold text-gray-500">
                     raised of $ 10,000 goal
                   </p>
                   <progress
                     value={100}
-                    className="rounded-lg w-80 h-2.5 bg-blue-500"
+                    className="h-2.5 w-80 rounded-lg bg-blue-500"
                   ></progress>
-                  <div className="flex flex-row gap-36 text-gray-500 font-semibold pb-4">
+                  <div className="flex flex-row gap-36 pb-4 font-semibold text-gray-500">
                     <p>10 days left</p>
                     <p>10 supporters</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg">
+            <div className=" ml-8 mt-10 flex h-2/3  w-2/5 flex-col rounded-lg bg-neutral-200">
               <div className="">
                 <Image
                   src="/assets/img/donation.jpg"
@@ -240,26 +240,26 @@ export default function Campaign() {
                   className="rounded-t-lg"
                   quality={100}
                 />
-                <div className="m-2 space-y-3 ml-5 pt-2 ">
-                  <p className="font-semibold text-black text-heading6">
+                <div className="m-2 ml-5 space-y-3 pt-2 ">
+                  <p className="text-heading6 font-semibold text-black">
                     Help This Child Get A Second Chance At Life.
                   </p>
-                  <h1 className="font-semibold text-2xl text-black">$ 1500</h1>
+                  <h1 className="text-2xl font-semibold text-black">$ 1500</h1>
                   <p className="font-semibold text-gray-500">
                     raised of $ 10,000 goal
                   </p>
                   <progress
                     value={100}
-                    className="rounded-lg w-80 h-2.5 bg-blue-500"
+                    className="h-2.5 w-80 rounded-lg bg-blue-500"
                   ></progress>
-                  <div className="flex flex-row gap-36 text-gray-500 font-semibold pb-4">
+                  <div className="flex flex-row gap-36 pb-4 font-semibold text-gray-500">
                     <p>10 days left</p>
                     <p>10 supporters</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" flex flex-col ml-8 mt-10  bg-neutral-200 w-2/5 h-2/3 rounded-lg">
+            <div className=" ml-8 mt-10 flex h-2/3  w-2/5 flex-col rounded-lg bg-neutral-200">
               <div className="">
                 <Image
                   src="/assets/img/donation.jpg"
@@ -269,19 +269,19 @@ export default function Campaign() {
                   className="rounded-t-lg"
                   quality={100}
                 />
-                <div className="m-2 space-y-3 ml-5 pt-2 ">
-                  <p className="font-semibold text-black text-heading6">
+                <div className="m-2 ml-5 space-y-3 pt-2 ">
+                  <p className="text-heading6 font-semibold text-black">
                     Help This Child Get A Second Chance At Life.
                   </p>
-                  <h1 className="font-semibold text-2xl text-black">$ 1500</h1>
+                  <h1 className="text-2xl font-semibold text-black">$ 1500</h1>
                   <p className="font-semibold text-gray-500">
                     raised of $ 10,000 goal
                   </p>
                   <progress
                     value={100}
-                    className="rounded-lg w-80 h-2.5 bg-blue-500"
+                    className="h-2.5 w-80 rounded-lg bg-blue-500"
                   ></progress>
-                  <div className="flex flex-row gap-36 text-gray-500 font-semibold pb-4">
+                  <div className="flex flex-row gap-36 pb-4 font-semibold text-gray-500">
                     <p>10 days left</p>
                     <p>10 supporters</p>
                   </div>
