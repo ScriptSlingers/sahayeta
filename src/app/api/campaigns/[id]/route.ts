@@ -19,7 +19,8 @@ export async function GET(req: NextRequest, { params }) {
         startDate: true,
         endDate: true,
         latitude: true,
-        longitude: true
+        longitude: true,
+        address: true
       }
     })
 

@@ -88,6 +88,7 @@ model Campaign {
   endDate         DateTime?
   latitude        String?
   longitude       String?
+  address         String?
   createdById     String
   createdBy       User           @relation(fields: [createdById], references: [id], onDelete: Cascade)
   categoryId      String

@@ -21,7 +21,8 @@ export async function GET() {
       status: true,
       payment: true,
       latitude: true,
-      longitude: true
+      longitude: true,
+      address: true
     }
   })
   return NextResponse.json({ campaigns })
