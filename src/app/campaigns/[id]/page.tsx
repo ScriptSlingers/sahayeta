@@ -53,14 +53,12 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             {campaign?.title}
           </div>
           <div className="relative flex h-96 ">
-            <Link href="/">
-              <Image
-                src={campaign?.image}
-                alt={campaign?.title}
-                fill
-                className="rounded-xl object-cover"
-              />
-            </Link>
+            <Image
+              src={campaign?.image || "/assets/img/placeholder.png"}
+              alt={campaign?.title || ""}
+              fill
+              className="rounded-xl object-cover"
+            />
           </div>
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-full border border-accent p-3">
@@ -110,8 +108,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
               <Link href="/profile">
                 <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
                   <Image
-                    src={campaign?.createdBy?.profileImage}
-                    alt={campaign?.createdBy?.name}
+                    src={campaign?.createdBy?.profileImage || "/assets/img/avatar.jpg"}
+                    alt={campaign?.createdBy?.name || ""}
                     height={40}
                     width={50}
                   />
@@ -129,21 +127,17 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 <div className="text-slate-800 ">
                   Contact: {campaign?.createdBy?.phoneNum || ''}
                 </div>
-                <div className="text-slate-800 ">
-                  {' '}
-                  End Date: {campaign?.endDate}
-                </div>
               </div>
             </div>
           </div>
           <div className="border-b border-slate-500"></div>
           <div className="flex flex-col gap-2">
             <div className="flex  gap-7">
-            <div className=" w-full">
-              {campaign && 
-              <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude}
-                address={campaign?.address} />
-              }
+              <div className=" w-full">
+                {campaign &&
+                  <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude}
+                    address={campaign?.address} />
+                }
               </div>
             </div>
           </div>
@@ -184,11 +178,11 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 Sahayata protects your donation
               </h1>
               <div>
-                We gurantee you a full refund for up to a year in the rare case
+                We guarantee you a full refund for up to a year in the rare case
                 that fraud occurs.{' '}
                 <a href="#" className="underline hover:text-blue-500">
                   {' '}
-                  See our Sahayata Giving Gurantee.
+                  See our Sahayata Giving Guarantee.
                 </a>
               </div>
             </div>

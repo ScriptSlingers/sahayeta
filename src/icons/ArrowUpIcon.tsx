@@ -5,10 +5,10 @@ export const ArrowUpIcon = () => {
       className="stroke-current transition-colors"
       fill="currentColor"
       viewBox="0 0 24 24"
-      // stroke="currentColor"
-      stroke-width={2}
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path d="M5 10l7-7m0 0l7 7m-7-7v18" />
     </svg>
