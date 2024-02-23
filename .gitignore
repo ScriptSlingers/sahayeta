@@ -39,6 +39,6 @@ package-lock.json
 next-env.d.ts
 
 
-# ommit test files
-# /src/app/test
-# /src/app/dummyfile
+#ommit test files
+/src/app/test
+/src/app/Dummy
