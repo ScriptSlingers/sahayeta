@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import { log } from 'console'
+
 const OsmMap = dynamic(() => import('@sahayeta/components/MapComponent'), {
   ssr: false
 })
@@ -158,8 +158,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             <button className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-t from-orange-400 to-yellow-300 p-2 text-black hover:border-2">
               Share{' '}
             </button>
-            <Link href="/payment" className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-b from-orange-400 to-yellow-400 p-2 text-black hover:border-2">
-              Donate now{' '}
+            <Link href={`/pay?campaignid=${campaignId}`} className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-b from-orange-400 to-yellow-400 p-2 text-black hover:border-2">
+              Donate now
             </Link>
             <div className="mb-2 mt-2 flex items-center gap-3">
               <Link href="/profile">

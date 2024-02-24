@@ -127,7 +127,7 @@ export const Search: React.FC = () => {
               </button>
               <button>
                 <Link
-                  href="/payment"
+                  href={`/pay?campaignid=${campaign.campaignId}`}
                   className=" inline-block w-28 items-center rounded border border-transparent  bg-blue-600 p-2 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
                 >
                   Donate
