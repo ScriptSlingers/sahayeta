@@ -52,19 +52,18 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
           <div className="font-maven text-xl font-semibold">
             {campaign?.title}
           </div>
-          <div className="relative flex h-96 ">
+          <div className="relative flex h-96 w-full ">
             <Image
               src={campaign?.image || "/assets/img/placeholder.png"}
               alt={campaign?.title || ""}
               fill
+              quality={100}
               className="rounded-xl object-cover"
             />
           </div>
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-full border border-accent p-3">
-              <Link href="#">
-                <ProfileIcon />
-              </Link>
+              <ProfileIcon />
             </div>
             <div className="rounded-md p-2">
               {campaign?.createdBy?.name

@@ -88,30 +88,35 @@ export const Search: React.FC = () => {
             key={campaign?.campaignId}
           >
             <div className="justify-between gap-20 p-10 lg:flex">
-              <div className="flex w-full flex-col gap-2 lg:w-1/2">
-                <button className="inline-block w-36 items-center rounded-full border border-transparent bg-blue-700 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black">
-                  <span>{campaign?.status}</span>
-                </button>
+              <div className="flex w-full flex-col gap-2 lg:w-1/2 justify-start">
+                <span className='bg-blue-600 px-3 w-40 text-center text-white py-1 rounded-full text-sm'>
+                  {campaign?.status
+                    .replace(/\b\w/g, (match) => match.toUpperCase())
+                    .replace(/([A-Z])/g, ' $1')}
+                </span>
                 <p className="font-poppins text-base font-semibold">
                   {campaign?.title}
                 </p>
                 <p className="text-xs font-normal text-[#2540C4]">
-                  Category: {campaign?.category?.name}
+                  Category: {campaign?.category?.displayName}
                 </p>
-                <p className="font-poppins text-sm font-normal text-gray-500">
+                <p className="font-poppins text-sm font-normal text-gray-500 text-justify">
                   {campaign?.description}
                 </p>
                 <div className="text-xs font-semibold">
-                  Written by {campaign?.createdBy?.name}
+                  Created by {campaign?.createdBy?.name}
                 </div>
               </div>
-              <div className="relative flex h-auto w-96 flex-col justify-center gap-2 lg:items-center">
-                <div>
+              <div className="h-auto w-96 rounded-2xl border-4 border-blue-300 p-0.5">
+
+                <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                   <Image
-                    src={campaign?.image}
-                    alt="campaign image"
+                    src={campaign?.image || "/assets/img/placeholder.png"}
                     fill
-                    className="flex w-96 rounded-2xl bg-slate-400 p-1"
+                    alt=""
+                    quality={100}
+                    className="object-cover"
+                    sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
               </div>
@@ -158,6 +163,6 @@ export const Search: React.FC = () => {
           }
         />
       </div>
-    </div>
+    </div >
   )
 }

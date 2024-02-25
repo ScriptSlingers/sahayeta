@@ -1,1 +1,226 @@
-@tailwind base;@tailwind components;@tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.contactLayout {
+    width: 100%;
+}
+
+.mainContact{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    gap: 30px;
+    font-family: 'Poppins';
+}
+
+.mainContactLayout{
+    width: 100%;
+    margin: auto;
+    background-color: #ECEEFF;
+    border-bottom-right-radius: 45%;
+    padding-bottom: 10vw;
+    padding-top: 120px;
+
+}
+
+.mainContactLeft{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: auto;
+    width: 50%;
+}
+
+.mainContactLeftTexts{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.mainContactHeading{
+    font-size: 3em;
+    font-weight: 600;
+}
+
+.mainContactDescription{
+    width: 80%;
+}
+
+.mainContactLeftBox{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px 0;
+    background-color: white;
+    width: 85%;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.mainContactLeftBoxOne{
+    display: flex;
+    gap: 30px;
+    width: 70%;
+}
+
+.mainContactLeftBoxTexts{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.mainContactLeftIcons{
+    background-color: #ECEEFF;
+    color: #556EE6;
+    line-height: 35px;
+    width: 50px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.mainContactLeftBoxTextsHeading{
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+
+.mainContactContainerRight{
+    padding: 50px;
+    background-color: white;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 30px;
+
+}
+
+.contactFormContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contactForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-size: 0.9em;
+}
+
+.formFlexRow{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    row-gap: 10px;
+}
+
+.formElementsOne{
+    width: 49%;
+}
+
+.formElementsOne input {
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgb(182, 182, 182);
+}
+
+.anythingElse{
+    border: 1px solid rgb(182, 182, 182);
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    padding-bottom: 60px;
+}
+
+.formElements{
+    display: flex;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.formElements span {
+    width: 95%;
+    font-size: 0.85em;
+}
+
+.getStartedContact{
+    display: flex;
+    width: 85%;
+    margin: auto;
+    margin-top: 150px;
+    gap: 5%;
+    font-family: 'Poppins';
+    align-items: center;
+    background-color: #ECEEFF;
+    padding: 30px 50px 0 50px;
+    border-radius: 40px;
+}
+
+.getStartedContactLeft{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.getStartedContactLeft button {
+    margin-top: 20px;
+}
+
+.getStartedContactRight{
+    width: 70%;
+    height: 100%;
+}
+
+/* Responsive style  */
+@media only screen and (max-width: 900px) {
+
+    .mainContactLayout{
+    border-bottom-right-radius: 0;
+    }
+
+    .getStartedContact{
+        margin-top: 50px;
+    }
+
+    .mainContact{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .mainContactLeft{
+        width: 90%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .mainContactDescription{
+        width: 100%;
+    }
+
+    .mainContactContainerRight{
+        width: 100%;
+    }
+
+    .mainContactLeftBox{
+        width: 100%;
+        justify-content: center;
+    }
+
+    .getStartedContact{
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .getStartedContactLeft{
+        width: 100%;
+    }
+
+    .getStartedContactRight{
+        width: 100%;
+    }
+}

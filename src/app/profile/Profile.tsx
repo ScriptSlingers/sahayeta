@@ -58,7 +58,7 @@ export default function Profile() {
 
   function formatDate(dob: any) {
     const date = new Date(dob)
-    const formattedDate = date.toLocaleDateString() // This gets the date part
+    const formattedDate = date.toLocaleDateString()
 
     return formattedDate
   }

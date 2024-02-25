@@ -469,7 +469,7 @@ export const EditModal = ({ campaignId, title, description, goalAmount }: any) =
                         {...register('goalAmount')}
                         className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                         type="number"
-                        placeholder="Email"
+                        placeholder="Goal Amount"
                         defaultValue={goalAmount}
                       />
                     </div>

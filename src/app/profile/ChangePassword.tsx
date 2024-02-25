@@ -1,11 +1,10 @@
 'use client'
-import React from 'react'
 
 export default function ChangePassword() {
   return (
-    <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
-      <div className="container flex items-center justify-center ">
-        <div className="flex w-full flex-col items-center justify-center rounded-xl bg-slate-200 py-5  ">
+    <div className="flex w-full flex-col rounded bg-blue-50">
+      <div className="container flex">
+        <div className="flex flex-col rounded-xl bg-slate-200  w-2/3 ">
           <div className="m-5 flex flex-col justify-center rounded-xl bg-white p-8">
             <span className="mb-3 text-4xl font-bold">
               Change your Password

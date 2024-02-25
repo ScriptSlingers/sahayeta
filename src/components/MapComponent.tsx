@@ -18,7 +18,7 @@ function GoogleMap() {
   }
 
   return (
-    // Important! Always set the container height explicitly
+   
     <div>
       <GoogleMapReact
         bootstrapURLKeys={{ key: 'AIzaSyCDwsFqJWgKHG_31yLSWZ2MRZmDYXP5Y2w' }}
