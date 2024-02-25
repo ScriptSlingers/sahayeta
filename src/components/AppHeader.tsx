@@ -40,8 +40,7 @@ export const AppHeader = () => {
             <Link href="/campaigns">
               <div>Campaign</div>
             </Link>
-            <div>Charity</div>
-            <div>Donate</div>
+
           </div>
         </div>
         <div className="flex items-center gap-6 p-6">

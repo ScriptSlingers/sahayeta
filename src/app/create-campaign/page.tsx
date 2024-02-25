@@ -118,7 +118,6 @@ export default function CreateCampaign() {
       categoryId: '',
       startDate: '',
       endDate: '',
-      address: address
     }
   })
 
@@ -129,6 +128,10 @@ export default function CreateCampaign() {
     month: 'long',
     day: 'numeric'
   })
+
+  const setNewDate = input => new Date(input.replace(/(\d{2})-(\d{2})-(\d{4})/, '$3-$2-$1')).toISOString();
+
+
 
   async function onSubmit(values, e) {
     e.preventDefault();
@@ -153,6 +156,8 @@ export default function CreateCampaign() {
       values.longitude = JSON.stringify(longitude);
       values.address = address;
       values.createdById = currentUser.id;
+      values.startDate = setNewDate(values.startDate)
+      values.endDate = setNewDate(values.endDate)
       await axios.post(
         '/api/campaigns',
         {
@@ -428,23 +433,10 @@ export default function CreateCampaign() {
                 placeholder="Enter the  Goal Amount here"
                 {...register('goalAmount')}
                 onChange={handleGoalAmountChange}
-                className="w-full border-b-[1.5px] border-gray-400 text-base font-medium focus:outline-none  "
+                className="w-1/2 border-b-[1.5px] border-gray-400 text-base font-medium focus:outline-none  "
               />
             </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-gray-500">
-                EndDate
-                <span className="text-red-500"> *</span>
-              </span>
-              <input
-                type="datetime-local"
-                required
-                placeholder="Enter the  End Date here"
-                {...register('endDate')}
-                onChange={handleEndDateChange}
-                className="w-full border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
-              />
-            </div>
+
             <div className="flex flex-col gap-2">
               <span className="text-gray-500">
                 StartDate
@@ -456,7 +448,21 @@ export default function CreateCampaign() {
                 placeholder="Enter the  Start Date  here"
                 {...register('startDate')}
                 onChange={handleStartDateChange}
-                className="w-full border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+                className="w-1/2 border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-gray-500">
+                EndDate
+                <span className="text-red-500"> *</span>
+              </span>
+              <input
+                type="date"
+                required
+                placeholder="Enter the  End Date here"
+                {...register('endDate')}
+                onChange={handleEndDateChange}
+                className="w-1/2 border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
               />
             </div>
           </div>
