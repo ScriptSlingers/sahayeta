@@ -44,9 +44,13 @@ export async function POST(request: NextRequest) {
       description,
       goalAmount,
       createdById,
-      categoryId
-      // endDate,
-      // startDate
+      categoryId,
+      endDate,
+      startDate,
+      latitude,
+      longitude,
+      address
+
     } = campaign
 
     const newCampaign = await prisma.campaign.create({
@@ -57,9 +61,12 @@ export async function POST(request: NextRequest) {
         description,
         goalAmount,
         createdById,
-        categoryId
-        // endDate,
-        // startDate
+        categoryId,
+        endDate,
+        startDate,
+        latitude,
+        longitude,
+        address
       }
     })
 
