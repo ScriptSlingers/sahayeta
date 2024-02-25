@@ -25,13 +25,20 @@ export default function Login(csrfToken) {
     formState: { isSubmitting }
   } = useForm()
 
-  async function onSubmit(values) {
-    await signIn('credentials', {
-      ...values,
-      callbackUrl: 'http://localhost:3000/'
-    });
-    toast.success("Logged in successfully");
-    console.log(values);
+  async function onSubmit(values, e) {
+    e.preventDefault(); // Prevent default form submission behavior
+    try {
+      await signIn('credentials', {
+        ...values,
+        callbackUrl: 'http://localhost:3000/'
+      });
+
+      toast.success("Sign in successful");
+      console.log(values);
+
+    } catch (error) {
+      toast.error("Error occurred during sign in");
+    }
   }
 
   return (

@@ -1,11 +1,10 @@
-'use client'
 import { useClientSession } from '@sahayeta/utils'
 import axios from 'axios'
 import Image from 'next/image'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { FaAddressBook, FaCalendarAlt, FaHeart } from 'react-icons/fa'
+import { FaAddressBook, FaUserEdit } from 'react-icons/fa'
 import { FaShield } from 'react-icons/fa6'
 
 type loggedInUser = {
@@ -25,24 +24,10 @@ type loggedInUser = {
 }
 
 export default function EditProfile() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0]
-    setSelectedFile(file || null)
-  }
-
-  const handleUpload = () => {
-    if (selectedFile) {
-      const formData = new FormData()
-      formData.append('file', selectedFile)
-    } else {
-      console.log('No file selected!')
-    }
-  }
-
-  const currentUser = useClientSession()
   const [loggedInUser, setLoggedInUser] = useState<loggedInUser | null>(null)
+  const currentUser = useClientSession()
+
+  const [file, setFile] = useState<File>()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +39,7 @@ export default function EditProfile() {
         }
       } catch (error) {
         console.error('Error fetching user data:', error)
+        toast.error('Error fetching user data. Please try again later.')
       }
     }
 
@@ -66,61 +52,81 @@ export default function EditProfile() {
   )
 
 
+  const handleImageUpload = (e: any) => {
+    const selectedFile = e.target.files?.[0]
+
+    if (selectedFile) {
+      setFile(selectedFile)
+    }
+  }
+
   const {
     register,
     handleSubmit,
-    setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = useForm({
     defaultValues: {
       name: loggedInUser?.name,
+      address: loggedInUser?.address,
       email: loggedInUser?.email,
       phoneNum: loggedInUser?.phoneNum,
-      address: loggedInUser?.address,
-    },
-  });
-
+      ctzImg: loggedInUser?.ctzImg
+    }
+  })
 
   const handleEdit = async (values) => {
     try {
-      const formData = new FormData();
+      const data = new FormData()
+      data.set('file', file)
 
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: data
+      })
 
-      Object.keys(values).forEach((key) => {
-        formData.append(key, values[key]);
-      });
-
-
-      if (selectedFile) {
-        formData.append('file', selectedFile);
+      if (!res.ok) {
+        throw new Error(await res.json())
       }
+      const resData = await res.json()
 
-      await axios.patch(
-        `/api/users/${loggedInUser?.id}`,
-        formData
-      ).then((response) => {
-        const updatedUser = response.data;
-        console.log("updatedUser ==>>", updatedUser);
-        console.log("values ==>>", values);
-        setLoggedInUser(updatedUser);
-      });
+      values.ctzImg = resData.path
 
-      toast.success(`User Edited Successfully`);
+      const editedValues = Object.fromEntries(
+        Object.entries(values).filter(([key, value]) => value !== '')
+      );
+
+      const response = await axios.patch(
+        `/api/users/${loggedInUser.id}`,
+        editedValues,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            accept: 'application/json'
+          }
+        }
+      );
+
+      const updatedUserData = response.data;
+      setLoggedInUser(updatedUserData);
+      console.log(editedValues);
+      toast.success(`Profile Updated Successfully`);
     } catch (error) {
-      console.error('Error Editing user:', error);
+      console.error('Error Editing Profile:', error);
+      toast.error('Failed to update profile. Please try again later.');
     }
   };
 
+
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
-      <div className="container flex items-center justify-center ">
-        <div className="flex w-full flex-col rounded-xl bg-slate-200 p-5">
+      <div className="container flex items-center justify-start ">
+        <div className="flex flex-col rounded-xl bg-slate-200 p-5 w-2/3">
           <div className="relative sm:rounded-lg">
             <p className="py-4 text-lg font-bold text-blue-700">
               User Information
             </p>
           </div>
-          <div>
+          <div className='flex flex-col gap-3'>
             <div className="flex items-center gap-3 rounded-lg border bg-gray-50 p-3">
               <div className="relative h-24 w-24 rounded-full border border-accent bg-slate-300">
                 <Image
@@ -130,7 +136,7 @@ export default function EditProfile() {
                   className="rounded-full"
                 />
               </div>
-              <div className="rounded-md">
+              <div className="rounded-md flex flex-col ga-2">
                 <p className="text-xl font-medium">{loggedInUser?.name}</p>
                 <p className="text-md flex font-maven text-slate-500 gap-2 items-center">
                   <FaAddressBook />
@@ -144,9 +150,11 @@ export default function EditProfile() {
             </div>
 
             <div className="w-full">
-              <h6 className="flex text-lg font-semibold">
-                <FaCalendarAlt className="text-lg" />
-                Edit Information
+              <h6 className="flex font-semibold items-center gap-2">
+                <FaUserEdit />
+                <span>
+                  Edit Information
+                </span>
               </h6>
             </div>
             <div className="w-full text-left ">
@@ -163,6 +171,7 @@ export default function EditProfile() {
                     className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                     type="text"
                     placeholder="Username"
+                    required
                     defaultValue={loggedInUser?.username}
                   />
                 </div>
@@ -174,6 +183,7 @@ export default function EditProfile() {
                     {...register('name')}
                     className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                     type="text"
+                    required
                     placeholder="Full Name"
                     defaultValue={loggedInUser?.name}
                   />
@@ -184,6 +194,7 @@ export default function EditProfile() {
                   </label>
                   <input
                     {...register('email')}
+                    required
                     className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                     type="email"
                     placeholder="Email"
@@ -196,6 +207,7 @@ export default function EditProfile() {
                   </label>
                   <input
                     {...register('phoneNum')}
+                    required
                     className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                     type="text"
                     placeholder="Phone"
@@ -208,15 +220,60 @@ export default function EditProfile() {
                   </label>
                   <input
                     {...register('address')}
+                    required
                     className="focus:shadow-outline w-full rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none"
                     type="text"
                     placeholder="Address"
+                    defaultValue={loggedInUser?.address}
+
                   />
                 </div>
-                <div className="mt-4 flex items-center justify-center gap-10 ">
+                <div className="flex w-full flex-col justify-start md:w-1/2">
+                  <div className="flex w-full flex-col gap-10">
+                    <input
+                      type="file"
+                      name="file"
+                      accept="image/*"
+                      id="imageUpload"
+                      required
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                    {file ? (
+                      <div className="w-72 object-contain">
+                        <Image
+                          src={URL.createObjectURL(file)}
+                          alt="Selected"
+                          width={300}
+                          height={200}
+                          className=" flex items-center justify-center rounded-2xl  bg-slate-400 p-1"
+                        />
+                      </div>
+                    ) : (
+                      <div className="relative h-56 w-96 rounded-lg bg-slate-300 ">
+                        <Image
+                          src={loggedInUser?.ctzImg || "/assets/img/placeholder.png"}
+                          alt="Profile image"
+                          fill
+                          objectFit='cover'
+                          quality={100}
+                          className="rounded-lg border-4 border-accent/50"
+                        />
+                      </div>
+                    )}
+                    <label
+                      htmlFor="imageUpload"
+                      className=" items-center flex h-[37px] w-[126px] cursor-pointer justify-center  rounded-3xl ml-20 bg-black px-4  py-2 text-white"
+                    >
+                      Upload
+                    </label>
+                    <p className="pt-2 text-sm ml-16">Only JPG, PNG images </p>
+                  </div>
+                </div>
+                <div className="mt-4 ml-10 flex items-center justify-start gap-10 ">
                   <button
                     type="submit"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   >
                     {isSubmitting ? <>Updating...</> : <>Update</>}
                   </button>

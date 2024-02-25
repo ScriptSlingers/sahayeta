@@ -31,6 +31,7 @@ export default function Signup() {
       setLoading(false);
       if (!res.ok) {
         setError((await res.json()).message);
+        toast.error("Error occurred while creating user account")
         return;
       }
 
