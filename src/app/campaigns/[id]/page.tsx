@@ -99,7 +99,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 journey to success. Your early support inspires others to
                 donate.
               </div>
-              <button className="mb-6 w-full rounded-lg bg-[#fdb72f] p-2 text-black hover:bg-orange-300 ">
+              <button className="mb-6 w-full rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-400 ">
                 Make a donation
               </button>
             </div>
@@ -148,17 +148,18 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
-        <div className=" relative m-7 mt-12 flex h-fit flex-col rounded-2xl bg-white shadow-2xl md:flex-row md:space-y-0 lg:w-1/3 ">
-          <section className="m-2 flex flex-col p-8 md:p-10">
+        <div className=" relative m-7 mt-12 flex h-fit flex-col rounded-2xl bg-white shadow-2xl md:flex-row md:space-y-0 lg:w-1/3">
+          <div className=''>
+          <section className="m-2 flex flex-col p-8 md:p-10  ">
             <div className="mb-5 text-slate-800">
               {' '}
               Npr. {campaign?.goalAmount} goal
             </div>
 
-            <button className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-t from-orange-400 to-yellow-300 p-2 text-black hover:border-2">
+            <button className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-white hover:border-2 text-center font-semibold hover:bg-blue-400">
               Share{' '}
             </button>
-            <Link href={`/pay?campaignid=${campaignId}`} className="mb-2 mt-2 w-full rounded-lg border bg-gradient-to-b from-orange-400 to-yellow-400 p-2 text-black hover:border-2">
+            <Link href={`/pay?campaignid=${campaignId}`} className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-white hover:border-2 text-center font-semibold hover:bg-blue-400">
               Donate now
             </Link>
             <div className="mb-2 mt-2 flex items-center gap-3">
@@ -193,6 +194,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
               </div>
             </div>
           </section>
+          
+          </div>
         </div>
       </div>
     </>
