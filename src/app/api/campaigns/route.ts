@@ -19,12 +19,17 @@ export async function GET() {
       createdBy: true,
       category: true,
       status: true,
-      payment: true,
+      payment: {
+        where:{
+          paymentStatus: "completed"
+        }
+      },
       latitude: true,
       longitude: true,
       address: true
     }
   })
+  
   return NextResponse.json({ campaigns })
 }
 export async function POST(request: NextRequest) {

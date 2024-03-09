@@ -118,7 +118,7 @@ model Payment {
   paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [methodId])
   campaignId      String
   campaign        Campaign     @relation(fields: [campaignId], references: [campaignId])
-
+  paymentAmount   Float
   @@map("payment")
 }
 

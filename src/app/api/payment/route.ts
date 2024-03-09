@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     }
     const {
       paymentMethodId,
-      campaignId
+      campaignId,
     } = payment
 
     const newPayment = await prisma.payment.create({
@@ -45,6 +45,7 @@ export async function POST(request: NextRequest) {
         paymentById: currentUser.id,
         campaignId : campaignId,
         paymentMethodId,
+        paymentAmount: 0,
       }
     })
     return NextResponse.json(newPayment)

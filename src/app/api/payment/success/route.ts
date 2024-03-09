@@ -17,7 +17,8 @@ export async function GET(req: NextRequest,) {
     const updatedPayment = await prisma.payment.update({
         where: { paymentId: transactionJson.transaction_uuid },
         data: {
-            paymentStatus: status[transactionJson.status]
+            paymentStatus: status[transactionJson.status],
+            paymentAmount : parseFloat(transactionJson.total_amount),
         }
       })
   
