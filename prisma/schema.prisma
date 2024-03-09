@@ -94,8 +94,7 @@ model Campaign {
   categoryId      String
   category        Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   status          CampaignStatus @default(pendingApproval)
-  paymentId       String?
-  payment         Payment?       @relation(fields: [paymentId], references: [paymentId], onDelete: Cascade)
+  payment         Payment[] 
 
   @@map("campaign")
 }
@@ -112,14 +111,14 @@ model PaymentMethod {
 model Payment {
   paymentId       String        @id @default(cuid()) @map("_id")
   paymentDate     DateTime
-  paymentType     String
-  expirationDate  DateTime
+  paymentStatus   PaymentStatus  @default(pending)
   paymentById     String
   paymentBy       User          @relation(fields: [paymentById], references: [id])
   paymentMethodId String
   paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [methodId])
-  campaign        Campaign[]
-
+  campaignId      String
+  campaign        Campaign     @relation(fields: [campaignId], references: [campaignId])
+  paymentAmount   Float
   @@map("payment")
 }
 
@@ -135,9 +134,8 @@ model Category {
 
 enum PaymentStatus {
   pending
-  approved
   clearing
-  rejected
+  failed
   cancelled
   completed
 

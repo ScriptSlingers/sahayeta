@@ -7,9 +7,8 @@ export async function GET(request: NextRequest) {
     where: {},
     select: {
       paymentId: true,
-      paymentType: true,
+      paymentStatus: true,
       paymentDate: true,
-      expirationDate: true,
       paymentBy: true,
       paymentMethod: true,
       campaign: true
@@ -30,29 +29,23 @@ export async function POST(request: NextRequest) {
   try {
     const payment = await request.json()
     if (
-      !payment.paymentType ||
-      !payment.paymentDate ||
-      !payment.paymentById ||
-      !payment.expirationDate ||
-      !payment.paymentMethodId
+      !payment.paymentMethodId ||
+      !payment.campaignId
     ) {
       throw new Error('Incomplete payment data')
     }
     const {
-      paymentType,
-      paymentDate,
-      expirationDate,
-      paymentById,
-      paymentMethodId
+      paymentMethodId,
+      campaignId,
     } = payment
 
     const newPayment = await prisma.payment.create({
       data: {
-        paymentType,
-        expirationDate,
-        paymentDate,
-        paymentById,
-        paymentMethodId
+        paymentDate: new Date(),
+        paymentById: currentUser.id,
+        campaignId : campaignId,
+        paymentMethodId,
+        paymentAmount: 0,
       }
     })
     return NextResponse.json(newPayment)
