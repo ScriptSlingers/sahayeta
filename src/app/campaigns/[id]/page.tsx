@@ -194,24 +194,6 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
         
         <div className='flex rounded-2xl bg-white shadow-xl border-1'>
           <section className="m-2 flex flex-col p-8 md:p-10">
-            {/* <div className="mb-2 mt-2 flex items-center gap-3">
-              <Link href="/profile">
-                <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
-                  <Image
-                    src="/assets/img/help.png"
-                    alt="help icon"
-                    height={40}
-                    width={50}
-                  />
-                </div>
-              </Link>
-              <div className=" rounded-md p-2">
-                <p className="font-medium">Become the first supporter</p>
-                <p className="mt-1 font-maven text-sm text-slate-500">
-                  Your Donation matters
-                </p>
-              </div>
-            </div> */}
             <div className="flex mt-2">
             <div className="relative overflow-hidden rounded-full ">
                   <Image
@@ -224,35 +206,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
               <h1 className="mb-2 font-medium">
                 Reshma Pariyar donated  $1,000. 
               </h1>
-              {/* <div>
-                We gurantee you a full refund for up to a year in the rare case
-                that fraud occurs.{' '}
-                <a href="#" className="underline hover:text-blue-500">
-                  {' '}
-                  See our Sahayata Giving Gurantee.
-                </a>
-              </div> */}
-            </div>
-            <div className="flex mt-2">
-            <div className="relative overflow-hidden rounded-full ">
-                  <Image
-                    src="/assets/img/confetti.png"
-                    alt="confetti"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-              <h1 className="mb-2 font-medium">
-                Reshma Pariyar donated  $1,000. 
-              </h1>
-              {/* <div>
-                We gurantee you a full refund for up to a year in the rare case
-                that fraud occurs.{' '}
-                <a href="#" className="underline hover:text-blue-500">
-                  {' '}
-                  See our Sahayata Giving Gurantee.
-                </a>
-              </div> */}
+              
             </div>
             </section>
             </div>
