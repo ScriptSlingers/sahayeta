@@ -22,6 +22,13 @@ export async function GET() {
       payment: {
         where:{
           paymentStatus: "completed"
+        },
+        include:{
+          paymentBy:{
+            select:{
+              name: true,
+            }
+          }
         }
       },
       latitude: true,
