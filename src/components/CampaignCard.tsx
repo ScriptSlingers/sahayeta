@@ -9,7 +9,7 @@ export const CampaignCard = ({
   campaignTitle,
   campaignDescription,
   campaignRaisedAmount,
-  campaignDonor,
+  numberOfDonors,
 }: any) => {
   return (
     <div
@@ -36,7 +36,7 @@ export const CampaignCard = ({
       </div>
       <div className="flex justify-between font-medium">
         <div className="">NPR. {campaignRaisedAmount || '0'} Raised</div>
-        <div className=""> {campaignDonor || '0'} No. of donors</div>
+        <div className=""> {numberOfDonors || '0'} No. of donors</div>
       </div>
     </div>
   )

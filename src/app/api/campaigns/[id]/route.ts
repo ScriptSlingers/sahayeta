@@ -18,7 +18,7 @@ export async function GET(req: NextRequest, { params }) {
         createdBy: true,
         startDate: true,
         endDate: true, 
-        payment: {
+        payments: {
           where:{
             paymentStatus: "completed"
           },

@@ -19,7 +19,7 @@ export async function GET() {
       createdBy: true,
       category: true,
       status: true,
-      payment: {
+      payments: {
         where:{
           paymentStatus: "completed"
         },
