@@ -47,12 +47,12 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="container flex gap-7 ">
-        <div className="flex flex-col gap-6 p-10 sm:w-full lg:w-2/3 ">
-          <div className="font-maven text-xl font-semibold">
+      <div className="flex gap-7 container">
+        <div className="flex flex-col gap-6 p-10 sm:w-full lg:w-2/3">
+          <div className="font-maven font-semibold text-xl">
             {campaign?.title}
           </div>
-          <div className="relative flex h-96 w-full ">
+          <div className="relative flex w-full h-96">
             <Image
               src={campaign?.image || "/assets/img/placeholder.png"}
               alt={campaign?.title || ""}
@@ -62,22 +62,22 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             />
           </div>
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-full border border-accent p-3">
+            <div className="border-accent p-3 border rounded-full w-12 h-12">
               <ProfileIcon />
             </div>
-            <div className="rounded-md p-2">
+            <div className="p-2 rounded-md">
               {campaign?.createdBy?.name
                 ? `${campaign.createdBy.name} is organizing this fundraiser.`
                 : 'Organizer name not available.'}
             </div>
           </div>
-          <div className="border-b border-slate-500"></div>
+          <div className="border-slate-500 border-b"></div>
           <div>Hello my name is {campaign?.createdBy?.name},</div>
           <div className="text-justify">{campaign?.description}</div>
-          
-          <div className="w-full  items-center justify-center gap-3 rounded  bg-white p-3 shadow lg:flex ">
+
+          <div className="lg:flex justify-center items-center gap-3 bg-white shadow p-3 rounded w-full">
             <div>
-              <div className="relative flex h-20 w-20 ">
+              <div className="relative flex w-20 h-20">
                 <Link href="/">
                   <Image
                     src="/assets/img/donateicon.png"
@@ -89,7 +89,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="font-maven text-lg font-semibold">
+              <div className="font-maven font-semibold text-lg">
                 `Give Rs.500 and be a founding donor`
               </div>
               <div className="text-slate-600">
@@ -97,18 +97,18 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 journey to success. Your early support inspires others to
                 donate.
               </div>
-              <button className="mb-6 w-full rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-400 ">
+              <button className="bg-blue-500 hover:bg-blue-400 mb-6 p-2 rounded-lg w-full text-white">
                 Make a donation
               </button>
             </div>
           </div>
-          
-          <div className="border-b border-slate-500"></div>
-          
+
+          <div className="border-slate-500 border-b"></div>
+
           <div className="flex flex-col gap-2">
-            <div className="flex  gap-7">
+            <div className="flex gap-7">
               <Link href="/profile">
-                <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
+                <div className="relative rounded-full hover:cursor-pointer overflow-hidden">
                   <Image
                     src={campaign?.createdBy?.profileImage || "/assets/img/avatar.jpg"}
                     alt={campaign?.createdBy?.name || ""}
@@ -117,49 +117,92 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                   />
                 </div>
               </Link>
-              <div className=" flex flex-col gap-2 rounded-md ">
-                <div className=" font-maven text-lg font-semibold ">
+              <div className="flex flex-col gap-2 rounded-md">
+                <div className="font-maven font-semibold text-lg">
                   {campaign?.createdBy?.name}
                 </div>
                 <div className="text-slate-800">Organizer</div>
-                <div className="text-slate-800 ">
+                <div className="text-slate-800">
                   {' '}
                   Address: {campaign?.createdBy?.address || ''}
                 </div>
-                <div className="text-slate-800 ">
+                <div className="text-slate-800">
                   Contact: {campaign?.createdBy?.phoneNum || ''}
                 </div>
               </div>
             </div>
           </div>
-          <div className="border-b border-slate-500"></div>
+          <div className="border-slate-500 border-b"></div>
           <div className="flex flex-col gap-2">
-            <div className="flex  gap-7">
-              <div className=" w-full">
+            <div className="flex gap-7">
+              <div className="w-full">
                 {campaign &&
                   <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude}
                     address={campaign?.address} />
                 }
               </div>
             </div>
+
           </div>
+          <div className="border-slate-500 border-b"></div>
+          <div className='font-medium'>
+            Donners Comment
+          </div>
+          <p>Get Well Soon</p>
         </div>
-        <div className='flex flex-col  lg:w-1/3 md:space-y-10 m-7'>
-        <div className=" relative mt-12 flex h-fit flex-col rounded-2xl bg-white shadow-xl md:flex-col border-1">
-             <section className="m-2 flex flex-col p-8 md:p-10  ">
-            <div className="mb-5 text-slate-800">
-              {' '}
-              Npr. {campaign?.goalAmount} goal
-            </div>
-            <button className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-white hover:border-2 text-center font-semibold hover:bg-blue-400">
-              Share{' '}
-            </button>
-            <Link href={`/pay?campaignid=${campaignId}`} className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-white hover:border-2 text-center font-semibold hover:bg-blue-400">
-              Donate now
-            </Link>
-            <div className="mb-2 mt-2 flex items-center gap-3">
+        <div className='flex flex-col md:space-y-10 m-7 lg:w-1/3'>
+          <div className="relative flex flex-col md:flex-col border-1 bg-white shadow-xl mt-12 rounded-2xl h-fit">
+            <section className="flex flex-col m-2 p-8 md:p-10">
+              <div className="mb-5 text-slate-800">
+                {' '}
+                Npr. {campaign?.goalAmount} goal
+              </div>
+              <button className="hover:border-2 bg-blue-500 hover:bg-blue-400 mt-2 mb-2 p-2 border rounded-lg w-full font-semibold text-center text-white">
+                Share{' '}
+              </button>
+              <Link href={`/pay?campaignid=${campaignId}`} className="hover:border-2 bg-blue-500 hover:bg-blue-400 mt-2 mb-2 p-2 border rounded-lg w-full font-semibold text-center text-white">
+                Donate now
+              </Link>
+              <div className="flex items-center gap-3 mt-2 mb-2">
+                <Link href="/profile">
+                  <div className="relative rounded-full hover:cursor-pointer overflow-hidden">
+                    <Image
+                      src="/assets/img/help.png"
+                      alt="help icon"
+                      height={40}
+                      width={50}
+                    />
+                  </div>
+                </Link>
+                <div className="p-2 rounded-md">
+                  <p className="font-medium">Become the first supporter</p>
+                  <p className="mt-1 font-maven text-slate-500 text-sm">
+                    Your Donation matters
+                  </p>
+                </div>
+              </div>
+              <div className="mt-2">
+                <h1 className="mb-2 font-medium">
+                  Sahayata protects your donation
+                </h1>
+                <div>
+                  We guarantee you a full refund for up to a year in the rare case
+                  that fraud occurs.{' '}
+                  <a href="#" className="hover:text-blue-500 underline">
+                    {' '}
+                    See our Sahayata Giving Guarantee.
+                  </a>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <div className='flex border-1 bg-white shadow-xl rounded-2xl'>
+            <section className="flex flex-col m-2 p-8 md:p-10">
+              {/* <div className="flex items-center gap-3 mt-2 mb-2">
               <Link href="/profile">
-                <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
+                <div className="relative rounded-full hover:cursor-pointer overflow-hidden">
                   <Image
                     src="/assets/img/help.png"
                     alt="help icon"
@@ -168,52 +211,15 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                   />
                 </div>
               </Link>
-              <div className=" rounded-md p-2">
+              <div className="p-2 rounded-md">
                 <p className="font-medium">Become the first supporter</p>
-                <p className="mt-1 font-maven text-sm text-slate-500">
-                  Your Donation matters
-                </p>
-              </div>
-            </div>
-            <div className="mt-2">
-              <h1 className="mb-2 font-medium">
-                Sahayata protects your donation
-              </h1>
-              <div>
-                We guarantee you a full refund for up to a year in the rare case
-                that fraud occurs.{' '}
-                <a href="#" className="underline hover:text-blue-500">
-                  {' '}
-                  See our Sahayata Giving Guarantee.
-                </a>
-              </div>
-            </div>
-             </section>
-            
-        </div>
-        
-        <div className='flex rounded-2xl bg-white shadow-xl border-1'>
-          <section className="m-2 flex flex-col p-8 md:p-10">
-            {/* <div className="mb-2 mt-2 flex items-center gap-3">
-              <Link href="/profile">
-                <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
-                  <Image
-                    src="/assets/img/help.png"
-                    alt="help icon"
-                    height={40}
-                    width={50}
-                  />
-                </div>
-              </Link>
-              <div className=" rounded-md p-2">
-                <p className="font-medium">Become the first supporter</p>
-                <p className="mt-1 font-maven text-sm text-slate-500">
+                <p className="mt-1 font-maven text-slate-500 text-sm">
                   Your Donation matters
                 </p>
               </div>
             </div> */}
-            <div className="flex mt-2">
-            <div className="relative overflow-hidden rounded-full ">
+              <div className="flex mt-2">
+                <div className="relative rounded-full overflow-hidden">
                   <Image
                     src="/assets/img/confetti.png"
                     alt="confetti"
@@ -221,20 +227,20 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                     width={30}
                   />
                 </div>
-              <h1 className="mb-2 font-medium">
-                Reshma Pariyar donated  $1,000. 
-              </h1>
-              {/* <div>
+                <h1 className="mb-2 font-medium">
+                  Reshma Pariyar donated  Rs.1,000.
+                </h1>
+                {/* <div>
                 We gurantee you a full refund for up to a year in the rare case
                 that fraud occurs.{' '}
-                <a href="#" className="underline hover:text-blue-500">
+                <a href="#" className="hover:text-blue-500 underline">
                   {' '}
                   See our Sahayata Giving Gurantee.
                 </a>
               </div> */}
-            </div>
-            <div className="flex mt-2">
-            <div className="relative overflow-hidden rounded-full ">
+              </div>
+              <div className="flex mt-2">
+                <div className="relative rounded-full overflow-hidden">
                   <Image
                     src="/assets/img/confetti.png"
                     alt="confetti"
@@ -242,21 +248,21 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                     width={30}
                   />
                 </div>
-              <h1 className="mb-2 font-medium">
-                Reshma Pariyar donated  $1,000. 
-              </h1>
-              {/* <div>
+                <h1 className="mb-2 font-medium">
+                  Reshma Pariyar donated  Rs.1,000.
+                </h1>
+                {/* <div>
                 We gurantee you a full refund for up to a year in the rare case
                 that fraud occurs.{' '}
-                <a href="#" className="underline hover:text-blue-500">
+                <a href="#" className="hover:text-blue-500 underline">
                   {' '}
                   See our Sahayata Giving Gurantee.
                 </a>
               </div> */}
-            </div>
+              </div>
             </section>
-            </div>
-      </div>
+          </div>
+        </div>
       </div>
     </>
   )
