@@ -203,11 +203,12 @@ export default function LandingSection() {
                   image,
                   title,
                   description,
-                  payment,
+                  payments,
                 }: any) => {
-                  // const raisedAmount = payment.map((pay) => pay  );
-                  // console.log(raisedAmount);
-
+                   let raisedAmount = 0;
+                    payments.map((payment) => (
+                   raisedAmount = raisedAmount + payment.paymentAmount 
+                   )  );
                   return (
                     <CampaignCard
                       key={campaignId}
@@ -216,8 +217,8 @@ export default function LandingSection() {
                       campaignImageURL={image}
                       campaignTitle={title}
                       campaignDescription={description}
-                      // campaignRaisedAmount={raisedAmount}
-                      numberOfDonors={0}
+                      campaignRaisedAmount={raisedAmount}
+                      numberOfDonors={payments.length}
                     />
                   )
                 }

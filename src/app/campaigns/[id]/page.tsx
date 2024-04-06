@@ -105,9 +105,9 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 journey to success. Your early support inspires others to
                 donate.
               </div>
-              <button className="mb-6 w-full rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-400 ">
-                Make a donation
-              </button>
+              <Link href={`/pay?campaignid=${campaignId}`} className="mb-6 w-full rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-400 text-center">
+              Make a Donation
+            </Link>
             </div>
           </div>
           
