@@ -203,9 +203,11 @@ export default function LandingSection() {
                   image,
                   title,
                   description,
-                  currentAmount,
-                  collectedAmount
+                  payment,
                 }: any) => {
+                  // const raisedAmount = payment.map((pay) => pay  );
+                  // console.log(raisedAmount);
+
                   return (
                     <CampaignCard
                       key={campaignId}
@@ -214,8 +216,8 @@ export default function LandingSection() {
                       campaignImageURL={image}
                       campaignTitle={title}
                       campaignDescription={description}
-                      campaignCurrentAmount={currentAmount}
-                      campaignCollectedAmount={collectedAmount}
+                      // campaignRaisedAmount={raisedAmount}
+                      numberOfDonors={0}
                     />
                   )
                 }

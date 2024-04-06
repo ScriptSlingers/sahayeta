@@ -10,6 +10,13 @@ const OsmMap = dynamic(() => import('@sahayeta/components/MapComponent'), {
   ssr: false
 })
 
+interface Payment {
+  paymentAmount: number
+  paymentBy: {
+    name: string
+  }
+}
+
 interface CampaignData {
   id: string
   title: string
@@ -21,6 +28,7 @@ interface CampaignData {
     address?: string
     phoneNum?: string
   }
+  payments: Payment[]
   endDate: string
   goalAmount: string
   longitude: string
@@ -199,25 +207,24 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
           </div>
 
           <div className='flex border-1 bg-white shadow-xl rounded-2xl'>
-            <section className="flex flex-col p-8 md:p-10">
-
-
-              <div className="flex justify-center items-center">
-                <div className="relative rounded-full overflow-hidden">
-                  <Image
-                    src="/assets/img/confetti.png"
-                    alt="confetti"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-                <h1 className="mb-2 font-medium">
-                  Reshma Pariyar donated  RS.2,000.
-                </h1>
-              </div>
+            <section className="flex flex-col m-2 p-8 md:p-10">
+              <h1 className='gap-12 font-bold'>Donations</h1>
+              {campaign?.payments.map((payment) => (
+                <div className="flex mt-2">
+                  <div className="relative rounded-full overflow-hidden">
+                    <Image
+                      src="/assets/img/confetti.png"
+                      alt="confetti"
+                      height={30}
+                      width={30}
+                    />
+                  </div>
+                  <h1 className="mb-2 font-medium">
+                    {payment.paymentBy.name} donated NPR. {payment.paymentAmount}
+                  </h1>
+                </div>))}
             </section>
           </div>
-
         </div>
       </div>
     </>
