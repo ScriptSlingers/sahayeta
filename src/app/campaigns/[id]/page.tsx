@@ -220,17 +220,69 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
             </div> */}
               <div className="flex mt-2">
                 <div className="relative rounded-full overflow-hidden">
-                  <Image
-                    src="/assets/img/confetti.png"
-                    alt="confetti"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-                <h1 className="mb-2 font-medium">
-                  Reshma Pariyar donated  Rs.1,000.
-                </h1>
-                {/* <div>
+                  <div className='flex flex-col md:space-y-10 m-7 lg:w-1/3'>
+                    <div className="relative flex flex-col md:flex-col border-1 bg-white shadow-xl mt-12 rounded-2xl h-fit">
+                      <section className="flex flex-col m-2 p-8 md:p-10">
+                        <div className="mb-5 text-slate-800">
+                          {' '}
+                          Npr. {campaign?.goalAmount} goal
+                        </div>
+                        <button className="hover:border-2 bg-blue-500 hover:bg-blue-400 mt-2 mb-2 p-2 border rounded-lg w-full font-semibold text-center text-white">
+                          Share{' '}
+                        </button>
+                        <Link href={`/pay?campaignid=${campaignId}`} className="hover:border-2 bg-blue-500 hover:bg-blue-400 mt-2 mb-2 p-2 border rounded-lg w-full font-semibold text-center text-white">
+                          Donate now
+                        </Link>
+                        <div className="flex items-center gap-3 mt-2 mb-2">
+                          <Link href="/profile">
+                            <div className="relative rounded-full hover:cursor-pointer overflow-hidden">
+                              <Image
+                                src="/assets/img/help.png"
+                                alt="help icon"
+                                height={40}
+                                width={50}
+                              />
+                            </div>
+                          </Link>
+                          <div className="p-2 rounded-md">
+                            <p className="font-medium">Become the first supporter</p>
+                            <p className="mt-1 font-maven text-slate-500 text-sm">
+                              Your Donation matters
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mt-2">
+                          <h1 className="mb-2 font-medium">
+                            Sahayata protects your donation
+                          </h1>
+                          <div>
+                            We guarantee you a full refund for up to a year in the rare case
+                            that fraud occurs.{' '}
+                            <a href="#" className="hover:text-blue-500 underline">
+                              {' '}
+                              See our Sahayata Giving Guarantee.
+                            </a>
+                          </div>
+                        </div>
+                      </section>
+
+                    </div>
+
+                    <div className='flex border-1 bg-white shadow-xl rounded-2xl'>
+                      <section className="flex flex-col m-2 p-8 md:p-10">
+                        <div className="flex mt-2">
+                          <div className="relative rounded-full overflow-hidden">
+                            <Image
+                              src="/assets/img/confetti.png"
+                              alt="confetti"
+                              height={30}
+                              width={30}
+                            />
+                          </div>
+                          <h1 className="mb-2 font-medium">
+                            Reshma Pariyar donated  $1,000.
+                          </h1>
+                          {/* <div>
                 We gurantee you a full refund for up to a year in the rare case
                 that fraud occurs.{' '}
                 <a href="#" className="hover:text-blue-500 underline">
@@ -238,20 +290,20 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                   See our Sahayata Giving Gurantee.
                 </a>
               </div> */}
-              </div>
-              <div className="flex mt-2">
-                <div className="relative rounded-full overflow-hidden">
-                  <Image
-                    src="/assets/img/confetti.png"
-                    alt="confetti"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-                <h1 className="mb-2 font-medium">
-                  Reshma Pariyar donated  Rs.1,000.
-                </h1>
-                {/* <div>
+                        </div>
+                        <div className="flex mt-2">
+                          <div className="relative rounded-full overflow-hidden">
+                            <Image
+                              src="/assets/img/confetti.png"
+                              alt="confetti"
+                              height={30}
+                              width={30}
+                            />
+                          </div>
+                          <h1 className="mb-2 font-medium">
+                            Reshma Pariyar donated  $1,000.
+                          </h1>
+                          {/* <div>
                 We gurantee you a full refund for up to a year in the rare case
                 that fraud occurs.{' '}
                 <a href="#" className="hover:text-blue-500 underline">
@@ -259,9 +311,16 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                   See our Sahayata Giving Gurantee.
                 </a>
               </div> */}
+                        </div>
+                      </section>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </section>
           </div>
+
         </div>
       </div>
     </>
