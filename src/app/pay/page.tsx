@@ -5,7 +5,7 @@ import axios from "axios";
 
 export  default function Pay({searchParams}) {
     const campaignId = searchParams.campaignid;
-    const [amount, setAmount]= useState(100);
+    const [amount, setAmount]= useState(500);
     const [signature, setSignature] = useState("");
     const [transactionId, setTransactionId] = useState("");
 
