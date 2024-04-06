@@ -316,7 +316,22 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                     </div>
                   </div>
                 </div>
-
+                <h1 className="mb-2 font-medium">
+                  Reshma Pariyar donated  $1,000.
+                </h1>
+              </div>
+              <div className="flex mt-2">
+                <div className="relative rounded-full overflow-hidden">
+                  <Image
+                    src="/assets/img/confetti.png"
+                    alt="confetti"
+                    height={30}
+                    width={30}
+                  />
+                </div>
+                <h1 className="mb-2 font-medium">
+                  Reshma Pariyar donated  $2,000.
+                </h1>
               </div>
             </section>
           </div>
