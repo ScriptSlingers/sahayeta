@@ -16,6 +16,7 @@ export async function GET() {
       collectedAmount: true,
       startDate: true,
       endDate: true,
+      createdById: true,
       createdBy: true,
       category: true,
       status: true,
