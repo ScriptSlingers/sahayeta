@@ -43,8 +43,13 @@ model User {
   email         String
   emailVerified DateTime?  @map("email_verified")
   password      String?
+  isVerified Boolean @default(false)
+  verificationExpiry DateTime?
+  verificationToken String?
   name          String?
   address       String?
+  resetToken String?
+  resetTokenExpiry DateTime?
   phoneNum      String?
   bio           String?
   profileImage  String?
