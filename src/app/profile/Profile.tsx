@@ -66,6 +66,7 @@ export default function Profile() {
     <div className="flex w-full flex-col  items-center justify-center rounded">
       <div className="container flex items-center justify-center ">
         <div className="flex w-full flex-col items-center justify-center rounded-xl bg-slate-200 px-4 py-4">
+
           <div className="flex w-full flex-col gap-4 rounded-xl bg-white p-4">
             <div className="relative h-56 w-56 rounded-lg bg-slate-300 ">
               <Image
@@ -184,6 +185,6 @@ export default function Profile() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

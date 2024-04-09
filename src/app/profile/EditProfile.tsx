@@ -222,7 +222,11 @@ export default function EditProfile() {
                     defaultValue={loggedInUser?.address}
                   />
                 </div>
-                <div className="flex w-full flex-col justify-start md:w-1/2">
+                <div className="flex w-full flex-col justify-start md:w-1/2 gap-3">
+                  <div className='flex flex-col'>
+                    <span className="font-semibold">Edit Citizenship Image:</span>
+                    <span className='text-sm'>(Add front and back in same image)</span>
+                  </div>
                   <div className="flex w-full flex-col gap-10">
                     <input
                       type="file"
