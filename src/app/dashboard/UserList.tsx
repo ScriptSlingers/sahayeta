@@ -44,7 +44,7 @@ export default function UsersListing() {
     }
   }, [users])
 
-  let count = 1;
+  let count = 1
 
   return (
     <div className="flex w-full flex-col items-center justify-center rounded bg-blue-50">
@@ -122,7 +122,9 @@ export default function UsersListing() {
             <table className="w-full text-left text-sm text-gray-500 rtl:text-right">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                 <tr>
-                  <th scope="col" className="p-4">S.N.</th>
+                  <th scope="col" className="p-4">
+                    S.N.
+                  </th>
                   <th scope="col" className="px-6 py-3">
                     User Name
                   </th>
@@ -159,9 +161,7 @@ export default function UsersListing() {
                   }: any) => {
                     return (
                       <tr className=" border-b hover:bg-gray-50 " key={id}>
-                        <td className="w-4 p-4">
-                          {count++}
-                        </td>
+                        <td className="w-4 p-4">{count++}</td>
                         <td scope="row" className="px-6 py-4">
                           {name}
                         </td>
@@ -341,7 +341,7 @@ export const EditModal = ({
     try {
       await axios.patch(`/api/users/${loggedInUser?.id}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', // or any other required headers
+          'Content-Type': 'multipart/form-data' // or any other required headers
           // 'Authorization': `Bearer ${token}`, // if authorization is needed
         }
       })
@@ -349,8 +349,8 @@ export const EditModal = ({
       toast.success(`User Edited Successfully`)
       closeModal()
     } catch (error) {
-      console.error('Error Editing user:', error);
-      console.log(error.response); // Check the response from the server
+      console.error('Error Editing user:', error)
+      console.log(error.response) // Check the response from the server
     }
   }
 

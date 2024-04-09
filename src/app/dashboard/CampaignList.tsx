@@ -8,11 +8,7 @@ import { useRouter } from 'next/navigation'
 import { Fragment, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import {
-  BsEye,
-  BsPencil,
-  BsTrash
-} from 'react-icons/bs'
+import { BsEye, BsPencil, BsTrash } from 'react-icons/bs'
 
 export default function CampaignsListing() {
   const router = useRouter()
@@ -65,7 +61,7 @@ export default function CampaignsListing() {
     return formattedDate
   }
 
-  let count = 1;
+  let count = 1
 
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
@@ -145,7 +141,9 @@ export default function CampaignsListing() {
             <table className="w-full text-left text-sm text-gray-500 rtl:text-right">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                 <tr>
-                  <th scope="col" className="p-4">S.N.</th>
+                  <th scope="col" className="p-4">
+                    S.N.
+                  </th>
                   <th scope="col" className="px-6 py-3">
                     Title
                   </th>
@@ -194,9 +192,7 @@ export default function CampaignsListing() {
                         className=" border-b hover:bg-gray-50 "
                         key={campaignId}
                       >
-                        <td className="w-4 p-4">
-                          {count++}
-                        </td>
+                        <td className="w-4 p-4">{count++}</td>
                         <td
                           scope="row"
                           className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 "
@@ -205,8 +201,9 @@ export default function CampaignsListing() {
                             href={`/campaigns/${campaignId}`}
                             className="flex items-center gap-2 text-blue-700"
                           >
-                            {`${title.slice(0, 13)}${title.length > 13 ? '...' : ''
-                              }`}
+                            {`${title.slice(0, 13)}${
+                              title.length > 13 ? '...' : ''
+                            }`}
                             <div className="h-4 w-4">
                               <OpenLinkIcon />
                             </div>
@@ -351,7 +348,12 @@ export const DeleteModal = ({ campaignId }: any) => {
   )
 }
 
-export const EditModal = ({ campaignId, title, description, goalAmount }: any) => {
+export const EditModal = ({
+  campaignId,
+  title,
+  description,
+  goalAmount
+}: any) => {
   const [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {

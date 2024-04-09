@@ -1,8 +1,8 @@
-import { prisma } from '@sahayeta/lib';
-import { compare } from "bcryptjs";
-import { NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import GoogleProvider from 'next-auth/providers/google';
+import { prisma } from '@sahayeta/lib'
+import { compare, hash } from 'bcryptjs'
+import { NextAuthOptions } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -29,68 +29,79 @@ export const authOptions: NextAuthOptions = {
           type: 'email',
           placeholder: 'email@example.com'
         },
-        password: { label: "Password", type: "password" },
-
+        password: { label: 'Password', type: 'password' }
       },
       authorize: async (credentials, req) => {
-        const generatedRandomKey = [...Array(10)].map(() => Math.random().toString(36).charAt(2)).join('');
+        const generatedRandomKey = [...Array(10)]
+          .map(() => Math.random().toString(36).charAt(2))
+          .join('')
 
         if (!credentials?.email || !credentials.password) {
-          return null;
-      }
-      const user = await prisma.user.findFirst({
-        where: {
-            email: credentials.email,
+          return null
         }
-    });
-    if (
-      !user ||
-      !(await compare(credentials.password, user.password!))
-  ) {
-      return null;
-  }
-   return {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      role: user.role,
-      randomKey: generatedRandomKey,
-  };
+        const user = await prisma.user.findFirst({
+          where: {
+            email: credentials.email
+          }
+        })
+        if (!user || !(await compare(credentials.password, user.password!))) {
+          return null
+        }
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          randomKey: generatedRandomKey
+        }
       }
     })
   ],
   callbacks: {
     session: async ({ session, token }) => {
-      const userDetails = await prisma.user.findFirst({
-        where: { email: session.user.email },
-        select: {
-          id: true,
-          role: true
-        }
-      })
-      session.user['role'] = userDetails.role
+      if (token.sub) {
+        const userDetails = await prisma.user.findFirst({
+          where: { email: session?.user?.email },
+          select: {
+            id: true,
+            role: true
+          }
+        })
+        session.user['role'] = userDetails.role
 
-      return {
+        return {
           ...session,
           user: {
-              ...session.user,
-              id: token.id,
-              randomKey: token.randomKey,
-          },
-      };
-  },
-    async jwt({ token, user }) {
-      if (user) {
-        const newUser = user as unknown as any;
-        return {
-            ...token,
-            id: newUser.id,
-            randomKey: newUser.randomKey,
-        };
-    }
-    return token;
+            ...session.user,
+            id: token.id,
+            randomKey: token.randomKey
+          }
+        }
+      }
     },
+    async jwt({ token, account, user }) {
+      if (account && user) {
+        if (account.provider === 'google') {
+          let dbUser = await prisma.user.findFirst({
+            where: { email: user.email }
+          })
+          if (!dbUser) {
+            dbUser = await prisma.user.create({
+              data: {
+                email: user.email,
+                name: user.name,
+                username: user.email.split('@')[0],
+                role: 'donor'
+              }
+            })
+          }
+          token.id = dbUser.id
+          token.email = dbUser.email
+          token.role = dbUser.role
+        }
+      }
+      return token
+    }
   },
-  secret: process.env.NEXTAUTH_SECRET,
-
+  secret: process.env.NEXTAUTH_SECRET
 }

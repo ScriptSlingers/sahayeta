@@ -18,12 +18,11 @@ export default function LandingSection() {
     query === ''
       ? campaigns
       : campaigns.filter((campaign: { campaignId: number; title: string }) =>
-        campaign.title
-          .toLowerCase()
-          .replace(/\s+/g, '')
-          .includes(query.toLowerCase().replace(/\s+/g, ''))
-      );
-
+          campaign.title
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, ''))
+        )
 
   useEffect(() => {
     axios
@@ -53,15 +52,14 @@ export default function LandingSection() {
           Sahayata Uniting Hearts, Transforming Lives – Be the Difference Today!
         </div>
 
-
-        <div className='w-1/2'>
+        <div className="w-1/2">
           <Combobox value={selected} onChange={setSelected}>
             <div className="relative">
               <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none sm:text-sm">
                 <Combobox.Input
-                  className="w-full border-none py-3.5 px-5 text-sm leading-5 text-gray-900 focus:outline-none"
-                  placeholder={"Enter your query"}
-                  onChange={(event) => setQuery(event.target.value)}
+                  className="w-full border-none px-5 py-3.5 text-sm leading-5 text-gray-900 focus:outline-none"
+                  placeholder={'Enter your query'}
+                  onChange={event => setQuery(event.target.value)}
                 />
                 <Combobox.Button className="absolute inset-y-0 right-3 flex items-center pr-2">
                   <BsSearchHeart
@@ -77,36 +75,43 @@ export default function LandingSection() {
                 leaveTo="opacity-0"
                 afterLeave={() => setQuery('')}
               >
-                <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-50">
+                <Combobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                   {filteredcampaigns.length === 0 && query !== '' ? (
                     <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                       Nothing found.
                     </div>
                   ) : (
-                    filteredcampaigns.map((campaign) => (
+                    filteredcampaigns.map(campaign => (
                       <Combobox.Option
                         key={campaign.campaignId}
                         className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-blue-600 text-white' : 'text-gray-900'
+                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                            active ? 'bg-blue-600 text-white' : 'text-gray-900'
                           }`
                         }
                         value={campaign.title}
                       >
                         {({ selected, active }) => (
                           <>
-                            <Link href={"/campaigns/" + campaign.campaignId}>
+                            <Link href={'/campaigns/' + campaign.campaignId}>
                               <span
-                                className={`block truncate ${selected ? 'font-medium' : 'font-normal'
-                                  }`}
+                                className={`block truncate ${
+                                  selected ? 'font-medium' : 'font-normal'
+                                }`}
                               >
                                 {campaign.title}
-                              </span></Link>
+                              </span>
+                            </Link>
                             {selected ? (
                               <span
-                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? 'text-white' : 'text-blue-600'
-                                  }`}
+                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                  active ? 'text-white' : 'text-blue-600'
+                                }`}
                               >
-                                <BsBookmarkFill className="h-3 w-5" aria-hidden="true" />
+                                <BsBookmarkFill
+                                  className="h-3 w-5"
+                                  aria-hidden="true"
+                                />
                               </span>
                             ) : null}
                           </>
@@ -120,44 +125,36 @@ export default function LandingSection() {
           </Combobox>
         </div>
 
-        <div className='flex gap-4'>
-          {displayedCampaigns.map(
-            ({
-              campaignId,
-              category
-
-            }: any) => {
-              return (
-                <Link href={"/campaigns/" + campaignId} className="flex gap-2 items-center justify-center rounded  bg-slate-100/30 py-2 px-3 text-white" key={campaignId}>
-                  <div className="flex h-3 w-3 items-center text-white">
-                    {SearchIcon}
-                  </div>
-                  <p className="text-xs">
-                    {category.displayName}
-                  </p>
-                </Link>
-              )
-            }
-          )
-          }
-
+        <div className="flex gap-4">
+          {displayedCampaigns.map(({ campaignId, category }: any) => {
+            return (
+              <Link
+                href={'/campaigns/' + campaignId}
+                className="flex items-center justify-center gap-2 rounded  bg-slate-100/30 px-3 py-2 text-white"
+                key={campaignId}
+              >
+                <div className="flex h-3 w-3 items-center text-white">
+                  {SearchIcon}
+                </div>
+                <p className="text-xs">{category.displayName}</p>
+              </Link>
+            )
+          })}
         </div>
 
         <div className="container grid w-full grid-cols-2 items-center justify-center gap-5 lg:grid-cols-5">
           {displayedHeroCampaigns.map(
-            ({
-              campaignId,
-              image,
-              category,
-
-            }: any) => {
+            ({ campaignId, image, category }: any) => {
               return (
-                <Link href={"/campaigns/" + campaignId}
-                  className="flex flex-col items-center gap-2 " key={campaignId}>
+                <Link
+                  href={'/campaigns/' + campaignId}
+                  className="flex flex-col items-center gap-2 "
+                  key={campaignId}
+                >
                   <div className="h-28 w-44 rounded-2xl border-4 border-blue-300 p-0.5">
                     <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                       <Image
-                        src={image || "/assets/img/placeholder.png"}
+                        src={image || '/assets/img/placeholder.png'}
                         fill
                         alt=""
                         quality={100}
@@ -172,10 +169,9 @@ export default function LandingSection() {
                 </Link>
               )
             }
-          )
-          }
+          )}
         </div>
-      </div >
+      </div>
       <div className="flex w-full flex-col  items-center justify-between  gap-5 bg-[#c7ecff] py-8 lg:flex-row lg:px-64">
         <p className="flex items-center font-semibold ">
           Harmony in Giving Sahayata, Your Bridge to Positive Change.
@@ -190,57 +186,50 @@ export default function LandingSection() {
           </Link>
         </button>
       </div>
-      <p className="py-6 text-center text-xl font-semibold ">
+      <p className="py-6 text-center text-2xl font-bold text-blue-700">
         Join the Urgent Cause
       </p>
-      {
-        displayedCampaigns.length !== 0 ? (
-          <div className="container flex w-full flex-col">
-            <div className=" grid grid-cols-3 items-center justify-center gap-5 p-3 text-black">
-              {displayedCampaigns.map(
-                ({
-                  campaignId,
-                  image,
-                  title,
-                  description,
-                  payments,
-                }: any) => {
-                   let raisedAmount = 0;
-                    payments.map((payment) => (
-                   raisedAmount = raisedAmount + payment.paymentAmount 
-                   )  );
-                  return (
-                    <CampaignCard
-                      key={campaignId}
-                      campaignId={campaignId}
-                      campaignImageAlt={title}
-                      campaignImageURL={image}
-                      campaignTitle={title}
-                      campaignDescription={description}
-                      campaignRaisedAmount={raisedAmount}
-                      numberOfDonors={payments.length}
-                    />
-                  )
-                }
-              )}
-            </div>
-            <div className="container flex items-center justify-center py-8 ">
-              <button>
-                <Link
-                  href="/campaigns"
-                  className=" inline-block items-center rounded border border-transparent  bg-blue-600 p-3 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
-                >
-                  View more Campaigns
-                </Link>
-              </button>
-            </div>
+      {displayedCampaigns.length !== 0 ? (
+        <div className="container flex w-full flex-col">
+          <div className=" grid grid-cols-3 items-center justify-center gap-5 p-3 text-black">
+            {displayedCampaigns.map(
+              ({ campaignId, image, title, description, payments }: any) => {
+                let raisedAmount = 0
+                payments.map(
+                  payment =>
+                    (raisedAmount = raisedAmount + payment.paymentAmount)
+                )
+                return (
+                  <CampaignCard
+                    key={campaignId}
+                    campaignId={campaignId}
+                    campaignImageAlt={title}
+                    campaignImageURL={image}
+                    campaignTitle={title}
+                    campaignDescription={description}
+                    campaignRaisedAmount={raisedAmount}
+                    numberOfDonors={payments.length}
+                  />
+                )
+              }
+            )}
           </div>
-        ) : (
-          <div className="flex h-48 items-center justify-center">
-            <Loading />
+          <div className="container flex items-center justify-center py-8 ">
+            <button>
+              <Link
+                href="/campaigns"
+                className=" inline-block items-center rounded border border-transparent  bg-blue-600 p-3 font-medium text-white duration-300 hover:border hover:border-blue-400 hover:bg-transparent hover:text-black "
+              >
+                View more Campaigns
+              </Link>
+            </button>
           </div>
-        )
-      }
+        </div>
+      ) : (
+        <div className="flex h-48 items-center justify-center">
+          <Loading />
+        </div>
+      )}
     </>
   )
 }

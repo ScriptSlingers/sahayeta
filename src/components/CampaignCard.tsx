@@ -9,7 +9,7 @@ export const CampaignCard = ({
   campaignTitle,
   campaignDescription,
   campaignRaisedAmount,
-  numberOfDonors,
+  numberOfDonors
 }: any) => {
   return (
     <div
@@ -28,10 +28,13 @@ export const CampaignCard = ({
             />
           </div>
         </Link>
-        <div className="text-xl font-semibold">{campaignTitle}</div>
+        <Link href={'/campaigns/' + campaignId}>
+          <div className="text-xl font-semibold">{campaignTitle}</div>
+        </Link>
         <div className="flex justify-center text-justify align-middle text-gray-500 ">
-          {`${campaignDescription.slice(0, 500)}${campaignDescription.length > 1000000 ? '...' : ''
-            }`}
+          {`${campaignDescription.slice(0, 500)}${
+            campaignDescription.length > 1000000 ? '...' : ''
+          }`}
         </div>
       </div>
       <div className="flex justify-between font-medium">
