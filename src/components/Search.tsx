@@ -88,10 +88,10 @@ export const Search: React.FC = () => {
             key={campaign?.campaignId}
           >
             <div className="justify-between gap-20 p-10 lg:flex">
-              <div className="flex w-full flex-col gap-2 lg:w-1/2 justify-start">
-                <span className='bg-blue-600 px-3 w-40 text-center text-white py-1 rounded-full text-sm'>
+              <div className="flex w-full flex-col justify-start gap-2 lg:w-1/2">
+                <span className="w-40 rounded-full bg-blue-600 px-3 py-1 text-center text-sm text-white">
                   {campaign?.status
-                    .replace(/\b\w/g, (match) => match.toUpperCase())
+                    .replace(/\b\w/g, match => match.toUpperCase())
                     .replace(/([A-Z])/g, ' $1')}
                 </span>
                 <p className="font-poppins text-base font-semibold">
@@ -100,7 +100,7 @@ export const Search: React.FC = () => {
                 <p className="text-xs font-normal text-[#2540C4]">
                   Category: {campaign?.category?.displayName}
                 </p>
-                <p className="font-poppins text-sm font-normal text-gray-500 text-justify">
+                <p className="font-poppins text-justify text-sm font-normal text-gray-500">
                   {campaign?.description}
                 </p>
                 <div className="text-xs font-semibold">
@@ -108,10 +108,9 @@ export const Search: React.FC = () => {
                 </div>
               </div>
               <div className="h-auto w-96 rounded-2xl border-4 border-blue-300 p-0.5">
-
                 <div className="relative h-full w-full items-center overflow-hidden  rounded-xl">
                   <Image
-                    src={campaign?.image || "/assets/img/placeholder.png"}
+                    src={campaign?.image || '/assets/img/placeholder.png'}
                     fill
                     alt=""
                     quality={100}
@@ -163,6 +162,6 @@ export const Search: React.FC = () => {
           }
         />
       </div>
-    </div >
+    </div>
   )
 }

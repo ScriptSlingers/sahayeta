@@ -37,11 +37,7 @@ export async function PATCH(req: NextRequest, { params }) {
   }
   try {
     const body = await req.json()
-    const {
-      paymentDate,
-      paymentById,
-      paymentMethodId
-    } = body
+    const { paymentDate, paymentById, paymentMethodId } = body
 
     const { id } = params
 

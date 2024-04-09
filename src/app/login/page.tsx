@@ -26,24 +26,23 @@ export default function Login(csrfToken) {
   } = useForm()
 
   async function onSubmit(values, e) {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault() // Prevent default form submission behavior
     try {
       await signIn('credentials', {
         ...values,
         callbackUrl: 'http://localhost:3000/'
-      });
+      })
 
-      toast.success("Sign in successful");
-      console.log(values);
-
+      toast.success('Sign in successful')
+      console.log(values)
     } catch (error) {
-      toast.error("Error occurred during sign in");
+      toast.error('Error occurred during sign in')
     }
   }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#f9f4f1] ">
-      <div className="relative flex flex-col rounded-2xl bg-white shadow-2xl md:flex-row overflow-hidden">
+      <div className="relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl md:flex-row">
         <section className=" relative">
           <Image
             src={donationImage}
@@ -57,7 +56,10 @@ export default function Login(csrfToken) {
           <span className="mb-8 font-light text-gray-400">
             Welcome back! Please enter your details
           </span>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
             <input
               {...register('email')}
               className="w-full rounded border border-neutral-400 p-3 text-sm text-black"
@@ -74,7 +76,7 @@ export default function Login(csrfToken) {
             />
 
             <div className="flex w-full justify-between py-4">
-              <div className='flex gap-2'>
+              <div className="flex gap-2">
                 <input type="checkbox" name="ch" id="ch" />
                 <span className="text-md">Remember Me</span>
               </div>
@@ -110,7 +112,8 @@ export default function Login(csrfToken) {
               href="/signup"
               className="text-md font-bold text-black hover:text-blue-500 "
             >
-              {" "}  Sign Up
+              {' '}
+              Sign Up
             </a>
           </div>
         </section>

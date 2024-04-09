@@ -40,7 +40,6 @@ export const AppHeader = () => {
             <Link href="/campaigns">
               <div>Campaign</div>
             </Link>
-
           </div>
         </div>
         <div className="flex items-center gap-6 p-6">

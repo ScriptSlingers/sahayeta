@@ -36,7 +36,7 @@ export default function CategoryEdit() {
       })
   }, [category])
 
-  let count = 1;
+  let count = 1
 
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
@@ -49,7 +49,9 @@ export default function CategoryEdit() {
             <table className="w-full text-left text-sm text-gray-500 rtl:text-right">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700 ">
                 <tr>
-                  <th scope="col" className="p-4">S.N.</th>
+                  <th scope="col" className="p-4">
+                    S.N.
+                  </th>
                   <th scope="col" className="px-6 py-3">
                     Category
                   </th>
@@ -69,9 +71,7 @@ export default function CategoryEdit() {
                   ({ id, name, displayName, description, index }: any) => {
                     return (
                       <tr className=" border-b hover:bg-gray-50 " key={id}>
-                        <td className="w-4 p-4">
-                          {count++}
-                        </td>
+                        <td className="w-4 p-4">{count++}</td>
                         <th
                           scope="row"
                           className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 "

@@ -44,14 +44,14 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
     const fetchCampaignData = async () => {
       try {
         const res = await axios.get(`/api/campaigns/${campaignId}`)
-        console.log(res.data);
+        console.log(res.data)
         setCampaign(res.data)
       } catch (error) {
         return error
       }
     }
     fetchCampaignData()
-  }, [])
+  }, [campaignId])
 
   return (
     <>
@@ -62,8 +62,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
           </div>
           <div className="relative flex h-96 w-full ">
             <Image
-              src={campaign?.image || "/assets/img/placeholder.png"}
-              alt={campaign?.title || ""}
+              src={campaign?.image || '/assets/img/placeholder.png'}
+              alt={campaign?.title || ''}
               fill
               quality={100}
               className="rounded-xl object-cover"
@@ -105,7 +105,10 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 journey to success. Your early support inspires others to
                 donate.
               </div>
-              <Link href={`/pay?campaignid=${campaignId}`} className="mb-6 w-full rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-400 text-center">
+              <Link
+                href={`/pay?campaignid=${campaignId}`}
+                className="mb-6 w-full rounded-lg bg-blue-500 p-2 text-center text-white hover:bg-blue-400"
+              >
                 Make a Donation
               </Link>
             </div>
@@ -118,8 +121,11 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
               <Link href="/profile">
                 <div className="relative overflow-hidden rounded-full hover:cursor-pointer">
                   <Image
-                    src={campaign?.createdBy?.profileImage || "/assets/img/avatar.jpg"}
-                    alt={campaign?.createdBy?.name || ""}
+                    src={
+                      campaign?.createdBy?.profileImage ||
+                      '/assets/img/avatar.jpg'
+                    }
+                    alt={campaign?.createdBy?.name || ''}
                     height={40}
                     width={50}
                   />
@@ -144,25 +150,31 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
           <div className="flex flex-col gap-2">
             <div className="flex  gap-7">
               <div className=" w-full">
-                {campaign &&
-                  <OsmMap latitude={campaign?.latitude} longitude={campaign?.longitude}
-                    address={campaign?.address} />
-                }
+                {campaign && (
+                  <OsmMap
+                    latitude={campaign?.latitude}
+                    longitude={campaign?.longitude}
+                    address={campaign?.address}
+                  />
+                )}
               </div>
             </div>
           </div>
         </div>
-        <div className='flex flex-col  lg:w-1/3 md:space-y-10 m-7'>
-          <div className=" relative mt-12 flex h-fit flex-col rounded-2xl bg-white shadow-xl md:flex-col border-1">
+        <div className="m-7 flex  flex-col md:space-y-10 lg:w-1/3">
+          <div className=" relative mt-12 flex h-fit flex-col rounded-2xl border-1 bg-white shadow-xl md:flex-col">
             <section className="m-2 flex flex-col p-8 md:p-10  ">
               <div className="mb-5 text-slate-800">
                 {' '}
                 Npr. {campaign?.goalAmount} goal
               </div>
-              <button className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-white hover:border-2 text-center font-semibold hover:bg-blue-400">
+              <button className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-center font-semibold text-white hover:border-2 hover:bg-blue-400">
                 Share{' '}
               </button>
-              <Link href={`/pay?campaignid=${campaignId}`} className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-white hover:border-2 text-center font-semibold hover:bg-blue-400">
+              <Link
+                href={`/pay?campaignid=${campaignId}`}
+                className="mb-2 mt-2 w-full rounded-lg border bg-blue-500 p-2 text-center font-semibold text-white hover:border-2 hover:bg-blue-400"
+              >
                 Donate now
               </Link>
               <div className="mb-2 mt-2 flex items-center gap-3">
@@ -188,8 +200,8 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                   Sahayata protects your donation
                 </h1>
                 <div>
-                  We guarantee you a full refund for up to a year in the rare case
-                  that fraud occurs.{' '}
+                  We guarantee you a full refund for up to a year in the rare
+                  case that fraud occurs.{' '}
                   <a href="#" className="underline hover:text-blue-500">
                     {' '}
                     See our Sahayata Giving Guarantee.
@@ -197,14 +209,13 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                 </div>
               </div>
             </section>
-
           </div>
 
-          <div className='flex rounded-2xl bg-white shadow-xl border-1'>
+          <div className="flex rounded-2xl border-1 bg-white shadow-xl">
             <section className="m-2 flex flex-col p-8 md:p-10">
-              <h1 className=' font-bold gap-12'>Donations</h1>
+              <h1 className=" gap-12 font-bold">Donations</h1>
               {campaign?.payments.map((payment, index) => (
-                <div className="flex mt-2" key={index}>
+                <div className="mt-2 flex" key={index}>
                   <div className="relative overflow-hidden rounded-full ">
                     <Image
                       src="/assets/img/confetti.png"
@@ -214,9 +225,11 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                     />
                   </div>
                   <h1 className="mb-2 font-medium">
-                    {payment.paymentBy.name} donated NPR. {payment.paymentAmount}
+                    {payment.paymentBy.name} donated NPR.{' '}
+                    {payment.paymentAmount}
                   </h1>
-                </div>))}
+                </div>
+              ))}
             </section>
           </div>
         </div>

@@ -13,4 +13,3 @@ export * from './QuestionIcon'
 export * from './CloseIcon'
 export * from './ChevronDownIcon'
 export * from './OpenLinkIcon'
-

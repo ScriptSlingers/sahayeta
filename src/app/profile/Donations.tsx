@@ -5,11 +5,10 @@ import { useClientSession } from '@sahayeta/utils'
 import { OpenLinkIcon } from '@sahayeta/icons'
 import Link from 'next/link'
 
-
 export default function Donations() {
   const [payments, setPayments] = useState<any>()
   const currentUser = useClientSession()
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState([])
 
   useEffect(() => {
     if (currentUser) {
@@ -21,54 +20,56 @@ export default function Donations() {
           if (response.data) {
             const userCampaigns = response.data.payments.filter(
               payment => payment?.paymentBy?.id === currentUser?.id
-            );
-            setPayments(userCampaigns);
+            )
+            setPayments(userCampaigns)
           } else {
-            console.log('Unexpected response structure:', response.data);
+            console.log('Unexpected response structure:', response.data)
           }
         })
         .catch(error => {
-          console.error('Axios error:', error);
+          console.error('Axios error:', error)
           if (error.response) {
-            console.error('Response error:', error.response);
+            console.error('Response error:', error.response)
           }
-        });
+        })
     }
-  }, [currentUser]);
-
+  }, [currentUser])
 
   useEffect(() => {
-
-    axios.get('/api/category/', { headers: { 'Content-Type': 'application/json' } })
+    axios
+      .get('/api/category/', {
+        headers: { 'Content-Type': 'application/json' }
+      })
       .then(response => {
         if (response.data && response.data.category) {
-          setCategory(response.data.category);
+          setCategory(response.data.category)
         } else {
-          console.log('Categories data is not in the expected format:', response.data);
+          console.log(
+            'Categories data is not in the expected format:',
+            response.data
+          )
         }
       })
       .catch(error => {
-        console.error('Error fetching categories:', error);
-      });
-  }, []);
+        console.error('Error fetching categories:', error)
+      })
+  }, [])
 
-
-
-  let count = 1;
+  let count = 1
   function formatDate(dateString) {
     if (!dateString) {
-      return "Not specified";
+      return 'Not specified'
     }
 
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
+    const date = new Date(dateString)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
 
-
-    return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    return `${year}-${month.toString().padStart(2, '0')}-${day
+      .toString()
+      .padStart(2, '0')}`
   }
-
 
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
@@ -80,7 +81,6 @@ export default function Donations() {
             </p>
           </div>
           <div className="m-3">
-
             <div className="flex-column flex flex-wrap items-center justify-between space-y-4 pb-4 sm:flex-row sm:space-y-0">
               <div>
                 <button
@@ -154,9 +154,7 @@ export default function Donations() {
                   <th scope="col" className="px-6 py-3">
                     S.N.
                   </th>
-                  <th scope="col" >
-                    Title
-                  </th>
+                  <th scope="col">Title</th>
                   <th scope="col" className="px-6 py-3">
                     Category
                   </th>
@@ -179,41 +177,53 @@ export default function Donations() {
                 </tr>
               </thead>
               <tbody>
-                {payments?.map((payment) => {
+                {payments?.map(payment => {
                   return (
-                    <tr key={payment.paymentId} className="border-b hover:bg-gray-50">
+                    <tr
+                      key={payment.paymentId}
+                      className="border-b hover:bg-gray-50"
+                    >
                       <td className="px-6 py-4">{count++}</td>
-                      <td
-                        scope="row"
-                        className=" font-medium text-gray-900 "
-                      >
+                      <td scope="row" className=" font-medium text-gray-900 ">
                         <Link
                           href={`/campaigns/${payment.paymentId}`}
                           className="flex items-center gap-2 text-blue-700"
                         >
-                          {`${payment.campaign[0].title.slice(0, 20)}${payment.campaign[0].title.length > 20 ? '...' : ''
-                            }`}
+                          {`${payment.campaign[0].title.slice(0, 20)}${
+                            payment.campaign[0].title.length > 20 ? '...' : ''
+                          }`}
                           <div className="h-4 w-4">
                             <OpenLinkIcon />
                           </div>
                         </Link>
                       </td>
                       <td className="px-6 py-4">
-                        {
-                          category && payments ?
-                            category.find(category => category.id === payment.campaign[0].categoryId)?.displayName || "Category not found"
-                            : "Loading..."
-                        }
+                        {category && payments
+                          ? category.find(
+                              category =>
+                                category.id === payment.campaign[0].categoryId
+                            )?.displayName || 'Category not found'
+                          : 'Loading...'}
                       </td>
 
-                      <td className="px-6 py-4">{formatDate(payment.paymentDate)}</td>
-                      <td className="px-6 py-4">{payment.campaign[0].goalAmount || "Not specified"}</td>
-                      <td className="px-6 py-4">{payment.campaign[0].collectedAmount || "Not specified"}</td>
-                      <td className="px-6 py-4">{payment.paymentMethod.methodName || "Not specified"}</td>
+                      <td className="px-6 py-4">
+                        {formatDate(payment.paymentDate)}
+                      </td>
+                      <td className="px-6 py-4">
+                        {payment.campaign[0].goalAmount || 'Not specified'}
+                      </td>
+                      <td className="px-6 py-4">
+                        {payment.campaign[0].collectedAmount || 'Not specified'}
+                      </td>
+                      <td className="px-6 py-4">
+                        {payment.paymentMethod.methodName || 'Not specified'}
+                      </td>
 
-                      <td className="px-6 py-4">{payment.campaign[0].status || "Not specified"}</td>
+                      <td className="px-6 py-4">
+                        {payment.campaign[0].status || 'Not specified'}
+                      </td>
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
             </table>

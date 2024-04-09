@@ -21,13 +21,13 @@ export async function GET() {
       category: true,
       status: true,
       payments: {
-        where:{
-          paymentStatus: "completed"
+        where: {
+          paymentStatus: 'completed'
         },
-        include:{
-          paymentBy:{
-            select:{
-              name: true,
+        include: {
+          paymentBy: {
+            select: {
+              name: true
             }
           }
         }
@@ -37,7 +37,7 @@ export async function GET() {
       address: true
     }
   })
-  
+
   return NextResponse.json({ campaigns })
 }
 export async function POST(request: NextRequest) {
@@ -63,7 +63,6 @@ export async function POST(request: NextRequest) {
       latitude,
       longitude,
       address
-
     } = campaign
 
     const newCampaign = await prisma.campaign.create({

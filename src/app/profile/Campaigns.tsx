@@ -35,7 +35,7 @@ export default function Campaigns() {
     }
   }, [currentUser])
 
-  let count = 1;
+  let count = 1
 
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
@@ -47,7 +47,6 @@ export default function Campaigns() {
             </p>
           </div>
           <div className="m-3">
-
             <div className="flex-column flex flex-wrap items-center justify-between space-y-4 pb-4 sm:flex-row sm:space-y-0">
               <div>
                 <button
@@ -121,9 +120,7 @@ export default function Campaigns() {
                   <th scope="col" className="px-6 py-3">
                     S.N.
                   </th>
-                  <th scope="col" >
-                    Title
-                  </th>
+                  <th scope="col">Title</th>
                   <th scope="col" className="px-6 py-3">
                     Category
                   </th>
@@ -161,26 +158,32 @@ export default function Campaigns() {
                       className=" border-b hover:bg-gray-50 "
                     >
                       <td className="px-6 py-4">{count++}</td>
-                      <td
-                        scope="row"
-                        className="font-medium text-gray-900 "
-                      >
+                      <td scope="row" className="font-medium text-gray-900 ">
                         <Link
                           href={`/campaigns/${campaignId}`}
                           className="flex items-center gap-2 text-blue-700"
                         >
-                          {`${title.slice(0, 20)}${title.length > 20 ? '...' : ''
-                            }`}
+                          {`${title.slice(0, 20)}${
+                            title.length > 20 ? '...' : ''
+                          }`}
                           <div className="h-4 w-4">
                             <OpenLinkIcon />
                           </div>
                         </Link>
                       </td>
                       <td className="px-6 py-4">{category?.name}</td>
-                      <td className="px-6 py-4">{startDate || "Not specified"}</td>
-                      <td className="px-6 py-4">{goalAmount || "Not specified"}</td>
-                      <td className="px-6 py-4">{collectedAmount || "Not specified"}</td>
-                      <td className="px-6 py-4">{endDate || "Not specified"}</td>
+                      <td className="px-6 py-4">
+                        {startDate || 'Not specified'}
+                      </td>
+                      <td className="px-6 py-4">
+                        {goalAmount || 'Not specified'}
+                      </td>
+                      <td className="px-6 py-4">
+                        {collectedAmount || 'Not specified'}
+                      </td>
+                      <td className="px-6 py-4">
+                        {endDate || 'Not specified'}
+                      </td>
                       <td className="px-6 py-4">{status}</td>
                     </tr>
                   )

@@ -9,7 +9,6 @@ import { useClientSession } from '@sahayeta/utils'
 import { useRouter } from 'next/navigation'
 
 export default function ProfilePage() {
-
   const currentUser = useClientSession()
 
   const router = useRouter()
@@ -26,34 +25,58 @@ export default function ProfilePage() {
 
   return (
     <div className="flex justify-center bg-blue-50 p-6">
-      <div className='flex w-full container'>
-        <div className="flex w-1/6 flex-col rounded-xl divide-y-1 bg-slate-200 py-5 shadow">
-          <button onClick={() => handleTabClick('profile')} className={`text-left font-medium px-5 py-3 ${selectedTab === 'profile'
-            ? ' w-full bg-blue-700 text-white'
-            : 'text-black'
-            }`}>
+      <div className="container flex w-full">
+        <div className="flex w-1/6 flex-col divide-y-1 rounded-xl bg-slate-200 py-5 shadow">
+          <button
+            onClick={() => handleTabClick('profile')}
+            className={`px-5 py-3 text-left font-medium ${
+              selectedTab === 'profile'
+                ? ' w-full bg-blue-700 text-white'
+                : 'text-black'
+            }`}
+          >
             Profile
           </button>
-          <button onClick={() => handleTabClick('editprofile')} className={`text-left font-medium px-5 py-3 ${selectedTab === 'editprofile'
-            ? ' w-full bg-blue-700 text-white'
-            : 'text-black'
-            }`}>
+          <button
+            onClick={() => handleTabClick('editprofile')}
+            className={`px-5 py-3 text-left font-medium ${
+              selectedTab === 'editprofile'
+                ? ' w-full bg-blue-700 text-white'
+                : 'text-black'
+            }`}
+          >
             Edit Profile
           </button>
-          <button onClick={() => handleTabClick('changepassword')} className={`text-left font-medium  px-5 py-3 ${selectedTab === 'changepassword'
-            ? ' w-full bg-blue-700  text-white'
-            : ' text-black'
-            }`}>
+          <button
+            onClick={() => handleTabClick('changepassword')}
+            className={`px-5 py-3  text-left font-medium ${
+              selectedTab === 'changepassword'
+                ? ' w-full bg-blue-700  text-white'
+                : ' text-black'
+            }`}
+          >
             Change Password
           </button>
-          <button onClick={() => handleTabClick('campaigns')} className={`text-left font-medium  px-5 py-3 ${selectedTab === 'campaigns'
-            ? ' w-full bg-blue-700  text-white'
-            : ' text-black'
-            }`}>Campaign List</button>
-          <button onClick={() => handleTabClick('donations')} className={`text-left font-medium  px-5 py-3 ${selectedTab === 'donations'
-            ? ' w-full bg-blue-700  text-white'
-            : ' text-black'
-            }`}>Donations List</button>
+          <button
+            onClick={() => handleTabClick('campaigns')}
+            className={`px-5 py-3  text-left font-medium ${
+              selectedTab === 'campaigns'
+                ? ' w-full bg-blue-700  text-white'
+                : ' text-black'
+            }`}
+          >
+            Campaign List
+          </button>
+          <button
+            onClick={() => handleTabClick('donations')}
+            className={`px-5 py-3  text-left font-medium ${
+              selectedTab === 'donations'
+                ? ' w-full bg-blue-700  text-white'
+                : ' text-black'
+            }`}
+          >
+            Donations List
+          </button>
         </div>
         <div className="w-5/6">
           {selectedTab === 'profile' && <Profile />}

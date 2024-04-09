@@ -1,8 +1,8 @@
 'use client'
 import { useClientSession } from '@sahayeta/utils'
 import axios from 'axios'
-import "leaflet-defaulticon-compatibility"
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"
+import 'leaflet-defaulticon-compatibility'
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css'
 import 'leaflet/dist/leaflet.css'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -39,55 +39,55 @@ export default function CreateCampaign() {
     useState('startDate')
   const [campaignEndDateLabel, setCampaignEndDateLabel] = useState('endDate')
 
-
   const center = {
     lat: 27.6706,
-    lng: 84.4385,
+    lng: 84.4385
   }
 
-  const [latitude, setLatitude] = useState(center.lat);
-  const [longitude, setLongitude] = useState(center.lng);
-  const [address, setAddress] = useState("");
-
-
+  const [latitude, setLatitude] = useState(center.lat)
+  const [longitude, setLongitude] = useState(center.lng)
+  const [address, setAddress] = useState('')
 
   if (currentUser?.id === null) {
     router.push('/login')
   }
 
   const LocationMarker = () => {
-    const eventHandlers = useMemo(() => ({
-      dragend(event) {
-        const newPos = event.target.getLatLng();
-        setLatitude(newPos.lat);
-        setLongitude(newPos.lng);
-        getAddressFromCoordinates(newPos.lat, newPos.lng);
-      },
-    }), []);
+    const eventHandlers = useMemo(
+      () => ({
+        dragend(event) {
+          const newPos = event.target.getLatLng()
+          setLatitude(newPos.lat)
+          setLongitude(newPos.lng)
+          getAddressFromCoordinates(newPos.lat, newPos.lng)
+        }
+      }),
+      []
+    )
 
     const getAddressFromCoordinates = async (lat, lng) => {
       try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
-        const data = await response.json();
-        setAddress(data.display_name);
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+        )
+        const data = await response.json()
+        setAddress(data.display_name)
       } catch (error) {
-        console.error('Error fetching address:', error);
+        console.error('Error fetching address:', error)
       }
-    };
+    }
 
     return (
       <Marker
         draggable={true}
         eventHandlers={eventHandlers}
-        position={{ lat: latitude, lng: longitude }}>
+        position={{ lat: latitude, lng: longitude }}
+      >
         <Popup minWidth={90}>
-          <span>
-            {address}
-          </span>
+          <span>{address}</span>
         </Popup>
       </Marker>
-    );
-
+    )
   }
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export default function CreateCampaign() {
       description: '',
       categoryId: '',
       startDate: '',
-      endDate: '',
+      endDate: ''
     }
   })
 
@@ -129,12 +129,11 @@ export default function CreateCampaign() {
     day: 'numeric'
   })
 
-  const setNewDate = input => new Date(input.replace(/(\d{2})-(\d{2})-(\d{4})/, '$3-$2-$1')).toISOString();
-
-
+  const setNewDate = input =>
+    new Date(input.replace(/(\d{2})-(\d{2})-(\d{4})/, '$3-$2-$1')).toISOString()
 
   async function onSubmit(values, e) {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const data = new FormData()
       data.set('file', file)
@@ -145,23 +144,23 @@ export default function CreateCampaign() {
       })
 
       if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || 'Failed to upload file');
+        const errorData = await res.json()
+        throw new Error(errorData.message || 'Failed to upload file')
       }
 
       const resData = await res.json()
 
-      values.image = resData.path;
-      values.latitude = JSON.stringify(latitude);
-      values.longitude = JSON.stringify(longitude);
-      values.address = address;
-      values.createdById = currentUser.id;
+      values.image = resData.path
+      values.latitude = JSON.stringify(latitude)
+      values.longitude = JSON.stringify(longitude)
+      values.address = address
+      values.createdById = currentUser.id
       values.startDate = setNewDate(values.startDate)
       values.endDate = setNewDate(values.endDate)
       await axios.post(
         '/api/campaigns',
         {
-          ...values,
+          ...values
         },
         {
           headers: {
@@ -179,7 +178,6 @@ export default function CreateCampaign() {
       return error
     }
   }
-
 
   const handleImageUpload = (e: any) => {
     const selectedFile = e.target.files?.[0]
@@ -262,10 +260,10 @@ export default function CreateCampaign() {
                   Total Created Campaigns(5)
                 </div>
                 <div className="flex justify-center gap-3 py-3">
-                  <div className="  font-poppins flex h-7 items-center justify-center bg-[#ECEEFF] text-base font-normal px-2 ">
+                  <div className="  font-poppins flex h-7 items-center justify-center bg-[#ECEEFF] px-2 text-base font-normal ">
                     Approved:(4)
                   </div>
-                  <div className="  font-poppins flex h-7 items-center justify-center bg-[#ECEEFF] text-base font-normal px-2 text-blue-600 ">
+                  <div className="  font-poppins flex h-7 items-center justify-center bg-[#ECEEFF] px-2 text-base font-normal text-blue-600 ">
                     Pending Approval: (1)
                   </div>
                 </div>
@@ -414,7 +412,7 @@ export default function CreateCampaign() {
                 defaultValue={address}
                 disabled
               />
-              <MapContainer center={center} zoom={13} className='h-80'>
+              <MapContainer center={center} zoom={13} className="h-80">
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -448,7 +446,7 @@ export default function CreateCampaign() {
                 placeholder="Enter the  Start Date  here"
                 {...register('startDate')}
                 onChange={handleStartDateChange}
-                className="w-1/2 border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+                className="w-1/2 border-b-[1.5px] border-gray-400 text-base font-medium focus:outline-none  "
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -462,7 +460,7 @@ export default function CreateCampaign() {
                 placeholder="Enter the  End Date here"
                 {...register('endDate')}
                 onChange={handleEndDateChange}
-                className="w-1/2 border-b-[1.5px] border-gray-400 focus:outline-none text-base font-medium  "
+                className="w-1/2 border-b-[1.5px] border-gray-400 text-base font-medium focus:outline-none  "
               />
             </div>
           </div>
@@ -502,7 +500,7 @@ export default function CreateCampaign() {
               )}
               <label
                 htmlFor="imageUpload"
-                className=" items-center flex h-[37px] w-[126px] cursor-pointer justify-center  rounded-3xl bg-black px-4  py-2 text-white"
+                className=" flex h-[37px] w-[126px] cursor-pointer items-center justify-center  rounded-3xl bg-black px-4  py-2 text-white"
               >
                 Upload
               </label>
@@ -522,7 +520,7 @@ export default function CreateCampaign() {
             Cancel
           </button>
         </div>
-      </form >
-    </div >
+      </form>
+    </div>
   )
 }

@@ -46,11 +46,9 @@ export default function EditProfile() {
     fetchData()
   }, [currentUser?.id])
 
-  const profileImageUrl = (loggedInUser?.profileImage || '/assets/img/avatar.jpg').replace(
-    '=s96-c',
-    '=s1000-c'
-  )
-
+  const profileImageUrl = (
+    loggedInUser?.profileImage || '/assets/img/avatar.jpg'
+  ).replace('=s96-c', '=s1000-c')
 
   const handleImageUpload = (e: any) => {
     const selectedFile = e.target.files?.[0]
@@ -74,7 +72,7 @@ export default function EditProfile() {
     }
   })
 
-  const handleEdit = async (values) => {
+  const handleEdit = async values => {
     try {
       const data = new FormData()
       data.set('file', file)
@@ -93,7 +91,7 @@ export default function EditProfile() {
 
       const editedValues = Object.fromEntries(
         Object.entries(values).filter(([key, value]) => value !== '')
-      );
+      )
 
       const response = await axios.patch(
         `/api/users/${loggedInUser.id}`,
@@ -104,29 +102,28 @@ export default function EditProfile() {
             accept: 'application/json'
           }
         }
-      );
+      )
 
-      const updatedUserData = response.data;
-      setLoggedInUser(updatedUserData);
-      console.log(editedValues);
-      toast.success(`Profile Updated Successfully`);
+      const updatedUserData = response.data
+      setLoggedInUser(updatedUserData)
+      console.log(editedValues)
+      toast.success(`Profile Updated Successfully`)
     } catch (error) {
-      console.error('Error Editing Profile:', error);
-      toast.error('Failed to update profile. Please try again later.');
+      console.error('Error Editing Profile:', error)
+      toast.error('Failed to update profile. Please try again later.')
     }
-  };
-
+  }
 
   return (
     <div className="flex w-full flex-col  items-center justify-center rounded bg-blue-50">
       <div className="container flex items-center justify-start ">
-        <div className="flex flex-col rounded-xl bg-slate-200 p-5 w-2/3">
+        <div className="flex w-2/3 flex-col rounded-xl bg-slate-200 p-5">
           <div className="relative sm:rounded-lg">
             <p className="py-4 text-lg font-bold text-blue-700">
               User Information
             </p>
           </div>
-          <div className='flex flex-col gap-3'>
+          <div className="flex flex-col gap-3">
             <div className="flex items-center gap-3 rounded-lg border bg-gray-50 p-3">
               <div className="relative h-24 w-24 rounded-full border border-accent bg-slate-300">
                 <Image
@@ -136,13 +133,13 @@ export default function EditProfile() {
                   className="rounded-full"
                 />
               </div>
-              <div className="rounded-md flex flex-col ga-2">
+              <div className="ga-2 flex flex-col rounded-md">
                 <p className="text-xl font-medium">{loggedInUser?.name}</p>
-                <p className="text-md flex font-maven text-slate-500 gap-2 items-center">
+                <p className="text-md flex items-center gap-2 font-maven text-slate-500">
                   <FaAddressBook />
                   {loggedInUser?.email}
                 </p>
-                <p className="text-md flex font-maven text-slate-500 gap-2 items-center">
+                <p className="text-md flex items-center gap-2 font-maven text-slate-500">
                   <FaShield />
                   {loggedInUser?.role}
                 </p>
@@ -150,11 +147,9 @@ export default function EditProfile() {
             </div>
 
             <div className="w-full">
-              <h6 className="flex font-semibold items-center gap-2">
+              <h6 className="flex items-center gap-2 font-semibold">
                 <FaUserEdit />
-                <span>
-                  Edit Information
-                </span>
+                <span>Edit Information</span>
               </h6>
             </div>
             <div className="w-full text-left ">
@@ -225,7 +220,6 @@ export default function EditProfile() {
                     type="text"
                     placeholder="Address"
                     defaultValue={loggedInUser?.address}
-
                   />
                 </div>
                 <div className="flex w-full flex-col justify-start md:w-1/2">
@@ -252,10 +246,13 @@ export default function EditProfile() {
                     ) : (
                       <div className="relative h-56 w-96 rounded-lg bg-slate-300 ">
                         <Image
-                          src={loggedInUser?.ctzImg || "/assets/img/placeholder.png"}
+                          src={
+                            loggedInUser?.ctzImg ||
+                            '/assets/img/placeholder.png'
+                          }
                           alt="Profile image"
                           fill
-                          objectFit='cover'
+                          objectFit="cover"
                           quality={100}
                           className="rounded-lg border-4 border-accent/50"
                         />
@@ -263,14 +260,14 @@ export default function EditProfile() {
                     )}
                     <label
                       htmlFor="imageUpload"
-                      className=" items-center flex h-[37px] w-[126px] cursor-pointer justify-center  rounded-3xl ml-20 bg-black px-4  py-2 text-white"
+                      className=" ml-20 flex h-[37px] w-[126px] cursor-pointer items-center  justify-center rounded-3xl bg-black px-4  py-2 text-white"
                     >
                       Upload
                     </label>
-                    <p className="pt-2 text-sm ml-16">Only JPG, PNG images </p>
+                    <p className="ml-16 pt-2 text-sm">Only JPG, PNG images </p>
                   </div>
                 </div>
-                <div className="mt-4 ml-10 flex items-center justify-start gap-10 ">
+                <div className="ml-10 mt-4 flex items-center justify-start gap-10 ">
                   <button
                     type="submit"
                     className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
