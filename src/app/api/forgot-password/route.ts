@@ -5,10 +5,8 @@ import { NextResponse } from 'next/server'
 export async function POST(req: Request) {
   try {
     const { email } = (await req.json()) as { email: string }
-
     const lowerCaseEmail = email.toLowerCase()
-
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.user.findFirst({
       where: {
         email: lowerCaseEmail
       }
@@ -24,8 +22,12 @@ export async function POST(req: Request) {
       )
     }
 
-    const passwordResetToken = crypto.randomBytes(20).toString('hex')
-    const passwordResetExpires = Date.now() + 3600000
+    const resetToken = crypto.randomBytes(20).toString('hex')
+    const passwordResetToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex')
+    const passwordResetExpires = new Date(Date.now() + 3600000).toISOString()
 
     await prisma.user.update({
       where: {
@@ -33,17 +35,15 @@ export async function POST(req: Request) {
       },
       data: {
         resetToken: passwordResetToken,
-        resetTokenExpiry: new Date(passwordResetExpires)
+        resetTokenExpiry: passwordResetExpires
       }
     })
 
-    const resetUrl = `http://localhost:3000/forgot-password/${passwordResetToken}`
-
-    console.log(resetUrl)
-
+    const resetUrl = `${process.env.NEXTAPP_URL}/reset-password/${resetToken}`
     return new NextResponse(
       JSON.stringify({
         status: 'success',
+        resetUrl,
         message: 'Password reset email sent.'
       }),
       { status: 200 }
