@@ -25,6 +25,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "lint-staged": "^14.0.1",
     "lodash": "^4.17.21",
+    "md5": "^2.3.0",
     "next": "^13.5.4",
     "next-auth": "^4.23.2",
     "nextjs-toploader": "^1.6.4",

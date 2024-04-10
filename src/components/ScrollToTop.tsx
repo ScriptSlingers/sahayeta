@@ -52,7 +52,7 @@ const CircularProgressBar = ({ percentage }: { percentage: number }) => {
           cy={50}
           strokeWidth="3px"
           r={radius}
-          className="fill-none "
+          className="stroke fill-none stroke-blue-100"
         />
         <circle
           cx={50}

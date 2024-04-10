@@ -1,5 +1,5 @@
 import { prisma } from '@sahayeta/lib'
-import { compare, hash } from 'bcryptjs'
+import { compare } from 'bcryptjs'
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
@@ -90,6 +90,7 @@ export const authOptions: NextAuthOptions = {
               data: {
                 email: user.email,
                 name: user.name,
+                profileImage: user.image,
                 username: user.email.split('@')[0],
                 role: 'donor'
               }

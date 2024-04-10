@@ -17,21 +17,10 @@ export async function GET() {
       startDate: true,
       endDate: true,
       createdById: true,
-      createdBy: true,
+      payments: true,
+      // createdBy: true,
       category: true,
       status: true,
-      payments: {
-        where: {
-          paymentStatus: 'completed'
-        },
-        include: {
-          paymentBy: {
-            select: {
-              name: true
-            }
-          }
-        }
-      },
       latitude: true,
       longitude: true,
       address: true

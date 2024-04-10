@@ -1,9 +1,9 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { useClientSession } from '@sahayeta/utils'
 import { OpenLinkIcon } from '@sahayeta/icons'
+import { useClientSession } from '@sahayeta/utils'
+import axios from 'axios'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 export default function Donations() {
   const [payments, setPayments] = useState<any>()
@@ -18,12 +18,9 @@ export default function Donations() {
         })
         .then(response => {
           if (response.data) {
-            const userCampaigns = response.data.payments.filter(
-              payment => payment?.paymentBy?.id === currentUser?.id
-            )
-            setPayments(userCampaigns)
+            setPayments(response.data.payments)
           } else {
-            console.log('Unexpected response structure:', response.data)
+            console.error('Unexpected response structure:', response.data)
           }
         })
         .catch(error => {
@@ -44,7 +41,7 @@ export default function Donations() {
         if (response.data && response.data.category) {
           setCategory(response.data.category)
         } else {
-          console.log(
+          console.error(
             'Categories data is not in the expected format:',
             response.data
           )
@@ -54,6 +51,10 @@ export default function Donations() {
         console.error('Error fetching categories:', error)
       })
   }, [])
+
+  const userCampaigns = payments?.filter(
+    payment => payment?.paymentById === currentUser?.id
+  )
 
   let count = 1
   function formatDate(dateString) {
@@ -177,7 +178,7 @@ export default function Donations() {
                 </tr>
               </thead>
               <tbody>
-                {payments?.map(payment => {
+                {userCampaigns?.map(payment => {
                   return (
                     <tr
                       key={payment.paymentId}
@@ -189,8 +190,8 @@ export default function Donations() {
                           href={`/campaigns/${payment.paymentId}`}
                           className="flex items-center gap-2 text-blue-700"
                         >
-                          {`${payment.campaign[0].title.slice(0, 20)}${
-                            payment.campaign[0].title.length > 20 ? '...' : ''
+                          {`${payment.campaign.title.slice(0, 20)}${
+                            payment.campaign.title.length > 20 ? '...' : ''
                           }`}
                           <div className="h-4 w-4">
                             <OpenLinkIcon />
@@ -201,7 +202,7 @@ export default function Donations() {
                         {category && payments
                           ? category.find(
                               category =>
-                                category.id === payment.campaign[0].categoryId
+                                category.id === payment.campaign.categoryId
                             )?.displayName || 'Category not found'
                           : 'Loading...'}
                       </td>
@@ -210,17 +211,17 @@ export default function Donations() {
                         {formatDate(payment.paymentDate)}
                       </td>
                       <td className="px-6 py-4">
-                        {payment.campaign[0].goalAmount || 'Not specified'}
+                        {payment.campaign.goalAmount || 'Not specified'}
                       </td>
                       <td className="px-6 py-4">
-                        {payment.campaign[0].collectedAmount || 'Not specified'}
+                        {payment.campaign.collectedAmount || 'Not specified'}
                       </td>
                       <td className="px-6 py-4">
-                        {payment.paymentMethod.methodName || 'Not specified'}
+                        {payment.paymentMethod?.methodName || 'Not specified'}
                       </td>
 
                       <td className="px-6 py-4">
-                        {payment.campaign[0].status || 'Not specified'}
+                        {payment.campaign.status || 'Not specified'}
                       </td>
                     </tr>
                   )
