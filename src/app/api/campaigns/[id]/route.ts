@@ -12,24 +12,22 @@ export async function GET(req: NextRequest, { params }) {
       select: {
         campaignId: true,
         title: true,
+        isVerified: true,
         image: true,
         description: true,
         goalAmount: true,
-        createdBy: true,
+        currentAmount: true,
+        collectedAmount: true,
         startDate: true,
         endDate: true,
+        createdById: true,
         payments: {
           where: {
             paymentStatus: 'completed'
-          },
-          include: {
-            paymentBy: {
-              select: {
-                name: true
-              }
-            }
           }
         },
+        category: true,
+        status: true,
         latitude: true,
         longitude: true,
         address: true
@@ -45,7 +43,7 @@ export async function GET(req: NextRequest, { params }) {
     return NextResponse.json(campaign)
   } catch (error) {
     return NextResponse.json(
-      { message: 'Error retriving the categories', error },
+      { message: 'Error retriving the campaigns', error },
       { status: 500 }
     )
   }

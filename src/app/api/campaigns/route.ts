@@ -18,7 +18,6 @@ export async function GET() {
       endDate: true,
       createdById: true,
       payments: true,
-      // createdBy: true,
       category: true,
       status: true,
       latitude: true,
