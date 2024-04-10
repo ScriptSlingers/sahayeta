@@ -18,7 +18,7 @@ export default function Donations() {
         })
         .then(response => {
           if (response.data) {
-            setPayments(response.data.payments);
+            setPayments(response.data.payments)
           } else {
             console.error('Unexpected response structure:', response.data)
           }
@@ -41,7 +41,10 @@ export default function Donations() {
         if (response.data && response.data.category) {
           setCategory(response.data.category)
         } else {
-          console.error('Categories data is not in the expected format:', response.data)
+          console.error(
+            'Categories data is not in the expected format:',
+            response.data
+          )
         }
       })
       .catch(error => {
@@ -187,8 +190,9 @@ export default function Donations() {
                           href={`/campaigns/${payment.paymentId}`}
                           className="flex items-center gap-2 text-blue-700"
                         >
-                          {`${payment.campaign.title.slice(0, 20)}${payment.campaign.title.length > 20 ? '...' : ''
-                            }`}
+                          {`${payment.campaign.title.slice(0, 20)}${
+                            payment.campaign.title.length > 20 ? '...' : ''
+                          }`}
                           <div className="h-4 w-4">
                             <OpenLinkIcon />
                           </div>
@@ -197,9 +201,9 @@ export default function Donations() {
                       <td className="px-6 py-4">
                         {category && payments
                           ? category.find(
-                            category =>
-                              category.id === payment.campaign.categoryId
-                          )?.displayName || 'Category not found'
+                              category =>
+                                category.id === payment.campaign.categoryId
+                            )?.displayName || 'Category not found'
                           : 'Loading...'}
                       </td>
 

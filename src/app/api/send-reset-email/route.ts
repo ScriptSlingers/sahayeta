@@ -1,29 +1,29 @@
-import { NextRequest, NextResponse } from "next/server";
-const nodemailer = require("nodemailer");
+import { NextRequest, NextResponse } from 'next/server'
+const nodemailer = require('nodemailer')
 
 export async function POST(request: NextRequest) {
-  const username = process.env.EMAIL_USERNAME;
-  const password = process.env.EMAIL_PASSWORD;
-  const senderEmail = process.env.PERSONAL_EMAIL;
+  const username = process.env.EMAIL_USERNAME
+  const password = process.env.EMAIL_PASSWORD
+  const senderEmail = process.env.PERSONAL_EMAIL
 
   const { email, resetUrl } = (await request.json()) as {
-    email: string;
-    resetUrl: string;
-  };
+    email: string
+    resetUrl: string
+  }
 
   const transporter = nodemailer.createTransport({
-    host: "mail.boostenhance.com",
+    host: 'mail.boostenhance.com',
     port: 465,
     tls: {
-      ciphers: "SSLv3",
-      rejectUnauthorized: false,
+      ciphers: 'SSLv3',
+      rejectUnauthorized: false
     },
 
     auth: {
       user: username,
-      pass: password,
-    },
-  });
+      pass: password
+    }
+  })
 
   try {
     await transporter.sendMail({
@@ -49,15 +49,15 @@ export async function POST(request: NextRequest) {
                 Reset Password
               </button>
             </a>            
-             `,
-    });
+             `
+    })
 
-    return NextResponse.json({ message: "Password reset link sent." });
+    return NextResponse.json({ message: 'Password reset link sent.' })
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error('Error sending email:', error)
     return NextResponse.json(
-      { message: "COULD NOT SEND MESSAGE" },
-      { status: 500 },
-    );
+      { message: 'COULD NOT SEND MESSAGE' },
+      { status: 500 }
+    )
   }
 }

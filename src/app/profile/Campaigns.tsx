@@ -18,8 +18,7 @@ export default function Campaigns() {
         })
         .then(response => {
           const userCampaigns = response.data.campaigns.filter(
-            (campaign: any) =>
-              campaign.createdById === currentUser?.id
+            (campaign: any) => campaign.createdById === currentUser?.id
           )
           setCampaigns(userCampaigns)
         })
@@ -157,8 +156,9 @@ export default function Campaigns() {
                           href={`/campaigns/${campaignId}`}
                           className="flex items-center gap-2 text-blue-700"
                         >
-                          {`${title.slice(0, 20)}${title.length > 20 ? '...' : ''
-                            }`}
+                          {`${title.slice(0, 20)}${
+                            title.length > 20 ? '...' : ''
+                          }`}
                           <div className="h-4 w-4">
                             <OpenLinkIcon />
                           </div>
