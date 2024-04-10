@@ -9,8 +9,9 @@ export async function GET(request: NextRequest) {
       paymentId: true,
       paymentStatus: true,
       paymentDate: true,
-      paymentBy: true,
-      paymentMethod: true,
+      paymentById: true,
+      paymentMethodId: true,
+      paymentAmount: true,
       campaign: true
     }
   })

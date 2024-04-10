@@ -103,7 +103,7 @@ export default function Profile() {
                   <FaShield />
                   <span className="font-semibold">Role:</span>
                 </div>
-                <span className="text-lg">{loggedInUser?.role}</span>
+                <span className="text-lg capitalize">{loggedInUser?.role}</span>
               </div>
 
               <div className="flex gap-2 py-2 text-lg">

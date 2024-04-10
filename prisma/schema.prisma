@@ -38,34 +38,34 @@ model Session {
 }
 
 model User {
-  id            String     @id @default(cuid()) @map("_id")
-  username      String?
-  email         String
-  emailVerified DateTime?  @map("email_verified")
-  password      String?
-  isVerified Boolean @default(false)
+  id                 String     @id @default(cuid()) @map("_id")
+  username           String?
+  email              String
+  emailVerified      DateTime?  @map("email_verified")
+  password           String?
+  isVerified         Boolean    @default(false)
   verificationExpiry DateTime?
-  verificationToken String?
-  name          String?
-  address       String?
-  resetToken String?
-  resetTokenExpiry DateTime?
-  phoneNum      String?
-  bio           String?
-  profileImage  String?
-  dob           DateTime?
-  ctzImg        String?
-  balance       Float?
-  orgName       String?
-  assignedOn    DateTime?
-  postedOn      DateTime?
-  createdAt     DateTime?  @default(now()) @map("created_at")
-  updatedAt     DateTime?
-  role          Roles      @default(donor)
-  campaign      Campaign[]
-  payment       Payment[]
-  accounts      Account[]
-  sessions      Session[]
+  verificationToken  String?
+  name               String?
+  address            String?
+  resetToken         String?
+  resetTokenExpiry   DateTime?
+  phoneNum           String?
+  bio                String?
+  profileImage       String?
+  dob                DateTime?
+  ctzImg             String?
+  balance            Float?
+  orgName            String?
+  assignedOn         DateTime?
+  postedOn           DateTime?
+  createdAt          DateTime?  @default(now()) @map("created_at")
+  updatedAt          DateTime?
+  role               Roles      @default(donor)
+  campaign           Campaign[]
+  payment            Payment[]
+  accounts           Account[]
+  sessions           Session[]
 
   @@unique([email, username, id])
   @@map("users")

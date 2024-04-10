@@ -1,15 +1,9 @@
 'use client'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import Image from 'next/image'
-import { useClientSession } from '@sahayeta/utils'
-import { TbAddressBook } from 'react-icons/tb'
-import { FaHeart } from 'react-icons/fa'
-import { FaCalendarAlt } from 'react-icons/fa'
-import { DeleteModal, EditModal } from '../dashboard/CampaignList'
-import Link from 'next/link'
-import { BsEye } from 'react-icons/bs'
 import { OpenLinkIcon } from '@sahayeta/icons'
+import { useClientSession } from '@sahayeta/utils'
+import axios from 'axios'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 export default function Campaigns() {
   const [campaigns, setCampaigns] = useState<any>()
@@ -25,7 +19,7 @@ export default function Campaigns() {
         .then(response => {
           const userCampaigns = response.data.campaigns.filter(
             (campaign: any) =>
-              campaign.createdBy && campaign.createdBy.id === currentUser.id
+              campaign.createdById === currentUser?.id
           )
           setCampaigns(userCampaigns)
         })
@@ -163,9 +157,8 @@ export default function Campaigns() {
                           href={`/campaigns/${campaignId}`}
                           className="flex items-center gap-2 text-blue-700"
                         >
-                          {`${title.slice(0, 20)}${
-                            title.length > 20 ? '...' : ''
-                          }`}
+                          {`${title.slice(0, 20)}${title.length > 20 ? '...' : ''
+                            }`}
                           <div className="h-4 w-4">
                             <OpenLinkIcon />
                           </div>
