@@ -20,10 +20,14 @@ export async function GET(req: NextRequest, { params }) {
         collectedAmount: true,
         startDate: true,
         endDate: true,
-        createdById: true,
+        createdBy: true,
         payments: {
           where: {
             paymentStatus: 'completed'
+          },
+          select: {
+            paymentBy: true,
+            paymentAmount: true
           }
         },
         category: true,

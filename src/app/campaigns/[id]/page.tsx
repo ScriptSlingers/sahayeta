@@ -12,7 +12,6 @@ const OsmMap = dynamic(() => import('@sahayeta/components/MapComponent'), {
 
 interface Payment {
   paymentAmount: number
-  paymentById: string
   paymentBy: {
     name: string
   }
@@ -226,7 +225,7 @@ export default function SingleCampaign({ params }: { params: { id: string } }) {
                     />
                   </div>
                   <h1 className="mb-2 font-medium">
-                    {payment.paymentById} donated NPR. {payment.paymentAmount}
+                    {payment.paymentBy.name} donated NPR.{payment.paymentAmount}
                   </h1>
                 </div>
               ))}
