@@ -17,6 +17,7 @@ export async function GET() {
       startDate: true,
       endDate: true,
       createdById: true,
+      createdBy: true,
       payments: {
         where: {
           paymentStatus: 'completed'
