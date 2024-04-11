@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@sahayeta/lib'
 import crypto from 'crypto'
 import { NextResponse } from 'next/server'
 
@@ -15,7 +15,6 @@ export async function POST(req: Request) {
       }
     }
   })
-
   if (!user) {
     return new NextResponse('Invalid token or has expired', {
       status: 400

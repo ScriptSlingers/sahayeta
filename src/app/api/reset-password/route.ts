@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@sahayeta/lib'
 import { hash } from 'bcryptjs'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     if (existingUser) {
       const hashedPassword = await hash(password, 12)
       await prisma.user.update({
-        where: { email: email },
+        where: { id: existingUser.id },
         data: {
           password: hashedPassword,
           resetToken: null,
