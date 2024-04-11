@@ -69,13 +69,13 @@ export const Footer = () => {
                   <Link href="/campaigns" className="hover:text-blue-700">
                     Campaign
                   </Link>
-                  <Link href="/portfolio" className="hover:text-blue-700">
+                  <Link href="#" className="hover:text-blue-700">
                     Support
                   </Link>
-                  <Link href="/our-team" className="hover:text-blue-700">
+                  <Link href="#" className="hover:text-blue-700">
                     Our Team
                   </Link>
-                  <Link href="/contact" className="hover:text-blue-700">
+                  <Link href="#" className="hover:text-blue-700">
                     Contact
                   </Link>
                 </div>
