@@ -92,7 +92,8 @@ export const authOptions: NextAuthOptions = {
                 name: user.name,
                 profileImage: user.image,
                 username: user.email.split('@')[0],
-                role: 'donor'
+                role: 'donor',
+                isVerified: true
               }
             })
           }

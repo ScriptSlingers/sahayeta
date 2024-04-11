@@ -35,6 +35,20 @@ export default function Signup() {
         return
       }
 
+      const { user } = await res.json()
+      const emailRes = await fetch('/api/send-verification-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formValues.email,
+          verificationURL: user.verificationURL
+        })
+      })
+      if (emailRes.status === 200) {
+        toast.success('Account verification token has been sent.')
+      }
       signIn(undefined, { callbackUrl: process.env.NEXTAUTH_URL })
       toast.success('Signup successful')
     } catch (error: any) {

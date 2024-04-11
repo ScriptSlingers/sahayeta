@@ -8,6 +8,7 @@ import { FcGoogle } from 'react-icons/fc'
 import donationImage from '../../../public/assets/img/children.jpg'
 import { useClientSession } from '../../utils'
 import toast from 'react-hot-toast'
+import Link from 'next/link'
 
 export default function Login(csrfToken) {
   const currentUser = useClientSession()
@@ -80,9 +81,12 @@ export default function Login(csrfToken) {
                 <input type="checkbox" name="ch" id="ch" />
                 <span className="text-md">Remember Me</span>
               </div>
-              <a href="#" className="text-md text-black  hover:text-blue-500 ">
+              <Link
+                href="/forgot-password"
+                className="text-md text-black  hover:text-blue-500 "
+              >
                 Forget Password?
-              </a>
+              </Link>
             </div>
 
             <button

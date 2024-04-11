@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
     await prisma.user.update({
       where: {
-        email: lowerCaseEmail
+        id: existingUser.id
       },
       data: {
         resetToken: passwordResetToken,
