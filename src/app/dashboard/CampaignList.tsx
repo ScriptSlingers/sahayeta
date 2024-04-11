@@ -16,6 +16,9 @@ export default function CampaignsListing() {
   const [campaigns, setCampaigns] = useState<any>()
   const currentUser = useClientSession()
 
+  const [createdBy, setCreatedBy] = useState<any>()
+  const [createdByName, setCreatedByName] = useState<any>("")
+
   useEffect(() => {
     if (currentUser && currentUser?.role !== 'admin') {
       router.push('/login')
@@ -182,6 +185,7 @@ export default function CampaignsListing() {
                     description,
                     goalAmount,
                     category,
+                    createdById,
                     createdBy,
                     collectedAmount,
                     startDate,
@@ -201,16 +205,16 @@ export default function CampaignsListing() {
                             href={`/campaigns/${campaignId}`}
                             className="flex items-center gap-2 text-blue-700"
                           >
-                            {`${title.slice(0, 13)}${
-                              title.length > 13 ? '...' : ''
-                            }`}
+                            {`${title.slice(0, 13)}${title.length > 13 ? '...' : ''
+                              }`}
                             <div className="h-4 w-4">
                               <OpenLinkIcon />
                             </div>
                           </Link>
                         </td>
                         <td className="px-6 py-4">{category?.name}</td>
-                        <td className="px-6 py-4">{createdBy?.name}</td>
+                        <td className="px-6 py-4">
+                          {createdBy.name}</td>
                         <td className="px-6 py-4">{formatDate(startDate)}</td>
                         <td className="px-6 py-4">{formatDate(endDate)}</td>
                         <td className="px-6 py-4">{goalAmount}</td>
@@ -248,7 +252,7 @@ export default function CampaignsListing() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

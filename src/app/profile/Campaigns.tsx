@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 
 export default function Campaigns() {
   const [campaigns, setCampaigns] = useState<any>()
-  const [createdByInfo, setCreatedByInfo] = useState<any>()
   const currentUser = useClientSession()
 
   useEffect(() => {
@@ -156,9 +155,8 @@ export default function Campaigns() {
                           href={`/campaigns/${campaignId}`}
                           className="flex items-center gap-2 text-blue-700"
                         >
-                          {`${title.slice(0, 20)}${
-                            title.length > 20 ? '...' : ''
-                          }`}
+                          {`${title.slice(0, 20)}${title.length > 20 ? '...' : ''
+                            }`}
                           <div className="h-4 w-4">
                             <OpenLinkIcon />
                           </div>
